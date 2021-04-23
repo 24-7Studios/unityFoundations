@@ -1421,7 +1421,7 @@ MonoBehaviour:
   Jumpable:
     serializedVersion: 2
     m_Bits: 1033
-  groundDistance: 0.001
+  groundDistance: 0.005
   groundingForce: 0.05
   fly: 0
   usePhysicsGravity: 1
