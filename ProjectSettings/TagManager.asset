@@ -8,10 +8,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - ground
+  - Environment
   - Water
   - UI
-  - 
+  - thisPlayer
   - 
   - camera
   - throwable

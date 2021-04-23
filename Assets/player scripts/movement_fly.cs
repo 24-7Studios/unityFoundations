@@ -16,7 +16,7 @@ public class movement_fly : MonoBehaviour
     public Rigidbody body;
     public Transform cam;
     public Transform groundCheck;
-    public LayerMask ground;
+    public LayerMask Jumpable;
     public float groundDistance = 0.1f;
     public float groundingForce = 0.05f;
     public bool fly = false;
@@ -26,6 +26,7 @@ public class movement_fly : MonoBehaviour
 
     Vector3 InputMovement;
     bool  grounded;
+    bool canJump;
 
     float x = 0;
     float z = 0;
@@ -54,7 +55,7 @@ public class movement_fly : MonoBehaviour
     {
 
         grounded = isGrounded();
-        
+        canJump = CanJump();
         
          x = Input.GetAxisRaw("Horizontal");
          z = Input.GetAxisRaw("Vertical");
@@ -80,11 +81,11 @@ public class movement_fly : MonoBehaviour
         else
 		{
 
-            if(Input.GetKeyDown("space") && grounded)
+            if(Input.GetKeyDown("space") && canJump)
 			{
                 Jump();
 			}
-            else if(grounded)
+            if(grounded)
 			{
                 y = -groundingForce;
 			}
@@ -158,9 +159,16 @@ public class movement_fly : MonoBehaviour
         return false;
 	}
 
+    public bool CanJump()
+	{
+        return Physics.CheckSphere(groundCheck.position, groundDistance, Jumpable);
+    }
+
     public bool isGrounded()
 	{
-        return Physics.CheckSphere(groundCheck.position, groundDistance, ground);
+        return Physics.CheckSphere(groundCheck.position, groundDistance,Jumpable);
     }
+
+
 
 }
