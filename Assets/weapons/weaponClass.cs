@@ -115,7 +115,7 @@ public class weaponClass : MonoBehaviour
     public virtual void Pickup(GameObject parent)
 	{
 
-        Debug.Log("Player picked up" + weaponName);
+        Debug.Log("Player picked up " + weaponName);
 
         transform.SetParent(parent.transform);
         
@@ -145,7 +145,7 @@ public class weaponClass : MonoBehaviour
     public virtual void Drop()
 	{
 
-        Debug.Log("Player dropped" + weaponName);
+        Debug.Log("Player dropped " + weaponName);
 
 		if (isBeingDual)
 		{
