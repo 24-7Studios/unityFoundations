@@ -1498,8 +1498,8 @@ MonoBehaviour:
   InputReloadDown: 0
   InputReloadHold: 0
   InputRealodUp: 0
-  fireAnim: 
-  pumpAnim: 
+  fireAnim: fire
+  pumpAnim: pump
   firePosition: {fileID: 6121096507663836009}
   fireEffect: {fileID: 4938784005027091182, guid: d379c7639183be44b83da0b9f0e2a075,
     type: 3}
