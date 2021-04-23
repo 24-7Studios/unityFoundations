@@ -10,10 +10,9 @@ public class mapLimitEnforcer : MonoBehaviour
     
     void OnTriggerExit(Collider other)
     {
-        if (other.transform.GetComponent<PlayerWeaponFunctions>())
-        {
-            other.transform.position = respawn.position;
-        }
+        
+            other.transform.position = new Vector3(0, Mathf.Abs(other.transform.position.y), 0);//respawn.position;
+        
     }
 
 }
