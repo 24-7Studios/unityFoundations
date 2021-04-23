@@ -27,7 +27,7 @@ public class movement_fly : MonoBehaviour
     Vector3 InputMovement;
     bool  grounded;
     bool canJump;
-
+    bool jump = false;
     float x = 0;
     float z = 0;
     float y = 0;
@@ -83,7 +83,7 @@ public class movement_fly : MonoBehaviour
 
             if(Input.GetKeyDown("space") && canJump)
 			{
-                Jump();
+                jump = true;
 			}
             if(grounded)
 			{
@@ -124,22 +124,20 @@ public class movement_fly : MonoBehaviour
 
         
            
-            body.AddForce(InputMovement, ForceMode.VelocityChange);
+        body.AddForce(InputMovement, ForceMode.VelocityChange);
 
-		
+		if(jump)
+		{
+            body.velocity += transform.up * jumpForce;
+            jump = false;
+        }
 
 
 
     }
 
 
-    public void Jump()
-	{
-
-        body.velocity += transform.up * jumpForce;
-
-	}
-
+   
     public bool isWalking()
 	{
 
