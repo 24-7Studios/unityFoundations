@@ -1803,7 +1803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ca83596af1b520439ff9a1e75ffc4e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 100
+  force: 40
 --- !u!65 &863236195
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3298,7 +3298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ca83596af1b520439ff9a1e75ffc4e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 200
+  force: 120
 --- !u!65 &1466859616
 BoxCollider:
   m_ObjectHideFlags: 0
