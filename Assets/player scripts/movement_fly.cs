@@ -63,7 +63,7 @@ public class movement_fly : MonoBehaviour
 
         RaycastHit FloorSnap;
         
-        if(Physics.Raycast(groundCheck.position, -groundCheck.up, out FloorSnap))
+        if(Physics.Raycast(groundCheck.position, -groundCheck.up, out FloorSnap) && ((FloorSnap.normal.x !< maxAngle)||(FloorSnap.normal.y! < maxAngle)) && grounded)
 		{
 
             Quaternion toRotation = Quaternion.FromToRotation(transform.up, FloorSnap.normal) * transform.rotation;
