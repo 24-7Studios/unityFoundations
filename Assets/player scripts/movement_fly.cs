@@ -19,6 +19,7 @@ public class movement_fly : MonoBehaviour
     public LayerMask Jumpable;
     public float groundDistance = 0.1f;
     public float groundingForce = 0.05f;
+    public float maxAngle = 50;
     public bool fly = false;
     public bool usePhysicsGravity = false;
     
@@ -31,7 +32,7 @@ public class movement_fly : MonoBehaviour
     float x = 0;
     float z = 0;
     float y = 0;
-
+    Vector3 groundNormal;
 
 
 
@@ -60,8 +61,20 @@ public class movement_fly : MonoBehaviour
          x = Input.GetAxisRaw("Horizontal");
          z = Input.GetAxisRaw("Vertical");
 
-
+        RaycastHit FloorSnap;
         
+        if(Physics.Raycast(groundCheck.position, -groundCheck.up, out FloorSnap))
+		{
+
+            Quaternion toRotation = Quaternion.FromToRotation(transform.up, FloorSnap.normal) * transform.rotation;
+            groundCheck.rotation = toRotation;
+            
+		}
+		else
+		{
+            groundCheck.rotation = body.rotation;
+		}
+
 
         if (fly)
         {
@@ -93,6 +106,9 @@ public class movement_fly : MonoBehaviour
 			{
                 y -= playerGravity * playerGravity * Time.deltaTime * Time.deltaTime;
 			}
+
+
+
             
 
 
@@ -100,7 +116,7 @@ public class movement_fly : MonoBehaviour
 
         
 
-
+        
 
         
 
@@ -111,7 +127,7 @@ public class movement_fly : MonoBehaviour
         }
         else
 		{
-            InputMovement = (((body.transform.right * x + body.transform.forward * z) * moveSpeed) + body.transform.up * y);
+            InputMovement = ((((groundCheck.transform.right) * x + (groundCheck.transform.forward) * z) * moveSpeed) + groundCheck.transform.up * y);
         }
         
 
