@@ -16,6 +16,8 @@ public class movement_fly : MonoBehaviour
     public Rigidbody body;
     public Transform cam;
     public Transform groundCheck;
+    public Transform foot;
+    public Vector3 footPostition;
     public LayerMask Jumpable;
     public float groundDistance = 0.1f;
     public float groundingForce = 0.05f;
@@ -45,7 +47,7 @@ public class movement_fly : MonoBehaviour
             playerGravity = Physics.gravity.y;
 		}
 
-
+        footPostition = foot.localPosition;
 
 
 
@@ -62,18 +64,23 @@ public class movement_fly : MonoBehaviour
          z = Input.GetAxisRaw("Vertical");
 
         RaycastHit FloorSnap;
-        
-        if(Physics.Raycast(groundCheck.position, -groundCheck.up, out FloorSnap) && ((FloorSnap.normal.x !< maxAngle)||(FloorSnap.normal.y! < maxAngle)) && grounded)
-		{
+
+        if (Physics.Raycast(groundCheck.position, -groundCheck.up, out FloorSnap) && ((FloorSnap.normal.x! < maxAngle) || (FloorSnap.normal.y! < maxAngle)) && grounded)
+        {
 
             Quaternion toRotation = Quaternion.FromToRotation(transform.up, FloorSnap.normal) * transform.rotation;
             groundCheck.rotation = toRotation;
-            
-		}
-		else
-		{
+
+
+        }
+        else
+        {
             groundCheck.rotation = body.rotation;
-		}
+
+        }
+
+        foot.rotation = groundCheck.rotation;
+        foot.localPosition = footPostition;
 
 
         if (fly)

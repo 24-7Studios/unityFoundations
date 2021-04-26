@@ -2867,6 +2867,8 @@ MonoBehaviour:
   body: {fileID: 1205728292}
   cam: {fileID: 963194228}
   groundCheck: {fileID: 1088457471}
+  foot: {fileID: 1298002066}
+  footPostition: {x: 0, y: 0, z: 0}
   Jumpable:
     serializedVersion: 2
     m_Bits: 1033
@@ -2930,7 +2932,7 @@ GameObject:
   - component: {fileID: 1298002066}
   - component: {fileID: 1298002067}
   m_Layer: 6
-  m_Name: feet
+  m_Name: foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2960,8 +2962,8 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 1ed17e4602ac3d74599b2f152586a68f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 1.6
+  m_Radius: 0.1
+  m_Height: 1.55
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1307112273
