@@ -147,7 +147,7 @@ public class movement_fly : MonoBehaviour
 
         
            
-        body.AddForce(InputMovement, ForceMode.VelocityChange);
+        body.AddForce(InputMovement, ForceMode.Impulse);
 
 		if(jump)
 		{
