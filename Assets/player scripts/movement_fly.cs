@@ -109,10 +109,7 @@ public class movement_fly : MonoBehaviour
 			{
                 y = -groundingForce;
 			}
-            else
-			{
-                y -= playerGravity * playerGravity * Time.deltaTime * Time.deltaTime;
-			}
+            
 
 
 
@@ -144,9 +141,14 @@ public class movement_fly : MonoBehaviour
 	private void FixedUpdate()
 	{
         
+        if(!grounded)
+		{
 
-        
-           
+            y -= -playerGravity * Time.fixedDeltaTime;
+
+        }
+
+
         body.AddForce(InputMovement, ForceMode.Impulse);
 
 		if(jump)

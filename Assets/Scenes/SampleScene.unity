@@ -3145,9 +3145,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  jumpForce: 12
+  jumpForce: 20
   sprintMultiplyer: 2
-  playerGravity: 0
+  playerGravity: -0.75
   body: {fileID: 1205728292}
   cam: {fileID: 963194228}
   groundCheck: {fileID: 1088457471}
@@ -3160,7 +3160,7 @@ MonoBehaviour:
   groundingForce: 0.1
   maxAngle: 20
   fly: 0
-  usePhysicsGravity: 1
+  usePhysicsGravity: 0
 --- !u!136 &1205728291
 CapsuleCollider:
   m_ObjectHideFlags: 0
