@@ -2300,6 +2300,12 @@ Transform:
   m_Father: {fileID: 1866257279}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &1044853852 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5272397529347102480, guid: e393b9f42f74f954ebc9eb0157e21211,
+    type: 3}
+  m_PrefabInstance: {fileID: 6849245787060741585}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1087510533
 GameObject:
   m_ObjectHideFlags: 0
@@ -6643,6 +6649,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1590042}
     m_Modifications:
+    - target: {fileID: 157643774894929717, guid: e393b9f42f74f954ebc9eb0157e21211,
+        type: 3}
+      propertyPath: ShapeModule.angle
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 157643774894929717, guid: e393b9f42f74f954ebc9eb0157e21211,
+        type: 3}
+      propertyPath: InitialModule.size3D
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 157643774894929717, guid: e393b9f42f74f954ebc9eb0157e21211,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 157643774894929717, guid: e393b9f42f74f954ebc9eb0157e21211,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 157643774894929717, guid: e393b9f42f74f954ebc9eb0157e21211,
+        type: 3}
+      propertyPath: InitialModule.startSizeY.scalar
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 157643774894929717, guid: e393b9f42f74f954ebc9eb0157e21211,
+        type: 3}
+      propertyPath: InitialModule.startSizeZ.scalar
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 205837717887191173, guid: e393b9f42f74f954ebc9eb0157e21211,
         type: 3}
       propertyPath: m_Layer
@@ -6953,6 +6989,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6849245787004451487, guid: e393b9f42f74f954ebc9eb0157e21211,
+        type: 3}
+      propertyPath: smokeEffect
+      value: 
+      objectReference: {fileID: 1044853852}
     - target: {fileID: 6849245787764552738, guid: e393b9f42f74f954ebc9eb0157e21211,
         type: 3}
       propertyPath: m_Layer
