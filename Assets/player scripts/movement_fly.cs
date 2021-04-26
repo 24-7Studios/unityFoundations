@@ -16,9 +16,12 @@ public class movement_fly : MonoBehaviour
     public Rigidbody body;
     public Transform cam;
     public Transform groundCheck;
+    public Transform foot;
+    public Vector3 footPostition;
     public LayerMask Jumpable;
     public float groundDistance = 0.1f;
     public float groundingForce = 0.05f;
+    public float maxAngle = 50;
     public bool fly = false;
     public bool usePhysicsGravity = false;
     
@@ -31,7 +34,7 @@ public class movement_fly : MonoBehaviour
     float x = 0;
     float z = 0;
     float y = 0;
-
+    Vector3 groundNormal;
 
 
 
@@ -44,7 +47,7 @@ public class movement_fly : MonoBehaviour
             playerGravity = Physics.gravity.y;
 		}
 
-
+        footPostition = foot.localPosition;
 
 
 
@@ -60,8 +63,25 @@ public class movement_fly : MonoBehaviour
          x = Input.GetAxisRaw("Horizontal");
          z = Input.GetAxisRaw("Vertical");
 
+        RaycastHit FloorSnap;
 
-        
+        if (Physics.Raycast(groundCheck.position, -groundCheck.up, out FloorSnap) && ((FloorSnap.normal.x! < maxAngle) || (FloorSnap.normal.y! < maxAngle)) && grounded)
+        {
+
+            Quaternion toRotation = Quaternion.FromToRotation(transform.up, FloorSnap.normal) * transform.rotation;
+            groundCheck.rotation = toRotation;
+
+
+        }
+        else
+        {
+            groundCheck.rotation = body.rotation;
+
+        }
+
+        foot.rotation = groundCheck.rotation;
+        foot.localPosition = footPostition;
+
 
         if (fly)
         {
@@ -89,10 +109,10 @@ public class movement_fly : MonoBehaviour
 			{
                 y = -groundingForce;
 			}
-            else
-			{
-                y -= playerGravity * playerGravity * Time.deltaTime * Time.deltaTime;
-			}
+            
+
+
+
             
 
 
@@ -100,7 +120,7 @@ public class movement_fly : MonoBehaviour
 
         
 
-
+        
 
         
 
@@ -111,7 +131,7 @@ public class movement_fly : MonoBehaviour
         }
         else
 		{
-            InputMovement = (((body.transform.right * x + body.transform.forward * z) * moveSpeed) + body.transform.up * y);
+            InputMovement = ((((groundCheck.transform.right) * x + (groundCheck.transform.forward) * z) * moveSpeed) + groundCheck.transform.up * y);
         }
         
 
@@ -121,10 +141,15 @@ public class movement_fly : MonoBehaviour
 	private void FixedUpdate()
 	{
         
+        if(!grounded)
+		{
 
-        
-           
-        body.AddForce(InputMovement, ForceMode.VelocityChange);
+            y -= -playerGravity * Time.fixedDeltaTime;
+
+        }
+
+
+        body.AddForce(InputMovement, ForceMode.Impulse);
 
 		if(jump)
 		{

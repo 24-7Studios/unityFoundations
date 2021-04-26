@@ -6,6 +6,9 @@ public class jumpPad : MonoBehaviour
 {
 
 	public float force = 20;
+    Rigidbody player;
+    bool launch;
+
 
     void OnTriggerEnter(Collider other)
     {
@@ -13,10 +16,25 @@ public class jumpPad : MonoBehaviour
         
         if(other.GetComponent<movement_fly>())
 		{
-            other.GetComponent<movement_fly>().body.velocity += transform.up * force;
+            player = other.GetComponent<movement_fly>().body;
+            launch = true;
         }
 
     }
+
+	private void FixedUpdate()
+	{
+
+
+        if(launch)
+		{
+            player.velocity += transform.up * force;
+            launch = false;
+        }
+        
+
+    }
+
 
 
 
