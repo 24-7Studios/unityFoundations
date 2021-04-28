@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Linq;
+
 
 public class PlayerWeaponFunctions : MonoBehaviour
 {
@@ -10,6 +12,9 @@ public class PlayerWeaponFunctions : MonoBehaviour
     public Rigidbody body;
     public Transform cam;
     public Animator anim;
+    public Canvas hud;
+    public Image crosshair;
+    public Text gunInfo;
     public GameObject weaponHolder;
     public weaponClass equippedWeapon;
     public weaponClass noWeapon;
@@ -84,8 +89,12 @@ public class PlayerWeaponFunctions : MonoBehaviour
             }
 
 
+            if (weapons.IndexOf(lastWeapon) != weapons.IndexOf(equippedWeapon))
+            {
+                lastWeapon = equippedWeapon;
+            }
 
-            lastWeapon = equippedWeapon;
+
             equippedWeapon = weapons[inventoryIndex];
 
 
@@ -126,6 +135,10 @@ public class PlayerWeaponFunctions : MonoBehaviour
 
 
         }
+
+
+        gunInfo.text = equippedWeapon.weaponName;
+
 
         if (Input.GetAxisRaw("Mouse ScrollWheel") != 0)
         {

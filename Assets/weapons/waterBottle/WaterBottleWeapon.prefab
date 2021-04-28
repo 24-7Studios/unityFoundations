@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a35683affd49643965c654acb684b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: WaterBottle
+  weaponName: ' Water Bottle'
   draw: ArmBottleDraw
   Dual: 0
   isBeingDual: 0

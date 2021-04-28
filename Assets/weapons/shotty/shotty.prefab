@@ -1473,7 +1473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ca56f92f4b15a040a08cd5fd399fcef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: 
+  weaponName: Shotgun
   draw: 
   Dual: 0
   isBeingDual: 0
