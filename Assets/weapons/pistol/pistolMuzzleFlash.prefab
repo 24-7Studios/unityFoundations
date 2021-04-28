@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 581505643148130484}
   - component: {fileID: 6602515286991315717}
   - component: {fileID: 450594068482012046}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4815,7 +4815,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7279114184938069834}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: pistolMuzzleFlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4848,7 +4848,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2432307781570211637}
   - component: {fileID: 7352739435968196160}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
