@@ -91,7 +91,12 @@ public class Shooty : weaponClass
 
 	}
 
+	public override string hud_ammo()
+	{
 
+		return "Pumps: " + (pumps + 1);
+
+	}
 
 	public override void StartCommands()
 	{

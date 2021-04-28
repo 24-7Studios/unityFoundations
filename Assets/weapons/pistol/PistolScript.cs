@@ -75,7 +75,10 @@ public class PistolScript : weaponClass
 
 
 
-
+	public override string hud_ammo()
+	{
+		return "Heat: " + (int)heat + "/" + 100;
+	}
 
 
 

@@ -101,6 +101,10 @@ public class weaponClass : MonoBehaviour
 
     }
 
+    public virtual string hud_ammo()
+	{
+        return "Ammo Not Set!";
+	}
 
     public virtual void StartCommands()
 	{
