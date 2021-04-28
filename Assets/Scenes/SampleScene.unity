@@ -3270,7 +3270,7 @@ MonoBehaviour:
   cam: {fileID: 963194228}
   anim: {fileID: 4724117160286923306}
   hud: {fileID: 1129494447}
-  crosshair: {fileID: 0}
+  crosshair: {fileID: 1984614628}
   gunInfo: {fileID: 1255790044}
   weaponHolder: {fileID: 963194225}
   equippedWeapon: {fileID: 0}
@@ -3967,7 +3967,8 @@ MonoBehaviour:
   itemClass: {fileID: 0}
   viewModel: {fileID: 6487023128497391629}
   viewModelOffset: {x: 0, y: 0, z: 0}
-  hasAmmo: 0
+  displayHudInfo: 0
+  reticle: {fileID: 0}
   isItem: 0
   body: {fileID: 0}
   cam: {fileID: 0}
@@ -5175,7 +5176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.9647059}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class weaponClass : MonoBehaviour
 {
@@ -15,11 +16,12 @@ public class weaponClass : MonoBehaviour
     public weaponPickup itemClass;
     public Transform viewModel;
     public Vector3 viewModelOffset;
-    public bool hasAmmo;
+    public bool displayHudInfo;
+    public Sprite reticle;
     public bool isItem; 
     public Rigidbody body;
     public Transform cam;
-    public  Animator anim;
+    public Animator anim;
     public GameObject weapons;
     public PlayerWeaponFunctions controller;
 

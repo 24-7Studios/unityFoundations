@@ -139,6 +139,13 @@ public class PlayerWeaponFunctions : MonoBehaviour
 
         gunInfo.text = equippedWeapon.weaponName;
 
+        if (equippedWeapon.reticle != null)
+        {
+            crosshair.sprite = equippedWeapon.reticle;
+            
+        }
+       
+
 
         if (Input.GetAxisRaw("Mouse ScrollWheel") != 0)
         {
