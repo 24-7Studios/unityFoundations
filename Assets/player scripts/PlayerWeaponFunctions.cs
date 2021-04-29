@@ -23,7 +23,7 @@ public class PlayerWeaponFunctions : MonoBehaviour
     
     public int weaponSystem = 0; // 0 = 3 1/2 default | 1 = 2 1/1 halo like | 3 = [] source like
 
-    public int i;
+    //public int i;
 
     [HideInInspector] 
     public bool canFire;
@@ -267,7 +267,9 @@ public class PlayerWeaponFunctions : MonoBehaviour
                         pickedUpWeapon.hand = false;
                         equippedWeapon.otherHand = pickedUpWeapon;
                         pickedUpWeapon.otherHand = equippedWeapon;
+                        pickedUpWeapon.transform.SetSiblingIndex(inventoryIndex + 1);
                         equippedWeapon = pickedUpWeapon;
+                        setWeapons();
                         inventoryIndex = weapons.IndexOf(equippedWeapon);
                         
 
