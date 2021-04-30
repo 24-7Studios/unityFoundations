@@ -3375,7 +3375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 963194228}
   body: {fileID: 1205728292}
-  sens: 130
+  sens: 1.2
   ymov: 0
   xmov: 0
 --- !u!114 &1205728290
@@ -4047,6 +4047,7 @@ MonoBehaviour:
   viewModelOffset: {x: 0, y: 0, z: 0}
   displayHudInfo: 0
   reticle: {fileID: 0}
+  reticleScale: {x: 0, y: 0, z: 0}
   isItem: 0
   body: {fileID: 0}
   cam: {fileID: 0}

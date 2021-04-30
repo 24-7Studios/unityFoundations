@@ -144,6 +144,7 @@ public class PlayerWeaponFunctions : MonoBehaviour
 		{
             crosshair.gameObject.SetActive(true);
             crosshair.sprite = equippedWeapon.reticle;
+            crosshair.rectTransform.localScale = equippedWeapon.reticleScale;
 		}
         else
 		{

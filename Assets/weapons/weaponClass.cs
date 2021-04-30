@@ -18,6 +18,7 @@ public class weaponClass : MonoBehaviour
     public Vector3 viewModelOffset;
     public bool displayHudInfo;
     public Sprite reticle;
+    public Vector3 reticleScale;
     public bool isItem; 
     public Rigidbody body;
     public Transform cam;
