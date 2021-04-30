@@ -142,11 +142,12 @@ public class PlayerWeaponFunctions : MonoBehaviour
         hud_weaponInfo.text = equippedWeapon.hud_ammo();
         if(equippedWeapon.reticle != null)
 		{
+            crosshair.gameObject.SetActive(true);
             crosshair.sprite = equippedWeapon.reticle;
 		}
         else
 		{
-            crosshair.sprite = null;
+            crosshair.gameObject.SetActive(false);
 		}
        
 
