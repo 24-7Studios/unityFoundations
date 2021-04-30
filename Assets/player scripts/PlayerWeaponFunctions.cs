@@ -140,7 +140,14 @@ public class PlayerWeaponFunctions : MonoBehaviour
 
         hud_weaponName.text = equippedWeapon.weaponName;
         hud_weaponInfo.text = equippedWeapon.hud_ammo();
-       
+        if(equippedWeapon.reticle != null)
+		{
+            crosshair.sprite = equippedWeapon.reticle;
+		}
+        else
+		{
+            crosshair.sprite = null;
+		}
        
 
 

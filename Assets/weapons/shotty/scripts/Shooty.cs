@@ -94,7 +94,7 @@ public class Shooty : weaponClass
 	public override string hud_ammo()
 	{
 
-		return "Pumps: " + (pumps + 1);
+		return "Ammo: " + (pumps + 1);
 
 	}
 
