@@ -25,10 +25,7 @@ public class animationEvents_smg : MonoBehaviour
     public void shoot(AudioClip a)
     {
 
-        if(source.clip != a)
-		{
-            source.clip = a;
-		}
+        
         playSound(a);
    
 
@@ -38,11 +35,12 @@ public class animationEvents_smg : MonoBehaviour
     public void playSound(AudioClip sound)
     {
 
-
+        //source.clip = sound;
+        //source.Play();
         source.PlayOneShot(sound);
 
 
     }
-
+    
 
 }

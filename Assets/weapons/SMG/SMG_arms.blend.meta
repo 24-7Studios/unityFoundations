@@ -118,7 +118,7 @@ ModelImporter:
       - time: 0
         functionName: shoot
         data: 
-        objectReferenceParameter: {fileID: 8300000, guid: ce60bf56c10527d49aa5d74966a4506f,
+        objectReferenceParameter: {fileID: 8300000, guid: 9bc6f20059c89904ebadbd67d7c45113,
           type: 3}
         floatParameter: 0
         intParameter: 0

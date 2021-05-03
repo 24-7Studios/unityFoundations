@@ -24,7 +24,7 @@ public class smg : weaponClass
     public float viewPunch = 3;
 
 
-    float effectTimer = 0.1f;
+    float effectTimer = 0.01f;
     float fireTimer;
     float reloadTimer;
     public bool doneReloading;
@@ -38,7 +38,7 @@ public class smg : weaponClass
 
         fireTimer -= Time.deltaTime;
         reloadTimer -= Time.deltaTime;
-        effectTimer -= Time.deltaTime;
+        
         anim.SetBool("doneReloading", doneReloading);
 
         if(InputFire1Hold)
@@ -97,6 +97,7 @@ public class smg : weaponClass
 
 	public void fire()
     {
+        
 
         anim.Rebind();
         anim.Play(fireAnim);
@@ -111,11 +112,23 @@ public class smg : weaponClass
 
     }
 
+
+
+	public override string hud_ammo()
+	{
+        return ("AMMO: " + loadedAmmo + "/" + magSize);
+	}
+
+
+
 	public override void StartCommands()
 	{
 
         loadedAmmo = magSize;
 
 	}
+
+
+
 
 }
