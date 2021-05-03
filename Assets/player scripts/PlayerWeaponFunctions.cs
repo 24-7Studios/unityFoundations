@@ -270,7 +270,7 @@ public class PlayerWeaponFunctions : MonoBehaviour
                     if((equippedWeapon.Dual && pickedUpWeapon.Dual && equippedWeapon.otherHand == null) && Input.GetKeyDown("c"))
 					{
 
-
+                        
                         equippedWeapon.isBeingDual = true;
                         pickedUpWeapon.isBeingDual = true;
                         equippedWeapon.hand = true;
@@ -287,6 +287,7 @@ public class PlayerWeaponFunctions : MonoBehaviour
                     }
 					else
 					{
+                        
                         equippedWeapon = pickedUpWeapon;
                         inventoryIndex = weapons.IndexOf(equippedWeapon);
                         setWeapons();

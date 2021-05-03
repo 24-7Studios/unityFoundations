@@ -130,9 +130,9 @@ public class weaponClass : MonoBehaviour
         anim = viewModel.GetComponent<Animator>();
         cam = GetComponentInParent<Camera>().transform;
         controller = GetComponentInParent<PlayerWeaponFunctions>();
-        weapons = cam.transform.Find("weapons").gameObject;
+        //weapons = cam.transform.Find("weapons").gameObject;
         itemClass = transform.GetComponentInChildren<weaponPickup>();
-        transform.SetParent(weapons.transform);
+        //transform.SetParent(weapons.transform);
         anim.transform.localPosition = viewModelOffset;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.Euler(Vector3.zero);

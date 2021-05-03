@@ -103,7 +103,11 @@ public class smg : weaponClass
         anim.Play(fireAnim);
         body.GetComponent<lookHandler_fly>().ymov -= viewPunch;
         GameObject c = Instantiate(muzzleFlash, muzzleFlashPos.position, muzzleFlashPos.rotation);
+        c.transform.position = muzzleFlashPos.position;
+        c.transform.rotation = muzzleFlashPos.rotation;
         GameObject b = Instantiate(casing, ejection.position, ejection.rotation);
+        b.transform.position = ejection.position;
+        b.transform.rotation = ejection.rotation;
         b.GetComponent<Rigidbody>().velocity = ejection.up * (Random.value * ejectionForceSpread + ejectionForce);
         Destroy(c, effectTimer);
         loadedAmmo--;
