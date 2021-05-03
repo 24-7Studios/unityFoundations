@@ -46,6 +46,11 @@ public class smg : weaponClass
             PrimaryAction();
 		}
 
+        if(InputReloadDown && loadedAmmo < magSize)
+		{
+            reload();
+   		}
+
         if(anim.GetCurrentAnimatorStateInfo(0).IsName(reloadAnim))
 		{
 

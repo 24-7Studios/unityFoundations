@@ -220,7 +220,7 @@ public class PlayerWeaponFunctions : MonoBehaviour
             }
         }
 
-
+        equippedWeapon.InputReloadDown = Input.GetKeyDown("r");
 
         if (Input.GetKeyDown("g") && equippedWeapon != noWeapon)
         {   

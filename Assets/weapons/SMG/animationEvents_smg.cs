@@ -4,15 +4,42 @@ using UnityEngine;
 
 public class animationEvents_smg : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+
+    public AudioSource source;
+
+
+
+    private void Start()
+	{
+
+
+		source = GetComponentInParent<AudioSource>();
+
+
+	}
+
+
+
+
+    public void shoot(AudioClip a)
     {
-        
+
+
+        playSound(a);
+   
+
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void playSound(AudioClip sound)
     {
-        
+
+
+        source.PlayOneShot(sound);
+
+
     }
+
+
 }
