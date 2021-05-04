@@ -6479,6 +6479,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: Blaster
+  weaponIcon: {fileID: 21300000, guid: e94dc3b168f585e4aac103e5938e98c2, type: 3}
+  weaponInfo: {fileID: 0}
   draw: draw
   Dual: 1
   isBeingDual: 0

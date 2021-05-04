@@ -118,11 +118,7 @@ public class smg : weaponClass
 
 
 
-	public override string hud_ammo()
-	{
-        return ("AMMO: " + loadedAmmo + "/" + magSize);
-	}
-
+	
 
 
 	public override void StartCommands()

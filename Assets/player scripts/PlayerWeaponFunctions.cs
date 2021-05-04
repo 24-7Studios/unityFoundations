@@ -14,8 +14,8 @@ public class PlayerWeaponFunctions : MonoBehaviour
     public Animator anim;
     public Canvas hud;
     public Image crosshair;
-    public Text hud_weaponName;
-    public Text hud_weaponInfo;
+    public Image hud_weaponIcon;
+    public Canvas hud_weaponInfo;
     public GameObject weaponHolder;
     public weaponClass equippedWeapon;
     public weaponClass noWeapon;
@@ -138,8 +138,8 @@ public class PlayerWeaponFunctions : MonoBehaviour
         }
 
 
-        hud_weaponName.text = equippedWeapon.weaponName;
-        hud_weaponInfo.text = equippedWeapon.hud_ammo();
+        hud_weaponIcon.sprite = equippedWeapon.weaponIcon;
+        hud_weaponInfo = equippedWeapon.weaponInfo;
 
         if(equippedWeapon.reticle != null)
 		{

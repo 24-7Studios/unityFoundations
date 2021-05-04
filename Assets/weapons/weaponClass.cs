@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class weaponClass : MonoBehaviour
 {
-    public string weaponName;  
-    
+    public string weaponName;
+    public Sprite weaponIcon;
+    public Canvas weaponInfo;
     
     public string draw;
     public bool Dual;
@@ -102,10 +103,7 @@ public class weaponClass : MonoBehaviour
 
     }
 
-    public virtual string hud_ammo()
-	{
-        return "Ammo Not Set!";
-	}
+    
 
     public virtual void StartCommands()
 	{
