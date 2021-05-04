@@ -1474,6 +1474,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: Shotgun
+  weaponIcon: {fileID: 21300000, guid: 9f9d08e975915074a85130a9d614fc75, type: 3}
+  weaponInfo: {fileID: 0}
   draw: 
   Dual: 0
   isBeingDual: 0

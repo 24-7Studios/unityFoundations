@@ -138,10 +138,20 @@ public class PlayerWeaponFunctions : MonoBehaviour
         }
 
 
-        hud_weaponIcon.sprite = equippedWeapon.weaponIcon;
+        //hud_weaponIcon.sprite = equippedWeapon.weaponIcon;
         hud_weaponInfo = equippedWeapon.weaponInfo;
+        if (equippedWeapon.weaponIcon != null)
+        {
+            hud_weaponIcon.gameObject.SetActive(true);
+            hud_weaponIcon.sprite = equippedWeapon.weaponIcon;
+            //.rectTransform.localScale = equippedWeapon.reticleScale;
+        }
+        else
+        {
+            hud_weaponIcon.gameObject.SetActive(false);
+        }
 
-        if(equippedWeapon.reticle != null)
+        if (equippedWeapon.reticle != null)
 		{
             crosshair.gameObject.SetActive(true);
             crosshair.sprite = equippedWeapon.reticle;

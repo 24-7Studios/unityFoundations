@@ -231,6 +231,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: ' Water Bottle'
+  weaponIcon: {fileID: 21300000, guid: 525682f2a08997a49a19ce8de0eb8123, type: 3}
+  weaponInfo: {fileID: 0}
   draw: ArmBottleDraw
   Dual: 0
   isBeingDual: 0
@@ -239,7 +241,9 @@ MonoBehaviour:
   itemClass: {fileID: 2253145497464663617}
   viewModel: {fileID: 7199175523858722211}
   viewModelOffset: {x: 0, y: 0, z: 0}
-  hasAmmo: 0
+  displayHudInfo: 0
+  reticle: {fileID: 0}
+  reticleScale: {x: 0, y: 0, z: 0}
   isItem: 0
   body: {fileID: 0}
   cam: {fileID: 0}
