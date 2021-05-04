@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4587912993874941720}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SMGMuzzleflash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3112209919717699655}
   - component: {fileID: 7338102302519329640}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 7391496280434129736}
   - component: {fileID: 7231855442434888842}
   - component: {fileID: 7232553605489341666}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: part
   m_TagString: Untagged
   m_Icon: {fileID: 0}
