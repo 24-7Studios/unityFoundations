@@ -19,8 +19,21 @@ public class animationEvents_smg : MonoBehaviour
 
 	}
 
+	public void draw(AudioClip a)
+	{
+        playSound(a);
+	}
 
 
+	public void magDrop(AudioClip a)
+	{
+        playSound(a);
+	}
+
+    public void magInsert(AudioClip a)
+    {
+        playSound(a);
+    }
 
     public void shoot(AudioClip a)
     {

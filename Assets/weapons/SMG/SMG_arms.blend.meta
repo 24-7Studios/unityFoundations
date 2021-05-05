@@ -151,7 +151,23 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.38129252
+        functionName: magDrop
+        data: 
+        objectReferenceParameter: {fileID: 8300000, guid: 2fc50369010673e498c5e1e122bcfeab,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 1
+        functionName: magInsert
+        data: 
+        objectReferenceParameter: {fileID: 8300000, guid: 9de70e4075957824691584c32098b149,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
