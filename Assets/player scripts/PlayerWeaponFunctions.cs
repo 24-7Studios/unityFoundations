@@ -14,13 +14,16 @@ public class PlayerWeaponFunctions : MonoBehaviour
     public Animator anim;
     public Canvas hud;
     public Image crosshair;
-    public Image hud_weaponIcon;
-    public Canvas hud_weaponInfo;
+    public Image hud_weaponIconR;
+    public Canvas hud_weaponInfoR;
+    public Image hud_weaponIconL;
+    public Canvas hud_weaponInfoL;
     public GameObject weaponHolder;
     public weaponClass equippedWeapon;
     public weaponClass noWeapon;
     public List<weaponClass> weapons;
-    
+    public bool infniteAmmo;
+    public bool bottomlessClip;
     public int weaponSystem = 0; // 0 = 3 1/2 default | 1 = 2 1/1 halo like | 3 = [] source like
 
     //public int i;
@@ -138,18 +141,84 @@ public class PlayerWeaponFunctions : MonoBehaviour
         }
 
 
-        //hud_weaponIcon.sprite = equippedWeapon.weaponIcon;
-        hud_weaponInfo = equippedWeapon.weaponInfo;
-        if (equippedWeapon.weaponIcon != null)
+
+
+        if (equippedWeapon.weaponIcon != null && !equippedWeapon.isBeingDual)
         {
-            hud_weaponIcon.gameObject.SetActive(true);
-            hud_weaponIcon.sprite = equippedWeapon.weaponIcon;
-            //.rectTransform.localScale = equippedWeapon.reticleScale;
+
+            hud_weaponIconR.gameObject.SetActive(true);
+            hud_weaponIconR.sprite = equippedWeapon.weaponIcon;
+            hud_weaponIconL.gameObject.SetActive(false);
+            hud_weaponIconL.sprite = null;
+
+        }
+        else if (equippedWeapon.isBeingDual)
+        {
+            
+            if(equippedWeapon.hand)
+			{
+
+                if(equippedWeapon.weaponIcon != null)
+				{
+                    hud_weaponIconR.sprite = equippedWeapon.weaponIcon;
+                    hud_weaponIconR.gameObject.SetActive(true); 
+                }
+                else
+				{
+                    hud_weaponIconR.sprite = null;
+                    hud_weaponIconR.gameObject.SetActive(false);
+				}
+
+                if (equippedWeapon.otherHand.weaponIcon != null)
+                {
+                    hud_weaponIconL.sprite = equippedWeapon.otherHand.weaponIcon;
+                    hud_weaponIconL.gameObject.SetActive(true);
+
+                }
+                else
+                {
+                    hud_weaponIconL.sprite = null;
+                    hud_weaponIconL.gameObject.SetActive(false);
+                }
+
+            }
+            else
+			{
+                if (equippedWeapon.weaponIcon != null)
+                {
+                    hud_weaponIconL.sprite = equippedWeapon.weaponIcon;
+                    hud_weaponIconL.gameObject.SetActive(true);
+                }
+                else
+                {
+                    hud_weaponIconL.sprite = null;
+                    hud_weaponIconL.gameObject.SetActive(false);
+                }
+
+                if (equippedWeapon.otherHand.weaponIcon != null)
+                {
+                    hud_weaponIconR.sprite = equippedWeapon.otherHand.weaponIcon;
+                    hud_weaponIconR.gameObject.SetActive(true);
+                }
+                else
+                {
+                    hud_weaponIconR.sprite = null;
+                    hud_weaponIconR.gameObject.SetActive(false);
+                }
+            }
         }
         else
         {
-            hud_weaponIcon.gameObject.SetActive(false);
+            hud_weaponIconL.gameObject.SetActive(false);
+            hud_weaponIconR.gameObject.SetActive(false);
         }
+        
+       
+
+
+
+
+
 
         if (equippedWeapon.reticle != null)
 		{
