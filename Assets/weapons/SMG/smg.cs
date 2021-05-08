@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class smg : weaponClass
 {
 
+    public Text invAmmo;
+    public Slider ammoSlide;
     public string fireAnim;
     public string reloadAnim;
     public string idleAnim;
@@ -62,7 +65,7 @@ public class smg : weaponClass
 
 		}
 
-
+        invAmmo.text = (spareAmmo + "/" + maxAmmo);
 			
 
     }

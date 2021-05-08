@@ -143,6 +143,9 @@ public class PlayerWeaponFunctions : MonoBehaviour
 
 
 
+
+
+
         if (equippedWeapon.weaponIcon != null && !equippedWeapon.isBeingDual)
         {
 
@@ -198,6 +201,84 @@ public class PlayerWeaponFunctions : MonoBehaviour
                 if (equippedWeapon.otherHand.weaponIcon != null)
                 {
                     hud_weaponIconR.sprite = equippedWeapon.otherHand.weaponIcon;
+                    hud_weaponIconR.gameObject.SetActive(true); 
+                }
+                else
+                {
+                    hud_weaponIconR.sprite = null;
+                    hud_weaponIconR.gameObject.SetActive(false);
+                }
+            }
+        }
+        else
+        {
+            hud_weaponIconL.gameObject.SetActive(false);
+            hud_weaponIconR.gameObject.SetActive(false);
+        }
+
+
+
+
+
+
+
+
+        if (equippedWeapon.weaponInfo != null && !equippedWeapon.isBeingDual)
+        {
+
+            equippedWeapon.weaponInfo.transform.SetParent(hud_weaponInfoR.transform, false);
+          
+            
+            equippedWeapon.weaponInfo.gameObject.SetActive(true);
+            
+          
+        }
+        else if (equippedWeapon.isBeingDual)
+        {
+
+            if (equippedWeapon.hand)
+            {
+
+                if (equippedWeapon.weaponIcon != null)
+                {
+                    hud_weaponIconR.sprite = equippedWeapon.weaponIcon;
+                    hud_weaponIconR.gameObject.SetActive(true);
+                }
+                else
+                {
+                    hud_weaponIconR.sprite = null;
+                    hud_weaponIconR.gameObject.SetActive(false);
+                }
+
+                if (equippedWeapon.otherHand.weaponIcon != null)
+                {
+                    hud_weaponIconL.sprite = equippedWeapon.otherHand.weaponIcon;
+                    hud_weaponIconL.gameObject.SetActive(true);
+
+                }
+                else
+                {
+                    hud_weaponIconL.sprite = null;
+                    hud_weaponIconL.gameObject.SetActive(false);
+                }
+
+            }
+            else
+            {
+                if (equippedWeapon.weaponIcon != null)
+                {
+                    hud_weaponIconL.sprite = equippedWeapon.weaponIcon;
+                    hud_weaponIconL.gameObject.SetActive(true);
+                }
+                else
+                {
+                    hud_weaponIconL.sprite = null;
+                    hud_weaponIconL.gameObject.SetActive(false);
+                }
+
+                if (equippedWeapon.otherHand.weaponIcon != null)
+                {
+                    hud_weaponIconR.sprite = equippedWeapon.otherHand.weaponIcon;
                     hud_weaponIconR.gameObject.SetActive(true);
                 }
                 else
@@ -212,8 +293,10 @@ public class PlayerWeaponFunctions : MonoBehaviour
             hud_weaponIconL.gameObject.SetActive(false);
             hud_weaponIconR.gameObject.SetActive(false);
         }
-        
-       
+
+
+
+
 
 
 
