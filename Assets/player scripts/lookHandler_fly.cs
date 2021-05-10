@@ -31,8 +31,8 @@ public class lookHandler_fly : MonoBehaviour
 
 
 
-        float MouseX = Input.GetAxis("Mouse X") * sens * Time.deltaTime;
-        float MouseY = Input.GetAxis("Mouse Y") * sens * Time.deltaTime;
+        float MouseX = Input.GetAxisRaw("Mouse X") * sens;
+        float MouseY = Input.GetAxisRaw("Mouse Y") * sens;
 
 
         ymov -= MouseY;
@@ -40,10 +40,12 @@ public class lookHandler_fly : MonoBehaviour
 
         xmov -= MouseX;
 
-        
+        cam.transform.localRotation = Quaternion.Euler(Vector3.right * ymov);
+        body.transform.rotation = Quaternion.Euler(Vector3.up * -xmov);
 
         
-               
+
+
 
 
     }
@@ -54,9 +56,7 @@ public class lookHandler_fly : MonoBehaviour
         //tis.transform.rotation = Quaternion.Euler(Vector3.up * -xmov + Vector3.right * ymov);
 
 
-        cam.transform.localRotation = Quaternion.Euler(Vector3.right * ymov);
-        body.transform.rotation = Quaternion.Euler(Vector3.up * -xmov);
-
+        
 
 
 

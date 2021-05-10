@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ef6053ff315084f8e888dbe792511a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effect: {fileID: 7573547752954946434, guid: 2eb44e2ac3dfbbf4b95d9afa31d83f83, type: 3}
+  effect: {fileID: 1372040286346358, guid: 53ebac442b16db64f9177d0c749cbb06, type: 3}
   sound: {fileID: 8300000, guid: 490afea8ff9e09a499a5856b0fd782f2, type: 3}
   fuse: 3
   overFuse: 10

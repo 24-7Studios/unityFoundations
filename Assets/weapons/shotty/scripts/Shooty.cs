@@ -92,7 +92,6 @@ public class Shooty : weaponClass
 	}
 
 
-
 	public override void StartCommands()
 	{
 

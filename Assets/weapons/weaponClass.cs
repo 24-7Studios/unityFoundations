@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class weaponClass : MonoBehaviour
 {
-    public string weaponName;  
-    
+    public string weaponName;
+    public Sprite weaponIcon;
+    public Canvas weaponInfo;
     
     public string draw;
     public bool Dual;
@@ -15,11 +17,13 @@ public class weaponClass : MonoBehaviour
     public weaponPickup itemClass;
     public Transform viewModel;
     public Vector3 viewModelOffset;
-    public bool hasAmmo;
+    public bool displayHudInfo;
+    public Sprite reticle;
+    public Vector3 reticleScale;
     public bool isItem; 
     public Rigidbody body;
     public Transform cam;
-    public  Animator anim;
+    public Animator anim;
     public GameObject weapons;
     public PlayerWeaponFunctions controller;
 
@@ -99,6 +103,7 @@ public class weaponClass : MonoBehaviour
 
     }
 
+    
 
     public virtual void StartCommands()
 	{
@@ -123,9 +128,9 @@ public class weaponClass : MonoBehaviour
         anim = viewModel.GetComponent<Animator>();
         cam = GetComponentInParent<Camera>().transform;
         controller = GetComponentInParent<PlayerWeaponFunctions>();
-        weapons = cam.transform.Find("weapons").gameObject;
+        
         itemClass = transform.GetComponentInChildren<weaponPickup>();
-        transform.SetParent(weapons.transform);
+        
         anim.transform.localPosition = viewModelOffset;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.Euler(Vector3.zero);

@@ -1473,7 +1473,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ca56f92f4b15a040a08cd5fd399fcef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: 
+  weaponName: Shotgun
+  weaponIcon: {fileID: 21300000, guid: 9f9d08e975915074a85130a9d614fc75, type: 3}
+  weaponInfo: {fileID: 0}
   draw: 
   Dual: 0
   isBeingDual: 0
@@ -1482,7 +1484,9 @@ MonoBehaviour:
   itemClass: {fileID: 0}
   viewModel: {fileID: 6014620707640088507}
   viewModelOffset: {x: 0, y: -0.05, z: -0.05}
-  hasAmmo: 1
+  displayHudInfo: 1
+  reticle: {fileID: 21300000, guid: e8ea843306e2a8049bc6e78867fb8ccf, type: 3}
+  reticleScale: {x: 0.5, y: 0.5, z: 0.5}
   isItem: 0
   body: {fileID: 0}
   cam: {fileID: 0}
