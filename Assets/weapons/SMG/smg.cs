@@ -65,7 +65,7 @@ public class smg : weaponClass
 
 		}
 
-        invAmmo.text = (spareAmmo + "/" + maxAmmo);
+      //  invAmmo.text = (spareAmmo + "/" + maxAmmo);
 			
 
     }

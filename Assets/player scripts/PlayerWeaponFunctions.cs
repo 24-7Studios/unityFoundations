@@ -222,7 +222,7 @@ public class PlayerWeaponFunctions : MonoBehaviour
 
 
 
-
+        /*
         if (equippedWeapon.weaponInfo != null && !equippedWeapon.isBeingDual)
         {
 
@@ -294,7 +294,7 @@ public class PlayerWeaponFunctions : MonoBehaviour
             hud_weaponIconR.gameObject.SetActive(false);
         }
 
-
+        */
 
 
 
