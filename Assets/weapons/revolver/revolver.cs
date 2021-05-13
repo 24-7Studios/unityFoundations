@@ -13,6 +13,8 @@ public class revolver : weaponClass
     public string fireAnim;
     public string reloadAnim;
     public string idleAnim;
+    public string easterEggReloadAnim;
+    public int easterEggReloadChance;
     public float maxAmmo;
     public float spareAmmo;
     public float magSize;
@@ -21,12 +23,9 @@ public class revolver : weaponClass
     public GameObject muzzleFlash;
     public ParticleSystem sparks;
     public Transform sparkPos;
-   
-
     public float viewPunch = 3;
     public bool hasLoaded;
     public bool hasFired;
- 
     float effectTimer = 0.05f;
     
 
@@ -99,10 +98,21 @@ public class revolver : weaponClass
 
     public void reload()
 	{
+        int eeValue1 = (int)(Random.value * easterEggReloadChance);
+        int eeValue2 = (int)(Random.value * easterEggReloadChance);
 
+        Debug.Log("eeValues are " + eeValue1 + " and " + eeValue2);
         if (loadedAmmo < magSize && anim.GetCurrentAnimatorStateInfo(0).IsName(idleAnim))
         {
-            anim.Play(reloadAnim);
+            if (eeValue1 == eeValue2)
+            {
+                anim.Play(easterEggReloadAnim);
+                eeValue1--;
+            }
+            else
+            {
+                anim.Play(reloadAnim);
+            }
         }
 
 	}
