@@ -2981,6 +2981,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: revolver
       objectReference: {fileID: 0}
+    - target: {fileID: 7813015279247081360, guid: 2ccdb3913628d0b418a4b8ddbbe39ba5,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7813015279247081360, guid: 2ccdb3913628d0b418a4b8ddbbe39ba5,
+        type: 3}
+      propertyPath: BypassReverbZones
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7813015279247081361, guid: 2ccdb3913628d0b418a4b8ddbbe39ba5,
         type: 3}
       propertyPath: isItem

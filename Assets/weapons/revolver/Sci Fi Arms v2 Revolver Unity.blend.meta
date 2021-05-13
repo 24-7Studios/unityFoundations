@@ -119,9 +119,17 @@ ModelImporter:
       curves: []
       events:
       - time: 0
-        functionName: revolverHolster
+        functionName: playSound
         data: 
         objectReferenceParameter: {fileID: 8300000, guid: 1c3331bf7652aec40a073535ba661dfd,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.6137072
+        functionName: playSound
+        data: 
+        objectReferenceParameter: {fileID: 8300000, guid: 48531d201bbc9e4419c8e295e47025ee,
           type: 3}
         floatParameter: 0
         intParameter: 0

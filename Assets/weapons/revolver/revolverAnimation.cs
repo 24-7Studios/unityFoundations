@@ -25,28 +25,13 @@ public class revolverAnimation : MonoBehaviour
 	{
         playSound(a);
 	}
-    
-     void revolverHolster(AudioClip a)
-	{
-        source.clip = a;
-        source.Play();
-	}
+  
     
     void fire(AudioClip a)
 	{
         playSound(a);
         revolver.hasFired = true;
 	}
-
-    void Update()
-    {
-        if (!gameObject.activeInHierarchy)
-            {
-                source.Stop();
-            }
-    }
-
-    
 
     void extract(AudioClip a)
 	{
