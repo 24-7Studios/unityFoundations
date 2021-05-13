@@ -19,7 +19,7 @@ public class revolver : weaponClass
     public float loadedAmmo;
     public Transform muzzleFlashPos;
     public GameObject muzzleFlash;
-    public GameObject sparks;
+    public ParticleSystem sparks;
     public Transform sparkPos;
    
 
@@ -27,7 +27,7 @@ public class revolver : weaponClass
     public bool hasLoaded;
     public bool hasFired;
 
-    float effectTimer = 0.01f;
+    float effectTimer = 0.05f;
     
 
 
@@ -63,13 +63,15 @@ public class revolver : weaponClass
 
         if(hasFired)
 		{
-            loadedAmmo--;
-            hasFired = false;
+
+            fire();
+            
 		}
 
         if(hasLoaded)
 		{
             loadedAmmo = magSize;
+            sparks.Play();
             hasLoaded = false;
 		}
 
@@ -85,7 +87,7 @@ public class revolver : weaponClass
 
         if(loadedAmmo > 0 && anim.GetCurrentAnimatorStateInfo(0).IsName(idleAnim))
 		{
-            fire();
+            anim.Play(fireAnim);
 		}
         else if(anim.GetCurrentAnimatorStateInfo(0).IsName(idleAnim))
 		{
@@ -98,18 +100,26 @@ public class revolver : weaponClass
     public void reload()
 	{
 
-
-        anim.Play(reloadAnim);
-
+        if (loadedAmmo < magSize && anim.GetCurrentAnimatorStateInfo(0).IsName(idleAnim))
+        {
+            anim.Play(reloadAnim);
+        }
 
 	}
 
 	public void fire()
     {
 
-        anim.Play(fireAnim);
-        
-    
+
+        loadedAmmo--;
+
+
+        GameObject c = Instantiate(muzzleFlash, muzzleFlashPos.position, muzzleFlashPos.rotation);
+        Destroy(c, effectTimer);
+        body.GetComponent<lookHandler_fly>().ymov -= viewPunch;
+
+        hasFired = false;
+
     }
 	
 }
