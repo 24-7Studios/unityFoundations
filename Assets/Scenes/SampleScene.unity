@@ -285,7 +285,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 80986840}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 2.668, z: 10.72}
+  m_LocalPosition: {x: 0.034, y: 2.73, z: 10.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6404543344695499871}
@@ -2404,7 +2404,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 77.55214
+  field of view: 83.98353
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2539,7 +2539,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 114.189575
+  field of view: 96.19888
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -4194,14 +4194,14 @@ MonoBehaviour:
   idleAnim: vmIdleAnim
   maxAmmo: 0
   spareAmmo: 0
-  magSize: 8
-  loadedAmmo: 8
+  magSize: 6
+  loadedAmmo: 6
   muzzleFlashPos: {fileID: 80986841}
   muzzleFlash: {fileID: 4360766050848057608, guid: bab7c464a7baa974b919fcc4f322e478,
     type: 3}
   sparks: {fileID: 145627996}
   sparkPos: {fileID: 1082805404}
-  viewPunch: 10
+  viewPunch: 40
   hasLoaded: 0
   hasFired: 0
 --- !u!1 &1298002065
