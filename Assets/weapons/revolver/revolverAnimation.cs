@@ -21,7 +21,11 @@ public class revolverAnimation : MonoBehaviour
 
     }
 
-
+    void click(AudioClip a)
+	{
+        playSound(a);
+	}
+    
     void fire(AudioClip a)
 	{
         playSound(a);
