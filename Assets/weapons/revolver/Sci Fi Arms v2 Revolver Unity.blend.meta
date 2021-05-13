@@ -21,9 +21,24 @@ ModelImporter:
   - first:
       74: 2310928006743948895
     second: vmEEReload
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SuitGloves
+    second: {fileID: 2100000, guid: d90f67bf166b928498921b4f0394b42a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SuitGlow
+    second: {fileID: 2100000, guid: 605cdc16a419c7446bbbbdb411193ef0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SuitSleeves
+    second: {fileID: 2100000, guid: 09147f6043241844884b2df1133246e0, type: 2}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1

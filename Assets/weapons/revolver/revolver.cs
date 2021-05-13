@@ -87,7 +87,7 @@ public class revolver : weaponClass
 
         if(loadedAmmo > 0 && anim.GetCurrentAnimatorStateInfo(0).IsName(idleAnim))
 		{
-            anim.Play(fireAnim);
+            anim.SetBool("poopoo",true);
 		}
         else if(anim.GetCurrentAnimatorStateInfo(0).IsName(idleAnim))
 		{
@@ -111,6 +111,7 @@ public class revolver : weaponClass
     {
 
 
+        anim.SetBool("poopoo",false);
         loadedAmmo--;
 
 
