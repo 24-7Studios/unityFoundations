@@ -415,51 +415,54 @@ public class PlayerWeaponFunctions : MonoBehaviour
 
                 Debug.Log(r.transform.gameObject.name);
 
-                if (r.transform.parent.GetComponent<weaponClass>())
-				{
-                    weaponClass pickedUpWeapon = r.transform.parent.GetComponent<weaponClass>();
-                    
-                    pickedUpWeapon.enabled = true;
-                    
-                    
-                    pickedUpWeapon.Pickup(weaponHolder);
-                    
-                    anim = pickedUpWeapon.GetComponentInChildren<Animator>();
-                    pickedUpWeapon.gameObject.SetActive(true);
+                if (r.transform.parent != null)
+                {
+                    if (r.transform.parent.GetComponent<weaponClass>())
+                    {
+                        weaponClass pickedUpWeapon = r.transform.parent.GetComponent<weaponClass>();
+
+                        pickedUpWeapon.enabled = true;
+
+
+                        pickedUpWeapon.Pickup(weaponHolder);
+
+                        anim = pickedUpWeapon.GetComponentInChildren<Animator>();
+                        pickedUpWeapon.gameObject.SetActive(true);
 
 
 
-                    if((equippedWeapon.Dual && pickedUpWeapon.Dual && equippedWeapon.otherHand == null) && Input.GetKeyDown("c"))
-					{
+                        if ((equippedWeapon.Dual && pickedUpWeapon.Dual && equippedWeapon.otherHand == null) && Input.GetKeyDown("c"))
+                        {
 
-                        
-                        equippedWeapon.isBeingDual = true;
-                        pickedUpWeapon.isBeingDual = true;
-                        equippedWeapon.hand = true;
-                        pickedUpWeapon.hand = false;
-                        equippedWeapon.otherHand = pickedUpWeapon;
-                        pickedUpWeapon.otherHand = equippedWeapon;
-                        pickedUpWeapon.transform.SetSiblingIndex(inventoryIndex + 1);
-                        equippedWeapon = pickedUpWeapon;
-                        setWeapons();
-                        inventoryIndex = weapons.IndexOf(equippedWeapon);
-                        
 
-                        setWeapons();
+                            equippedWeapon.isBeingDual = true;
+                            pickedUpWeapon.isBeingDual = true;
+                            equippedWeapon.hand = true;
+                            pickedUpWeapon.hand = false;
+                            equippedWeapon.otherHand = pickedUpWeapon;
+                            pickedUpWeapon.otherHand = equippedWeapon;
+                            pickedUpWeapon.transform.SetSiblingIndex(inventoryIndex + 1);
+                            equippedWeapon = pickedUpWeapon;
+                            setWeapons();
+                            inventoryIndex = weapons.IndexOf(equippedWeapon);
+
+
+                            setWeapons();
+                        }
+                        else
+                        {
+
+                            equippedWeapon = pickedUpWeapon;
+                            inventoryIndex = weapons.IndexOf(equippedWeapon);
+                            setWeapons();
+                        }
+
+
+
+
+
                     }
-					else
-					{
-                        
-                        equippedWeapon = pickedUpWeapon;
-                        inventoryIndex = weapons.IndexOf(equippedWeapon);
-                        setWeapons();
-                    }
-
-                        
-                    
-
-
-				}
+                }
                
                 
 			}
