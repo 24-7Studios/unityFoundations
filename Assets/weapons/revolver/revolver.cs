@@ -24,10 +24,11 @@ public class revolver : weaponClass
    
 
     public float viewPunch = 3;
-
+    public bool hasLoaded;
+    public bool hasFired;
 
     float effectTimer = 0.01f;
-
+    
 
 
 
@@ -55,7 +56,22 @@ public class revolver : weaponClass
             PrimaryAction();
 		}
 
-        
+        if(InputReloadDown)
+		{
+            reload();
+		}
+
+        if(hasFired)
+		{
+            loadedAmmo--;
+            hasFired = false;
+		}
+
+        if(hasLoaded)
+		{
+            loadedAmmo = magSize;
+            hasLoaded = false;
+		}
 
         
 
@@ -71,6 +87,19 @@ public class revolver : weaponClass
 		{
             fire();
 		}
+        else if(anim.GetCurrentAnimatorStateInfo(0).IsName(idleAnim))
+		{
+            reload();
+		}
+
+
+	}
+
+    public void reload()
+	{
+
+
+        anim.Play(reloadAnim);
 
 
 	}
@@ -79,7 +108,7 @@ public class revolver : weaponClass
     {
 
         anim.Play(fireAnim);
-        loadedAmmo--;
+        
     
     }
 	
