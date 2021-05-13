@@ -26,7 +26,7 @@ public class revolver : weaponClass
     public float viewPunch = 3;
     public bool hasLoaded;
     public bool hasFired;
-
+ 
     float effectTimer = 0.05f;
     
 

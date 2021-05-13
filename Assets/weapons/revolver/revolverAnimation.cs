@@ -32,6 +32,8 @@ public class revolverAnimation : MonoBehaviour
         revolver.hasFired = true;
 	}
 
+    
+
     void extract(AudioClip a)
 	{
         playSound(a);
