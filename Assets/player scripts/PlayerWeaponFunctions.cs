@@ -103,42 +103,48 @@ public class PlayerWeaponFunctions : MonoBehaviour
 
 
 
-        }
 
-        setWeapons();
-        foreach (weaponClass e in weapons)
-        {
-            if(e == noWeapon)
-			{
-                weapons.RemoveAt(weapons.IndexOf(e));
-            }
-                
-            
-        }
-
-
-        foreach (weaponClass e in weapons)
-        {
-
-            e.gameObject.SetActive(true);
-            if (equippedWeapon == e && equippedWeapon.isBeingDual && equippedWeapon.otherHand != null)
+            setWeapons();
+            foreach (weaponClass e in weapons)
             {
-                e.viewModel.gameObject.SetActive(true);
-                e.otherHand.viewModel.gameObject.SetActive(true);
+                if (e == noWeapon)
+                {
+                    weapons.RemoveAt(weapons.IndexOf(e));
+                }
+
+
             }
-            else if (equippedWeapon == e && !equippedWeapon.isBeingDual)
-			{
-                e.viewModel.gameObject.SetActive(true);
-			}
-            else if (e != equippedWeapon.otherHand)
-			{
 
-                e.viewModel.gameObject.SetActive(false);
 
-			}
+            foreach (weaponClass e in weapons)
+            {
+
+                e.gameObject.SetActive(true);
+                if (equippedWeapon == e && equippedWeapon.isBeingDual && equippedWeapon.otherHand != null)
+                {
+                    e.viewModel.gameObject.SetActive(true);
+                    e.otherHand.viewModel.gameObject.SetActive(true);
+                }
+                else if (equippedWeapon == e && !equippedWeapon.isBeingDual)
+                {
+                    e.viewModel.gameObject.SetActive(true);
+                }
+                else if (e != equippedWeapon.otherHand)
+                {
+
+                    e.viewModel.gameObject.SetActive(false);
+
+                }
+
+
+            }
+
+
 
 
         }
+
+       
 
 
 
