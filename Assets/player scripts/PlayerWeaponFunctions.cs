@@ -331,7 +331,7 @@ public class PlayerWeaponFunctions : MonoBehaviour
                 equippedWeapon.otherHand.anim.Play(equippedWeapon.otherHand.draw);
 
 			}
-			else if (!equippedWeapon.isBeingDual)
+			else if (!equippedWeapon.isBeingDual && equippedWeapon != lastWeapon)
 			{
 
                 equippedWeapon.anim.Play(equippedWeapon.draw);
