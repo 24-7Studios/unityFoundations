@@ -2302,7 +2302,7 @@ MonoBehaviour:
   viewModel: {fileID: 2278939718669815366}
   viewModelOffset: {x: 0, y: 0, z: 0}
   displayHudInfo: 0
-  reticle: {fileID: 0}
+  reticle: {fileID: 21300000, guid: 1c9081c15f9f1574e8eef9d553a8f9a2, type: 3}
   reticleScale: {x: 0, y: 0, z: 0}
   isItem: 0
   body: {fileID: 0}
