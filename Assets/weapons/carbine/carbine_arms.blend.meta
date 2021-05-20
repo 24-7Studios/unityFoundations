@@ -143,7 +143,39 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.34653464
+        functionName: back
+        data: 
+        objectReferenceParameter: {fileID: 8300000, guid: 4d60ee985b60ef94d9ed8652087ef42e,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.3815341
+        functionName: extract
+        data: 
+        objectReferenceParameter: {fileID: 8300000, guid: 0de74285668d8cc45b74f9d542eccb8b,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.6772008
+        functionName: insert
+        data: 
+        objectReferenceParameter: {fileID: 8300000, guid: 648228d724623124d9734724b4b2779c,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.78528947
+        functionName: forward
+        data: 
+        objectReferenceParameter: {fileID: 8300000, guid: 65c80a65abb6556418b29374d3362fc2,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -172,7 +204,15 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0
+        functionName: fire
+        data: 
+        objectReferenceParameter: {fileID: 8300000, guid: 8ff98f957ac42d24a8ee605fb65943a7,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
