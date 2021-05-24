@@ -1774,7 +1774,7 @@ MonoBehaviour:
   reloadAnim: vmReload
   idleAnim: vmIdleAnim
   easterEggReloadAnim: vmEEReload
-  easterEggReloadChance: 10
+  easterEggReloadChance: 100
   maxAmmo: 0
   spareAmmo: 0
   magSize: 6
