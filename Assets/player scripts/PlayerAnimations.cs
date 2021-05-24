@@ -8,6 +8,7 @@ public class PlayerAnimations : MonoBehaviour
     public Animator anim;
     public movement_fly moves;
     public float velocity;
+    public float damp = 5;
 
    
     // Update is called once per frame
@@ -17,7 +18,7 @@ public class PlayerAnimations : MonoBehaviour
         velocity = moves.body.transform.InverseTransformDirection(moves.body.velocity).z;
 
 
-        anim.SetFloat("speed", velocity / (moves.moveSpeed * 17));
+        anim.SetFloat("speed", velocity / (moves.moveSpeed * 17), damp, Time.fixedDeltaTime);
 
 
 
