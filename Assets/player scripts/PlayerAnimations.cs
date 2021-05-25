@@ -7,6 +7,7 @@ public class PlayerAnimations : MonoBehaviour
 
     public Animator anim;
     public movement_fly moves;
+    public float fallVelocity;
     public float velocity;
     public float damp = 5;
 
@@ -21,7 +22,7 @@ public class PlayerAnimations : MonoBehaviour
 
         anim.SetFloat("speed", moves.WalkInfo().y, damp, Time.fixedDeltaTime);
 
-        if(!moves.isGrounded())
+        if(!moves.isGrounded() && moves.body.velocity.y < -fallVelocity)
 		{
             falling = true;
 		}
