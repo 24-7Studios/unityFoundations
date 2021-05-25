@@ -3992,7 +3992,7 @@ MonoBehaviour:
   anim: {fileID: 3166231813453636616}
   moves: {fileID: 1205728290}
   velocity: 0
-  damp: 0.01
+  damp: 0.05
 --- !u!1 &1227673124
 GameObject:
   m_ObjectHideFlags: 0
