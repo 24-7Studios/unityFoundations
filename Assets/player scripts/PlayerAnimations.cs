@@ -10,6 +10,7 @@ public class PlayerAnimations : MonoBehaviour
     public float velocity;
     public float damp = 5;
 
+    bool falling = false;
    
     // Update is called once per frame
     void Update()
@@ -19,6 +20,19 @@ public class PlayerAnimations : MonoBehaviour
 
 
         anim.SetFloat("speed", moves.WalkInfo().y, damp, Time.fixedDeltaTime);
+
+        if(!moves.isGrounded())
+		{
+            falling = true;
+		}
+
+
+        if(falling && moves.isGrounded())
+		{
+            falling = false;
+            anim.SetTrigger("landed");
+
+		}
 
 
 
