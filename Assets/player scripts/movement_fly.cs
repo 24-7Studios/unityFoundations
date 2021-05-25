@@ -173,13 +173,14 @@ public class movement_fly : MonoBehaviour
 
 	}
 
-    public static bool isSprinting()
+    public Vector2 WalkInfo()
 	{
+        Vector2 vec = new Vector2();
 
-        if(Input.GetKey(KeyCode.LeftShift))
-                return true;
+        vec.Set(x, z);
 
-        return false;
+        return vec;
+
 	}
 
     public bool CanJump()

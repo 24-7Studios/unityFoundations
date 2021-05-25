@@ -18,7 +18,7 @@ public class PlayerAnimations : MonoBehaviour
         velocity = moves.body.transform.InverseTransformDirection(moves.body.velocity).z;
 
 
-        anim.SetFloat("speed", velocity / (moves.moveSpeed * 17), damp, Time.fixedDeltaTime);
+        anim.SetFloat("speed", moves.WalkInfo().y, damp, Time.fixedDeltaTime);
 
 
 
