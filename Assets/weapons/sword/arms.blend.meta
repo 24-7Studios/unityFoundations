@@ -59,8 +59,8 @@ ModelImporter:
       name: idle
       takeName: bruh
       internalID: 0
-      firstFrame: 1
-      lastFrame: 1
+      firstFrame: 100
+      lastFrame: 102
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
