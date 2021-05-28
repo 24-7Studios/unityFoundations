@@ -230,12 +230,16 @@ public class PlayerWeaponFunctions : MonoBehaviour
 		{
             player.worldCam.transform.SetParent(equippedWeapon.cameraBone);
 
-		}
+        }
 		else
 		{
             player.worldCam.transform.SetParent(player.camTransformer);
-		}
+           
+        }
 
+        player.worldCam.transform.localPosition = Vector3.zero;
+        player.worldCam.transform.localEulerAngles = Vector3.zero;
+        player.worldCam.transform.localScale = Vector3.one;
 
         /*
         if (equippedWeapon.weaponInfo != null && !equippedWeapon.isBeingDual)
