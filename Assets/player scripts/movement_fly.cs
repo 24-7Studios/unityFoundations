@@ -6,15 +6,15 @@ using UnityEngine;
 public class movement_fly : MonoBehaviour
 {
 
-
+    public Player player;
     public float moveSpeed = 2;
     public float jumpForce = 5;
     public float sprintMultiplyer = 2;
     public float playerGravity = 9.86f;
 
 
-    public Rigidbody body;
-    public Transform cam;
+    
+    
     public Transform groundCheck;
     public Transform foot;
     public Vector3 footPostition;
@@ -42,7 +42,9 @@ public class movement_fly : MonoBehaviour
     void Start()
     {
 
-        if(usePhysicsGravity)
+        player = GetComponent<Player>();
+
+        if (usePhysicsGravity)
 		{
             playerGravity = Physics.gravity.y;
 		}
@@ -75,7 +77,7 @@ public class movement_fly : MonoBehaviour
         }
         else
         {
-            groundCheck.rotation = body.rotation;
+            groundCheck.rotation = player.playerBody.rotation;
 
         }
 
@@ -127,7 +129,7 @@ public class movement_fly : MonoBehaviour
 
         if (fly)
         {
-            InputMovement = (((cam.transform.right * x + cam.transform.forward * z) * moveSpeed) + cam.transform.up * y);
+            InputMovement = (((player.camTransformer.transform.right * x + player.camTransformer.transform.forward * z) * moveSpeed) + player.camTransformer.transform.up * y);
         }
         else
 		{
@@ -149,11 +151,11 @@ public class movement_fly : MonoBehaviour
         }
 
 
-        body.AddForce(InputMovement, ForceMode.Impulse);
+        player.playerBody.AddForce(InputMovement, ForceMode.Impulse);
 
 		if(jump)
 		{
-            body.velocity += transform.up * jumpForce;
+            player.playerBody.velocity += transform.up * jumpForce;
             jump = false;
         }
 

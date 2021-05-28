@@ -10,8 +10,8 @@ public class PlayerWeaponFunctions : MonoBehaviour
 
 
     public Player player;
-    //Transform cam;
-    public Animator anim;
+    
+    
     public Canvas hud;
     public Image crosshair;
     public Image hud_weaponIconR;
@@ -226,8 +226,15 @@ public class PlayerWeaponFunctions : MonoBehaviour
 
 
 
+        if(equippedWeapon.cameraBone != null)
+		{
+            player.worldCam.transform.SetParent(equippedWeapon.cameraBone);
 
-
+		}
+		else
+		{
+            player.worldCam.transform.SetParent(player.camTransformer);
+		}
 
 
         /*
@@ -434,7 +441,7 @@ public class PlayerWeaponFunctions : MonoBehaviour
 
                         pickedUpWeapon.Pickup(player.weaponHolder);
 
-                        anim = pickedUpWeapon.GetComponentInChildren<Animator>();
+                        
                         pickedUpWeapon.gameObject.SetActive(true);
 
 

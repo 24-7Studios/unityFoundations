@@ -5,8 +5,7 @@ using UnityEngine;
 public class lookHandler_fly : MonoBehaviour
 {
     public Player player;
-    public Transform cam;
-    public Rigidbody body;
+
 
     public float sens = 100f;
 
@@ -20,6 +19,7 @@ public class lookHandler_fly : MonoBehaviour
     void Start()
     {
 
+        player = GetComponent<Player>();
 
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -41,8 +41,8 @@ public class lookHandler_fly : MonoBehaviour
 
         xmov -= MouseX;
 
-        cam.transform.localRotation = Quaternion.Euler(Vector3.right * ymov);
-        body.transform.rotation = Quaternion.Euler(Vector3.up * -xmov);
+        player.camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * ymov);
+        player.playerBody.transform.rotation = Quaternion.Euler(Vector3.up * -xmov);
 
         
 

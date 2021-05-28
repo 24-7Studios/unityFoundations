@@ -7,7 +7,6 @@ public class PlayerAnimations : MonoBehaviour
 
     public Player player;
     public Animator anim;
-    public movement_fly moves;
     public float fallVelocity;
     public float velocity;
     public float damp = 5;
@@ -29,18 +28,18 @@ public class PlayerAnimations : MonoBehaviour
 	void Update()
     {
 
-        velocity = moves.body.transform.InverseTransformDirection(moves.body.velocity).z;
+        velocity = player.playerBody.transform.InverseTransformDirection(player.playerBody.velocity).z;
 
 
-        anim.SetFloat("speed", moves.WalkInfo().y, damp, Time.fixedDeltaTime);
+        anim.SetFloat("speed", player.mover.WalkInfo().y, damp, Time.fixedDeltaTime);
 
-        if(!moves.isGrounded() && moves.body.velocity.y < -fallVelocity)
+        if(!player.mover.isGrounded() && player.playerBody.velocity.y < -fallVelocity)
 		{
             falling = true;
 		}
 
 
-        if(falling && moves.isGrounded())
+        if(falling && player.mover.isGrounded())
 		{
             falling = false;
             anim.SetTrigger("landed");

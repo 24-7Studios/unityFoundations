@@ -14,7 +14,7 @@ public class jumpPad : MonoBehaviour
     {
 
         
-        if(other.GetComponent<movement_fly>())
+        if(other.GetComponent<Rigidbody>())
 		{
             r = other.GetComponent<Rigidbody>(); ;
             launch = true;

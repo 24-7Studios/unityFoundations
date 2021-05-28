@@ -10,22 +10,33 @@ public class weaponClass : MonoBehaviour
     public Canvas weaponInfo;
 
     public Player player;
-
+    
 
 
     public string draw;
+
+
     public bool Dual;
     public bool isBeingDual;
     public bool hand; //false for left true for right
     public weaponClass otherHand;
+
     public weaponPickup itemClass;
+
+
     public Transform viewModel;
     public Vector3 viewModelOffset;
+
+
+
     public bool displayHudInfo;
     public Sprite reticle;
     public Vector3 reticleScale;
+
+
     public bool isItem; 
     public Animator anim;
+    public Transform cameraBone;
     public GameObject weapons;
     public PlayerWeaponFunctions controller;
 
