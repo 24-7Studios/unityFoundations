@@ -8,7 +8,11 @@ public class weaponClass : MonoBehaviour
     public string weaponName;
     public Sprite weaponIcon;
     public Canvas weaponInfo;
-    
+
+    public Player player;
+
+
+
     public string draw;
     public bool Dual;
     public bool isBeingDual;
@@ -21,8 +25,6 @@ public class weaponClass : MonoBehaviour
     public Sprite reticle;
     public Vector3 reticleScale;
     public bool isItem; 
-    public Rigidbody body;
-    public Transform cam;
     public Animator anim;
     public GameObject weapons;
     public PlayerWeaponFunctions controller;
@@ -124,9 +126,9 @@ public class weaponClass : MonoBehaviour
 
         transform.SetParent(parent.transform);
         
-        body = GetComponentInParent<Rigidbody>();
+       
         anim = viewModel.GetComponent<Animator>();
-        cam = GetComponentInParent<Camera>().transform;
+        player = GetComponentInParent<Player>();
         controller = GetComponentInParent<PlayerWeaponFunctions>();
         
         itemClass = transform.GetComponentInChildren<weaponPickup>();
@@ -164,7 +166,7 @@ public class weaponClass : MonoBehaviour
         itemClass.gameObject.SetActive(true);
         viewModel.gameObject.SetActive(false);
         transform.parent = null;
-        transform.position = body.transform.position + body.transform.forward * 1;
+        transform.position = player.playerBody.transform.position + player.playerBody.transform.forward * 1;
         itemClass.enabled = true;
         itemClass.hasDropped();
         controller.setWeapons();
@@ -197,11 +199,11 @@ public class weaponClass : MonoBehaviour
 
         transform.SetParent(parent.transform);
 
-        body = GetComponentInParent<Rigidbody>();
+       
         anim = viewModel.GetComponent<Animator>();
-        cam = GetComponentInParent<Camera>().transform;
+        player = GetComponentInParent<Player>();
         controller = GetComponentInParent<PlayerWeaponFunctions>();
-        weapons = cam.transform.Find("weapons").gameObject;
+        weapons = player.weaponHolder;
         itemClass = transform.GetComponentInChildren<weaponPickup>(true);
         transform.SetParent(weapons.transform);
         anim.transform.localPosition = viewModelOffset;

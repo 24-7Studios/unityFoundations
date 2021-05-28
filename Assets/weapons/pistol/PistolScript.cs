@@ -86,7 +86,7 @@ public class PistolScript : weaponClass
 
 		anim.Rebind();
 		anim.Play(fireAnim);
-		body.GetComponent<lookHandler_fly>().ymov -= viewPunch;
+		player.looker.ymov -= viewPunch;
 		GameObject c = Instantiate(fireEffect, firePosition);
 		Destroy(c, effectTimer);
 		heat += heatupPerShot;

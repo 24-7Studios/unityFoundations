@@ -2293,6 +2293,7 @@ MonoBehaviour:
   weaponName: Carbine
   weaponIcon: {fileID: 21300000, guid: 39bcad8d34bfdea49b16301d0d1e3191, type: 3}
   weaponInfo: {fileID: 0}
+  player: {fileID: 0}
   draw: draw
   Dual: 0
   isBeingDual: 0
@@ -2305,8 +2306,6 @@ MonoBehaviour:
   reticle: {fileID: 21300000, guid: 1c9081c15f9f1574e8eef9d553a8f9a2, type: 3}
   reticleScale: {x: 0, y: 0, z: 0}
   isItem: 0
-  body: {fileID: 0}
-  cam: {fileID: 0}
   anim: {fileID: 0}
   weapons: {fileID: 0}
   controller: {fileID: 0}
@@ -3840,6 +3839,7 @@ GameObject:
   - component: {fileID: 1205728287}
   - component: {fileID: 1205728292}
   - component: {fileID: 1205728291}
+  - component: {fileID: 1205728294}
   - component: {fileID: 1205728290}
   - component: {fileID: 1205728293}
   - component: {fileID: 1205728289}
@@ -3882,8 +3882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29035edca9fcdb549aabe597682c3c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 1205728292}
-  cam: {fileID: 963194228}
+  player: {fileID: 1205728294}
   anim: {fileID: 4724117160286923306}
   hud: {fileID: 1129494447}
   crosshair: {fileID: 1984614628}
@@ -3891,7 +3890,6 @@ MonoBehaviour:
   hud_weaponInfoR: {fileID: 515796662}
   hud_weaponIconL: {fileID: 1233960979}
   hud_weaponInfoL: {fileID: 1227673128}
-  weaponHolder: {fileID: 1590041}
   equippedWeapon: {fileID: 0}
   noWeapon: {fileID: 1444498299}
   weapons: []
@@ -3913,6 +3911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95940aa98b6dc954e92f7628c412a808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   cam: {fileID: 963194228}
   body: {fileID: 1205728292}
   sens: 1.2
@@ -3989,11 +3988,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2c3d10e796545646a6a0bc07121bffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   anim: {fileID: 3166231813453636616}
   moves: {fileID: 1205728290}
   fallVelocity: 10
   velocity: 0
   damp: 0.05
+--- !u!114 &1205728294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205728286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127a4e1144e846348b1563128844b992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerBody: {fileID: 1205728292}
+  camTransformer: {fileID: 963194228}
+  worldCam: {fileID: 963194227}
+  gunCam: {fileID: 878553949}
+  looker: {fileID: 1205728289}
+  weaponHolder: {fileID: 1590041}
 --- !u!1 &1227673124
 GameObject:
   m_ObjectHideFlags: 0
@@ -4677,6 +4695,7 @@ MonoBehaviour:
   weaponName: Melee
   weaponIcon: {fileID: 0}
   weaponInfo: {fileID: 0}
+  player: {fileID: 0}
   draw: idleDraw
   Dual: 0
   isBeingDual: 0
@@ -4689,8 +4708,6 @@ MonoBehaviour:
   reticle: {fileID: 0}
   reticleScale: {x: 0, y: 0, z: 0}
   isItem: 0
-  body: {fileID: 0}
-  cam: {fileID: 0}
   anim: {fileID: 0}
   weapons: {fileID: 0}
   controller: {fileID: 0}

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAnimations : MonoBehaviour
 {
 
+    public Player player;
     public Animator anim;
     public movement_fly moves;
     public float fallVelocity;
@@ -12,9 +13,20 @@ public class PlayerAnimations : MonoBehaviour
     public float damp = 5;
 
     bool falling = false;
-   
-    // Update is called once per frame
-    void Update()
+
+
+	private void Start()
+	{
+
+        player = GetComponent<Player>();
+
+
+    }
+
+
+
+
+	void Update()
     {
 
         velocity = moves.body.transform.InverseTransformDirection(moves.body.velocity).z;

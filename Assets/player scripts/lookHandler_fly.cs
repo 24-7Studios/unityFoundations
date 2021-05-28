@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class lookHandler_fly : MonoBehaviour
 {
+    public Player player;
     public Transform cam;
     public Rigidbody body;
 

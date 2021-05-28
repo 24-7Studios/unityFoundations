@@ -9,8 +9,8 @@ public class PlayerWeaponFunctions : MonoBehaviour
 {
 
 
-    public Rigidbody body;
-    public Transform cam;
+    public Player player;
+    //Transform cam;
     public Animator anim;
     public Canvas hud;
     public Image crosshair;
@@ -18,7 +18,7 @@ public class PlayerWeaponFunctions : MonoBehaviour
     public Canvas hud_weaponInfoR;
     public Image hud_weaponIconL;
     public Canvas hud_weaponInfoL;
-    public GameObject weaponHolder;
+    //public GameObject weaponHolder;
     public weaponClass equippedWeapon;
     public weaponClass noWeapon;
     public List<weaponClass> weapons;
@@ -40,6 +40,8 @@ public class PlayerWeaponFunctions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        player = GetComponent<Player>();
 
         setWeapons();
 
@@ -415,7 +417,7 @@ public class PlayerWeaponFunctions : MonoBehaviour
             RaycastHit r;
          
             
-            if(Physics.Raycast(cam.transform.position, cam.transform.forward, out r, grabDistance))
+            if(Physics.Raycast(player.worldCam.transform.position, player.worldCam.transform.forward, out r, grabDistance))
 			{
                
 
@@ -430,7 +432,7 @@ public class PlayerWeaponFunctions : MonoBehaviour
                         pickedUpWeapon.enabled = true;
 
 
-                        pickedUpWeapon.Pickup(weaponHolder);
+                        pickedUpWeapon.Pickup(player.weaponHolder);
 
                         anim = pickedUpWeapon.GetComponentInChildren<Animator>();
                         pickedUpWeapon.gameObject.SetActive(true);
@@ -506,7 +508,7 @@ public class PlayerWeaponFunctions : MonoBehaviour
 
 
 
-        return cam.GetComponentsInChildren<weaponClass>(false).ToList();
+        return player.weaponHolder.GetComponentsInChildren<weaponClass>(false).ToList();
 
 
 

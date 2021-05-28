@@ -50,9 +50,9 @@ public class BallandBomb : weaponClass
 
         anim.Play(A);
 
-        clone = Instantiate(Throw, cam.transform.position + cam.transform.forward * 1, cam.rotation);
+        clone = Instantiate(Throw, player.camTransformer.transform.position + player.camTransformer.transform.forward * 1, player.camTransformer.rotation);
 
-        clone.velocity = (cam.forward * power + body.velocity);
+        clone.velocity = (player.camTransformer.forward * power + player.playerBody.velocity);
 
 
 

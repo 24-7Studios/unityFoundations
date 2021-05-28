@@ -6,7 +6,7 @@ public class jumpPad : MonoBehaviour
 {
 
 	public float force = 20;
-    Rigidbody player;
+    Rigidbody r;
     bool launch;
 
 
@@ -16,7 +16,7 @@ public class jumpPad : MonoBehaviour
         
         if(other.GetComponent<movement_fly>())
 		{
-            player = other.GetComponent<movement_fly>().body;
+            r = other.GetComponent<Rigidbody>(); ;
             launch = true;
         }
 
@@ -28,7 +28,7 @@ public class jumpPad : MonoBehaviour
 
         if(launch)
 		{
-            player.velocity += transform.up * force;
+            r.velocity += transform.up * force;
             launch = false;
         }
         
