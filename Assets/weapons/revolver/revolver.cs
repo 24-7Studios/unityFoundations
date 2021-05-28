@@ -127,7 +127,7 @@ public class revolver : weaponClass
 
         GameObject c = Instantiate(muzzleFlash, muzzleFlashPos.position, muzzleFlashPos.rotation);
         Destroy(c, effectTimer);
-        player.looker.ymov -= viewPunch;
+        player.looker.viewPunch(viewPunch);
 
         hasFired = false;
 

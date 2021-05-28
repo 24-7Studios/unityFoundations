@@ -104,7 +104,7 @@ public class smg : weaponClass
 
         anim.Rebind();
         anim.Play(fireAnim);
-        player.looker.ymov -= viewPunch;
+        player.looker.viewPunch(viewPunch);
         GameObject c = Instantiate(muzzleFlash, muzzleFlashPos.position, muzzleFlashPos.rotation);
         c.transform.position = muzzleFlashPos.position;
         c.transform.rotation = muzzleFlashPos.rotation;

@@ -51,17 +51,10 @@ public class lookHandler_fly : MonoBehaviour
 
     }
 
-
-	private void FixedUpdate()
+    public void viewPunch(float r)
 	{
-        //tis.transform.rotation = Quaternion.Euler(Vector3.up * -xmov + Vector3.right * ymov);
-
-
-        
-
-
-
-    }
+        ymov -= r;
+	}
 
 
 }

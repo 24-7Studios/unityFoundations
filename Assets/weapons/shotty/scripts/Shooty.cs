@@ -43,8 +43,8 @@ public class Shooty : weaponClass
 		{
 
 			anim.Play(fireAnim);
-			
-			player.looker.ymov -= viewPunch;
+
+			player.looker.viewPunch(viewPunch);
 			GameObject c = Instantiate(fireEffect, firePosition);
 			Destroy(c, effectTimer);
 
