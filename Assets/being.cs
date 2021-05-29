@@ -12,7 +12,7 @@ public class being : MonoBehaviour
 		
 
 
-	public void Update()
+	public virtual void Update()
 	{
 		
 		if(health < 0)
@@ -34,7 +34,7 @@ public class being : MonoBehaviour
 
 	}
 
-	public void takeDamagefromHit(float d, float percentSheild)
+	public virtual void takeDamagefromHit(float d, float percentSheild)
 	{
 		hit();
 		float shieldDamage = d * percentSheild;
@@ -57,7 +57,7 @@ public class being : MonoBehaviour
 	}
 
 
-	public void hit()
+	public virtual void hit()
 	{
 		if(instantDeath)
 		{
@@ -71,7 +71,7 @@ public class being : MonoBehaviour
 	}
 
 	
-	public void die()
+	public virtual void die()
 	{
 		Destroy(this.gameObject);
 	}
