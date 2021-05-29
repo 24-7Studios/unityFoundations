@@ -7473,6 +7473,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4265371636734408043, guid: 7f25d25def649b3409e4f393f35a1b85,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295131674200201944, guid: 7f25d25def649b3409e4f393f35a1b85,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295131674335078010, guid: 7f25d25def649b3409e4f393f35a1b85,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295131674718938005, guid: 7f25d25def649b3409e4f393f35a1b85,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295131674767926718, guid: 7f25d25def649b3409e4f393f35a1b85,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295131674936196963, guid: 7f25d25def649b3409e4f393f35a1b85,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6295131674995784912, guid: 7f25d25def649b3409e4f393f35a1b85,
         type: 3}
       propertyPath: m_RootOrder
@@ -7532,6 +7562,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295131674995784913, guid: 7f25d25def649b3409e4f393f35a1b85,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295131675026245854, guid: 7f25d25def649b3409e4f393f35a1b85,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295131675032536811, guid: 7f25d25def649b3409e4f393f35a1b85,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295131675707814271, guid: 7f25d25def649b3409e4f393f35a1b85,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295131675826968621, guid: 7f25d25def649b3409e4f393f35a1b85,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f25d25def649b3409e4f393f35a1b85, type: 3}

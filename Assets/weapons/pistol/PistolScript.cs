@@ -18,8 +18,12 @@ public class PistolScript : weaponClass
 	public Transform smokePosition;
 	public ParticleSystem smokeEffect;
 
-	public float damage = 15;
-	public float shieldPercent = 0.5f;
+	public GameObject DebugObject;
+
+	public float baseDamage = 15;
+	public float shieldDamage = 0.5f;
+	public float spread = 2;
+
 
 	public float heatupPerShot = 6;
 	public float cooldownSpeed = 2;
@@ -96,17 +100,20 @@ public class PistolScript : weaponClass
 		fireTimer = fireDelay;
 
 		RaycastHit hit;
-
-		if(Physics.Raycast(player.camTransformer.position, player.camTransformer.forward, out hit, Mathf.Infinity))
+		
+		float deviation = Random.Range(-spread, spread);
+		if(Physics.Raycast(player.camTransformer.position, player.camTransformer.forward + (Vector3.one * deviation), out hit, Mathf.Infinity, Shootable))
 		{
 			Debug.Log(hit.collider.gameObject.name);
 
+			Instantiate(DebugObject, hit.point, Quaternion.Euler(hit.normal));
+			
 			if(hit.collider.GetComponentInParent<being>())
 			{
 
 				being b = hit.collider.GetComponentInParent<being>();
 
-				b.takeDamagefromHit(damage, shieldPercent);
+				b.takeDamagefromHit(baseDamage, shieldDamage);
 
 				if(hit.rigidbody)
 				{

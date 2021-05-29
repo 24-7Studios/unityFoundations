@@ -10,8 +10,8 @@ public class weaponClass : MonoBehaviour
     public Canvas weaponInfo;
 
     public Player player;
-    
 
+    public LayerMask Shootable;
 
     public string draw;
 

@@ -6481,6 +6481,10 @@ MonoBehaviour:
   weaponName: Blaster
   weaponIcon: {fileID: 21300000, guid: e94dc3b168f585e4aac103e5938e98c2, type: 3}
   weaponInfo: {fileID: 0}
+  player: {fileID: 0}
+  Shootable:
+    serializedVersion: 2
+    m_Bits: 1689
   draw: draw
   Dual: 1
   isBeingDual: 0
@@ -6493,9 +6497,8 @@ MonoBehaviour:
   reticle: {fileID: 21300000, guid: cc89c232c70ddfb47bdcfba9bc64818e, type: 3}
   reticleScale: {x: 1, y: 1, z: 1}
   isItem: 1
-  body: {fileID: 0}
-  cam: {fileID: 0}
   anim: {fileID: 0}
+  cameraBone: {fileID: 0}
   weapons: {fileID: 0}
   controller: {fileID: 0}
   InputFire1Down: 0
@@ -6516,6 +6519,11 @@ MonoBehaviour:
     type: 3}
   smokePosition: {fileID: 6849245787853919625}
   smokeEffect: {fileID: 5272397529347102480}
+  DebugObject: {fileID: 4837419253238934036, guid: d294ffef25fbe1a4ca7ed8440f33ecc3,
+    type: 3}
+  baseDamage: 15
+  shieldDamage: 0.5
+  spread: 0.02
   heatupPerShot: 20
   cooldownSpeed: 30
   fireDelay: 0.08
