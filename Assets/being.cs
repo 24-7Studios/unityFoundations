@@ -15,7 +15,7 @@ public class being : MonoBehaviour
 	public virtual void Update()
 	{
 		
-		if(health < 0)
+		if(health == 0)
 		{
 			die();
 		}
@@ -40,7 +40,7 @@ public class being : MonoBehaviour
 		float shieldDamage = d * percentSheild;
 		float healthDamage = d - (d * percentSheild);
 
-		if(shields !>= 0)
+		if(shields !> 0)
 		{
 			shields -= shieldDamage;
 

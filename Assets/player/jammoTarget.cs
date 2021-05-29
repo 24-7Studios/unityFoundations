@@ -12,7 +12,13 @@ public class jammoTarget : being
     {
 
         rigidbodies = GetComponentsInChildren<Rigidbody>(false).ToList();
+        foreach (Rigidbody r in rigidbodies)
+        {
 
+            r.isKinematic = true;
+            
+
+        }
 
     }
 
@@ -21,7 +27,8 @@ public class jammoTarget : being
         foreach(Rigidbody r in rigidbodies)
 		{
 
-            r.
+            r.isKinematic = false;
+            r.detectCollisions = true;
 
 		}
 

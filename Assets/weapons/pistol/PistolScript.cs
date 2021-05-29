@@ -17,7 +17,10 @@ public class PistolScript : weaponClass
 	public GameObject fireEffect;
 	public Transform smokePosition;
 	public ParticleSystem smokeEffect;
-	
+
+	public float damage = 15;
+	public float shieldPercent = 0.5f;
+
 	public float heatupPerShot = 6;
 	public float cooldownSpeed = 2;
 	public float fireDelay = 0.5f;
@@ -91,6 +94,33 @@ public class PistolScript : weaponClass
 		Destroy(c, effectTimer);
 		heat += heatupPerShot;
 		fireTimer = fireDelay;
+
+		RaycastHit hit;
+
+		if(Physics.Raycast(player.camTransformer.position, player.camTransformer.forward, out hit, Mathf.Infinity))
+		{
+			Debug.Log(hit.collider.gameObject.name);
+
+			if(hit.collider.GetComponentInParent<being>())
+			{
+
+				being b = hit.collider.GetComponentInParent<being>();
+
+				b.takeDamagefromHit(damage, shieldPercent);
+
+				if(hit.rigidbody)
+				{
+					Rigidbody r = hit.rigidbody;
+
+					r.isKinematic = false;
+					r.detectCollisions = true;
+
+				}
+
+			}
+
+
+		}
 
 	}
 
