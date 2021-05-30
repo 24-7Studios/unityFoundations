@@ -12,6 +12,8 @@ public class weaponClass : MonoBehaviour
     public Player player;
 
     public LayerMask Shootable;
+    public bool debugMode;
+
 
     public string draw;
 

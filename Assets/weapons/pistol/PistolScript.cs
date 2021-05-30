@@ -102,17 +102,19 @@ public class PistolScript : weaponClass
 
 		RaycastHit hit;
 		
-		float deviation = Random.Range(-spread, spread);
-		Vector3 shootDirection = player.camTransformer.forward;
-		shootDirection.x += deviation;
-		shootDirection.y += deviation;
-		shootDirection.z += deviation;
+		
+		Vector3 shootDirection = (player.camTransformer.forward + Random.insideUnitSphere * spread).normalized;
 
 		if(Physics.Raycast(player.camTransformer.position ,shootDirection , out hit, Mathf.Infinity, Shootable))
 		{
-			Debug.Log(hit.collider.gameObject.name);
+			if (debugMode)
+			{
+				Debug.Log(hit.collider.gameObject.name);
+				Instantiate(DebugObject, hit.point, Quaternion.Euler(hit.normal));
+			}
 
-			Instantiate(DebugObject, hit.point, Quaternion.Euler(hit.normal));
+
+			
 			
 			if(hit.collider.GetComponentInParent<being>())
 			{

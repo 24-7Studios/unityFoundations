@@ -6485,6 +6485,7 @@ MonoBehaviour:
   Shootable:
     serializedVersion: 2
     m_Bits: 1689
+  debugMode: 0
   draw: draw
   Dual: 1
   isBeingDual: 0
@@ -6529,7 +6530,7 @@ MonoBehaviour:
   cooldownSpeed: 30
   fireDelay: 0.08
   burst: 3
-  viewPunch: 0
+  viewPunch: 3
   heat: 0
 --- !u!82 &6849245787004451486
 AudioSource:
