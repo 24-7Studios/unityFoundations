@@ -15,6 +15,17 @@ public class revolver : weaponClass
     public string idleAnim;
     public string easterEggReloadAnim;
     public int easterEggReloadChance;
+
+
+    public float baseDamage;
+    public float fleshMulitplier;
+    public float hitForce;
+    public float spread;
+
+    public GameObject impactEffect;
+
+    public GameObject DebugObject;
+
     public float maxAmmo;
     public float spareAmmo;
     public float magSize;
@@ -130,6 +141,43 @@ public class revolver : weaponClass
         player.looker.viewPunch(viewPunch);
 
         hasFired = false;
+
+        RaycastHit hit;
+
+
+        Vector3 shootDirection = (player.camTransformer.forward + Random.insideUnitSphere * spread).normalized;
+
+        if (Physics.Raycast(player.camTransformer.position, shootDirection, out hit, Mathf.Infinity, Shootable))
+        {
+            if (debugMode)
+            {
+                Debug.Log(hit.collider.gameObject.name);
+                Instantiate(DebugObject, hit.point, Quaternion.Euler(hit.normal));
+            }
+
+
+
+
+            if (hit.collider.GetComponentInParent<being>())
+            {
+
+                being be = hit.collider.GetComponentInParent<being>();
+
+                be.takeDamagefromHit(baseDamage, fleshMulitplier);
+            }
+            if (hit.collider.GetComponent<Rigidbody>())
+            {
+                Rigidbody r = hit.collider.GetComponent<Rigidbody>();
+
+                r.AddForceAtPosition(player.camTransformer.forward * hitForce, hit.point, ForceMode.Impulse);
+            }
+
+            GameObject fx = Instantiate(impactEffect);
+            fx.transform.position = hit.point;
+            fx.transform.forward = hit.normal;
+
+
+        }
 
     }
 	

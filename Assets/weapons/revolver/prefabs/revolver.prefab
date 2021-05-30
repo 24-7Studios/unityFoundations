@@ -1869,6 +1869,10 @@ MonoBehaviour:
   weaponIcon: {fileID: 21300000, guid: a2c85b469203efb4fbb53b2ea2108c72, type: 3}
   weaponInfo: {fileID: 0}
   player: {fileID: 0}
+  Shootable:
+    serializedVersion: 2
+    m_Bits: 1689
+  debugMode: 0
   draw: vmSpin
   Dual: 1
   isBeingDual: 0
@@ -1878,8 +1882,8 @@ MonoBehaviour:
   viewModel: {fileID: 249057980303478149}
   viewModelOffset: {x: 0, y: 0, z: 0}
   displayHudInfo: 0
-  reticle: {fileID: 0}
-  reticleScale: {x: 0, y: 0, z: 0}
+  reticle: {fileID: 21300000, guid: cc89c232c70ddfb47bdcfba9bc64818e, type: 3}
+  reticleScale: {x: 1, y: 1, z: 1}
   isItem: 1
   anim: {fileID: 0}
   cameraBone: {fileID: 880989787156570074}
@@ -1899,6 +1903,14 @@ MonoBehaviour:
   idleAnim: vmIdleAnim
   easterEggReloadAnim: vmEEReload
   easterEggReloadChance: 100
+  baseDamage: 60
+  fleshMulitplier: 1
+  hitForce: 40
+  spread: 0.02
+  impactEffect: {fileID: 5718995469900101050, guid: 8e06fde96679c1248a8bca766fc413a1,
+    type: 3}
+  DebugObject: {fileID: 4837419253238934036, guid: d294ffef25fbe1a4ca7ed8440f33ecc3,
+    type: 3}
   maxAmmo: 0
   spareAmmo: 0
   magSize: 6
@@ -1908,7 +1920,7 @@ MonoBehaviour:
     type: 3}
   sparks: {fileID: 632273528072824674}
   sparkPos: {fileID: 7813015279142859326}
-  viewPunch: 20
+  viewPunch: 10
   hasLoaded: 0
   hasFired: 0
 --- !u!82 &7813015279247081360
