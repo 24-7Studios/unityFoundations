@@ -17,6 +17,7 @@ public class PistolScript : weaponClass
 	public GameObject fireEffect;
 	public Transform smokePosition;
 	public ParticleSystem smokeEffect;
+	public GameObject impactEffect;
 
 	public GameObject DebugObject;
 
@@ -129,6 +130,10 @@ public class PistolScript : weaponClass
 
 				r.AddForceAtPosition(player.camTransformer.forward * hitForce, hit.point, ForceMode.Impulse);
 			}
+
+			GameObject fx = Instantiate(impactEffect);
+			fx.transform.position = hit.point;
+			fx.transform.forward = hit.normal;
 
 
 		}

@@ -1066,6 +1066,8 @@ MonoBehaviour:
   fireAnim: fire
   reloadAnim: reload
   idleAnim: idle
+  impactEffect: {fileID: 5718995469900101050, guid: 8e06fde96679c1248a8bca766fc413a1,
+    type: 3}
   baseDamage: 5
   fleshMulitplier: 1.25
   spread: 0.05

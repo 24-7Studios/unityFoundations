@@ -11,6 +11,7 @@ public class smg : weaponClass
     public string fireAnim;
     public string reloadAnim;
     public string idleAnim;
+    public GameObject impactEffect;
 
     public float baseDamage;
     public float fleshMulitplier;
@@ -153,6 +154,10 @@ public class smg : weaponClass
 
                 r.AddForceAtPosition(player.camTransformer.forward * hitForce, hit.point, ForceMode.Impulse);
             }
+
+            GameObject fx = Instantiate(impactEffect);
+            fx.transform.position = hit.point;
+            fx.transform.forward = hit.normal;
 
 
         }
