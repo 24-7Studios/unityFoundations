@@ -1032,6 +1032,10 @@ MonoBehaviour:
   weaponIcon: {fileID: 21300000, guid: b100cd74661f66042af73b755f9fea6f, type: 3}
   weaponInfo: {fileID: 0}
   player: {fileID: 0}
+  Shootable:
+    serializedVersion: 2
+    m_Bits: 1689
+  debugMode: 0
   draw: draw
   Dual: 1
   isBeingDual: 0
@@ -1062,6 +1066,12 @@ MonoBehaviour:
   fireAnim: fire
   reloadAnim: reload
   idleAnim: idle
+  baseDamage: 5
+  fleshMulitplier: 1.25
+  spread: 0.05
+  hitForce: 10
+  DebugObject: {fileID: 4837419253238934036, guid: d294ffef25fbe1a4ca7ed8440f33ecc3,
+    type: 3}
   reloadTime: 2
   fireDelay: 0.05
   maxAmmo: 0
