@@ -6523,12 +6523,13 @@ MonoBehaviour:
     type: 3}
   baseDamage: 15
   shieldDamage: 0.5
+  hitForce: 10
   spread: 0.02
   heatupPerShot: 20
   cooldownSpeed: 30
   fireDelay: 0.08
   burst: 3
-  viewPunch: 5
+  viewPunch: 0
   heat: 0
 --- !u!82 &6849245787004451486
 AudioSource:

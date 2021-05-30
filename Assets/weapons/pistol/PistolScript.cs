@@ -22,6 +22,7 @@ public class PistolScript : weaponClass
 
 	public float baseDamage = 15;
 	public float shieldDamage = 0.5f;
+	public float hitForce = 10;
 	public float spread = 2;
 
 
@@ -102,7 +103,12 @@ public class PistolScript : weaponClass
 		RaycastHit hit;
 		
 		float deviation = Random.Range(-spread, spread);
-		if(Physics.Raycast(player.camTransformer.position, player.camTransformer.forward + (Vector3.one * deviation), out hit, Mathf.Infinity, Shootable))
+		Vector3 shootDirection = player.camTransformer.forward;
+		shootDirection.x += deviation;
+		shootDirection.y += deviation;
+		shootDirection.z += deviation;
+
+		if(Physics.Raycast(player.camTransformer.position ,shootDirection , out hit, Mathf.Infinity, Shootable))
 		{
 			Debug.Log(hit.collider.gameObject.name);
 
@@ -114,16 +120,12 @@ public class PistolScript : weaponClass
 				being b = hit.collider.GetComponentInParent<being>();
 
 				b.takeDamagefromHit(baseDamage, shieldDamage);
+			}
+			else if(hit.collider.GetComponent<Rigidbody>())
+			{
+				Rigidbody r = hit.collider.GetComponent<Rigidbody>();
 
-				if(hit.rigidbody)
-				{
-					Rigidbody r = hit.rigidbody;
-
-					r.isKinematic = false;
-					r.detectCollisions = true;
-
-				}
-
+				r.AddForceAtPosition(player.camTransformer.forward * hitForce, hit.point, ForceMode.Impulse);
 			}
 
 
