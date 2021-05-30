@@ -21,7 +21,7 @@ public class PistolScript : weaponClass
 	public GameObject DebugObject;
 
 	public float baseDamage = 15;
-	public float shieldDamage = 0.5f;
+	public float fleshMulitplier = 1f;
 	public float hitForce = 10;
 	public float spread = 2;
 
@@ -121,9 +121,9 @@ public class PistolScript : weaponClass
 
 				being b = hit.collider.GetComponentInParent<being>();
 
-				b.takeDamagefromHit(baseDamage, shieldDamage);
+				b.takeDamagefromHit(baseDamage, fleshMulitplier);
 			}
-			else if(hit.collider.GetComponent<Rigidbody>())
+			if(hit.collider.GetComponent<Rigidbody>())
 			{
 				Rigidbody r = hit.collider.GetComponent<Rigidbody>();
 

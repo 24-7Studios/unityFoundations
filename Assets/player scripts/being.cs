@@ -34,24 +34,21 @@ public class being : MonoBehaviour
 
 	}
 
-	public virtual void takeDamagefromHit(float d, float percentSheild)
+	public virtual void takeDamagefromHit(float d, float s)
 	{
 		hit();
-		float shieldDamage = d * percentSheild;
-		float healthDamage = d - (d * percentSheild);
 
-		if(shields !> 0)
+		
+
+		if(d > shields)
 		{
-			shields -= shieldDamage;
-
-			if(shields == 0)
-			{
-				health -= healthDamage;
-			}
+			float leftOver = d - shields;
+			shields -= d;
+			health -= leftOver * s;
 		}
 		else
 		{
-			health -= healthDamage;
+			shields -= d;
 		}
 
 	}

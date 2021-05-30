@@ -34,9 +34,7 @@ public class PlayerWeaponFunctions : MonoBehaviour
     public int inventoryIndex;
     private int grabDistance = 5;
     private weaponClass lastWeapon;
-
-
-
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -236,6 +234,8 @@ public class PlayerWeaponFunctions : MonoBehaviour
             player.worldCam.transform.SetParent(player.camTransformer);
            
         }
+
+
 
         player.worldCam.transform.localPosition = Vector3.zero;
         player.worldCam.transform.localEulerAngles = Vector3.zero;
