@@ -1480,7 +1480,7 @@ MonoBehaviour:
   Shootable:
     serializedVersion: 2
     m_Bits: 1689
-  debugMode: 1
+  debugMode: 0
   draw: 
   Dual: 0
   isBeingDual: 0
