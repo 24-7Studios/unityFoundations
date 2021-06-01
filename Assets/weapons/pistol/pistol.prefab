@@ -6527,7 +6527,7 @@ MonoBehaviour:
   baseDamage: 15
   fleshMulitplier: 1
   hitForce: 10
-  spread: 0.02
+  spread: 0.01
   heatupPerShot: 20
   cooldownSpeed: 30
   fireDelay: 0.08
