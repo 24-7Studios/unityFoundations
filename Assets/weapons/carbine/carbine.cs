@@ -26,7 +26,7 @@ public class carbine : weaponClass
     public GameObject muzzleFlash;
     public float viewPunch = 3;
     public bool hasLoaded;
-    float effectTimer = 0.05f;
+    float effectTimer = 0.1f;
 
 
 
