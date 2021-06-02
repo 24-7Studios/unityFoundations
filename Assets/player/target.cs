@@ -5,7 +5,7 @@ using UnityEngine;
 public class target : being
 {
 
-	bool isDead;
+	public bool isDead;
 
 
 	public override void die()

@@ -7,36 +7,14 @@ public class despawn : MonoBehaviour
 
 
     public float timer = 0;
-    
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
 
 
 
 
-    {
 
-        
-
-
-        
-
-    }
-
-	private void OnCollisionEnter(Collision collision)
+	private void Start()
 	{
-
-        Destroy(gameObject, timer);
-        
+		Destroy(gameObject, timer);
 	}
 
 
