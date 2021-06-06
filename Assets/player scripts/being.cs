@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class being : MonoBehaviour
+public class being : NetworkBehaviour
 {
+
+
 	public string thisName;
+
 		
 	public float health = 100;
 	public float shields = 100;

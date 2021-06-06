@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class movement_fly : MonoBehaviour
+public class movement_fly : NetworkBehaviour
 {
 
     public Player player;
@@ -58,6 +59,10 @@ public class movement_fly : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!isLocalPlayer)
+        {
+            return;
+        }
 
         grounded = isGrounded();
         canJump = CanJump();
