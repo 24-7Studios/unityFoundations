@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using Mirror.Experimental;
 
-public class movement_fly : NetworkBehaviour
-{
+public class movement_fly : NetworkRigidbody
+{ 
 
     public Player player;
     public float moveSpeed = 2;
