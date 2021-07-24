@@ -6,7 +6,7 @@ using Mirror;
 using Mirror.Experimental;
 
 public class movement_fly : NetworkRigidbody
-{ 
+{
 
     public Player player;
     public float moveSpeed = 2;
@@ -15,8 +15,8 @@ public class movement_fly : NetworkRigidbody
     public float playerGravity = 9.86f;
 
 
-    
-    
+
+
     public Transform groundCheck;
     public Transform foot;
     public Vector3 footPostition;
@@ -26,11 +26,11 @@ public class movement_fly : NetworkRigidbody
     public float maxAngle = 50;
     public bool fly = false;
     public bool usePhysicsGravity = false;
-    
-    
+
+
 
     Vector3 InputMovement;
-    bool  grounded;
+    bool grounded;
     bool canJump;
     bool jump = false;
     float x = 0;
@@ -39,8 +39,8 @@ public class movement_fly : NetworkRigidbody
     Vector3 groundNormal;
 
 
-
     // Start is called before the first frame update
+    [Server]
     void Start()
     {
 
@@ -54,12 +54,15 @@ public class movement_fly : NetworkRigidbody
         footPostition = foot.localPosition;
 
 
-
+        
     }
 
     // Update is called once per frame
+    [Client ]
     void Update()
     {
+        
+
         if(!isLocalPlayer)
         {
             return;
@@ -141,16 +144,23 @@ public class movement_fly : NetworkRigidbody
 		{
             InputMovement = ((((groundCheck.transform.right) * x + (groundCheck.transform.forward) * z) * moveSpeed) + groundCheck.transform.up * y);
         }
-        
 
+        CmdMove();
 
     }
 
+
+    /*
+    [Server]
 	private void FixedUpdate()
 	{
-        
-        if(!grounded)
-		{
+
+        if(!isLocalPlayer)
+        { return;
+        }
+
+        if (!grounded)
+        {
 
             y -= -playerGravity * Time.fixedDeltaTime;
 
@@ -159,16 +169,36 @@ public class movement_fly : NetworkRigidbody
 
         player.playerBody.AddForce(InputMovement, ForceMode.Impulse);
 
-		if(jump)
-		{
+        if (jump)
+        {
             player.playerBody.velocity += transform.up * jumpForce;
             jump = false;
         }
 
-
-
     }
+    */
 
+
+
+    [Command]
+    void CmdMove()
+    {
+        if (!grounded)
+        {
+
+            y -= -playerGravity * Time.fixedDeltaTime;
+
+        }
+
+
+        player.playerBody.AddForce(InputMovement, ForceMode.Impulse);
+
+        if (jump)
+        {
+            player.playerBody.velocity += transform.up * jumpForce;
+            jump = false;
+        }
+    }
 
    
     public bool isWalking()

@@ -74,18 +74,18 @@ public class Shooty : weaponClass
 					}
 
 
+					IDamage b = hit.collider.GetComponentInParent<IDamage>();
 
+					Rigidbody r = hit.collider.GetComponent<Rigidbody>();
 
-					if (hit.collider.GetComponentInParent<being>())
+					if (b != null)
 					{
-
-						being b = hit.collider.GetComponentInParent<being>();
 
 						b.takeDamagefromHit(baseDamage, fleshMulitplier);
 					}
-					if (hit.collider.GetComponent<Rigidbody>())
+					if (r != null)
 					{
-						Rigidbody r = hit.collider.GetComponent<Rigidbody>();
+						
 
 						r.AddForceAtPosition(player.camTransformer.forward * hitForce, hit.point, ForceMode.Impulse);
 					}

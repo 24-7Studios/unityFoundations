@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class Player : being
+public class Player : NetworkBehaviour
 {
 
-    public Rigidbody playerBody;
+    public Rigidbody playerPhysBody;
     public Transform camTransformer;
     public Camera worldCam;
     public Camera gunCam;
@@ -14,7 +15,7 @@ public class Player : being
     public GameObject weaponHolder;
 
     
-
+    //input
 
 
 
