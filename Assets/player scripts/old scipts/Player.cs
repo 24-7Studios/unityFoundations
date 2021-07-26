@@ -11,9 +11,8 @@ public class Player : NetworkBehaviour
     public GameObject CameraSetup;
     public Camera worldCam;
     public Camera gunCam;
-    //public lookHandler_fly looker;
-    //public movement_fly mover;
     public GameObject weaponHolder;
+    public PlayerModelClass PlayerModel;
 
 
     public float sens = 100f;
@@ -26,10 +25,15 @@ public class Player : NetworkBehaviour
     private void Start()
     {
 
-        
+
 
         if (!isLocalPlayer)
         {
+
+            foreach (GameObject part in PlayerModel.models)
+            {
+                part.layer = 0;
+            }
 
             
 
@@ -37,9 +41,17 @@ public class Player : NetworkBehaviour
 
         }
 
-        Instantiate(CameraSetup, camTransformer);
+
+        foreach (GameObject part in PlayerModel.models)
+        {
+            part.layer = 6;
+        }
 
         
+
+        Instantiate(CameraSetup, camTransformer);
+
+
 
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -50,7 +62,7 @@ public class Player : NetworkBehaviour
     private void Update()
     {
 
-       
+
 
         if (!isLocalPlayer) return;
 
@@ -65,13 +77,25 @@ public class Player : NetworkBehaviour
 
         camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * yMouseInput);
         playerPhysBody.transform.rotation = Quaternion.Euler(Vector3.up * -xMouseInput);
+        CmdSyncPlayerRotation();
 
-        
 
 
 
 
     }
+
+    [Command]
+    void CmdSyncPlayerRotation()
+    {
+
+        camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * yMouseInput);
+
+        playerPhysBody.transform.rotation = Quaternion.Euler(Vector3.up * -xMouseInput);
+
+    }
+
+    
 
     public void viewPunch(float r)
     {
