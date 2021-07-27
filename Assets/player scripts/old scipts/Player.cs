@@ -21,12 +21,13 @@ public class Player : NetworkBehaviour
     //mouse
     public float sens = 100f;
 
-
-    public float yMouseInput = 0;
-    public float xMouseInput = 0;
+    
+    float yMouseInput = 0;
+    
+    float xMouseInput = 0;
 
     //movement
-    /*
+    
     public float moveSpeed = 2;
     public float jumpForce = 5;
     public float sprintMultiplyer = 2;
@@ -50,7 +51,7 @@ public class Player : NetworkBehaviour
     float z = 0;
     float y = 0;
     Vector3 groundNormal;
-    */
+    
 
     private void Start()
     {
@@ -88,14 +89,14 @@ public class Player : NetworkBehaviour
 
         Instantiate(PlayerModel, playerPhysBody.transform);
         
-        /*
+        
         if (usePhysicsGravity)
         {
             playerGravity = Physics.gravity.y;
         }
 
         footPostition = foot.localPosition;
-        */
+        
 
 
     }
@@ -105,7 +106,11 @@ public class Player : NetworkBehaviour
     {
 
 
+
+
         //mouse looking
+
+
         if (isLocalPlayer)
         {
 
@@ -120,14 +125,25 @@ public class Player : NetworkBehaviour
 
             camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * yMouseInput);
             playerPhysBody.transform.rotation = Quaternion.Euler(Vector3.up * -xMouseInput);
-            CmdSyncPlayerRotation();
+            
+            CmdSyncPlayerRotation(yMouseInput, xMouseInput);
 
         }
+
+        
+
+
+            
+            
+
+        
+        
+
         ///////////////////////////////////////////////////////////////////////////////////////
 
 
         //movement
-        /*
+        
         if (isServer || isLocalPlayer)
         {
 
@@ -205,18 +221,19 @@ public class Player : NetworkBehaviour
             }
 
         }
-        */
+        
         ////////////////////////////////////////////////////////
 
 
 
     }
 
-
+    
     public void FixedUpdate()
     {
-     /*
-        if(isServer)
+
+        if (isLocalPlayer)
+
         {
 
             if (!grounded)
@@ -235,12 +252,15 @@ public class Player : NetworkBehaviour
                 jump = false;
             }
 
+
+            CmdMovePlayer(InputMovement);
+
         }
 
-        */
+        
     }
 
-    /*
+    
     public bool isGrounded()
     {
         return Physics.CheckSphere(groundCheck.position, groundDistance, Jumpable);
@@ -250,15 +270,61 @@ public class Player : NetworkBehaviour
     {
         return isGrounded();
     }
-    */
-
+    
     [Command]
-    void CmdSyncPlayerRotation()
+    void CmdMovePlayer(Vector3 IM)
     {
 
-        camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * yMouseInput);
 
-        playerPhysBody.transform.rotation = Quaternion.Euler(Vector3.up * -xMouseInput);
+        if (!grounded)
+        {
+
+            y -= -playerGravity * Time.fixedDeltaTime;
+
+        }
+
+
+        playerPhysBody.AddForce(IM, ForceMode.Impulse);
+
+        if (jump)
+        {
+            playerPhysBody.velocity += transform.up * jumpForce;
+            jump = false;
+        }
+
+
+    }
+
+    [Command]
+    void CmdSyncPlayerRotation(float y, float x)
+    {
+
+        RpcSyncPlayerRotation(y, x);
+
+    }
+
+    [ClientRpc]
+    void RpcSyncPlayerRotation(float y, float x)
+    {
+
+        if (!isLocalPlayer)
+
+        {
+
+            yMouseInput = y;
+            xMouseInput = x;
+
+            camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * yMouseInput);
+            playerPhysBody.transform.rotation = Quaternion.Euler(Vector3.up * -xMouseInput);
+
+            //camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * y);
+
+            //playerPhysBody.transform.rotation = Quaternion.Euler(Vector3.up * -x);
+
+
+        }
+
+
 
     }
 

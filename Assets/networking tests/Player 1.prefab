@@ -90,7 +90,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1812054873815986981}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1812054873656604585
 CapsuleCollider:
@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 7499185015825023132}
   - component: {fileID: 4985518175796578509}
   - component: {fileID: 44444896030296583}
+  - component: {fileID: 8168929781161495384}
   m_Layer: 6
   m_Name: Player 1
   m_TagString: Player
@@ -140,8 +141,8 @@ Transform:
   m_Children:
   - {fileID: 1812054873394660916}
   - {fileID: 1812054873376556135}
-  - {fileID: 1812054873656604584}
   - {fileID: 1812054873834540485}
+  - {fileID: 1812054873656604584}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -187,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127a4e1144e846348b1563128844b992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
+  syncMode: 1
   syncInterval: 0.1
   playerPhysBody: {fileID: 1812054873815986974}
   camTransformer: {fileID: 1812054873376556135}
@@ -200,8 +201,21 @@ MonoBehaviour:
   PlayerModel: {fileID: 6467225448153583259, guid: 77d5588aeda0f9f4196c6e0a36e6db0c,
     type: 3}
   sens: 10
-  yMouseInput: 0
-  xMouseInput: 0
+  moveSpeed: 1.35
+  jumpForce: 20
+  sprintMultiplyer: 2
+  playerGravity: -0.75
+  groundCheck: {fileID: 1812054873834540485}
+  foot: {fileID: 1812054873656604584}
+  footPostition: {x: 0, y: 0, z: 0}
+  Jumpable:
+    serializedVersion: 2
+    m_Bits: 1033
+  groundDistance: 0.3
+  groundingForce: 0.1
+  maxAngle: 20
+  fly: 0
+  usePhysicsGravity: 0
 --- !u!114 &4985518175796578509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,6 +254,28 @@ MonoBehaviour:
   compressRotation: 0
   interpolateScale: 1
   syncScale: 1
+--- !u!114 &8168929781161495384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812054873815986980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83392ae5c1b731446909f252fd494ae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  target: {fileID: 1812054873815986974}
+  clientAuthority: 0
+  syncVelocity: 1
+  clearVelocity: 0
+  velocitySensitivity: 0.1
+  syncAngularVelocity: 1
+  clearAngularVelocity: 0
+  angularVelocitySensitivity: 0.1
 --- !u!1 &1812054873834540484
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +305,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1812054873815986981}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1812054873834540090
 SphereCollider:
