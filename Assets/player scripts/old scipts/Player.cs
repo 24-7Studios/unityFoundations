@@ -299,7 +299,13 @@ public class Player : NetworkBehaviour
     void CmdSyncPlayerRotation(float y, float x)
     {
 
-        RpcSyncPlayerRotation(y, x);
+        yMouseInput = y;
+        xMouseInput = x;
+
+        camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * yMouseInput);
+        playerPhysBody.transform.rotation = Quaternion.Euler(Vector3.up * -xMouseInput);
+
+        //RpcSyncPlayerRotation(y, x);
 
     }
 
