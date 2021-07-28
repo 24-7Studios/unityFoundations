@@ -321,7 +321,7 @@ public class Player : NetworkBehaviour
     void RpcSyncPlayerRotation(float y, float x)
     {
 
-        if (!isLocalPlayer || isServer)
+        if (!isLocalPlayer && !isServer)
 
         {
 
