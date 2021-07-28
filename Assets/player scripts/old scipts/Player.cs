@@ -124,6 +124,7 @@ public class Player : NetworkBehaviour
             xMouseInput -= MouseX;
 
             camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * yMouseInput);
+
             playerPhysBody.transform.rotation = Quaternion.Euler(Vector3.up * -xMouseInput);
             
             CmdSyncPlayerRotation(yMouseInput, xMouseInput);
