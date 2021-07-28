@@ -144,8 +144,8 @@ public class Player : NetworkBehaviour
 
         //movement
         
-        if (isServer || isLocalPlayer)
-        {
+        //if (isServer || isLocalPlayer)
+        //{
 
             grounded = isGrounded();
             canJump = CanJump();
@@ -171,7 +171,7 @@ public class Player : NetworkBehaviour
             foot.rotation = groundCheck.rotation;
             foot.localPosition = footPostition;
 
-        }
+        //}
 
         if (isLocalPlayer)
         {
@@ -202,10 +202,7 @@ public class Player : NetworkBehaviour
                 {
                     jump = true;
                 }
-                if (grounded)
-                {
-                    y = -groundingForce;
-                }
+                
             }
 
 
@@ -233,27 +230,42 @@ public class Player : NetworkBehaviour
     {
 
         if (isLocalPlayer)
-
         {
+
+            
+
+            if (jump)
+            {   
+
+                playerPhysBody.velocity += transform.up * jumpForce;
+                jump = false;
+
+                if (!isServer)
+                {
+                    CmdJump();
+                }
+
+
+            }
 
             if (!grounded)
             {
-
                 y -= -playerGravity * Time.fixedDeltaTime;
+            }
+            if (grounded)
+            {
+                y = -groundingForce;
+            }
 
+
+            if (!isServer)
+            {
+                CmdMovePlayer(InputMovement);
             }
 
 
             playerPhysBody.AddForce(InputMovement, ForceMode.Impulse);
 
-            if (jump)
-            {
-                playerPhysBody.velocity += transform.up * jumpForce;
-                jump = false;
-            }
-
-
-            CmdMovePlayer(InputMovement);
 
         }
 
@@ -271,27 +283,20 @@ public class Player : NetworkBehaviour
         return isGrounded();
     }
     
+
+    [Command]
+    void CmdJump()
+    {
+
+            playerPhysBody.velocity += transform.up * jumpForce;
+
+    }
+
     [Command]
     void CmdMovePlayer(Vector3 IM)
     {
-
-
-        if (!grounded)
-        {
-
-            y -= -playerGravity * Time.fixedDeltaTime;
-
-        }
-
-
-        playerPhysBody.AddForce(IM, ForceMode.Impulse);
-
-        if (jump)
-        {
-            playerPhysBody.velocity += transform.up * jumpForce;
-            jump = false;
-        }
-
+        InputMovement = IM;
+        playerPhysBody.AddForce(InputMovement, ForceMode.Impulse);
 
     }
 
@@ -323,14 +328,8 @@ public class Player : NetworkBehaviour
             camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * yMouseInput);
             playerPhysBody.transform.rotation = Quaternion.Euler(Vector3.up * -xMouseInput);
 
-            //camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * y);
-
-            //playerPhysBody.transform.rotation = Quaternion.Euler(Vector3.up * -x);
-
 
         }
-
-
 
     }
 
