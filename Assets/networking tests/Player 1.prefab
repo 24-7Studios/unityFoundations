@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 7499185015825023132}
   - component: {fileID: 4985518175796578509}
   - component: {fileID: 44444896030296583}
-  - component: {fileID: 8168929781161495384}
+  - component: {fileID: 2439346303200181916}
   m_Layer: 6
   m_Name: Player 1
   m_TagString: Player
@@ -254,7 +254,7 @@ MonoBehaviour:
   compressRotation: 0
   interpolateScale: 1
   syncScale: 1
---- !u!114 &8168929781161495384
+--- !u!114 &2439346303200181916
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -273,7 +273,7 @@ MonoBehaviour:
   syncVelocity: 1
   clearVelocity: 0
   velocitySensitivity: 0.1
-  syncAngularVelocity: 1
+  syncAngularVelocity: 0
   clearAngularVelocity: 0
   angularVelocitySensitivity: 0.1
 --- !u!1 &1812054873834540484
