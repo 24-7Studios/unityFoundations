@@ -310,13 +310,14 @@ public class Player : NetworkBehaviour
         yMouseInput = y;
         xMouseInput = x;
 
+        /*
         camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * yMouseInput);
         playerPhysBody.transform.rotation = Quaternion.Euler(Vector3.up * -xMouseInput);
-        
+        */
 
         
 
-        //RpcSyncPlayerRotation(y, x);
+        RpcSyncPlayerRotation(y, x);
 
     }
 
