@@ -40,6 +40,9 @@ public class Player : NetworkBehaviour
     public float groundDistance = 0.1f;
     public float groundingForce = 0.05f;
     public float maxAngle = 50;
+    public float PositionCompensationDamping = 1f;
+    public float SyncInterval = 999f;
+    float SyncTimer = 0;
     public bool fly = false;
     public bool usePhysicsGravity = false;
 
@@ -315,9 +318,25 @@ public class Player : NetworkBehaviour
     void RpcSyncPlayerPosistion(Vector3 P)
     {
 
-        if (!isServer)
+        if (!isServer && !isLocalPlayer)
         {
             playerPhysBody.position = P;
+        }
+        else if(isLocalPlayer && !isServer)
+        {
+
+            SyncTimer -= Time.fixedDeltaTime;
+
+            if(SyncTimer < syncInterval)
+            {
+                playerPhysBody.position = Vector3.Lerp(playerPhysBody.position, P, Time.fixedDeltaTime / PositionCompensationDamping);
+                
+                SyncTimer = syncInterval;
+            }
+            
+
+            
+
         }
 
     }
