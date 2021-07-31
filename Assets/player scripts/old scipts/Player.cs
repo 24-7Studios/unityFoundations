@@ -261,13 +261,19 @@ public class Player : NetworkBehaviour
             }
 
 
+
+            playerPhysBody.AddForce(InputMovement, ForceMode.Impulse);
+
+
             if (!isServer)
             {
                 CmdMovePlayer(InputMovement);
             }
+            else
+            {
+                RpcSyncPlayerPosistion(playerPhysBody.position);
+            }
 
-
-            playerPhysBody.AddForce(InputMovement, ForceMode.Impulse);
 
 
         }
@@ -298,10 +304,24 @@ public class Player : NetworkBehaviour
     [Command]
     void CmdMovePlayer(Vector3 IM)
     {
-        InputMovement = IM;
-        playerPhysBody.AddForce(InputMovement, ForceMode.Impulse);
+
+        playerPhysBody.AddForce(IM, ForceMode.Impulse);
+        RpcSyncPlayerPosistion(playerPhysBody.position);
 
     }
+
+
+    [ClientRpc]
+    void RpcSyncPlayerPosistion(Vector3 P)
+    {
+
+        if (!isServer)
+        {
+            playerPhysBody.position = P;
+        }
+
+    }
+
 
     [Command]
     void CmdSyncPlayerRotation(float y, float x)
