@@ -323,13 +323,13 @@ public class Player : NetworkBehaviour
         {
             playerPhysBody.position = P;
         }
-        else if(isLocalPlayer && Vector3.Distance(playerPhysBody.position, P) > PostionSnapThreshold)
+        else if(isLocalPlayer && !isServer && Vector3.Distance(playerPhysBody.position, P) > PostionSnapThreshold)
         {
 
             playerPhysBody.position = P;
 
         }
-        else if(isLocalPlayer && Vector3.Distance(playerPhysBody.position, P) !> PostionSnapThreshold)
+        else if(isLocalPlayer && !isServer && Vector3.Distance(playerPhysBody.position, P) < PostionSnapThreshold)
         {
 
             CmdCompensateOnServer(playerPhysBody.position);
@@ -342,16 +342,18 @@ public class Player : NetworkBehaviour
     void CmdCompensateOnServer(Vector3 P)
     {
 
-        SyncTimer -= Time.fixedDeltaTime;
+        
+
+        SyncTimer -= Time.deltaTime;
 
         if (SyncTimer < syncInterval)
         {
             playerPhysBody.position = Vector3.Lerp(playerPhysBody.position, P, Time.fixedDeltaTime / PositionCompensationDamping);
-
+            
             SyncTimer = syncInterval;
         }
 
-        RpcSyncPlayerPosistion(playerPhysBody.position);
+        
 
     }
 
