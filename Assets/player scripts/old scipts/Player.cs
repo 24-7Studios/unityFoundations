@@ -41,6 +41,7 @@ public class Player : NetworkBehaviour
     public float groundingForce = 0.05f;
     public float maxAngle = 50;
     public float PositionCompensationDamping = 1f;
+    public float PostionSnapThreshold = 10;
     public float SyncInterval = 999f;
     float SyncTimer = 0;
     public bool fly = false;
@@ -322,7 +323,7 @@ public class Player : NetworkBehaviour
         {
             playerPhysBody.position = P;
         }
-        else if(isLocalPlayer && !isServer)
+        else if(isLocalPlayer && !isServer && Vector3.Distance(playerPhysBody.position, P) > PostionSnapThreshold)
         {
 
             SyncTimer -= Time.fixedDeltaTime;
@@ -334,10 +335,30 @@ public class Player : NetworkBehaviour
                 SyncTimer = syncInterval;
             }
             
+        }
+        else if(isLocalPlayer && !isServer && Vector3.Distance(playerPhysBody.position, P) !> PostionSnapThreshold)
+        {
 
-            
+            CmdCompensateOnServer(playerPhysBody.position);
 
         }
+
+    }
+
+    [Command]
+    void CmdCompensateOnServer(Vector3 P)
+    {
+
+        SyncTimer -= Time.fixedDeltaTime;
+
+        if (SyncTimer < syncInterval)
+        {
+            playerPhysBody.position = Vector3.Lerp(playerPhysBody.position, P, Time.fixedDeltaTime / PositionCompensationDamping);
+
+            SyncTimer = syncInterval;
+        }
+
+        RpcSyncPlayerPosistion(playerPhysBody.position);
 
     }
 

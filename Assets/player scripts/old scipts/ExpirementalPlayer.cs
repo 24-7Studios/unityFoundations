@@ -44,7 +44,6 @@ public class ExpirementalPlayer : NetworkBehaviour
     public float PostionSnapThreshold = 5;
     public float SyncInterval = 999f;
     float SyncTimer = 0;
-    [SyncVar]bool syncBool = false;
     public bool fly = false;
     public bool usePhysicsGravity = false;
 
@@ -318,12 +317,18 @@ public class ExpirementalPlayer : NetworkBehaviour
         {
             SyncTimer -= Time.fixedDeltaTime;
 
-            if (SyncTimer < syncInterval)
+            if (SyncTimer < syncInterval && Vector3.Distance(playerPhysBody.position, P) !> PostionSnapThreshold)
             {
+                
+
                 playerPhysBody.position = Vector3.Lerp(playerPhysBody.position, P, Time.fixedDeltaTime / PositionCompensationDamping);
 
                 SyncTimer = syncInterval;
+
+                  
+                
             }
+            
         }
 
 
@@ -346,23 +351,12 @@ public class ExpirementalPlayer : NetworkBehaviour
         if(isLocalPlayer && Vector3.Distance(playerPhysBody.position, P) > PostionSnapThreshold)
         {
             playerPhysBody.position = P;
+            
         }
-        else
-        {
-
-            SyncTheBool(syncBool = true);
-
-        }
+        
 
     }
 
-    [Command]
-    void SyncTheBool(bool B)
-    {
-
-        syncBool = B;
-
-    }
 
 
     [Command]
