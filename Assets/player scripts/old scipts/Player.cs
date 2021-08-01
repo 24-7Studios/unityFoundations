@@ -319,24 +319,17 @@ public class Player : NetworkBehaviour
     void RpcSyncPlayerPosistion(Vector3 P)
     {
 
-        if (!isServer && !isLocalPlayer)
+        if (!isLocalPlayer)
         {
             playerPhysBody.position = P;
         }
-        else if(isLocalPlayer && !isServer && Vector3.Distance(playerPhysBody.position, P) > PostionSnapThreshold)
+        else if(isLocalPlayer && Vector3.Distance(playerPhysBody.position, P) > PostionSnapThreshold)
         {
 
-            SyncTimer -= Time.fixedDeltaTime;
+            playerPhysBody.position = P;
 
-            if(SyncTimer < syncInterval)
-            {
-                playerPhysBody.position = Vector3.Lerp(playerPhysBody.position, P, Time.fixedDeltaTime / PositionCompensationDamping);
-                
-                SyncTimer = syncInterval;
-            }
-            
         }
-        else if(isLocalPlayer && !isServer && Vector3.Distance(playerPhysBody.position, P) !> PostionSnapThreshold)
+        else if(isLocalPlayer && Vector3.Distance(playerPhysBody.position, P) !> PostionSnapThreshold)
         {
 
             CmdCompensateOnServer(playerPhysBody.position);
