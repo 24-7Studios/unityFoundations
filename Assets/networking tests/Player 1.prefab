@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 1812054873815986974}
   - component: {fileID: 1812054873815986969}
   - component: {fileID: 7499185015825023132}
+  - component: {fileID: 6817726163464650897}
   - component: {fileID: 4985518175796578509}
   m_Layer: 6
   m_Name: Player 1
@@ -181,7 +182,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812054873815986980}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 127a4e1144e846348b1563128844b992, type: 3}
   m_Name: 
@@ -213,6 +214,50 @@ MonoBehaviour:
   groundingForce: 0.1
   maxAngle: 20
   PositionCompensationDamping: 0.25
+  SyncInterval: 0
+  fly: 0
+  usePhysicsGravity: 0
+--- !u!114 &6817726163464650897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812054873815986980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddbf562db6fd48641b30dcedf19c5151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  playerPhysBody: {fileID: 1812054873815986974}
+  camTransformer: {fileID: 1812054873376556135}
+  CameraSetup: {fileID: 2390121815867376660, guid: 73465b97eb43c3f4498aba8e3eac7909,
+    type: 3}
+  worldCam: {fileID: 0}
+  gunCam: {fileID: 0}
+  weaponHolder: {fileID: 0}
+  PlayerModelPrefab: {fileID: 5056094003084437972, guid: 77d5588aeda0f9f4196c6e0a36e6db0c,
+    type: 3}
+  PlayerModel: {fileID: 6467225448153583259, guid: 77d5588aeda0f9f4196c6e0a36e6db0c,
+    type: 3}
+  sens: 10
+  moveSpeed: 1.35
+  jumpForce: 20
+  sprintMultiplyer: 2
+  playerGravity: -0.75
+  groundCheck: {fileID: 1812054873834540485}
+  foot: {fileID: 1812054873656604584}
+  footPostition: {x: 0, y: 0, z: 0}
+  Jumpable:
+    serializedVersion: 2
+    m_Bits: 1033
+  groundDistance: 0.3
+  groundingForce: 0.1
+  maxAngle: 20
+  PositionCompensationDamping: 0.1
+  PostionSnapThreshold: 5
   SyncInterval: 0
   fly: 0
   usePhysicsGravity: 0
