@@ -936,6 +936,7 @@ MonoBehaviour:
   Port: 7777
   NoDelay: 1
   Interval: 10
+  Timeout: 10000
   FastResend: 2
   CongestionWindow: 0
   SendWindowSize: 4096
@@ -960,8 +961,6 @@ MonoBehaviour:
   runInBackground: 1
   autoStartServerBuild: 1
   serverTickRate: 30
-  serverBatching: 1
-  serverBatchInterval: 0
   offlineScene: 
   onlineScene: 
   transport: {fileID: 369848923}
@@ -974,8 +973,7 @@ MonoBehaviour:
     type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs:
-  - {fileID: 1812054873815986980, guid: 1e236cb9157e8cb48bea8d0d2d194405, type: 3}
+  spawnPrefabs: []
 --- !u!4 &369848925
 Transform:
   m_ObjectHideFlags: 0
