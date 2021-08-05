@@ -34,14 +34,14 @@ public class Player : NetworkBehaviour
 
     //movement
 
-    [SerializeField]
-    private float moveSpeed = 2;
+    //[SerializeField]
+    private float moveSpeed = 1.35f;
 
-    [SerializeField]
-    private float jumpForce = 5;
+    //[SerializeField]
+    private float jumpForce = 20;
 
-    [SerializeField]
-    private float playerGravity = 9.86f;
+    //[SerializeField]
+    private float playerGravity = -0.75f;
 
     [SerializeField]
     private Transform groundCheck;
@@ -54,17 +54,17 @@ public class Player : NetworkBehaviour
     [SerializeField]
     private LayerMask Jumpable;
 
-    [SerializeField]
-    private float groundDistance = 0.1f;
+    //[SerializeField]
+    private float groundDistance = 0.3f;
+
+    //[SerializeField]
+    private float groundingForce = 0.1f;
+
+    //[SerializeField]
+    private float maxAngle = 20;
 
     [SerializeField]
-    private float groundingForce = 0.05f;
-
-    [SerializeField]
-    private float maxAngle = 50;
-
-    [SerializeField]
-    private float PositionCompensationDamping = 1f;
+    private float PositionCompensationDamping = 0.25f;
 
     [SerializeField]
     private float PostionSnapThreshold = 10;
