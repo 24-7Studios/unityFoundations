@@ -14,39 +14,72 @@ public class Player : NetworkBehaviour
     public Camera worldCam;
     public Camera gunCam;
     public GameObject weaponHolder;
-    public GameObject PlayerModelPrefab;
+
+    [SerializeField] 
+    private GameObject PlayerModelPrefab;
+
     public PlayerModelClass PlayerModel;
-    public localPlayerOptions settings;
+
+    [SerializeField] 
+    private localPlayerOptions settings;
 
 
     //mouse
-    float sens = 100f;
+    private float sens;
 
     
-    float yMouseInput = 0;
+    private float yMouseInput = 0;
     
-    float xMouseInput = 0;
+    private float xMouseInput = 0;
 
     //movement
-    
-    public float moveSpeed = 2;
-    public float jumpForce = 5;
-    public float sprintMultiplyer = 2;
-    public float playerGravity = 9.86f;
 
-    public Transform groundCheck;
-    public Transform foot;
-    public Vector3 footPostition;
-    public LayerMask Jumpable;
-    public float groundDistance = 0.1f;
-    public float groundingForce = 0.05f;
-    public float maxAngle = 50;
-    public float PositionCompensationDamping = 1f;
-    public float PostionSnapThreshold = 10;
-    public float SyncInterval = 999f;
+    [SerializeField]
+    private float moveSpeed = 2;
+
+    [SerializeField]
+    private float jumpForce = 5;
+
+    [SerializeField]
+    private float playerGravity = 9.86f;
+
+    [SerializeField]
+    private Transform groundCheck;
+
+    [SerializeField]
+    private Transform foot;
+
+    [SerializeField]
+    private Vector3 footPostition;
+
+    [SerializeField]
+    private LayerMask Jumpable;
+
+    [SerializeField]
+    private float groundDistance = 0.1f;
+
+    [SerializeField]
+    private float groundingForce = 0.05f;
+
+    [SerializeField]
+    private float maxAngle = 50;
+
+    [SerializeField]
+    private float PositionCompensationDamping = 1f;
+
+    [SerializeField]
+    private float PostionSnapThreshold = 10;
+
+    [SerializeField]
+    private float SyncInterval = 999f;
+
     float SyncTimer = 0;
-    public bool fly = false;
-    public bool usePhysicsGravity = false;
+
+    [SerializeField]
+    private bool fly = false;
+
+    [SerializeField]
+    private bool usePhysicsGravity = false;
 
     Vector3 InputMovement;
     bool grounded;
