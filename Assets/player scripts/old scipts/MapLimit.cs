@@ -10,7 +10,7 @@ public class MapLimit : NetworkBehaviour
     public List<Transform> RespawnPoints;
 
 
-
+    [Server]
     private void OnTriggerExit(Collider other)
     {
 
