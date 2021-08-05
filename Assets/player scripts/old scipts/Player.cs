@@ -16,10 +16,11 @@ public class Player : NetworkBehaviour
     public GameObject weaponHolder;
     public GameObject PlayerModelPrefab;
     public PlayerModelClass PlayerModel;
+    public localPlayerOptions settings;
 
 
     //mouse
-    public float sens = 100f;
+    float sens = 100f;
 
     
     float yMouseInput = 0;
@@ -75,7 +76,10 @@ public class Player : NetworkBehaviour
 
         if (isLocalPlayer)
         {
-            
+
+            sens = settings.MouseSens;
+
+
             foreach (GameObject part in PlayerModel.models)
             {
                 part.layer = 6;
