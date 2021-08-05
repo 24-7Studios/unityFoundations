@@ -215,11 +215,9 @@ MonoBehaviour:
   settings: {fileID: -2344564246593695945}
   moveSpeed: 1.35
   jumpForce: 20
-  sprintMultiplyer: 2
   playerGravity: -0.75
   groundCheck: {fileID: 1812054873834540485}
   foot: {fileID: 1812054873656604584}
-  footPostition: {x: 0, y: 0, z: 0}
   Jumpable:
     serializedVersion: 2
     m_Bits: 1033

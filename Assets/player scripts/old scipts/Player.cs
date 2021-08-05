@@ -49,7 +49,6 @@ public class Player : NetworkBehaviour
     [SerializeField]
     private Transform foot;
 
-    [SerializeField]
     private Vector3 footPostition;
 
     [SerializeField]
