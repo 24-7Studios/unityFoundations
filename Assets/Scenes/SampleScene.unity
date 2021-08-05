@@ -914,7 +914,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 369848920}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61b93ff779f4ef84da855aef42076949, type: 3}
   m_Name: 
@@ -925,7 +925,7 @@ MonoBehaviour:
   AllowSteamRelay: 1
   UseNextGenSteamNetworking: 1
   InitFacepunch: 1
-  SteamUserID: 0
+  SteamUserID: 76561198370568905
 --- !u!114 &369848922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -948,7 +948,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 369848920}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
   m_Name: 
@@ -983,7 +983,7 @@ MonoBehaviour:
   serverTickRate: 30
   offlineScene: 
   onlineScene: 
-  transport: {fileID: 369848921}
+  transport: {fileID: 369848923}
   networkAddress: localhost
   maxConnections: 100
   disconnectInactiveConnections: 0
@@ -3393,6 +3393,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1536173732}
   - component: {fileID: 1536173734}
+  - component: {fileID: 1536173735}
   - component: {fileID: 1536173733}
   m_Layer: 2
   m_Name: bounds
@@ -3424,9 +3425,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1536173731}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c7884d145e5fec4c8885a1007dc5a79, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneId: 3322550613
+  serverOnly: 1
+  visible: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!65 &1536173734
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3440,6 +3446,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 100, y: 100, z: 250}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1536173735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536173731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea119d922bcdfc24b8197e99669aaed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  RespawnPoints:
+  - {fileID: 415938993}
+  - {fileID: 707604923}
 --- !u!1 &1560318182
 GameObject:
   m_ObjectHideFlags: 0
