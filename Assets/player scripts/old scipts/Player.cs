@@ -98,6 +98,8 @@ public class Player : NetworkBehaviour
     [SerializeField]
     private bool usePhysicsGravity = false;
 
+    
+
     Vector3 InputMovement;
     bool grounded;
     bool canJump;
@@ -322,7 +324,7 @@ public class Player : NetworkBehaviour
 
             if (!isServer)
             {
-                CmdMovePlayer(InputMovement);
+                CmdMovePlayer(InputMovement, playerPhysBody.position);
             }
             else
             {
@@ -357,52 +359,68 @@ public class Player : NetworkBehaviour
     }
 
     [Command]
-    void CmdMovePlayer(Vector3 IM)
+    void CmdMovePlayer(Vector3 IM, Vector3 clientPos)
     {
 
         playerPhysBody.AddForce(IM, ForceMode.Impulse);
+        
+
+        if (!isLocalPlayer && Vector3.Distance(playerPhysBody.position, clientPos) > PostionSnapThreshold)
+        {
+
+            CorrectPlayerPos(playerPhysBody.position);
+
+        }
+        else if (!isLocalPlayer && Vector3.Distance(playerPhysBody.position, clientPos) < PostionSnapThreshold)
+        {
+
+
+            SyncTimer -= Time.deltaTime;
+
+            if (SyncTimer < SyncInterval)
+            {
+
+                SyncTimer = SyncInterval;
+                playerPhysBody.position = Vector3.Lerp(playerPhysBody.position, clientPos, Time.fixedDeltaTime / PositionCompensationDamping);
+
+
+            }
+
+
+
+        }
+
         RpcSyncPlayerPosistion(playerPhysBody.position);
 
     }
 
 
     [ClientRpc]
-    void RpcSyncPlayerPosistion(Vector3 P)
+    void RpcSyncPlayerPosistion(Vector3 serverPos)
     {
 
         if (!isLocalPlayer)
         {
-            playerPhysBody.position = P;
+            playerPhysBody.position = serverPos;
         }
-        else if(isLocalPlayer && !isServer && Vector3.Distance(playerPhysBody.position, P) > PostionSnapThreshold)
-        {
+      
 
-            playerPhysBody.position = P;
+    }
+    [ClientRpc]
+    void CorrectPlayerPos(Vector3 serverPos)
+    {
 
-        }
-        else if(isLocalPlayer && !isServer && Vector3.Distance(playerPhysBody.position, P) < PostionSnapThreshold)
-        {
-
-            CmdCompensateOnServer(playerPhysBody.position);
-
-        }
+        playerPhysBody.position = serverPos;
 
     }
 
     [Command]
-    void CmdCompensateOnServer(Vector3 P)
+    void CmdCompensateOnServer(Vector3 clientPos)
     {
 
         
 
-        SyncTimer -= Time.deltaTime;
-
-        if (SyncTimer < SyncInterval)
-        {
-            playerPhysBody.position = Vector3.Lerp(playerPhysBody.position, P, Time.fixedDeltaTime / PositionCompensationDamping);
-            
-            SyncTimer = syncInterval;
-        }
+        
 
         
 

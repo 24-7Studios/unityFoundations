@@ -220,7 +220,7 @@ MonoBehaviour:
     m_Bits: 1033
   PositionCompensationDamping: 0.25
   PostionSnapThreshold: 10
-  SyncInterval: 1
+  SyncInterval: 0
   fly: 0
   usePhysicsGravity: 0
 --- !u!114 &4985518175796578509
