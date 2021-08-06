@@ -210,7 +210,7 @@ MonoBehaviour:
   gunCam: {fileID: 0}
   weaponHolder: {fileID: 0}
   PlayerModelPrefab: {fileID: 0}
-  PlayerModel: {fileID: 6467225448153583259, guid: 77d5588aeda0f9f4196c6e0a36e6db0c,
+  PlayerModel: {fileID: 8565117335367678146, guid: 2669793c01c2f134c9828dcb545a6b56,
     type: 3}
   settings: {fileID: -2344564246593695945}
   groundCheck: {fileID: 1812054873834540485}
