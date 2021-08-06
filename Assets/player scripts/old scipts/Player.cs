@@ -7,6 +7,9 @@ public class Player : NetworkBehaviour
 {
    
     //player setup
+    /// <summary>
+    /// components that make the player work. also likely to be referenced by other scripts especially in the guns
+    /// </summary>
     
     public Rigidbody playerPhysBody;
     public Transform camTransformer;
@@ -24,7 +27,14 @@ public class Player : NetworkBehaviour
     private localPlayerOptions settings;
 
 
+
+
+
     //mouse
+    /// <summary>
+    /// pee pee poo poo what do u think it is
+    /// </summary>
+
     private float sens;
 
     
@@ -32,7 +42,15 @@ public class Player : NetworkBehaviour
     
     private float xMouseInput = 0;
 
+
+
+
+
     //movement
+    /// <summary>
+    /// stuff with movement. mostly just modifiers and some stuff with network syncing
+    /// </summary>
+
 
     //[SerializeField]
     private float moveSpeed = 1.35f;
@@ -186,9 +204,6 @@ public class Player : NetworkBehaviour
 
 
         //movement
-        
-        //if (isServer || isLocalPlayer)
-        //{
 
             grounded = isGrounded();
             canJump = CanJump();
@@ -214,7 +229,7 @@ public class Player : NetworkBehaviour
             foot.rotation = groundCheck.rotation;
             foot.localPosition = footPostition;
 
-        //}
+        
 
         if (isLocalPlayer)
         {
@@ -382,7 +397,7 @@ public class Player : NetworkBehaviour
 
         SyncTimer -= Time.deltaTime;
 
-        if (SyncTimer < syncInterval)
+        if (SyncTimer < SyncInterval)
         {
             playerPhysBody.position = Vector3.Lerp(playerPhysBody.position, P, Time.fixedDeltaTime / PositionCompensationDamping);
             

@@ -213,20 +213,14 @@ MonoBehaviour:
   PlayerModel: {fileID: 6467225448153583259, guid: 77d5588aeda0f9f4196c6e0a36e6db0c,
     type: 3}
   settings: {fileID: -2344564246593695945}
-  moveSpeed: 1.35
-  jumpForce: 20
-  playerGravity: -0.75
   groundCheck: {fileID: 1812054873834540485}
   foot: {fileID: 1812054873656604584}
   Jumpable:
     serializedVersion: 2
     m_Bits: 1033
-  groundDistance: 0.3
-  groundingForce: 0.1
-  maxAngle: 20
   PositionCompensationDamping: 0.25
   PostionSnapThreshold: 10
-  SyncInterval: 0
+  SyncInterval: 1
   fly: 0
   usePhysicsGravity: 0
 --- !u!114 &4985518175796578509
