@@ -219,7 +219,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1033
   PositionCompensationDamping: 0.25
-  PostionSnapThreshold: 10
+  PostionSnapThreshold: 5
   SyncInterval: 0
   fly: 0
   usePhysicsGravity: 0

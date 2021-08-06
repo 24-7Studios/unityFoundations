@@ -368,7 +368,7 @@ public class Player : NetworkBehaviour
         if (!isLocalPlayer && Vector3.Distance(playerPhysBody.position, clientPos) > PostionSnapThreshold)
         {
 
-            CorrectPlayerPos(playerPhysBody.position);
+            RpcCorrectPlayerPos(playerPhysBody.position);
 
         }
         else if (!isLocalPlayer && Vector3.Distance(playerPhysBody.position, clientPos) < PostionSnapThreshold)
@@ -407,24 +407,13 @@ public class Player : NetworkBehaviour
 
     }
     [ClientRpc]
-    void CorrectPlayerPos(Vector3 serverPos)
+    void RpcCorrectPlayerPos(Vector3 serverPos)
     {
 
         playerPhysBody.position = serverPos;
 
     }
 
-    [Command]
-    void CmdCompensateOnServer(Vector3 clientPos)
-    {
-
-        
-
-        
-
-        
-
-    }
 
 
     [Command]
