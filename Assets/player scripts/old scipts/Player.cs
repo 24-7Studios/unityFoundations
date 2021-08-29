@@ -115,15 +115,7 @@ public class Player : NetworkBehaviour
 
         
 
-        if (!isLocalPlayer)
-        {
-            
-            foreach (GameObject part in PlayerModel.models)
-            {
-                part.layer = 0;
-            }
-            
-        }
+        
 
 
         if (isLocalPlayer)
@@ -131,12 +123,6 @@ public class Player : NetworkBehaviour
 
             sens = settings.MouseSens;
 
-
-            foreach (GameObject part in PlayerModel.models)
-            {
-                part.layer = 6;
-            }
-            
 
 
             Instantiate(CameraSetup, camTransformer);
@@ -147,7 +133,7 @@ public class Player : NetworkBehaviour
 
         }
 
-        Instantiate(PlayerModel, playerPhysBody.transform);
+        setPlayermodel(PlayerModel);
         
         
         if (usePhysicsGravity)
@@ -453,7 +439,51 @@ public class Player : NetworkBehaviour
 
     }
 
-    
+    public Vector3 getPlayerInput()
+    {
+
+        return InputMovement;
+
+    }
+
+    public void setPlayermodel(PlayerModelClass p)
+    {
+
+        
+
+        PlayerModel = p;
+
+        PlayerModel.setPlayer(this.transform.GetComponent<Player>());
+
+        if (!isLocalPlayer)
+        {
+
+            foreach (GameObject part in PlayerModel.models)
+            {
+                part.layer = 0;
+            }
+
+        }
+
+        if (isLocalPlayer)
+        {
+
+
+            foreach (GameObject part in PlayerModel.models)
+            {
+                part.layer = 6;
+            }
+
+            
+
+        }
+
+
+        Instantiate(PlayerModel, playerPhysBody.transform);
+
+        
+
+    }
 
     public void viewPunch(float r)
     {

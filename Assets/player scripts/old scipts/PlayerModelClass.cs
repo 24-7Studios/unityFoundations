@@ -10,20 +10,11 @@ public class PlayerModelClass : NetworkBehaviour
     public GameObject baseCont;
     public GameObject ModelPrefab;
     public List<GameObject> models;
+    protected Player player;
 
-
-
-    // Start is called before the first frame update
-    void Start()
+    public void setPlayer(Player p)
     {
-        
-
-
+        player = p;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
