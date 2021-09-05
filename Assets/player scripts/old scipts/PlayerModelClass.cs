@@ -10,11 +10,12 @@ public class PlayerModelClass : NetworkBehaviour
     public GameObject baseCont;
     public GameObject ModelPrefab;
     public List<GameObject> models;
-    protected Player player;
+    protected PlayerScript player;
 
-    public void setPlayer(Player p)
+    public virtual void setPlayer(PlayerScript p)
     {
         player = p;
+        Debug.Log("player Set!" + player);
     }
 
 }

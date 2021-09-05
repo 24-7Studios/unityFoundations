@@ -6,17 +6,20 @@ public class caplsulePLayerModelClass : PlayerModelClass
 {
 
     [SerializeField]
-    private Transform visor;
+    private Transform head;
 
 
     private void Start()
     {
-        visor.SetParent(player.camTransformer);
+        
     }
 
 
     void Update()
     {
-        
+        head.rotation = player.camTransformer.rotation;
     }
+
+    
+
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class Player : NetworkBehaviour
+public class PlayerScript : NetworkBehaviour
 {
    
     //player setup
@@ -113,7 +113,7 @@ public class Player : NetworkBehaviour
     private void Start()
     {
 
-        
+        setPlayermodel(PlayerModel);
 
         
 
@@ -133,7 +133,7 @@ public class Player : NetworkBehaviour
 
         }
 
-        setPlayermodel(PlayerModel);
+        
         
         
         if (usePhysicsGravity)
@@ -449,11 +449,10 @@ public class Player : NetworkBehaviour
     public void setPlayermodel(PlayerModelClass p)
     {
 
+        PlayerModel = Instantiate(p, playerPhysBody.transform);
+
+        PlayerModel.setPlayer(this);
         
-
-        PlayerModel = p;
-
-        PlayerModel.setPlayer(this.transform.GetComponent<Player>());
 
         if (!isLocalPlayer)
         {
@@ -479,7 +478,7 @@ public class Player : NetworkBehaviour
         }
 
 
-        Instantiate(PlayerModel, playerPhysBody.transform);
+        
 
         
 
