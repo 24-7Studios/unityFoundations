@@ -8,6 +8,11 @@ public class caplsulePLayerModelClass : PlayerModelClass
     [SerializeField]
     private Transform head;
 
+    [SerializeField]
+    private Transform arm;
+
+    public Transform RightHoldPos;
+    public Transform LeftHoldPos;
 
     private void Start()
     {
@@ -18,6 +23,7 @@ public class caplsulePLayerModelClass : PlayerModelClass
     void Update()
     {
         head.rotation = player.camTransformer.rotation;
+        arm.rotation = player.camTransformer.rotation;
     }
 
     
