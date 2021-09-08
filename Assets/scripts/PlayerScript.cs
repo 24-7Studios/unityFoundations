@@ -16,7 +16,10 @@ public class PlayerScript : NetworkBehaviour
     public GameObject CameraSetup;
     public Camera worldCam;
     public Camera gunCam;
-    public GameObject weaponHolder;
+    
+
+    [SerializeField]
+    private Collider interactZone;
 
     [SerializeField] 
     private GameObject PlayerModelPrefab;
@@ -108,7 +111,11 @@ public class PlayerScript : NetworkBehaviour
     float z = 0;
     float y = 0;
     Vector3 groundNormal;
-    
+
+
+    //backpack
+    public GameObject weaponHolder;
+
 
     private void Start()
     {
@@ -266,7 +273,7 @@ public class PlayerScript : NetworkBehaviour
         }
         
         ////////////////////////////////////////////////////////
-
+        //backpack 
 
 
     }
