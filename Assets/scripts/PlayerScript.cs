@@ -5,6 +5,9 @@ using Mirror;
 
 public class PlayerScript : NetworkBehaviour
 {
+
+
+    public GameObject testPick;
    
     //player setup
     /// <summary>
@@ -114,7 +117,8 @@ public class PlayerScript : NetworkBehaviour
 
 
     //backpack
-    public GameObject weaponHolder;
+    private Transform backpack;
+    private Transform viewmodelHolder;
 
 
     private void Start()
@@ -149,7 +153,8 @@ public class PlayerScript : NetworkBehaviour
         }
 
         footPostition = foot.localPosition;
-        
+
+        pickup(testPick);
 
 
     }
@@ -446,13 +451,6 @@ public class PlayerScript : NetworkBehaviour
 
     }
 
-    public Vector3 getPlayerInput()
-    {
-
-        return InputMovement;
-
-    }
-
     public void setPlayermodel(PlayerModelClass p)
     {
 
@@ -484,12 +482,55 @@ public class PlayerScript : NetworkBehaviour
 
         }
 
+    }
 
-        
+    public Vector3 getPlayerInput()
+    {
+        return InputMovement;
+    }
 
+    public void pickup(GameObject thing)
+    {
+
+        Ipickup i = thing.GetComponent<Ipickup>();
+
+        i.pickup(this);
+
+        WeaponClass wep = thing.GetComponent<WeaponClass>();
+
+        if (wep != null)
+        {
+            GameObject vModel = wep.getViewmodelOb();
+            GameObject wModel = wep.getWorldModelOb();
+
+            vModel.transform.SetParent(viewmodelHolder);
+            PlayerModel.equipWeapon(wModel);
+
+
+            if (isLocalPlayer)
+            {
+                vModel.SetActive(true);
+                vModel.layer = 11;
+                wModel.SetActive(true);
+                wModel.layer = 6;
+            }
+            else
+            {
+                vModel.SetActive(false);
+                wModel.layer = 0;
+            }
+
+        }
         
+        
+        
+    }
+
+    public void drop(GameObject thing)
+    {
 
     }
+
 
     public void viewPunch(float r)
     {

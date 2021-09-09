@@ -209,7 +209,7 @@ MonoBehaviour:
     type: 3}
   worldCam: {fileID: 0}
   gunCam: {fileID: 0}
-  weaponHolder: {fileID: 0}
+  interactZone: {fileID: 0}
   PlayerModelPrefab: {fileID: 0}
   PlayerModel: {fileID: -7493404476013411301, guid: c8d4cf5569e590747bd755a71fefbf17,
     type: 3}
@@ -224,6 +224,7 @@ MonoBehaviour:
   SyncInterval: 0
   fly: 0
   usePhysicsGravity: 0
+  weaponHolder: {fileID: 0}
 --- !u!114 &4985518175796578509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,7 +296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1812054874910917664}
   m_Layer: 6
-  m_Name: weapons
+  m_Name: viewmodels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -340,8 +341,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9087477135016821432}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 1.5, z: 0}
-  m_LocalScale: {x: -1.7, y: 1.2, z: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1.2, z: -1.7}
   m_Children: []
   m_Father: {fileID: 1812054873815986981}
   m_RootOrder: 0

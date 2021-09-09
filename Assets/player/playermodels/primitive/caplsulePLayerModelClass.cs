@@ -11,8 +11,7 @@ public class caplsulePLayerModelClass : PlayerModelClass
     [SerializeField]
     private Transform arm;
 
-    public Transform RightHoldPos;
-    public Transform LeftHoldPos;
+
 
     private void Start()
     {

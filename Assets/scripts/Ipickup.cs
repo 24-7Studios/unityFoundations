@@ -7,6 +7,7 @@ public interface Ipickup
 {
 
 
+
     void pickup(PlayerScript p);
 
     void drop();
