@@ -206,8 +206,8 @@ MonoBehaviour:
   syncInterval: 0.025
   testPick: {fileID: 3929747283771302314, guid: ed412db4cad7f4745b7f392135385fcc,
     type: 3}
-  viewmodelSwayFactor: 1000
-  viewmodelDampFactor: 0.2
+  viewmodelSwayFactor: 200
+  viewmodelDampFactor: 1
   playerPhysBody: {fileID: 1812054873815986974}
   camTransformer: {fileID: 1812054873376556135}
   CameraSetup: {fileID: 2390121815867376660, guid: 73465b97eb43c3f4498aba8e3eac7909,

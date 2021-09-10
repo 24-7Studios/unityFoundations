@@ -289,7 +289,7 @@ public class PlayerScript : NetworkBehaviour
         ////////////////////////////////////////////////////////
         //backpack 
 
-        viewmodelHolder.localRotation = Quaternion.Euler(Vector3.Lerp(Vector3.zero, viewmodelSwayFactor * (Vector3.right * z + Vector3.forward * -x), Time.fixedDeltaTime * Time.deltaTime / viewmodelDampFactor));
+
 
     }
 
