@@ -162,8 +162,11 @@ public class PlayerScript : NetworkBehaviour
 
         footPostition = foot.localPosition;
 
+        GameObject testItem = Instantiate(testPick);
+
+        pickup(testItem);
+        drop(testItem);
         
-        pickup(Instantiate(testPick));
 
 
     }
@@ -542,7 +545,13 @@ public class PlayerScript : NetworkBehaviour
 
     public void drop(GameObject thing)
     {
+        thing.transform.SetParent(backpack);
 
+        Ipickup i = thing.GetComponent<Ipickup>();
+
+        i.drop();
+
+       
     }
 
 

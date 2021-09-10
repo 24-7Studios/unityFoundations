@@ -29,7 +29,8 @@ public class WeaponClass : NetworkBehaviour, Ipickup
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position = item.transform.position;
+        transform.rotation = item.transform.rotation;
     }
 
     protected virtual void raycastShoot()
@@ -68,6 +69,14 @@ public class WeaponClass : NetworkBehaviour, Ipickup
 
     public void drop()
     {
+        transform.SetParent(null);
+        item.transform.SetParent(transform);
+        worldModel.transform.SetParent(transform);
+        viewmodel.transform.SetParent(transform);
+        viewmodel.SetActive(false);
+        worldModel.SetActive(false);
+        item.transform.localPosition = Vector3.zero;
+        item.transform.localRotation = Quaternion.Euler(Vector3.zero);
         item.SetActive(true);
         isitem = true;
     }
