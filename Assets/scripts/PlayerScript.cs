@@ -545,13 +545,13 @@ public class PlayerScript : NetworkBehaviour
 
     public void drop(GameObject thing)
     {
-        thing.transform.SetParent(backpack);
 
         Ipickup i = thing.GetComponent<Ipickup>();
 
         i.drop();
 
-       
+        thing.transform.position = transform.position + transform.forward * 1;
+
     }
 
 
