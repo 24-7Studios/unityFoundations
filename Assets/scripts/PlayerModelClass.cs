@@ -28,6 +28,7 @@ public class PlayerModelClass : NetworkBehaviour
     public virtual void equipWeapon(GameObject w)
     {
         w.transform.SetParent(RightHoldPos);
+        w.transform.localPosition = Vector3.zero;
         
     }
 

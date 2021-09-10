@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity;
 using Mirror;
 
 public class PlayerScript : NetworkBehaviour
@@ -8,6 +9,11 @@ public class PlayerScript : NetworkBehaviour
 
 
     public GameObject testPick;
+
+    [SerializeField]
+    private float viewmodelSwayFactor = 50;
+    [SerializeField]
+    private float viewmodelDampFactor = 25;
    
     //player setup
     /// <summary>
@@ -117,7 +123,9 @@ public class PlayerScript : NetworkBehaviour
 
 
     //backpack
+    [SerializeField]
     private Transform backpack;
+    [SerializeField]
     private Transform viewmodelHolder;
 
 
@@ -154,7 +162,8 @@ public class PlayerScript : NetworkBehaviour
 
         footPostition = foot.localPosition;
 
-        pickup(testPick);
+        
+        pickup(Instantiate(testPick));
 
 
     }
@@ -276,10 +285,11 @@ public class PlayerScript : NetworkBehaviour
             }
 
         }
-        
+
         ////////////////////////////////////////////////////////
         //backpack 
 
+        viewmodelHolder.localRotation = Quaternion.Euler(Vector3.Lerp(Vector3.zero, viewmodelSwayFactor * (Vector3.right * z + Vector3.forward * -x), Time.fixedDeltaTime * Time.deltaTime / viewmodelDampFactor));
 
     }
 
@@ -492,9 +502,12 @@ public class PlayerScript : NetworkBehaviour
     public void pickup(GameObject thing)
     {
 
+        thing.transform.SetParent(backpack);
+
         Ipickup i = thing.GetComponent<Ipickup>();
 
         i.pickup(this);
+        
 
         WeaponClass wep = thing.GetComponent<WeaponClass>();
 
@@ -504,6 +517,7 @@ public class PlayerScript : NetworkBehaviour
             GameObject wModel = wep.getWorldModelOb();
 
             vModel.transform.SetParent(viewmodelHolder);
+            vModel.transform.localPosition = Vector3.zero;
             PlayerModel.equipWeapon(wModel);
 
 
