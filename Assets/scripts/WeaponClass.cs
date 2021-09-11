@@ -7,6 +7,7 @@ public class WeaponClass : NetworkBehaviour, Ipickup
 {
 
 
+
     [SerializeField]
     protected GameObject item;
 
@@ -29,6 +30,8 @@ public class WeaponClass : NetworkBehaviour, Ipickup
     // Update is called once per frame
     void Update()
     {
+
+        
 
     }
 
@@ -60,11 +63,31 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         return isitem;
     }
 
+    public GameObject getObject()
+    {
+        return gameObject;
+    }
+
     public void pickup(PlayerScript p)
     {
         item.SetActive(false);
         isitem = false;
     }
+
+    /* public void drop()
+     {
+         transform.SetParent(null);
+         item.transform.SetParent(transform);
+         worldModel.transform.SetParent(transform);
+         viewmodel.transform.SetParent(transform);
+         viewmodel.SetActive(false);
+         worldModel.SetActive(false);
+         item.transform.localPosition = Vector3.zero;
+         item.transform.localRotation = Quaternion.Euler(Vector3.zero);
+         item.SetActive(true);
+         isitem = true;
+     }
+    */
 
     public void drop()
     {
@@ -74,10 +97,11 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         viewmodel.transform.SetParent(transform);
         viewmodel.SetActive(false);
         worldModel.SetActive(false);
-        transform.transform.localPosition = Vector3.zero;
-        transform.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.Euler(Vector3.zero);
         item.SetActive(true);
         isitem = true;
     }
+
 
 }

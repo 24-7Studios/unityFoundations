@@ -6,7 +6,7 @@ using Mirror;
 public interface Ipickup
 {
 
-
+    GameObject getObject();
 
     void pickup(PlayerScript p);
 

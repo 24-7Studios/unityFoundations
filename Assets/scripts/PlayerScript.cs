@@ -292,6 +292,29 @@ public class PlayerScript : NetworkBehaviour
         ////////////////////////////////////////////////////////
         //backpack 
 
+        float grabDistance = 10;
+
+        if(Input.GetButtonDown("e"))
+        {
+            RaycastHit r;
+
+            if(Physics.Raycast(camTransformer.position, camTransformer.forward, out r, grabDistance))
+            {
+
+                GameObject thing = r.transform.GetComponent<Ipickup>().getObject();
+
+                if(thing.GetComponent<WeaponClass>())
+                {
+                    pickup(thing);
+                }
+                
+
+                
+
+            }
+
+        }
+
 
 
     }
@@ -548,10 +571,10 @@ public class PlayerScript : NetworkBehaviour
 
         Ipickup i = thing.GetComponent<Ipickup>();
 
-        i.drop();
+        
 
         thing.transform.position = transform.position + transform.forward * 1;
-
+        i.drop();
     }
 
 
