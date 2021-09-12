@@ -133,7 +133,7 @@ public class PlayerScript : NetworkBehaviour
     {
 
         controls = new Inputmaster();
-        
+        controls.Player.jump.performed += _ => activateJump();
         
     }
 
@@ -278,15 +278,7 @@ public class PlayerScript : NetworkBehaviour
                     y = 0;
                 }
             }
-            else
-            {
 
-                if (Input.GetKeyDown("space") && canJump)
-                {
-                    jump = true;
-                }
-
-            }
 
             
 
@@ -387,11 +379,6 @@ public class PlayerScript : NetworkBehaviour
         
     }
 
-    public void takeInputMovement(Vector2 inVec)
-    {
-
-
-    }
 
     public bool isGrounded()
     {
@@ -403,6 +390,14 @@ public class PlayerScript : NetworkBehaviour
         return isGrounded();
     }
     
+    void activateJump()
+    {           
+        if(!fly && (canJump == true) && jump == false )
+        {
+            jump = true;
+        }
+            
+    }
 
     [Command]
     void CmdJump()
