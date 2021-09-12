@@ -8,14 +8,13 @@ public class PlayerScript : NetworkBehaviour
 {
 
 
-    public GameObject testPick;
+    
 
     //player setup
     /// <summary>
     /// components that make the player work. also likely to be referenced by other scripts especially in the guns
     /// </summary>
 
-    public NetworkManager server;
     public Rigidbody playerPhysBody;
     public Transform camTransformer;
     public GameObject CameraSetup;
@@ -135,6 +134,7 @@ public class PlayerScript : NetworkBehaviour
 
         controls = new Inputmaster();
         
+        
     }
 
 
@@ -178,16 +178,9 @@ public class PlayerScript : NetworkBehaviour
 
         
 
-        GameObject testItem = Instantiate(testPick);
-        
-
-
-        pickup(testItem);
-        //drop(testItem);
 
 
     }
-
 
 
 
