@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity;
+using UnityEngine.InputSystem;
 using Mirror;
 
 public class PlayerScript : NetworkBehaviour
@@ -9,11 +9,6 @@ public class PlayerScript : NetworkBehaviour
 
 
     public GameObject testPick;
-
-    [SerializeField]
-    private float viewmodelSwayFactor = 50;
-    [SerializeField]
-    private float viewmodelDampFactor = 25;
    
     //player setup
     /// <summary>
@@ -129,8 +124,23 @@ public class PlayerScript : NetworkBehaviour
     private Transform viewmodelHolder;
 
 
+    //controls
+
+
+
+    private void Awake()
+    {
+        
+        
+        
+    }
+
+
     private void Start()
     {
+
+
+
 
         setPlayermodel(PlayerModel);
 
@@ -184,10 +194,10 @@ public class PlayerScript : NetworkBehaviour
         if (isLocalPlayer)
         {
 
-            
 
-            float MouseX = Input.GetAxisRaw("Mouse X") * sens;
-            float MouseY = Input.GetAxisRaw("Mouse Y") * sens;
+
+            float MouseX = 0;//Input.GetAxisRaw("Mouse X") * sens;
+            float MouseY = 0;//Input.GetAxisRaw("Mouse Y") * sens;
 
 
             yMouseInput -= MouseY;
@@ -246,55 +256,16 @@ public class PlayerScript : NetworkBehaviour
         if (isLocalPlayer)
         {
 
-            x = Input.GetAxisRaw("Horizontal");
-            z = Input.GetAxisRaw("Vertical");
-
-
-            if (fly)
-            {
-                if (Input.GetKey("space"))
-                {
-                    y = 1;
-                }
-                else if (Input.GetKey("c"))
-                {
-                    y = -1;
-                }
-                else
-                {
-                    y = 0;
-                }
-            }
-            else
-            {
-
-                if (Input.GetKeyDown("space") && canJump)
-                {
-                    jump = true;
-                }
-                
-            }
-
-
-
-
-            if (fly)
-            {
-                InputMovement = (((camTransformer.transform.right * x + camTransformer.transform.forward * z) * moveSpeed) + camTransformer.transform.up * y);
-            }
-            else
-            {
-                InputMovement = ((((groundCheck.transform.right) * x + (groundCheck.transform.forward) * z) * moveSpeed) + groundCheck.transform.up * y);
-            }
-
+            
         }
 
         ////////////////////////////////////////////////////////
         //backpack 
 
-        float grabDistance = 10;
+        //float grabDistance = 10;
 
-        if(Input.GetButtonDown("e"))
+        /*
+        if(false)
         {
             RaycastHit r;
 
@@ -314,7 +285,7 @@ public class PlayerScript : NetworkBehaviour
             }
 
         }
-
+        */
 
 
     }
@@ -372,7 +343,52 @@ public class PlayerScript : NetworkBehaviour
         
     }
 
-    
+    public void takeInputMovement(Vector2 inVec)
+    {
+        x = inVec.x;
+        z = inVec.y;
+
+        /*
+        if (fly)
+        {
+            if (Input.GetKey("space"))
+            {
+                y = 1;
+            }
+            else if (Input.GetKey("c"))
+            {
+                y = -1;
+            }
+            else
+            {
+                y = 0;
+            }
+        }
+        else
+        {
+
+            if (Input.GetKeyDown("space") && canJump)
+            {
+                jump = true;
+            }
+
+        }
+
+        */
+
+
+
+        if (fly)
+        {
+            InputMovement = (((camTransformer.transform.right * x + camTransformer.transform.forward * z) * moveSpeed) + camTransformer.transform.up * y);
+        }
+        else
+        {
+            InputMovement = ((((groundCheck.transform.right) * x + (groundCheck.transform.forward) * z) * moveSpeed) + groundCheck.transform.up * y);
+        }
+
+    }
+
     public bool isGrounded()
     {
         return Physics.CheckSphere(groundCheck.position, groundDistance, Jumpable);
