@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acdfc876a8d586d46b023dc0822eab56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MouseSens: 10
+  MouseSens: 100
 --- !u!114 &7499185015825023132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,7 +229,6 @@ MonoBehaviour:
   usePhysicsGravity: 0
   backpack: {fileID: 7059568952569084450}
   viewmodelHolder: {fileID: 1812054874910917664}
-  controls: {fileID: 0}
 --- !u!114 &4985518175796578509
 MonoBehaviour:
   m_ObjectHideFlags: 0

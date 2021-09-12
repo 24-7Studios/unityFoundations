@@ -125,13 +125,14 @@ public class PlayerScript : NetworkBehaviour
 
 
     //controls
-
+    private Inputmaster controls;
+    
 
 
     private void Awake()
     {
-        
-        
+
+        controls = new Inputmaster();
         
     }
 
@@ -149,6 +150,8 @@ public class PlayerScript : NetworkBehaviour
 
         if (isLocalPlayer)
         {
+
+            controls.Player.Enable();
 
             sens = settings.MouseSens;
 
@@ -196,8 +199,8 @@ public class PlayerScript : NetworkBehaviour
 
 
 
-            float MouseX = 0;//Input.GetAxisRaw("Mouse X") * sens;
-            float MouseY = 0;//Input.GetAxisRaw("Mouse Y") * sens;
+            float MouseX = controls.Player.looking.ReadValue<Vector2>().x * sens * Time.deltaTime;
+            float MouseY = controls.Player.looking.ReadValue<Vector2>().y * sens * Time.deltaTime;
 
 
             yMouseInput -= MouseY;
@@ -256,7 +259,48 @@ public class PlayerScript : NetworkBehaviour
         if (isLocalPlayer)
         {
 
+            x = controls.Player.Movement.ReadValue<Vector2>().x;
+            z = controls.Player.Movement.ReadValue<Vector2>().y;
+
             
+            if (fly)
+            {
+                if (Input.GetKey("space"))
+                {
+                    y = 1;
+                }
+                else if (Input.GetKey("c"))
+                {
+                    y = -1;
+                }
+                else
+                {
+                    y = 0;
+                }
+            }
+            else
+            {
+
+                if (Input.GetKeyDown("space") && canJump)
+                {
+                    jump = true;
+                }
+
+            }
+
+            
+
+
+
+            if (fly)
+            {
+                InputMovement = (((camTransformer.transform.right * x + camTransformer.transform.forward * z) * moveSpeed) + camTransformer.transform.up * y);
+            }
+            else
+            {
+                InputMovement = ((((groundCheck.transform.right) * x + (groundCheck.transform.forward) * z) * moveSpeed) + groundCheck.transform.up * y);
+            }
+
         }
 
         ////////////////////////////////////////////////////////
@@ -345,47 +389,7 @@ public class PlayerScript : NetworkBehaviour
 
     public void takeInputMovement(Vector2 inVec)
     {
-        x = inVec.x;
-        z = inVec.y;
 
-        /*
-        if (fly)
-        {
-            if (Input.GetKey("space"))
-            {
-                y = 1;
-            }
-            else if (Input.GetKey("c"))
-            {
-                y = -1;
-            }
-            else
-            {
-                y = 0;
-            }
-        }
-        else
-        {
-
-            if (Input.GetKeyDown("space") && canJump)
-            {
-                jump = true;
-            }
-
-        }
-
-        */
-
-
-
-        if (fly)
-        {
-            InputMovement = (((camTransformer.transform.right * x + camTransformer.transform.forward * z) * moveSpeed) + camTransformer.transform.up * y);
-        }
-        else
-        {
-            InputMovement = ((((groundCheck.transform.right) * x + (groundCheck.transform.forward) * z) * moveSpeed) + groundCheck.transform.up * y);
-        }
 
     }
 

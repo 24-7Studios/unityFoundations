@@ -22,7 +22,7 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                     ""name"": ""looking"",
                     ""type"": ""Value"",
                     ""id"": ""e761f024-addf-4cf5-a38a-f0a15a112488"",
-                    ""expectedControlType"": ""Axis"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -52,28 +52,6 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""b3069c95-ff04-4192-96dd-ae4a8242f086"",
-                    ""path"": ""<Mouse>/delta/x"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""mouse + keybaord"",
-                    ""action"": ""looking"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ed064feb-a430-4fc3-8eb7-3e92d9fc3d0c"",
-                    ""path"": ""<Mouse>/delta/y"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""mouse + keybaord"",
-                    ""action"": ""looking"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""320c1fcb-4c1d-4805-9b7c-c1680fbe7773"",
@@ -110,7 +88,7 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""Up"",
                     ""id"": ""aed6e840-8963-4304-be26-17edfeb46fc2"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""mouse + keybaord"",
@@ -121,7 +99,7 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""Down"",
                     ""id"": ""0c99cc6c-37d9-49f4-8a0d-d7a47a981529"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""mouse + keybaord"",
@@ -150,6 +128,17 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f85e59ce-1b03-44f4-8370-5593c2b787b0"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""mouse + keybaord"",
+                    ""action"": ""looking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
