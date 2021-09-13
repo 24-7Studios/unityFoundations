@@ -204,7 +204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 1
   syncInterval: 0.025
-  testPick: {fileID: 3929747283771302314, guid: ed412db4cad7f4745b7f392135385fcc,
+  testWeapon: {fileID: 3929747283771302314, guid: ed412db4cad7f4745b7f392135385fcc,
     type: 3}
   playerPhysBody: {fileID: 1812054873815986974}
   camTransformer: {fileID: 1812054873376556135}

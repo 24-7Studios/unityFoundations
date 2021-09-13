@@ -7,13 +7,14 @@ using Mirror;
 public class PlayerScript : NetworkBehaviour
 {
 
+    public GameObject testWeapon;
 
-    
 
     //player setup
     /// <summary>
     /// components that make the player work. also likely to be referenced by other scripts especially in the guns
     /// </summary>
+
 
     public Rigidbody playerPhysBody;
     public Transform camTransformer;
@@ -141,7 +142,7 @@ public class PlayerScript : NetworkBehaviour
     private void Start()
     {
 
-
+        
 
 
         setPlayermodel(PlayerModel);
@@ -176,14 +177,13 @@ public class PlayerScript : NetworkBehaviour
 
         footPostition = foot.localPosition;
 
-        
 
-
+        setWeapons(testWeapon);
 
     }
 
-
-
+    
+    
 
     private void Update()
     {
@@ -540,7 +540,39 @@ public class PlayerScript : NetworkBehaviour
         return InputMovement;
     }
 
-    
+    public void setWeapons(GameObject thing)
+    {
+
+        float timer = .5f;
+
+        if (NetworkClient.ready)
+        {
+            timer -= Time.fixedDeltaTime;
+            if (timer < 0)
+            {
+                cmdSpawnObject(thing);
+                pickup(Instantiate(thing));
+            }
+            else
+            {
+                setWeapons(thing);
+            }
+        }
+        else
+        {
+            setWeapons(thing);
+        }
+
+    }
+
+    [Command]
+    public void cmdSpawnObject(GameObject thing)
+    {
+
+        NetworkServer.Spawn(thing);
+        
+
+    }
 
     public void pickup(GameObject thing)
     {
