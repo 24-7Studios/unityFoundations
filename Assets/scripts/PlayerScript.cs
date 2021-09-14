@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Mirror;
 
 public class PlayerScript : NetworkBehaviour
@@ -15,7 +14,7 @@ public class PlayerScript : NetworkBehaviour
     /// components that make the player work. also likely to be referenced by other scripts especially in the guns
     /// </summary>
 
-
+    public NetworkManager server;
     public Rigidbody playerPhysBody;
     public Transform camTransformer;
     public GameObject CameraSetup;
@@ -136,6 +135,7 @@ public class PlayerScript : NetworkBehaviour
         controls = new Inputmaster();
         controls.Player.jump.performed += _ => activateJump();
         
+        
     }
 
 
@@ -178,7 +178,7 @@ public class PlayerScript : NetworkBehaviour
         footPostition = foot.localPosition;
 
 
-        setWeapons(testWeapon);
+        
 
     }
 
@@ -540,44 +540,15 @@ public class PlayerScript : NetworkBehaviour
         return InputMovement;
     }
 
-    public void setWeapons(GameObject thing)
-    {
-
-        float timer = .5f;
-
-        if (NetworkClient.ready)
-        {
-            timer -= Time.fixedDeltaTime;
-            if (timer < 0)
-            {
-                cmdSpawnObject(thing);
-                pickup(Instantiate(thing));
-            }
-            else
-            {
-                setWeapons(thing);
-            }
-        }
-        else
-        {
-            setWeapons(thing);
-        }
-
-    }
-
-    [Command]
-    public void cmdSpawnObject(GameObject thing)
-    {
-
-        NetworkServer.Spawn(thing);
-        
-
-    }
 
     public void pickup(GameObject thing)
     {
 
+
         thing.transform.SetParent(backpack);
+        thing.transform.localPosition = Vector3.zero;
+        thing.transform.localRotation = Quaternion.Euler(Vector3.right);
+        thing.transform.localScale = Vector3.one;
 
         Ipickup i = thing.GetComponent<Ipickup>();
 
@@ -586,34 +557,33 @@ public class PlayerScript : NetworkBehaviour
 
         WeaponClass wep = thing.GetComponent<WeaponClass>();
 
-        if (wep != null)
-        {
-            GameObject vModel = wep.getViewmodelOb();
-            GameObject wModel = wep.getWorldModelOb();
-
-            vModel.transform.SetParent(viewmodelHolder);
-            vModel.transform.localPosition = Vector3.zero;
-            PlayerModel.equipWeapon(wModel);
-
-
-            if (isLocalPlayer)
+            if (wep != null)
             {
-                vModel.SetActive(true);
-                vModel.layer = 11;
-                wModel.SetActive(true);
-                wModel.layer = 6;
-            }
-            else
-            {
-                vModel.SetActive(false);
-                wModel.layer = 0;
-            }
+                GameObject vModel = wep.getViewmodelOb();
+                GameObject wModel = wep.getWorldModelOb();
 
-        }
-        
-        
+                vModel.transform.SetParent(viewmodelHolder);
+                vModel.transform.localPosition = Vector3.zero;
+                PlayerModel.equipWeapon(wModel);
+
+
+                if (isLocalPlayer)
+                {
+                    vModel.SetActive(true);
+                    vModel.layer = 11;
+                    wModel.SetActive(true);
+                    wModel.layer = 6;
+                }
+                else
+                {
+                    vModel.SetActive(false);
+                    wModel.layer = 0;
+                }
+
+            }   
         
     }
+
 
     public void drop(GameObject thing)
     {
