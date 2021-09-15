@@ -119,7 +119,7 @@ public class PlayerScript : NetworkBehaviour
 
     //backpack
     [SerializeField]
-    private Transform backpack;
+    public Transform backpack;
     [SerializeField]
     private Transform viewmodelHolder;
 

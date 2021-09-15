@@ -18,6 +18,8 @@ public class weaponGiver : NetworkBehaviour
         if(thing != null)
         {
 
+            
+
             GameObject spawnedW = Instantiate(myweapon, transform);
 
             NetworkServer.Spawn(spawnedW);
