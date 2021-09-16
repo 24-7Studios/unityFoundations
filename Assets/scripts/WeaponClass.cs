@@ -6,7 +6,8 @@ using Mirror;
 public class WeaponClass : NetworkBehaviour, Ipickup
 {
 
-
+    [SyncVar]
+    public PlayerScript player;
 
     [SerializeField]
     protected GameObject item;
@@ -18,13 +19,30 @@ public class WeaponClass : NetworkBehaviour, Ipickup
     protected GameObject viewmodel;
 
 
-    [SerializeField]
+
+    public Vector3 basePosOffset = new Vector3();
+
+    public Vector3 baseRotOffset = new Vector3();
+
+    public Vector3 baseScaOffset = new Vector3();
+
+    [SyncVar]
     protected bool isitem;
 
     // Start is called before the first frame update
     void Start()
     {
         
+        if(player != null)
+        {
+            player.pickup(gameObject);
+        }
+        else
+        {
+
+        }
+
+
     }
 
     // Update is called once per frame
@@ -35,18 +53,6 @@ public class WeaponClass : NetworkBehaviour, Ipickup
 
     }
 
-    protected virtual void raycastShoot()
-    {
-
-    }
-
-    /*
-    public GameObject getItemOb()
-    {
-        return item;
-    }
-    */
-    
 
     public GameObject getWorldModelOb()
     {
@@ -70,37 +76,53 @@ public class WeaponClass : NetworkBehaviour, Ipickup
 
     public void pickup(PlayerScript p)
     {
-        item.SetActive(false);
-        isitem = false;
-    }
 
-    /* public void drop()
-     {
-         transform.SetParent(null);
-         item.transform.SetParent(transform);
-         worldModel.transform.SetParent(transform);
-         viewmodel.transform.SetParent(transform);
-         viewmodel.SetActive(false);
-         worldModel.SetActive(false);
-         item.transform.localPosition = Vector3.zero;
-         item.transform.localRotation = Quaternion.Euler(Vector3.zero);
-         item.SetActive(true);
-         isitem = true;
-     }
-    */
+        player = p;
+
+        foreach (MeshRenderer m in item.GetComponents<MeshRenderer>())
+        {
+            m.enabled = false;
+        }
+
+        foreach (Collider c in item.GetComponents<Collider>())
+        {
+            c.enabled = false;
+        }
+
+        item.GetComponent<Rigidbody>().isKinematic = true;
+
+        isitem = false;
+
+    }
 
     public void drop()
     {
-        transform.SetParent(item.transform);
         item.transform.SetParent(null);
         worldModel.transform.SetParent(transform);
         viewmodel.transform.SetParent(transform);
         viewmodel.SetActive(false);
         worldModel.SetActive(false);
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.Euler(Vector3.zero);
-        item.SetActive(true);
+
+        foreach (MeshRenderer m in item.GetComponents<MeshRenderer>())
+        {
+            m.enabled = true;
+        }
+
+        foreach (Collider c in item.GetComponents<Collider>())
+        {
+            c.enabled = true;
+        }
+
+        item.GetComponent<Rigidbody>().isKinematic = false;
+
+        player = null;
+
         isitem = true;
+    }
+
+    protected virtual void raycastShoot()
+    {
+
     }
 
 

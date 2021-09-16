@@ -547,18 +547,23 @@ public class PlayerScript : NetworkBehaviour
 
         thing.transform.SetParent(backpack);
         thing.transform.localPosition = Vector3.zero;
-        thing.transform.localRotation = Quaternion.Euler(Vector3.right);
+        
         thing.transform.localScale = Vector3.one;
 
         Ipickup i = thing.GetComponent<Ipickup>();
 
         i.pickup(this);
         
-
+            
         WeaponClass wep = thing.GetComponent<WeaponClass>();
 
             if (wep != null)
             {
+
+                thing.transform.localPosition = wep.basePosOffset;
+                thing.transform.localRotation = Quaternion.Euler(wep.baseRotOffset);
+                thing.transform.localScale = wep.baseScaOffset;
+
                 GameObject vModel = wep.getViewmodelOb();
                 GameObject wModel = wep.getWorldModelOb();
 
@@ -577,6 +582,7 @@ public class PlayerScript : NetworkBehaviour
                 else
                 {
                     vModel.SetActive(false);
+                    wModel.SetActive(true);
                     wModel.layer = 0;
                 }
 
@@ -590,10 +596,10 @@ public class PlayerScript : NetworkBehaviour
 
         Ipickup i = thing.GetComponent<Ipickup>();
 
-        
-
-        thing.transform.position = transform.position + transform.forward * 1;
         i.drop();
+
+        thing.transform.position = transform.position + transform.forward * 2;
+        
     }
 
 
@@ -602,6 +608,6 @@ public class PlayerScript : NetworkBehaviour
         yMouseInput -= r;
     }
 
-
+    
 
 }
