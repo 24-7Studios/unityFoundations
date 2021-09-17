@@ -26,6 +26,12 @@ public class WeaponClass : NetworkBehaviour, Ipickup
 
     public Vector3 baseScaOffset = new Vector3();
 
+    public Vector3 WModelPosOffset = new Vector3();
+
+    public Vector3 WModelRotOffset = new Vector3();
+
+    public Vector3 WModelScaOffset = new Vector3();
+
     [SyncVar]
     protected bool isitem;
 
