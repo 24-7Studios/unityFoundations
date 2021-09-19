@@ -545,7 +545,7 @@ public class PlayerScript : NetworkBehaviour
     {
 
 
-        thing.transform.SetParent(backpack);
+        thing.transform.SetParent(backpack, false);
         thing.transform.localPosition = Vector3.zero;
 
         Ipickup i = thing.GetComponent<Ipickup>();
@@ -568,12 +568,8 @@ public class PlayerScript : NetworkBehaviour
                 vModel.transform.SetParent(viewmodelHolder);
                 vModel.transform.localPosition = Vector3.zero;
 
-                wModel.transform.localPosition = wep.WModelPosOffset;
-                wModel.transform.localRotation = Quaternion.Euler(wep.WModelRotOffset);
-                wModel.transform.localScale = wep.WModelScaOffset;
 
-
-                PlayerModel.equipWeapon(wModel);
+                PlayerModel.equipWeapon(wep);
 
 
                 if (isLocalPlayer)
