@@ -12,11 +12,12 @@ public class weaponDroper : NetworkBehaviour
     {
 
         PlayerScript thing = other.GetComponent<PlayerScript>();
+        WeaponClass weapon = thing.backpack.GetComponentInChildren<WeaponClass>(true);
 
-        if (thing != null)
+        if (thing != null && weapon != null)
         {
 
-            WeaponClass weapon = thing.backpack.GetComponentInChildren<WeaponClass>(true);
+            
 
             thing.drop(weapon.gameObject);
             rpcDropWeapon(weapon.gameObject, thing);

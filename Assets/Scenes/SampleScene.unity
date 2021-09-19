@@ -904,7 +904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  myweapon: {fileID: 1399968401232785994, guid: 34692b99d2a997840977907650baf65d,
+  myweapon: {fileID: 8378784299745222373, guid: e7180d551022c7b4f9d2502061aa4957,
     type: 3}
 --- !u!114 &335595195
 MonoBehaviour:
@@ -1127,6 +1127,7 @@ MonoBehaviour:
   playerSpawnMethod: 0
   spawnPrefabs:
   - {fileID: 1399968401232785994, guid: 34692b99d2a997840977907650baf65d, type: 3}
+  - {fileID: 8378784299745222373, guid: e7180d551022c7b4f9d2502061aa4957, type: 3}
 --- !u!4 &369848925
 Transform:
   m_ObjectHideFlags: 0

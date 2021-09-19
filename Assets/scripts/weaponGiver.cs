@@ -8,7 +8,9 @@ public class weaponGiver : NetworkBehaviour
 
     public GameObject myweapon;
 
-    
+
+
+
     [ServerCallback]
     private void OnTriggerEnter(Collider other)
     {
@@ -22,10 +24,13 @@ public class weaponGiver : NetworkBehaviour
 
             GameObject spawnedW = Instantiate(myweapon, transform);
 
+            
+            
             NetworkServer.Spawn(spawnedW);
 
 
             rpcGiveWeapon(spawnedW, thing);
+
         }
 
     }
