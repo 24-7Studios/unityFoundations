@@ -36,6 +36,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "crouch",
+                    "type": "Button",
+                    "id": "3a01b681-22f9-4732-a468-7bacbd2f6cf1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -124,6 +132,17 @@
                     "processors": "",
                     "groups": "mouse + keybaord",
                     "action": "looking",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c90e6cb5-db9f-4bc6-b5c1-4452df6d6a42",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "mouse + keybaord",
+                    "action": "crouch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
