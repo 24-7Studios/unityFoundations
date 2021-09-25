@@ -194,7 +194,7 @@ MonoBehaviour:
   Jumpable:
     serializedVersion: 2
     m_Bits: 1033
-  groundDistance: 0.1
+  groundDistance: 0.3
   groundingForce: 0.1
   PositionCompensationDamping: 0.25
   PostionSnapThreshold: 5
@@ -244,8 +244,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1050093693641089722}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.01, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1050093693558037595}
@@ -262,7 +262,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 0.01
+  m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1050093693734197461
 GameObject:
@@ -304,9 +304,9 @@ CapsuleCollider:
   m_GameObject: {fileID: 1050093693734197461}
   m_Material: {fileID: 13400000, guid: 1ed17e4602ac3d74599b2f152586a68f, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 0.1
-  m_Height: 1.205
+  m_Height: 1.25
   m_Direction: 1
   m_Center: {x: 0, y: -0.025, z: 0}
 --- !u!1 &1050093694719503197

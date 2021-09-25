@@ -118,8 +118,6 @@ public class PlayerScript : NetworkBehaviour
     float y = 0;
     Vector3 groundNormal;
 
-    [SyncVar]
-    bool isCrouching;
 
     //backpack
     [SerializeField]
@@ -138,7 +136,7 @@ public class PlayerScript : NetworkBehaviour
 
         controls = new Inputmaster();
         controls.Player.jump.performed += _ => activateJump();
-        controls.Player.crouch.performed += _0 => crouch(); 
+        
         
     }
 
@@ -391,8 +389,7 @@ public class PlayerScript : NetworkBehaviour
 
     public bool isGrounded()
     {
-        
-        return Physics.Raycast(transform.position, -groundCheck.up, groundDistance, Jumpable); //Physics.CheckSphere(groundCheck.position, groundDistance, Jumpable);
+        return Physics.CheckSphere(groundCheck.position, groundDistance, Jumpable);
     }
 
     public bool CanJump()
@@ -407,11 +404,6 @@ public class PlayerScript : NetworkBehaviour
             jump = true;
         }
             
-    }
-
-    void crouch()
-    {
-
     }
 
     [Command]
