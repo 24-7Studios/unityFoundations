@@ -18,14 +18,15 @@ public class PlayerScript : NetworkBehaviour
     public Rigidbody playerPhysBody;
     public Transform camTransformer;
     public GameObject CameraSetup;
-    //public Camera worldCam;
-    //public Camera gunCam;
+    public Camera worldCam;
+    public Camera gunCam;
     
 
     [SerializeField]
     private Collider interactZone;
 
-    
+    [SerializeField] 
+    private GameObject PlayerModelPrefab;
 
     public PlayerModelClass PlayerModel;
 
@@ -58,16 +59,13 @@ public class PlayerScript : NetworkBehaviour
     /// </summary>
 
 
-    [SerializeField]
+    //[SerializeField]
     private float moveSpeed = 1.35f;
 
-    [SerializeField]
-    private float airMult = 0.2f;
-
-    [SerializeField]
+    //[SerializeField]
     private float jumpForce = 20;
 
-    [SerializeField]
+    //[SerializeField]
     private float playerGravity = -0.75f;
 
     [SerializeField]
@@ -81,10 +79,10 @@ public class PlayerScript : NetworkBehaviour
     [SerializeField]
     private LayerMask Jumpable;
 
-    [SerializeField]
+    //[SerializeField]
     private float groundDistance = 0.3f;
 
-    [SerializeField]
+    //[SerializeField]
     private float groundingForce = 0.1f;
 
     //[SerializeField]
@@ -264,11 +262,6 @@ public class PlayerScript : NetworkBehaviour
             x = controls.Player.Movement.ReadValue<Vector2>().x;
             z = controls.Player.Movement.ReadValue<Vector2>().y;
 
-            if(!grounded)
-            {
-                x *= airMult;
-                z *= airMult;
-            }
             
             if (fly)
             {
