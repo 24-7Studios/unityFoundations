@@ -124,6 +124,7 @@ public class PlayerScript : NetworkBehaviour
     [SerializeField]
     private Transform viewmodelHolder;
 
+    [SyncVar]
     private List<WeaponClass> weapons;
     private WeaponClass primary;
     private WeaponClass secondary;
