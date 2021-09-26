@@ -25,18 +25,29 @@ public class PlayerModelClass : NetworkBehaviour
         Debug.Log("player Set!" + player);
     }
 
-    public virtual void equipWeapon(WeaponClass w)
+    public virtual void equipWeapon(WeaponClass w, bool hand)
     {
+
+        Transform targetPos;
+
+        if(hand)
+        {
+            targetPos = LeftHoldPos;
+        }
+        else
+        {
+            targetPos = RightHoldPos;
+        }
 
         GameObject wm = w.getWorldModelOb();
 
-        wm.transform.SetParent(RightHoldPos, false);
+        wm.transform.SetParent(targetPos, false);
         wm.transform.localPosition = w.WModelPosOffset;
         wm.transform.localRotation = Quaternion.Euler(w.WModelRotOffset);
 
         wm.transform.SetParent(null, true);
         wm.transform.localScale = w.WModelScaOffset;
-        wm.transform.SetParent(RightHoldPos, true);
+        wm.transform.SetParent(targetPos, true);
 
     }
 

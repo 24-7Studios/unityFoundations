@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Mirror;
 
@@ -59,13 +60,13 @@ public class PlayerScript : NetworkBehaviour
     /// </summary>
 
 
-    //[SerializeField]
+    [SerializeField]
     private float moveSpeed = 1.35f;
 
-    //[SerializeField]
+    [SerializeField]
     private float jumpForce = 20;
 
-    //[SerializeField]
+    [SerializeField]
     private float playerGravity = -0.75f;
 
     [SerializeField]
@@ -122,6 +123,11 @@ public class PlayerScript : NetworkBehaviour
     public Transform backpack;
     [SerializeField]
     private Transform viewmodelHolder;
+
+    private List<WeaponClass> weapons;
+    private WeaponClass primary;
+    private WeaponClass secondary;
+    private int slot;
 
 
     //controls
@@ -298,30 +304,11 @@ public class PlayerScript : NetworkBehaviour
         ////////////////////////////////////////////////////////
         //backpack 
 
-        //float grabDistance = 10;
+        weapons = GetComponentsInChildren<WeaponClass>().ToList();
 
-        /*
-        if(false)
-        {
-            RaycastHit r;
 
-            if(Physics.Raycast(camTransformer.position, camTransformer.forward, out r, grabDistance))
-            {
 
-                GameObject thing = r.transform.GetComponent<Ipickup>().getObject();
 
-                if(thing.GetComponent<WeaponClass>())
-                {
-                    pickup(thing);
-                }
-                
-
-                
-
-            }
-
-        }
-        */
 
 
     }
@@ -569,7 +556,7 @@ public class PlayerScript : NetworkBehaviour
                 vModel.transform.localPosition = Vector3.zero;
 
 
-                PlayerModel.equipWeapon(wep);
+                PlayerModel.equipWeapon(wep, wep.hand);
 
 
                 if (isLocalPlayer)

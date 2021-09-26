@@ -347,6 +347,8 @@ MonoBehaviour:
   WModelPosOffset: {x: 0, y: 0, z: 0}
   WModelRotOffset: {x: 0, y: 90, z: 0}
   WModelScaOffset: {x: 0.5, y: 0.5, z: 0.5}
+  canDual: 1
+  hand: 0
 --- !u!114 &304513260997012659
 MonoBehaviour:
   m_ObjectHideFlags: 0

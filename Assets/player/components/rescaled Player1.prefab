@@ -173,6 +173,9 @@ MonoBehaviour:
   PlayerModel: {fileID: -7493404476013411301, guid: c8d4cf5569e590747bd755a71fefbf17,
     type: 3}
   settings: {fileID: 5242603199734816841}
+  moveSpeed: 0.75
+  jumpForce: 20
+  playerGravity: -1
   groundCheck: {fileID: 1050093693641089723}
   foot: {fileID: 1050093693734197462}
   Jumpable:

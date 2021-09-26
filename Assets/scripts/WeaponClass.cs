@@ -32,6 +32,16 @@ public class WeaponClass : NetworkBehaviour, Ipickup
 
     public Vector3 WModelScaOffset = new Vector3();
 
+
+    [SerializeField]
+    private bool canDual;
+
+    [SyncVar]
+    private WeaponClass otherHand;
+
+    [SyncVar]
+    public bool hand;
+
     [SyncVar]
     protected bool isitem;
 
@@ -109,6 +119,8 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         viewmodel.SetActive(false);
         worldModel.SetActive(false);
 
+        hand = false;
+
         foreach (MeshRenderer m in item.GetComponents<MeshRenderer>())
         {
             m.enabled = true;
@@ -124,6 +136,17 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         player = null;
 
         isitem = true;
+    }
+
+
+    public  WeaponClass getOtherHand()
+    {
+        return otherHand;
+    }
+
+    public bool isDual()
+    {
+        return otherHand != null;
     }
 
     protected virtual void raycastShoot()
