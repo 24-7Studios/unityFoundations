@@ -39,7 +39,7 @@ public class weaponGiver : NetworkBehaviour
     private void rpcGiveWeapon(GameObject g, PlayerScript p)
     {
 
-        p.pickup(g);
+        p.pickupWeapon(g, false);
 
     }
 

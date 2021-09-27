@@ -51,7 +51,7 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         
         if(player != null)
         {
-            player.pickup(gameObject);
+            player.pickupWeapon(gameObject, hand);
         }
         else
         {

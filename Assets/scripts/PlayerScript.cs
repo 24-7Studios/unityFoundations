@@ -128,7 +128,9 @@ public class PlayerScript : NetworkBehaviour
     private List<WeaponClass> weapons;
     private WeaponClass primary;
     private WeaponClass secondary;
-    private int slot;
+    private WeaponClass equipedWeapon;
+    private int inventoryIndex;
+    private int equipedSlot;
 
 
     //controls
@@ -305,10 +307,23 @@ public class PlayerScript : NetworkBehaviour
         ////////////////////////////////////////////////////////
         //backpack 
 
+
+
         weapons = GetComponentsInChildren<WeaponClass>().ToList();
 
+        equipedWeapon = weapons[inventoryIndex];
 
-
+        foreach( WeaponClass w in weapons)
+        {
+            if(w != equipedWeapon || w!= equipedWeapon.getOtherHand())
+            {
+                w.getViewmodelOb().SetActive(true);
+            }
+            else
+            {
+                w.getViewmodelOb().SetActive(true);
+            }
+        }
 
 
 
@@ -529,7 +544,7 @@ public class PlayerScript : NetworkBehaviour
     }
 
 
-    public void pickup(GameObject thing)
+    public void pickupWeapon(GameObject thing, bool hand)
     {
 
 
@@ -546,6 +561,8 @@ public class PlayerScript : NetworkBehaviour
             if (wep != null)
             {
 
+                wep.hand = hand;
+
                 thing.transform.localPosition = wep.basePosOffset;
                 thing.transform.localRotation = Quaternion.Euler(wep.baseRotOffset);
                 thing.transform.localScale = wep.baseScaOffset;
@@ -558,7 +575,13 @@ public class PlayerScript : NetworkBehaviour
 
 
                 PlayerModel.equipWeapon(wep, wep.hand);
+                
+                if(hand && wep.getOtherHand() != null)
+                {
 
+                    thing.transform.SetSiblingIndex(wep.getOtherHand().transform.GetSiblingIndex() + 1);
+
+                }            
 
                 if (isLocalPlayer)
                 {
@@ -577,6 +600,68 @@ public class PlayerScript : NetworkBehaviour
             }   
         
     }
+
+
+
+
+    //
+    public void SystemPickupWeapon(GameObject thing, bool hand)
+    {
+
+
+        thing.transform.SetParent(backpack, false);
+        thing.transform.localPosition = Vector3.zero;
+
+        Ipickup i = thing.GetComponent<Ipickup>();
+
+        i.pickup(this);
+
+
+        WeaponClass wep = thing.GetComponent<WeaponClass>();
+
+        if (wep != null)
+        {
+
+            wep.hand = hand;
+
+            thing.transform.localPosition = wep.basePosOffset;
+            thing.transform.localRotation = Quaternion.Euler(wep.baseRotOffset);
+            thing.transform.localScale = wep.baseScaOffset;
+
+            GameObject vModel = wep.getViewmodelOb();
+            GameObject wModel = wep.getWorldModelOb();
+
+            vModel.transform.SetParent(viewmodelHolder);
+            vModel.transform.localPosition = Vector3.zero;
+
+
+            PlayerModel.equipWeapon(wep, wep.hand);
+
+            if (hand && wep.getOtherHand() != null)
+            {
+
+                thing.transform.SetSiblingIndex(wep.getOtherHand().transform.GetSiblingIndex() + 1);
+
+            }
+
+            if (isLocalPlayer)
+            {
+                vModel.SetActive(true);
+                vModel.layer = 11;
+                wModel.SetActive(true);
+                wModel.layer = 6;
+            }
+            else
+            {
+                vModel.SetActive(false);
+                wModel.SetActive(true);
+                wModel.layer = 0;
+            }
+
+        }
+
+    }
+    //
 
 
     public void drop(GameObject thing)
