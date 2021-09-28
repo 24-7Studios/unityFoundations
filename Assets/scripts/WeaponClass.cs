@@ -90,6 +90,11 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         return gameObject;
     }
 
+    public bool CanDualWield()
+    {
+        return canDual;
+    }
+
     public void pickup(PlayerScript p)
     {
 
@@ -142,6 +147,11 @@ public class WeaponClass : NetworkBehaviour, Ipickup
     public  WeaponClass getOtherHand()
     {
         return otherHand;
+    }
+
+    public void setOtherHand(WeaponClass other)
+    {
+        otherHand = other;
     }
 
     public bool isDual()
