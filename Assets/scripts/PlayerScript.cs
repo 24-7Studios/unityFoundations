@@ -124,12 +124,14 @@ public class PlayerScript : NetworkBehaviour
     [SerializeField]
     private Transform viewmodelHolder;
 
+
     [SyncVar]
-    private List<WeaponClass> weapons;
     private WeaponClass primary;
+    [SyncVar]
     private WeaponClass secondary;
+    [SyncVar]
     private bool equipedSlot = false;   // false for primary true for secondary
-    private WeaponClass equipedWeapon;
+    
 
 
     //controls
@@ -330,7 +332,7 @@ public class PlayerScript : NetworkBehaviour
             }
         }
         */
-
+        /*
         if(!equipedSlot)
         {
             if(primary != null)
@@ -377,7 +379,7 @@ public class PlayerScript : NetworkBehaviour
                 }
             }
         }
-
+        */
 
 
 
@@ -633,7 +635,94 @@ public class PlayerScript : NetworkBehaviour
     {
 
         equipedSlot = !equipedSlot;
+        if(isLocalPlayer)
+        {
+            if(equipedSlotWeapon(equipedSlot) != null)
+            {
+
+                equipedSlotWeapon(equipedSlot).getViewmodelOb().SetActive(true);
+
+                if(equipedSlotWeapon(equipedSlot).getOtherHand() != null)
+                {
+                    equipedSlotWeapon(equipedSlot).getOtherHand().getViewmodelOb().SetActive(true);
+                }
+            }
+
+            if (equipedSlotWeapon(!equipedSlot) != null)
+            {
+                equipedSlotWeapon(!equipedSlot).getViewmodelOb().SetActive(false);
+
+                if (equipedSlotWeapon(!equipedSlot).getOtherHand() != null)
+                {
+                    equipedSlotWeapon(!equipedSlot).getOtherHand().getViewmodelOb().SetActive(false);
+                }
+
+            }
+
+
+        }
+
+
+
+        if (equipedSlotWeapon(equipedSlot) != null)
+        {
+
+            equipedSlotWeapon(equipedSlot).getWorldModelOb().SetActive(true);
+
+            if (equipedSlotWeapon(equipedSlot).getOtherHand() != null)
+            {
+                equipedSlotWeapon(equipedSlot).getOtherHand().getWorldModelOb().SetActive(true);
+            }
+
+        }
+
+        if (equipedSlotWeapon(!equipedSlot) != null)
+        {
+            equipedSlotWeapon(!equipedSlot).getWorldModelOb().SetActive(false);
+
+            if (equipedSlotWeapon(!equipedSlot).getOtherHand() != null)
+            {
+                equipedSlotWeapon(!equipedSlot).getOtherHand().getWorldModelOb().SetActive(false);
+            }
+
+        }
+
+        if (!server)
+        {
+            cmdChangeSlot(equipedSlot);
+        }
         
+    }
+
+    [Command]
+    private void cmdChangeSlot(bool s)
+    {
+        equipedSlot = s;
+
+
+        if (equipedSlotWeapon(equipedSlot) != null)
+        {
+
+            equipedSlotWeapon(equipedSlot).getWorldModelOb().SetActive(true);
+
+            if (equipedSlotWeapon(equipedSlot).getOtherHand() != null)
+            {
+                equipedSlotWeapon(equipedSlot).getOtherHand().getWorldModelOb().SetActive(true);
+            }
+
+        }
+
+        if (equipedSlotWeapon(!equipedSlot) != null)
+        {
+            equipedSlotWeapon(!equipedSlot).getWorldModelOb().SetActive(false);
+
+            if (equipedSlotWeapon(!equipedSlot).getOtherHand() != null)
+            {
+                equipedSlotWeapon(!equipedSlot).getOtherHand().getWorldModelOb().SetActive(false);
+            }
+
+        }
+
     }
 
     public void pickupWeapon(GameObject thing, bool hand)
@@ -656,40 +745,7 @@ public class PlayerScript : NetworkBehaviour
            
                 wep.hand = hand;
 
-                if (hand)
-                {
-                    thing.transform.SetSiblingIndex(wep.getOtherHand().transform.GetSiblingIndex() + 1);
-                }
 
-                if(hand)
-                {
-                    if(equipedSlotWeapon(equipedSlot).getOtherHand() != null)
-                    {
-                        equipedSlotWeapon(equipedSlot).getOtherHand().drop();
-                        equipedSlotWeapon(equipedSlot).setOtherHand(wep);
-                    }
-                    else
-                    {
-                        equipedSlotWeapon(equipedSlot).setOtherHand(wep);  
-                    }
-                }
-                else
-                {
-                    
-                    if(primary == null)
-                    {
-                        primary = wep;
-                    }
-                    else if(secondary == null)
-                    {
-                        secondary = wep;
-                    }
-                    else
-                    {
-                        setSlotWeapon(wep, equipedSlot);
-                    }
-
-                }
                 thing.transform.localPosition = wep.basePosOffset;
                 thing.transform.localRotation = Quaternion.Euler(wep.baseRotOffset);
                 thing.transform.localScale = wep.baseScaOffset;
@@ -703,7 +759,32 @@ public class PlayerScript : NetworkBehaviour
 
                 PlayerModel.equipWeapon(wep, wep.hand);
 
-                if (isLocalPlayer)
+            if (hand)
+            {
+                thing.transform.SetSiblingIndex(wep.getOtherHand().transform.GetSiblingIndex() + 1);
+            }
+
+            if (hand)
+            {
+                if (equipedSlotWeapon(equipedSlot).getOtherHand() != null)
+                {
+                    equipedSlotWeapon(equipedSlot).getOtherHand().drop();
+                    equipedSlotWeapon(equipedSlot).setOtherHand(wep);
+                }
+                else
+                {
+                    equipedSlotWeapon(equipedSlot).setOtherHand(wep);
+                }
+            }
+            else
+            {
+
+                setSlotWeapon(wep, equipedSlot);
+
+            }
+
+
+            if (isLocalPlayer)
                 {
                     vModel.SetActive(true);
                     vModel.layer = 11;

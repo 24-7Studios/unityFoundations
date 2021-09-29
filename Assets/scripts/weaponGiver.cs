@@ -28,6 +28,10 @@ public class weaponGiver : NetworkBehaviour
             
             NetworkServer.Spawn(spawnedW);
 
+            if(!isServer)
+            {
+                thing.pickupWeapon(spawnedW, false);
+            }
 
             rpcGiveWeapon(spawnedW, thing);
 

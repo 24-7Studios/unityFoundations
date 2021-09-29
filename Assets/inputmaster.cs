@@ -35,14 +35,6 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""grab"",
-                    ""type"": ""Button"",
-                    ""id"": ""812610ee-03ca-4a3b-bb97-1b2d90e1fe95"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Movement"",
                     ""type"": ""Value"",
                     ""id"": ""5d3149f4-2a4b-4a54-af55-91d2f96b3be4"",
@@ -51,17 +43,33 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""SelectWeapon"",
-                    ""type"": ""Value"",
-                    ""id"": ""140ded67-27fb-439c-bf63-5a9df26ed819"",
-                    ""expectedControlType"": ""Axis"",
+                    ""name"": ""Change"",
+                    ""type"": ""Button"",
+                    ""id"": ""c3b2bfbf-9a55-4025-a929-6c2af0258380"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Change"",
+                    ""name"": ""interact"",
                     ""type"": ""Button"",
-                    ""id"": ""c3b2bfbf-9a55-4025-a929-6c2af0258380"",
+                    ""id"": ""140ded67-27fb-439c-bf63-5a9df26ed819"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Fire_1"",
+                    ""type"": ""Button"",
+                    ""id"": ""92026b81-ea9e-4cb7-868d-cd5fc69714f5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Fire_2/Zoom1"",
+                    ""type"": ""Button"",
+                    ""id"": ""3154bfe1-127f-4536-81a0-6f034a659eff"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -76,17 +84,6 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""mouse + keybaord"",
                     ""action"": ""jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""440cbc69-c6e4-4367-8691-3067d362a7a6"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""mouse + keybaord"",
-                    ""action"": ""grab"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -159,11 +156,11 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""480fb3eb-c577-4d51-bb7f-8d65a2d4ec66"",
-                    ""path"": ""<Mouse>/scroll/x"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""mouse + keybaord"",
-                    ""action"": ""SelectWeapon"",
+                    ""action"": ""interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -175,6 +172,28 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""mouse + keybaord"",
                     ""action"": ""Change"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a7126d87-a11d-4aa9-8eca-6dcefb78cbc9"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""mouse + keybaord"",
+                    ""action"": ""Fire_1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""29a78e4f-3e55-48b6-9f04-746864e1ffa6"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""mouse + keybaord"",
+                    ""action"": ""Fire_2/Zoom1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -204,10 +223,11 @@ public class @Inputmaster : IInputActionCollection, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_looking = m_Player.FindAction("looking", throwIfNotFound: true);
         m_Player_jump = m_Player.FindAction("jump", throwIfNotFound: true);
-        m_Player_grab = m_Player.FindAction("grab", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
-        m_Player_SelectWeapon = m_Player.FindAction("SelectWeapon", throwIfNotFound: true);
         m_Player_Change = m_Player.FindAction("Change", throwIfNotFound: true);
+        m_Player_interact = m_Player.FindAction("interact", throwIfNotFound: true);
+        m_Player_Fire_1 = m_Player.FindAction("Fire_1", throwIfNotFound: true);
+        m_Player_Fire_2Zoom1 = m_Player.FindAction("Fire_2/Zoom1", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -259,20 +279,22 @@ public class @Inputmaster : IInputActionCollection, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_looking;
     private readonly InputAction m_Player_jump;
-    private readonly InputAction m_Player_grab;
     private readonly InputAction m_Player_Movement;
-    private readonly InputAction m_Player_SelectWeapon;
     private readonly InputAction m_Player_Change;
+    private readonly InputAction m_Player_interact;
+    private readonly InputAction m_Player_Fire_1;
+    private readonly InputAction m_Player_Fire_2Zoom1;
     public struct PlayerActions
     {
         private @Inputmaster m_Wrapper;
         public PlayerActions(@Inputmaster wrapper) { m_Wrapper = wrapper; }
         public InputAction @looking => m_Wrapper.m_Player_looking;
         public InputAction @jump => m_Wrapper.m_Player_jump;
-        public InputAction @grab => m_Wrapper.m_Player_grab;
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
-        public InputAction @SelectWeapon => m_Wrapper.m_Player_SelectWeapon;
         public InputAction @Change => m_Wrapper.m_Player_Change;
+        public InputAction @interact => m_Wrapper.m_Player_interact;
+        public InputAction @Fire_1 => m_Wrapper.m_Player_Fire_1;
+        public InputAction @Fire_2Zoom1 => m_Wrapper.m_Player_Fire_2Zoom1;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -288,18 +310,21 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                 @jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                @grab.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrab;
-                @grab.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrab;
-                @grab.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrab;
                 @Movement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
-                @SelectWeapon.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectWeapon;
-                @SelectWeapon.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectWeapon;
-                @SelectWeapon.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectWeapon;
                 @Change.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChange;
                 @Change.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChange;
                 @Change.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChange;
+                @interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Fire_1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire_1;
+                @Fire_1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire_1;
+                @Fire_1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire_1;
+                @Fire_2Zoom1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire_2Zoom1;
+                @Fire_2Zoom1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire_2Zoom1;
+                @Fire_2Zoom1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire_2Zoom1;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -310,18 +335,21 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                 @jump.started += instance.OnJump;
                 @jump.performed += instance.OnJump;
                 @jump.canceled += instance.OnJump;
-                @grab.started += instance.OnGrab;
-                @grab.performed += instance.OnGrab;
-                @grab.canceled += instance.OnGrab;
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
-                @SelectWeapon.started += instance.OnSelectWeapon;
-                @SelectWeapon.performed += instance.OnSelectWeapon;
-                @SelectWeapon.canceled += instance.OnSelectWeapon;
                 @Change.started += instance.OnChange;
                 @Change.performed += instance.OnChange;
                 @Change.canceled += instance.OnChange;
+                @interact.started += instance.OnInteract;
+                @interact.performed += instance.OnInteract;
+                @interact.canceled += instance.OnInteract;
+                @Fire_1.started += instance.OnFire_1;
+                @Fire_1.performed += instance.OnFire_1;
+                @Fire_1.canceled += instance.OnFire_1;
+                @Fire_2Zoom1.started += instance.OnFire_2Zoom1;
+                @Fire_2Zoom1.performed += instance.OnFire_2Zoom1;
+                @Fire_2Zoom1.canceled += instance.OnFire_2Zoom1;
             }
         }
     }
@@ -339,9 +367,10 @@ public class @Inputmaster : IInputActionCollection, IDisposable
     {
         void OnLooking(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnGrab(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
-        void OnSelectWeapon(InputAction.CallbackContext context);
         void OnChange(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        void OnFire_1(InputAction.CallbackContext context);
+        void OnFire_2Zoom1(InputAction.CallbackContext context);
     }
 }

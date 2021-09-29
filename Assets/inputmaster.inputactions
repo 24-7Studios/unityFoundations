@@ -22,14 +22,6 @@
                     "interactions": ""
                 },
                 {
-                    "name": "grab",
-                    "type": "Button",
-                    "id": "812610ee-03ca-4a3b-bb97-1b2d90e1fe95",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Movement",
                     "type": "Value",
                     "id": "5d3149f4-2a4b-4a54-af55-91d2f96b3be4",
@@ -38,17 +30,33 @@
                     "interactions": ""
                 },
                 {
-                    "name": "SelectWeapon",
-                    "type": "Value",
-                    "id": "140ded67-27fb-439c-bf63-5a9df26ed819",
-                    "expectedControlType": "Axis",
+                    "name": "Change",
+                    "type": "Button",
+                    "id": "c3b2bfbf-9a55-4025-a929-6c2af0258380",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "Change",
+                    "name": "interact",
                     "type": "Button",
-                    "id": "c3b2bfbf-9a55-4025-a929-6c2af0258380",
+                    "id": "140ded67-27fb-439c-bf63-5a9df26ed819",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Fire_1",
+                    "type": "Button",
+                    "id": "92026b81-ea9e-4cb7-868d-cd5fc69714f5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Fire_2/Zoom1",
+                    "type": "Button",
+                    "id": "3154bfe1-127f-4536-81a0-6f034a659eff",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -63,17 +71,6 @@
                     "processors": "",
                     "groups": "mouse + keybaord",
                     "action": "jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "440cbc69-c6e4-4367-8691-3067d362a7a6",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "mouse + keybaord",
-                    "action": "grab",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -146,11 +143,11 @@
                 {
                     "name": "",
                     "id": "480fb3eb-c577-4d51-bb7f-8d65a2d4ec66",
-                    "path": "<Mouse>/scroll/x",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "mouse + keybaord",
-                    "action": "SelectWeapon",
+                    "action": "interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -162,6 +159,28 @@
                     "processors": "",
                     "groups": "mouse + keybaord",
                     "action": "Change",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a7126d87-a11d-4aa9-8eca-6dcefb78cbc9",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "mouse + keybaord",
+                    "action": "Fire_1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "29a78e4f-3e55-48b6-9f04-746864e1ffa6",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "mouse + keybaord",
+                    "action": "Fire_2/Zoom1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
