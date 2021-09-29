@@ -128,8 +128,8 @@ public class PlayerScript : NetworkBehaviour
     private List<WeaponClass> weapons;
     private WeaponClass primary;
     private WeaponClass secondary;
-    private int equipedSlot;
-    private WeaponClass equipedSlotWeapon;
+    //private int equipedSlot;
+    //private WeaponClass equipedSlotWeapon;
     private WeaponClass equipedWeapon;
     private int inventoryIndex;
 
@@ -144,6 +144,7 @@ public class PlayerScript : NetworkBehaviour
 
         controls = new Inputmaster();
         controls.Player.jump.performed += _ => activateJump();
+        controls.Player.Change.performed += __ => ChangeSlot();
         
         
     }
@@ -312,19 +313,22 @@ public class PlayerScript : NetworkBehaviour
 
         weapons = GetComponentsInChildren<WeaponClass>().ToList();
 
-        equipedWeapon = weapons[inventoryIndex];
-
-        foreach( WeaponClass w in weapons)
+        if(weapons.Capacity > 0)
         {
-            if(w != equipedWeapon || w!= equipedWeapon.getOtherHand())
+            equipedWeapon = weapons[inventoryIndex];
+
+            foreach (WeaponClass w in weapons)
             {
-                w.getViewmodelOb().SetActive(false);
-                w.getWorldModelOb().SetActive(false);
-            }
-            else
-            {
-                w.getViewmodelOb().SetActive(true);
-                w.getWorldModelOb().SetActive(true);
+                if(w == equipedWeapon || w == equipedWeapon.getOtherHand())
+                {
+                    w.getViewmodelOb().SetActive(true);
+                    w.getWorldModelOb().SetActive(true);
+                }
+                else
+                {
+                    w.getWorldModelOb().SetActive(false);
+                    w.getViewmodelOb().SetActive(false);
+                }
             }
         }
 
@@ -535,7 +539,7 @@ public class PlayerScript : NetworkBehaviour
         }
     }
 
-    private int EquipedSlot()
+    private int equipedSlot()
     {
         int value = -1;
 
@@ -551,7 +555,7 @@ public class PlayerScript : NetworkBehaviour
         return value;
     }
 
-    private WeaponClass EquipedSlotWeapon(int s)
+    private WeaponClass equipedSlotWeapon(int s)
     {
 
         if(s == 0)
@@ -567,6 +571,46 @@ public class PlayerScript : NetworkBehaviour
             return null;
         }
 
+    }
+
+    private void setWeapon(WeaponClass wep, int s)
+    {
+         
+        if(s == 0)
+        {
+            
+            if(primary != null)
+            {
+                primary.drop();
+            }
+
+            primary = wep;
+        }
+        if(s == 1)
+        {
+
+            if (secondary != null)
+            {
+                secondary.drop();
+            }
+
+            secondary = wep;
+        }
+
+    }
+
+    private void ChangeSlot()
+    {
+
+        if(equipedSlot() == 0)
+        {
+            inventoryIndex = weapons.IndexOf(secondary);
+        }
+        if(equipedSlot() == 1)
+        {
+            inventoryIndex = weapons.IndexOf(primary);
+        }
+        
     }
 
     public void pickupWeapon(GameObject thing, bool hand)
@@ -585,11 +629,8 @@ public class PlayerScript : NetworkBehaviour
 
             if (wep != null)
             {
-                
 
-
-            
-
+           
                 wep.hand = hand;
 
                 if (hand)
@@ -610,13 +651,19 @@ public class PlayerScript : NetworkBehaviour
                     }
                 }
                 else
-                { 
-
-                    if(equipedSlotWeapon(equipedSlot()) != null)
+                {
+                    
+                    if(primary == null)
                     {
-                        
-                        
-                        
+                        primary = wep;
+                    }
+                    else if(secondary == null)
+                    {
+                        secondary = wep;
+                    }
+                    else
+                    {
+                        setWeapon(wep, equipedSlot());
                     }
 
                 }

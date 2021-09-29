@@ -36,6 +36,22 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "SelectWeapon",
+                    "type": "Value",
+                    "id": "140ded67-27fb-439c-bf63-5a9df26ed819",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Change",
+                    "type": "Button",
+                    "id": "c3b2bfbf-9a55-4025-a929-6c2af0258380",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -124,6 +140,28 @@
                     "processors": "",
                     "groups": "mouse + keybaord",
                     "action": "looking",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "480fb3eb-c577-4d51-bb7f-8d65a2d4ec66",
+                    "path": "<Mouse>/scroll/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "mouse + keybaord",
+                    "action": "SelectWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "85694f22-a308-4d5f-9808-84a181edd587",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "mouse + keybaord",
+                    "action": "Change",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

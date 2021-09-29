@@ -49,6 +49,22 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""SelectWeapon"",
+                    ""type"": ""Value"",
+                    ""id"": ""140ded67-27fb-439c-bf63-5a9df26ed819"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Change"",
+                    ""type"": ""Button"",
+                    ""id"": ""c3b2bfbf-9a55-4025-a929-6c2af0258380"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -139,6 +155,28 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                     ""action"": ""looking"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""480fb3eb-c577-4d51-bb7f-8d65a2d4ec66"",
+                    ""path"": ""<Mouse>/scroll/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""mouse + keybaord"",
+                    ""action"": ""SelectWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""85694f22-a308-4d5f-9808-84a181edd587"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""mouse + keybaord"",
+                    ""action"": ""Change"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -168,6 +206,8 @@ public class @Inputmaster : IInputActionCollection, IDisposable
         m_Player_jump = m_Player.FindAction("jump", throwIfNotFound: true);
         m_Player_grab = m_Player.FindAction("grab", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+        m_Player_SelectWeapon = m_Player.FindAction("SelectWeapon", throwIfNotFound: true);
+        m_Player_Change = m_Player.FindAction("Change", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -221,6 +261,8 @@ public class @Inputmaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_jump;
     private readonly InputAction m_Player_grab;
     private readonly InputAction m_Player_Movement;
+    private readonly InputAction m_Player_SelectWeapon;
+    private readonly InputAction m_Player_Change;
     public struct PlayerActions
     {
         private @Inputmaster m_Wrapper;
@@ -229,6 +271,8 @@ public class @Inputmaster : IInputActionCollection, IDisposable
         public InputAction @jump => m_Wrapper.m_Player_jump;
         public InputAction @grab => m_Wrapper.m_Player_grab;
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
+        public InputAction @SelectWeapon => m_Wrapper.m_Player_SelectWeapon;
+        public InputAction @Change => m_Wrapper.m_Player_Change;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -250,6 +294,12 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                 @Movement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
+                @SelectWeapon.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectWeapon;
+                @SelectWeapon.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectWeapon;
+                @SelectWeapon.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectWeapon;
+                @Change.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChange;
+                @Change.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChange;
+                @Change.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChange;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -266,6 +316,12 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @SelectWeapon.started += instance.OnSelectWeapon;
+                @SelectWeapon.performed += instance.OnSelectWeapon;
+                @SelectWeapon.canceled += instance.OnSelectWeapon;
+                @Change.started += instance.OnChange;
+                @Change.performed += instance.OnChange;
+                @Change.canceled += instance.OnChange;
             }
         }
     }
@@ -285,5 +341,7 @@ public class @Inputmaster : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnGrab(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
+        void OnSelectWeapon(InputAction.CallbackContext context);
+        void OnChange(InputAction.CallbackContext context);
     }
 }
