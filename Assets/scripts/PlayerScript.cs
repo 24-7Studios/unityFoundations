@@ -131,7 +131,6 @@ public class PlayerScript : NetworkBehaviour
     //private int equipedSlot;
     //private WeaponClass equipedSlotWeapon;
     private WeaponClass equipedWeapon;
-    private int inventoryIndex;
 
 
     //controls
@@ -315,7 +314,7 @@ public class PlayerScript : NetworkBehaviour
 
         if(weapons.Capacity > 0)
         {
-            equipedWeapon = weapons[inventoryIndex];
+            
 
             foreach (WeaponClass w in weapons)
             {
@@ -602,14 +601,6 @@ public class PlayerScript : NetworkBehaviour
     private void ChangeSlot()
     {
 
-        if(equipedSlot() == 0)
-        {
-            inventoryIndex = weapons.IndexOf(secondary);
-        }
-        if(equipedSlot() == 1)
-        {
-            inventoryIndex = weapons.IndexOf(primary);
-        }
         
     }
 

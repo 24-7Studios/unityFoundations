@@ -6,7 +6,57 @@ ModelImporter:
   - first:
       74: 6365926014387069646
     second: bruh
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Base_Stock
+    second: {fileID: 2895064947943234598, guid: 8704c307d909eeb4b8f355f0dae45fa1,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SuitGloves
+    second: {fileID: 2100000, guid: d90f67bf166b928498921b4f0394b42a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SuitGlow
+    second: {fileID: 2100000, guid: 605cdc16a419c7446bbbbdb411193ef0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SuitSleeves
+    second: {fileID: 2100000, guid: 09147f6043241844884b2df1133246e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bullet
+    second: {fileID: -5958687832535533449, guid: cd9e1b2c2a269ad42980f22a0323bcf7,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: casing
+    second: {fileID: 7465012541371680254, guid: 8704c307d909eeb4b8f355f0dae45fa1,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: emmisive1(blue)
+    second: {fileID: 6318922593667523279, guid: 07eccdd8ff9f93442b665fc187065f47,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: secondary
+    second: {fileID: 8009138033094245905, guid: 8704c307d909eeb4b8f355f0dae45fa1,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: stripes
+    second: {fileID: 2100000, guid: af51b65ec9ef0ad409f75b70f8a94c6e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -70,7 +120,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 3
+    tangentImportMode: 2
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
