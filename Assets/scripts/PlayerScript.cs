@@ -120,7 +120,7 @@ public class PlayerScript : NetworkBehaviour
 
     //backpack
     [SerializeField]
-    public Transform backpack;
+    private Transform backpack;
     [SerializeField]
     private Transform viewmodelHolder;
 
@@ -762,6 +762,16 @@ public class PlayerScript : NetworkBehaviour
 
     }
 
+    public Transform getBackpack()
+    {
+        return backpack;
+    }
+
+    public Transform getViewmodelHolder()
+    {
+        return viewmodelHolder;
+    }
+
     public void pickupWeapon(GameObject thing, bool hand)
     {
 
@@ -847,8 +857,6 @@ public class PlayerScript : NetworkBehaviour
         Ipickup i = thing.GetComponent<Ipickup>();
 
         i.drop();
-
-        setSlotWeapon(null, equipedSlot);
 
         thing.transform.position = transform.position + transform.forward * 2;    
     }

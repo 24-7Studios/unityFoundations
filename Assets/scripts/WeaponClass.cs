@@ -51,7 +51,7 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         
         if(player != null)
         {
-            player.pickupWeapon(gameObject, hand);
+            pickup(player);
         }
         else
         {
@@ -113,6 +113,29 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         item.GetComponent<Rigidbody>().isKinematic = true;
 
         isitem = false;
+
+        transform.SetParent(player.getBackpack());
+        transform.localPosition = basePosOffset;
+        transform.localRotation = Quaternion.Euler(baseRotOffset);
+        transform.localScale = baseScaOffset;
+        viewmodel.transform.SetParent(player.getViewmodelHolder());
+        viewmodel.transform.localPosition = Vector3.zero;
+
+        player.PlayerModel.equipWeapon(this, hand);
+
+        if(isLocalPlayer)
+        {
+            viewmodel.SetActive(true);
+            viewmodel.layer = 11;
+            worldModel.SetActive(true);
+            worldModel.layer = 6;
+        }
+        else
+        {
+            viewmodel.SetActive(false);
+            worldModel.SetActive(true);
+            worldModel.layer = 0;
+        }
 
     }
 
