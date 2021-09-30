@@ -691,11 +691,48 @@ public class PlayerScript : NetworkBehaviour
         {
             cmdChangeSlot(equipedSlot);
         }
+        else
+        {
+            rpcChangeSlot(equipedSlot);
+        }
         
     }
 
     [Command]
     private void cmdChangeSlot(bool s)
+    {
+        equipedSlot = s;
+
+
+        if (equipedSlotWeapon(equipedSlot) != null)
+        {
+
+            equipedSlotWeapon(equipedSlot).getWorldModelOb().SetActive(true);
+
+            if (equipedSlotWeapon(equipedSlot).getOtherHand() != null)
+            {
+                equipedSlotWeapon(equipedSlot).getOtherHand().getWorldModelOb().SetActive(true);
+            }
+
+        }
+
+        if (equipedSlotWeapon(!equipedSlot) != null)
+        {
+            equipedSlotWeapon(!equipedSlot).getWorldModelOb().SetActive(false);
+
+            if (equipedSlotWeapon(!equipedSlot).getOtherHand() != null)
+            {
+                equipedSlotWeapon(!equipedSlot).getOtherHand().getWorldModelOb().SetActive(false);
+            }
+
+        }
+
+
+
+    }
+
+    [ClientRpc]
+    private void rpcChangeSlot(bool s)
     {
         equipedSlot = s;
 
@@ -731,6 +768,8 @@ public class PlayerScript : NetworkBehaviour
 
         thing.transform.SetParent(backpack, false);
         thing.transform.localPosition = Vector3.zero;
+
+        
 
         Ipickup i = thing.GetComponent<Ipickup>();
 
