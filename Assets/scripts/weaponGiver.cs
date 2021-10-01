@@ -28,7 +28,7 @@ public class weaponGiver : NetworkBehaviour
             
             NetworkServer.Spawn(spawnedW);
 
-            thing.pickupWeapon(spawnedW, false);
+            thing.pickup(spawnedW);
             //rpcGiveWeapon(spawnedW, thing);
 
         }
@@ -39,7 +39,7 @@ public class weaponGiver : NetworkBehaviour
     private void rpcGiveWeapon(GameObject g, PlayerScript p)
     {
 
-        p.pickupWeapon(g, false);
+        p.pickup(g);
         Debug.Log("gave player " + p + " a " + g);
 
     }

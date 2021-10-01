@@ -12,7 +12,7 @@ public class weaponDroper : NetworkBehaviour
     {
 
         PlayerScript thing = other.GetComponent<PlayerScript>();
-        WeaponClass weapon = thing.backpack.GetComponentInChildren<WeaponClass>(true);
+        WeaponClass weapon = thing.getBackpack().GetComponentInChildren<WeaponClass>(true);
 
         if (thing != null && weapon != null)
         {

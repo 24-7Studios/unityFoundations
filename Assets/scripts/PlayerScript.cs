@@ -309,79 +309,17 @@ public class PlayerScript : NetworkBehaviour
         ////////////////////////////////////////////////////////
         //backpack 
 
-
-        /*
-        weapons = GetComponentsInChildren<WeaponClass>().ToList();
-
-        if(weapons.Capacity > 0)
+        if(equipedSlotWeapon(equipedSlot) != null)
         {
-            
-
-            foreach (WeaponClass w in weapons)
-            {
-                if(w == equipedWeapon || w == equipedWeapon.getOtherHand())
-                {
-                    w.getViewmodelOb().SetActive(true);
-                    w.getWorldModelOb().SetActive(true);
-                }
-                else
-                {
-                    w.getWorldModelOb().SetActive(false);
-                    w.getViewmodelOb().SetActive(false);
-                }
-            }
+            equipedSlotWeapon(equipedSlot).getViewmodelOb().SetActive(true);
+            equipedSlotWeapon(equipedSlot).getWorldModelOb().SetActive(true);
         }
-        */
-        /*
-        if(!equipedSlot)
+
+        if(equipedSlotWeapon(!equipedSlot) != null)
         {
-            if(primary != null)
-            {
-                primary.getViewmodelOb().SetActive(true);
-                primary.getWorldModelOb().SetActive(true);
-                if (primary.getOtherHand() != null)
-                {
-                    primary.getOtherHand().getViewmodelOb().SetActive(true);
-                    primary.getOtherHand().getWorldModelOb().SetActive(true);
-                }
-            }
-            if(secondary != null)
-            {
-                secondary.getViewmodelOb().SetActive(false);
-                secondary.getWorldModelOb().SetActive(false);
-                if (secondary.getOtherHand() != null)
-                {
-                    secondary.getOtherHand().getViewmodelOb().SetActive(false);
-                    secondary.getOtherHand().getWorldModelOb().SetActive(false);
-                }
-            }
+            equipedSlotWeapon(!equipedSlot).getViewmodelOb().SetActive(false);
+            equipedSlotWeapon(!equipedSlot).getWorldModelOb().SetActive(false);
         }
-        else
-        {
-            if (primary != null)
-            {
-                primary.getViewmodelOb().SetActive(false);
-                primary.getWorldModelOb().SetActive(false);
-                if (primary.getOtherHand() != null)
-                {
-                    primary.getOtherHand().getViewmodelOb().SetActive(false);
-                    primary.getOtherHand().getWorldModelOb().SetActive(false);
-                }
-            }
-            if (secondary != null)
-            {
-                secondary.getViewmodelOb().SetActive(true);
-                secondary.getWorldModelOb().SetActive(true);
-                if (secondary.getOtherHand() != null)
-                {
-                    secondary.getOtherHand().getViewmodelOb().SetActive(true);
-                    secondary.getOtherHand().getWorldModelOb().SetActive(true);
-                }
-            }
-        }
-        */
-
-
 
     }
 
@@ -531,13 +469,6 @@ public class PlayerScript : NetworkBehaviour
         yMouseInput = y;
         xMouseInput = x;
 
-        /*
-        camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * yMouseInput);
-        playerPhysBody.transform.rotation = Quaternion.Euler(Vector3.up * -xMouseInput);
-        */
-
-        
-
         RpcSyncPlayerRotation(y, x);
 
     }
@@ -586,182 +517,6 @@ public class PlayerScript : NetworkBehaviour
         }
     }
 
-
-    private WeaponClass equipedSlotWeapon(bool s)
-    {
-
-        if(!s)
-        {
-            return primary;
-        }
-        else if(s)
-        {
-            return secondary;
-        }
-        else
-        {
-            return null;
-        }
-
-    }
-
-    private void setSlotWeapon(WeaponClass wep, bool s)
-    {
-         
-        if(!s)
-        {
-            
-            if(primary != null)
-            {
-                primary.drop();
-            }
-
-            primary = wep;
-        }
-        if(s)
-        {
-
-            if (secondary != null)
-            {
-                secondary.drop();
-            }
-
-            secondary = wep;
-        }
-
-    }
-
-    private void ChangeSlot()
-    {
-
-        equipedSlot = !equipedSlot;
-        if(isLocalPlayer)
-        {
-            if(equipedSlotWeapon(equipedSlot) != null)
-            {
-
-                equipedSlotWeapon(equipedSlot).getViewmodelOb().SetActive(true);
-
-                if(equipedSlotWeapon(equipedSlot).getOtherHand() != null)
-                {
-                    equipedSlotWeapon(equipedSlot).getOtherHand().getViewmodelOb().SetActive(true);
-                }
-            }
-
-            if (equipedSlotWeapon(!equipedSlot) != null)
-            {
-                equipedSlotWeapon(!equipedSlot).getViewmodelOb().SetActive(false);
-
-                if (equipedSlotWeapon(!equipedSlot).getOtherHand() != null)
-                {
-                    equipedSlotWeapon(!equipedSlot).getOtherHand().getViewmodelOb().SetActive(false);
-                }
-
-            }
-
-
-        }
-
-
-
-        if (equipedSlotWeapon(equipedSlot) != null)
-        {
-
-            equipedSlotWeapon(equipedSlot).getWorldModelOb().SetActive(true);
-
-            if (equipedSlotWeapon(equipedSlot).getOtherHand() != null)
-            {
-                equipedSlotWeapon(equipedSlot).getOtherHand().getWorldModelOb().SetActive(true);
-            }
-
-        }
-
-        if (equipedSlotWeapon(!equipedSlot) != null)
-        {
-            equipedSlotWeapon(!equipedSlot).getWorldModelOb().SetActive(false);
-
-            if (equipedSlotWeapon(!equipedSlot).getOtherHand() != null)
-            {
-                equipedSlotWeapon(!equipedSlot).getOtherHand().getWorldModelOb().SetActive(false);
-            }
-
-        }
-
-        if (!server)
-        {
-            cmdChangeSlot(equipedSlot);
-        }
-        else
-        {
-            rpcChangeSlot(equipedSlot);
-        }
-        
-    }
-
-    [Command]
-    private void cmdChangeSlot(bool s)
-    {
-        equipedSlot = s;
-
-
-        if (equipedSlotWeapon(equipedSlot) != null)
-        {
-
-            equipedSlotWeapon(equipedSlot).getWorldModelOb().SetActive(true);
-
-            if (equipedSlotWeapon(equipedSlot).getOtherHand() != null)
-            {
-                equipedSlotWeapon(equipedSlot).getOtherHand().getWorldModelOb().SetActive(true);
-            }
-
-        }
-
-        if (equipedSlotWeapon(!equipedSlot) != null)
-        {
-            equipedSlotWeapon(!equipedSlot).getWorldModelOb().SetActive(false);
-
-            if (equipedSlotWeapon(!equipedSlot).getOtherHand() != null)
-            {
-                equipedSlotWeapon(!equipedSlot).getOtherHand().getWorldModelOb().SetActive(false);
-            }
-
-        }
-
-
-
-    }
-
-    [ClientRpc]
-    private void rpcChangeSlot(bool s)
-    {
-        equipedSlot = s;
-
-
-        if (equipedSlotWeapon(equipedSlot) != null)
-        {
-
-            equipedSlotWeapon(equipedSlot).getWorldModelOb().SetActive(true);
-
-            if (equipedSlotWeapon(equipedSlot).getOtherHand() != null)
-            {
-                equipedSlotWeapon(equipedSlot).getOtherHand().getWorldModelOb().SetActive(true);
-            }
-
-        }
-
-        if (equipedSlotWeapon(!equipedSlot) != null)
-        {
-            equipedSlotWeapon(!equipedSlot).getWorldModelOb().SetActive(false);
-
-            if (equipedSlotWeapon(!equipedSlot).getOtherHand() != null)
-            {
-                equipedSlotWeapon(!equipedSlot).getOtherHand().getWorldModelOb().SetActive(false);
-            }
-
-        }
-
-    }
-
     public Transform getBackpack()
     {
         return backpack;
@@ -772,93 +527,76 @@ public class PlayerScript : NetworkBehaviour
         return viewmodelHolder;
     }
 
-    public void pickupWeapon(GameObject thing, bool hand)
+    public void pickup(GameObject thing)
     {
-
-
-        thing.transform.SetParent(backpack, false);
-        thing.transform.localPosition = Vector3.zero;
-
-        
 
         Ipickup i = thing.GetComponent<Ipickup>();
 
         i.pickup(this);
         
-            
-        WeaponClass wep = thing.GetComponent<WeaponClass>();
-
-            if (wep != null)
-            {
-
-           
-                wep.hand = hand;
-
-
-                thing.transform.localPosition = wep.basePosOffset;
-                thing.transform.localRotation = Quaternion.Euler(wep.baseRotOffset);
-                thing.transform.localScale = wep.baseScaOffset;
-
-                GameObject vModel = wep.getViewmodelOb();
-                GameObject wModel = wep.getWorldModelOb();
-
-                vModel.transform.SetParent(viewmodelHolder);
-                vModel.transform.localPosition = Vector3.zero;
-
-
-                PlayerModel.equipWeapon(wep, wep.hand);
-
-            if (hand)
-            {
-                thing.transform.SetSiblingIndex(wep.getOtherHand().transform.GetSiblingIndex() + 1);
-            }
-
-            if (hand)
-            {
-                if (equipedSlotWeapon(equipedSlot).getOtherHand() != null)
-                {
-                    equipedSlotWeapon(equipedSlot).getOtherHand().drop();
-                    equipedSlotWeapon(equipedSlot).setOtherHand(wep);
-                }
-                else
-                {
-                    equipedSlotWeapon(equipedSlot).setOtherHand(wep);
-                }
-            }
-            else
-            {
-
-                setSlotWeapon(wep, equipedSlot);
-
-            }
-
-
-            if (isLocalPlayer)
-                {
-                    vModel.SetActive(true);
-                    vModel.layer = 11;
-                    wModel.SetActive(true);
-                    wModel.layer = 6;
-                }
-                else
-                {
-                    vModel.SetActive(false);
-                    wModel.SetActive(true);
-                    wModel.layer = 0;
-                }
-
-            }   
-        
     }
 
     public void drop(GameObject thing)
     {   
-
         Ipickup i = thing.GetComponent<Ipickup>();
 
         i.drop();
 
         thing.transform.position = transform.position + transform.forward * 2;    
+    }
+
+    private void ChangeSlot()
+    {
+        equipedSlot = !equipedSlot;
+    }
+
+    public bool getEquipedSlot()
+    {
+        return equipedSlot;
+    }
+
+    public  WeaponClass equipedSlotWeapon(bool s)
+    {
+
+        if (!s)
+        {
+            return primary;
+        }
+        else if (s)
+        {
+            return secondary;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
+    public void setSlotWeapon(WeaponClass wep, bool s)
+    {
+
+        if (!s)
+        {
+
+            if (primary != null)
+            {
+                primary.drop();
+            }
+
+            primary = wep;
+        }
+        if (s)
+        {
+
+            if (secondary != null)
+            {
+                secondary.drop();
+            }
+
+            secondary = wep;
+        }
+
     }
 
     public void viewPunch(float r)

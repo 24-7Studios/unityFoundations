@@ -7,7 +7,22 @@ public class WeaponClass : NetworkBehaviour, Ipickup
 {
 
     [SyncVar]
-    public PlayerScript player;
+    protected PlayerScript player;
+
+    [SyncVar]
+    protected bool slot;
+
+    [SerializeField]
+    private bool canDual;
+
+    [SyncVar]
+    private WeaponClass otherHand;
+
+    [SyncVar]
+    private bool hand;
+
+    [SyncVar]
+    protected bool isitem;
 
     [SerializeField]
     protected GameObject item;
@@ -17,6 +32,7 @@ public class WeaponClass : NetworkBehaviour, Ipickup
 
     [SerializeField]
     protected GameObject viewmodel;
+
 
 
 
@@ -33,17 +49,7 @@ public class WeaponClass : NetworkBehaviour, Ipickup
     public Vector3 WModelScaOffset = new Vector3();
 
 
-    [SerializeField]
-    private bool canDual;
 
-    [SyncVar]
-    private WeaponClass otherHand;
-
-    [SyncVar]
-    public bool hand;
-
-    [SyncVar]
-    protected bool isitem;
 
     // Start is called before the first frame update
     void Start()
@@ -97,8 +103,28 @@ public class WeaponClass : NetworkBehaviour, Ipickup
 
     public void pickup(PlayerScript p)
     {
-
+        Debug.Log("player has picked up: " + this);
         player = p;
+        
+        if(!hand)
+        {
+            if (player.equipedSlotWeapon(false) == null)
+            {
+                slot = false;
+            }
+            else if (player.equipedSlotWeapon(true) == null)
+            {
+                slot = true;
+            }
+            else
+            {
+                slot = player.getEquipedSlot();
+            }
+            player.setSlotWeapon(this, slot);
+        }
+
+
+        player.PlayerModel.equipWeapon(this, hand);
 
         foreach (MeshRenderer m in item.GetComponents<MeshRenderer>())
         {
@@ -121,9 +147,8 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         viewmodel.transform.SetParent(player.getViewmodelHolder());
         viewmodel.transform.localPosition = Vector3.zero;
 
-        player.PlayerModel.equipWeapon(this, hand);
 
-        if(isLocalPlayer)
+        if(player.isLocalPlayer)
         {
             viewmodel.SetActive(true);
             viewmodel.layer = 11;
@@ -166,6 +191,19 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         isitem = true;
     }
 
+    public bool getHand()
+    {
+        return hand;
+    }
+
+    public void setHand(bool h)
+    {
+        hand = h;
+    }
+    public bool isDual()
+    {
+        return otherHand != null;
+    }
 
     public  WeaponClass getOtherHand()
     {
@@ -175,11 +213,6 @@ public class WeaponClass : NetworkBehaviour, Ipickup
     public void setOtherHand(WeaponClass other)
     {
         otherHand = other;
-    }
-
-    public bool isDual()
-    {
-        return otherHand != null;
     }
 
     protected virtual void raycastShoot()
