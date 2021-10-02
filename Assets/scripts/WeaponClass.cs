@@ -10,13 +10,10 @@ public class WeaponClass : NetworkBehaviour, Ipickup
     protected PlayerScript player;
 
     [SyncVar]
-    protected bool slot;
+    protected Slot slot;
 
     [SerializeField]
     private bool canDual;
-
-    [SyncVar]
-    private WeaponClass otherHand;
 
     [SyncVar]
     private bool hand;
@@ -57,7 +54,7 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         
         if(player != null)
         {
-            pickup(player);
+            forcedPickup(player, slot, hand);
         }
         else
         {
@@ -104,23 +101,17 @@ public class WeaponClass : NetworkBehaviour, Ipickup
     public void pickup(PlayerScript p)
     {
         Debug.Log("player has picked up: " + this);
+
+
         player = p;
         
         if(!hand)
         {
-            if (player.equipedSlotWeapon(false) == null)
-            {
-                slot = false;
-            }
-            else if (player.equipedSlotWeapon(true) == null)
-            {
-                slot = true;
-            }
-            else
-            {
-                slot = player.getEquipedSlot();
-            }
-            player.setSlotWeapon(this, slot);
+            player.getEquipedSlot().setWeapon(this, false);
+        }
+        else
+        {
+            player.getEquipedSlot().setWeapon(this, true);
         }
 
 
@@ -149,6 +140,60 @@ public class WeaponClass : NetworkBehaviour, Ipickup
 
 
         if(player.isLocalPlayer)
+        {
+            viewmodel.SetActive(true);
+            viewmodel.layer = 11;
+            worldModel.SetActive(true);
+            worldModel.layer = 6;
+        }
+        else
+        {
+            viewmodel.SetActive(false);
+            worldModel.SetActive(true);
+            worldModel.layer = 0;
+        }
+
+    }
+
+    public void forcedPickup(PlayerScript p, Slot s, bool h)
+    {
+
+        Debug.Log("player has picked up: " + this);
+
+
+        player = p;
+
+        hand = h;
+
+        slot = s;
+
+        slot.setWeapon(this, h);
+
+        player.PlayerModel.equipWeapon(this, hand);
+
+        foreach (MeshRenderer m in item.GetComponents<MeshRenderer>())
+        {
+            m.enabled = false;
+        }
+
+        foreach (Collider c in item.GetComponents<Collider>())
+        {
+            c.enabled = false;
+        }
+
+        item.GetComponent<Rigidbody>().isKinematic = true;
+
+        isitem = false;
+
+        transform.SetParent(player.getBackpack());
+        transform.localPosition = basePosOffset;
+        transform.localRotation = Quaternion.Euler(baseRotOffset);
+        transform.localScale = baseScaOffset;
+        viewmodel.transform.SetParent(player.getViewmodelHolder());
+        viewmodel.transform.localPosition = Vector3.zero;
+
+
+        if (player.isLocalPlayer)
         {
             viewmodel.SetActive(true);
             viewmodel.layer = 11;
@@ -199,20 +244,6 @@ public class WeaponClass : NetworkBehaviour, Ipickup
     public void setHand(bool h)
     {
         hand = h;
-    }
-    public bool isDual()
-    {
-        return otherHand != null;
-    }
-
-    public  WeaponClass getOtherHand()
-    {
-        return otherHand;
-    }
-
-    public void setOtherHand(WeaponClass other)
-    {
-        otherHand = other;
     }
 
     protected virtual void raycastShoot()

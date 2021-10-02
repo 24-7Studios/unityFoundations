@@ -7,9 +7,6 @@ using Mirror;
 public class PlayerScript : NetworkBehaviour
 {
 
-    public GameObject testWeapon;
-
-
     //player setup
     /// <summary>
     /// components that make the player work. also likely to be referenced by other scripts especially in the guns
@@ -125,12 +122,12 @@ public class PlayerScript : NetworkBehaviour
     private Transform viewmodelHolder;
 
 
-    [SyncVar]
-    private WeaponClass primary;
-    [SyncVar]
-    private WeaponClass secondary;
-    [SyncVar]
-    private bool equipedSlot = false;   // false for primary true for secondary
+    [SyncVar, SerializeField]
+    private Slot primary = new Slot(0);
+    [SyncVar, SerializeField]
+    private Slot secondary = new Slot(1);
+    [SyncVar, SerializeField]
+    private Slot equipedSlot;
     
 
 
@@ -144,7 +141,7 @@ public class PlayerScript : NetworkBehaviour
 
         controls = new Inputmaster();
         controls.Player.jump.performed += _ => activateJump();
-        controls.Player.Change.performed += __ => ChangeSlot();
+        //controls.Player.Change.performed += __ => ChangeSlot();
         
         
     }
@@ -153,12 +150,11 @@ public class PlayerScript : NetworkBehaviour
     private void Start()
     {
 
-        
-
+        equipedSlot = primary;
 
         setPlayermodel(PlayerModel);
 
-        
+  
 
 
         if (isLocalPlayer)
@@ -309,23 +305,7 @@ public class PlayerScript : NetworkBehaviour
         ////////////////////////////////////////////////////////
         //backpack 
 
-        if(equipedSlotWeapon(equipedSlot) != null)
-        {
-            if(isLocalPlayer)
-            {
-                equipedSlotWeapon(equipedSlot).getViewmodelOb().SetActive(true);
-            }
-            equipedSlotWeapon(equipedSlot).getWorldModelOb().SetActive(true);
-        }
 
-        if(equipedSlotWeapon(!equipedSlot) != null)
-        {
-            if(isLocalPlayer)
-            {
-                equipedSlotWeapon(!equipedSlot).getViewmodelOb().SetActive(false);
-            }
-            equipedSlotWeapon(!equipedSlot).getWorldModelOb().SetActive(false);
-        }
 
     }
 
@@ -542,6 +522,11 @@ public class PlayerScript : NetworkBehaviour
         
     }
 
+    public Slot getEquipedSlot()
+    {
+        return equipedSlot;
+    }
+
     public void drop(GameObject thing)
     {   
         Ipickup i = thing.GetComponent<Ipickup>();
@@ -551,82 +536,6 @@ public class PlayerScript : NetworkBehaviour
         thing.transform.position = transform.position + transform.forward * 2;    
     }
 
-    private void ChangeSlot()
-    {
-        equipedSlot = !equipedSlot;
-
-        if(isServer)
-        {
-            rpcChangeSlot(equipedSlot);
-        }
-        else
-        {
-            cmdChangeSlot(equipedSlot);
-        }
-
-    }
-
-    [Command]
-    private void cmdChangeSlot(bool h)
-    {
-        equipedSlot = h;
-        rpcChangeSlot(equipedSlot);
-    }
-
-    [ClientRpc]
-    private void rpcChangeSlot(bool h)
-    {
-        equipedSlot = h;
-    }
-
-    public bool getEquipedSlot()
-    {
-        return equipedSlot;
-    }
-
-    public  WeaponClass equipedSlotWeapon(bool s)
-    {
-
-        if (!s)
-        {
-            return primary;
-        }
-        else if (s)
-        {
-            return secondary;
-        }
-        else
-        {
-            return null;
-        }
-
-    }
-
-    public void setSlotWeapon(WeaponClass wep, bool s)
-    {
-
-        if (!s)
-        {
-
-            if (primary != null)
-            {
-                primary.drop();
-            }
-
-            primary = wep;
-        }
-        if (s)
-        {
-
-            if (secondary != null)
-            {
-                secondary.drop();
-            }
-
-            secondary = wep;
-        }
-
-    }
 
     public void viewPunch(float r)
     {
@@ -634,5 +543,82 @@ public class PlayerScript : NetworkBehaviour
     }
 
     
+
+}
+
+[System.Serializable]
+public class Slot
+{
+
+    private WeaponClass myWeapon;
+    private WeaponClass otherHand;
+    private int myIndex;
+
+    public Slot()
+    {
+        myIndex = -1;
+    }
+
+    public Slot(int s)
+    {
+        myIndex = s;
+    }
+
+    public void setIndex(int s)
+    {
+        myIndex = s;
+    }
+
+    public int getIndex()
+    {
+        return myIndex;
+    }
+
+    public WeaponClass getWeapon()
+    {
+        return myWeapon;
+    }
+
+    public WeaponClass getOtherHand()
+    {
+        return otherHand;
+    }
+
+    public void setWeapon(WeaponClass w)
+    {
+        if(myWeapon != null)
+        {
+            myWeapon.drop();
+        }
+
+        myWeapon = w;
+    }
+
+    public void setWeapon(WeaponClass w, bool hand)
+    {
+
+        w.setHand(hand);
+
+        if(!hand)
+        {
+            if(myWeapon != null)
+            {
+                myWeapon.drop();
+            }
+
+            myWeapon = w; 
+        }
+        else
+        {
+            if(otherHand != null)
+            {
+                otherHand.drop();
+            }
+
+            otherHand = w;
+        }
+
+    }
+
 
 }
