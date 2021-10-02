@@ -311,13 +311,19 @@ public class PlayerScript : NetworkBehaviour
 
         if(equipedSlotWeapon(equipedSlot) != null)
         {
-            equipedSlotWeapon(equipedSlot).getViewmodelOb().SetActive(true);
+            if(isLocalPlayer)
+            {
+                equipedSlotWeapon(equipedSlot).getViewmodelOb().SetActive(true);
+            }
             equipedSlotWeapon(equipedSlot).getWorldModelOb().SetActive(true);
         }
 
         if(equipedSlotWeapon(!equipedSlot) != null)
         {
-            equipedSlotWeapon(!equipedSlot).getViewmodelOb().SetActive(false);
+            if(isLocalPlayer)
+            {
+                equipedSlotWeapon(!equipedSlot).getViewmodelOb().SetActive(false);
+            }
             equipedSlotWeapon(!equipedSlot).getWorldModelOb().SetActive(false);
         }
 
@@ -548,6 +554,29 @@ public class PlayerScript : NetworkBehaviour
     private void ChangeSlot()
     {
         equipedSlot = !equipedSlot;
+
+        if(isServer)
+        {
+            rpcChangeSlot(equipedSlot);
+        }
+        else
+        {
+            cmdChangeSlot(equipedSlot);
+        }
+
+    }
+
+    [Command]
+    private void cmdChangeSlot(bool h)
+    {
+        equipedSlot = h;
+        rpcChangeSlot(equipedSlot);
+    }
+
+    [ClientRpc]
+    private void rpcChangeSlot(bool h)
+    {
+        equipedSlot = h;
     }
 
     public bool getEquipedSlot()

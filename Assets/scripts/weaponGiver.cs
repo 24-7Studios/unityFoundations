@@ -23,13 +23,12 @@ public class weaponGiver : NetworkBehaviour
             
 
             GameObject spawnedW = Instantiate(myweapon, transform);
-
-            
             
             NetworkServer.Spawn(spawnedW);
 
+            
+            rpcGiveWeapon(spawnedW, thing);
             thing.pickup(spawnedW);
-            //rpcGiveWeapon(spawnedW, thing);
 
         }
 
@@ -39,7 +38,10 @@ public class weaponGiver : NetworkBehaviour
     private void rpcGiveWeapon(GameObject g, PlayerScript p)
     {
 
-        p.pickup(g);
+        if(!isServer)
+        {
+            p.pickup(g);
+        }
         Debug.Log("gave player " + p + " a " + g);
 
     }
