@@ -121,11 +121,14 @@ public class PlayerScript : NetworkBehaviour
     [SerializeField]
     private Transform viewmodelHolder;
 
-
+    [SerializeField]
+    private int numOfSlots = 2;
+    [SyncVar]
+    List<Slot> WeaponSlots;
     [SyncVar, SerializeField]
-    private Slot primary = new Slot(0);
+    Slot primary;
     [SyncVar, SerializeField]
-    private Slot secondary = new Slot(1);
+    Slot secondary;
     [SyncVar, SerializeField]
     private Slot equipedSlot;
     
@@ -141,7 +144,7 @@ public class PlayerScript : NetworkBehaviour
 
         controls = new Inputmaster();
         controls.Player.jump.performed += _ => activateJump();
-        //controls.Player.Change.performed += __ => ChangeSlot();
+        controls.Player.Change.performed += __ => changeSlot();
         
         
     }
@@ -149,6 +152,14 @@ public class PlayerScript : NetworkBehaviour
 
     private void Start()
     {
+
+        for(int i = 0; i < numOfSlots; i++)
+        {
+            WeaponSlots.Add(new Slot(i));
+        }
+
+        primary = WeaponSlots[primary.getIndex()];
+        secondary = WeaponSlots[secondary.getIndex()];
 
         equipedSlot = primary;
 
@@ -304,8 +315,42 @@ public class PlayerScript : NetworkBehaviour
 
         ////////////////////////////////////////////////////////
         //backpack 
+        
+        if(equipedSlot.getWeapon() != null)
+        {
+            equipedSlot.getWeapon().gameObject.SetActive(true);
 
+            if (equipedSlot.getOtherHand() != null)
+            {
+                equipedSlot.getOtherHand().gameObject.SetActive(true);
+            }
+        }
+        
+        if(primary != equipedSlot)
+        {
+            if(primary.getOtherHand() != null)
+            {
+                primary.getWeapon().gameObject.SetActive(false);
 
+                if (primary.getOtherHand() != null)
+                {
+                    primary.getOtherHand().gameObject.SetActive(false);
+                }
+            }
+        }
+
+        if (secondary != equipedSlot)
+        {
+            if(secondary.getOtherHand() != null)
+            {
+                secondary.getWeapon().gameObject.SetActive(false);
+
+                if (secondary.getOtherHand() != null)
+                {
+                    secondary.getOtherHand().gameObject.SetActive(false);
+                }
+            }
+        }
 
     }
 
@@ -513,6 +558,41 @@ public class PlayerScript : NetworkBehaviour
         return viewmodelHolder;
     }
 
+    private void changeSlot()
+    {
+        if(equipedSlot == primary)
+        {
+            equipedSlot = secondary;
+        }
+        else
+        {
+            equipedSlot = primary;
+        }
+
+        if(!isServer)
+        {
+            cmdChangeSlot(equipedSlot);
+        }
+        else
+        {
+            rpcChangeSlot(equipedSlot);
+        }
+
+    }
+
+    [Command]
+    private void cmdChangeSlot(Slot s)
+    {
+        equipedSlot = s;
+    }
+
+    [ClientRpc]
+    private void rpcChangeSlot(Slot s)
+    {
+        equipedSlot = s;
+    }
+
+
     public void pickup(GameObject thing)
     {
 
@@ -549,9 +629,11 @@ public class PlayerScript : NetworkBehaviour
 [System.Serializable]
 public class Slot
 {
-
+    [SerializeField]
     private WeaponClass myWeapon;
+    [SerializeField]
     private WeaponClass otherHand;
+    [SerializeField]
     private int myIndex;
 
     public Slot()
