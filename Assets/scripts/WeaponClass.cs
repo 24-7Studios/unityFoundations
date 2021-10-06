@@ -8,9 +8,12 @@ public class WeaponClass : NetworkBehaviour, Ipickup
 
     [SyncVar]
     protected PlayerScript player;
+    
+    [SyncVar]
+    protected Slot slot;    // this is just to check the index from. Do not acually reference this  for anything else;
 
     [SyncVar]
-    protected Slot slot;
+    protected int index;
 
     [SerializeField]
     private bool canDual;
@@ -54,7 +57,7 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         
         if(player != null)
         {
-            forcedPickup(player, slot, hand);
+            forcedPickup(player, slot.getIndex(), hand);
         }
         else
         {
@@ -104,14 +107,17 @@ public class WeaponClass : NetworkBehaviour, Ipickup
 
 
         player = p;
-        
+
+        slot = player.getEquipedSlot();
+        slot.getIndex();
+
         if(!hand)
         {
-            player.getEquipedSlot().setWeapon(this, false);
+            slot.setWeapon(this, false);
         }
         else
         {
-            player.getEquipedSlot().setWeapon(this, true);
+            slot.setWeapon(this, true);
         }
 
 
@@ -155,7 +161,7 @@ public class WeaponClass : NetworkBehaviour, Ipickup
 
     }
 
-    public void forcedPickup(PlayerScript p, Slot s, bool h)
+    public void forcedPickup(PlayerScript p, int s, bool h)
     {
 
         Debug.Log("player has picked up: " + this);
@@ -165,9 +171,9 @@ public class WeaponClass : NetworkBehaviour, Ipickup
 
         hand = h;
 
-        slot = s;
+        index = s;
 
-        slot.setWeapon(this, h);
+        player.getSlotAtIndex(s).setWeapon(this, hand);
 
         player.PlayerModel.equipWeapon(this, hand);
 

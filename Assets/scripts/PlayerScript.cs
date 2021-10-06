@@ -123,12 +123,16 @@ public class PlayerScript : NetworkBehaviour
 
     [SerializeField]
     private int numOfSlots = 2;
+
     [SyncVar]
-    List<Slot> WeaponSlots;
+    List<Slot> WeaponSlots = new List<Slot>();
+
     [SyncVar, SerializeField]
     Slot primary;
+
     [SyncVar, SerializeField]
     Slot secondary;
+
     [SyncVar, SerializeField]
     private Slot equipedSlot;
     
@@ -153,13 +157,15 @@ public class PlayerScript : NetworkBehaviour
     private void Start()
     {
 
+
         for(int i = 0; i < numOfSlots; i++)
         {
-            WeaponSlots.Add(new Slot(i));
+            Slot s = new Slot(i);
+            WeaponSlots.Add(s);
         }
 
-        primary = WeaponSlots[primary.getIndex()];
-        secondary = WeaponSlots[secondary.getIndex()];
+        primary = WeaponSlots[0];
+        secondary = WeaponSlots[1];
 
         equipedSlot = primary;
 
@@ -318,36 +324,69 @@ public class PlayerScript : NetworkBehaviour
         
         if(equipedSlot.getWeapon() != null)
         {
-            equipedSlot.getWeapon().gameObject.SetActive(true);
+            if(isLocalPlayer)
+            {
+                equipedSlot.getWeapon().getViewmodelOb().SetActive(true);
+            }
+
+            equipedSlot.getWeapon().getWorldModelOb().SetActive(true);
 
             if (equipedSlot.getOtherHand() != null)
             {
-                equipedSlot.getOtherHand().gameObject.SetActive(true);
+                if(isLocalPlayer)
+                {
+                    equipedSlot.getOtherHand().getViewmodelOb().SetActive(true);
+                }
+
+                equipedSlot.getOtherHand().getWorldModelOb().SetActive(true);
+
             }
         }
         
         if(primary != equipedSlot)
         {
-            if(primary.getOtherHand() != null)
+            if (primary.getWeapon() != null)
             {
-                primary.getWeapon().gameObject.SetActive(false);
+                if (isLocalPlayer)
+                {
+                    primary.getWeapon().getViewmodelOb().SetActive(false);
+                }
+
+                primary.getWeapon().getWorldModelOb().SetActive(false);
 
                 if (primary.getOtherHand() != null)
                 {
-                    primary.getOtherHand().gameObject.SetActive(false);
+                    if (isLocalPlayer)
+                    {
+                        primary.getOtherHand().getViewmodelOb().SetActive(false);
+                    }
+
+                    primary.getOtherHand().getWorldModelOb().SetActive(false);
+
                 }
             }
         }
 
         if (secondary != equipedSlot)
         {
-            if(secondary.getOtherHand() != null)
+            if (secondary.getWeapon() != null)
             {
-                secondary.getWeapon().gameObject.SetActive(false);
+                if (isLocalPlayer)
+                {
+                    secondary.getWeapon().getViewmodelOb().SetActive(false);
+                }
+
+                secondary.getWeapon().getWorldModelOb().SetActive(false);
 
                 if (secondary.getOtherHand() != null)
                 {
-                    secondary.getOtherHand().gameObject.SetActive(false);
+                    if (isLocalPlayer)
+                    {
+                        secondary.getOtherHand().getViewmodelOb().SetActive(false);
+                    }
+
+                    secondary.getOtherHand().getWorldModelOb().SetActive(false);
+
                 }
             }
         }
@@ -571,25 +610,25 @@ public class PlayerScript : NetworkBehaviour
 
         if(!isServer)
         {
-            cmdChangeSlot(equipedSlot);
+            cmdChangeSlot(equipedSlot.getIndex());
         }
         else
         {
-            rpcChangeSlot(equipedSlot);
+            rpcChangeSlot(equipedSlot.getIndex());
         }
 
     }
 
     [Command]
-    private void cmdChangeSlot(Slot s)
+    private void cmdChangeSlot(int i)
     {
-        equipedSlot = s;
+        equipedSlot = WeaponSlots[i];
     }
 
     [ClientRpc]
-    private void rpcChangeSlot(Slot s)
+    private void rpcChangeSlot(int i)
     {
-        equipedSlot = s;
+        equipedSlot = WeaponSlots[i];
     }
 
 
@@ -605,6 +644,11 @@ public class PlayerScript : NetworkBehaviour
     public Slot getEquipedSlot()
     {
         return equipedSlot;
+    }
+
+    public Slot getSlotAtIndex(int s)
+    {
+        return WeaponSlots[s];
     }
 
     public void drop(GameObject thing)
