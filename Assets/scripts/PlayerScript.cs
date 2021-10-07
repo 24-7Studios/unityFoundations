@@ -12,12 +12,20 @@ public class PlayerScript : NetworkBehaviour
     /// components that make the player work. also likely to be referenced by other scripts especially in the guns
     /// </summary>
 
-    public NetworkManager server;
-    public Rigidbody playerPhysBody;
-    public Transform camTransformer;
-    public GameObject CameraSetup;
-    public Camera worldCam;
-    public Camera gunCam;
+    [SerializeField]
+    private Rigidbody playerPhysBody;
+
+    [SerializeField]
+    private Transform camTransformer;
+
+    [SerializeField]
+    private GameObject CameraSetup;
+
+    [SerializeField]
+    private Camera worldCam;
+
+    [SerializeField]
+    private Camera gunCam;
     
 
     [SerializeField]
@@ -587,6 +595,11 @@ public class PlayerScript : NetworkBehaviour
         }
     }
 
+    public Transform getCamTransformer()
+    {
+        return camTransformer;
+    }
+
     public Transform getBackpack()
     {
         return backpack;
@@ -595,6 +608,11 @@ public class PlayerScript : NetworkBehaviour
     public Transform getViewmodelHolder()
     {
         return viewmodelHolder;
+    }
+
+    public Inputmaster getInputMaster()
+    {
+        return controls;
     }
 
     private void changeSlot()

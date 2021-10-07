@@ -101,7 +101,7 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         return canDual;
     }
 
-    public void pickup(PlayerScript p)
+    public virtual void pickup(PlayerScript p)
     {
         Debug.Log("player has picked up: " + this);
 
@@ -114,10 +114,13 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         if(!hand)
         {
             slot.setWeapon(this, false);
+            player.getInputMaster().Player.Fire_1.performed += l => fire();
+            player.getInputMaster().Player.Fire_2Zoom1.performed += l => altFire();
         }
         else
         {
             slot.setWeapon(this, true);
+            player.getInputMaster().Player.Fire_2Zoom1.performed += l => fire();
         }
 
 
@@ -161,7 +164,7 @@ public class WeaponClass : NetworkBehaviour, Ipickup
 
     }
 
-    public void forcedPickup(PlayerScript p, int s, bool h)
+    public virtual void forcedPickup(PlayerScript p, int s, bool h)
     {
 
         Debug.Log("player has picked up: " + this);
@@ -174,6 +177,16 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         index = s;
 
         player.getSlotAtIndex(s).setWeapon(this, hand);
+
+        if (!hand)
+        {
+            player.getInputMaster().Player.Fire_1.performed += l => fire();
+            player.getInputMaster().Player.Fire_2Zoom1.performed += l => altFire();
+        }
+        else
+        {
+            player.getInputMaster().Player.Fire_2Zoom1.performed += l => fire();
+        }
 
         player.PlayerModel.equipWeapon(this, hand);
 
@@ -215,8 +228,12 @@ public class WeaponClass : NetworkBehaviour, Ipickup
 
     }
 
-    public void drop()
+    public virtual void drop()
     {
+
+        player.getInputMaster().Player.Fire_1.performed -= l => fire();
+        player.getInputMaster().Player.Fire_2Zoom1.performed -= l => altFire();
+
         item.transform.SetParent(null);
         worldModel.transform.SetParent(transform);
         viewmodel.transform.SetParent(transform);
@@ -252,7 +269,17 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         hand = h;
     }
 
-    protected virtual void raycastShoot()
+    protected virtual void fire()
+    {
+        raycastHitDetect();
+    }
+
+    protected virtual void altFire()
+    {
+
+    }
+
+    protected virtual void raycastHitDetect()
     {
 
     }

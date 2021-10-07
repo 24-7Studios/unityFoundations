@@ -23,9 +23,9 @@ public class caplsulePLayerModelClass : PlayerModelClass
 
     void Update()
     {
-        head.rotation = player.camTransformer.rotation;
-        RightArm.rotation = player.camTransformer.rotation;
-        LeftArm.rotation = player.camTransformer.rotation;
+        head.rotation = player.getCamTransformer().rotation;
+        RightArm.rotation = player.getCamTransformer().rotation;
+        LeftArm.rotation = player.getCamTransformer().rotation;
     }
 
     
