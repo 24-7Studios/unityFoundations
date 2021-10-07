@@ -127,13 +127,13 @@ public class PlayerScript : NetworkBehaviour
     [SyncVar]
     List<Slot> WeaponSlots = new List<Slot>();
 
-    [SyncVar, SerializeField]
+    [SerializeField]
     Slot primary;
 
-    [SyncVar, SerializeField]
+    [SerializeField]
     Slot secondary;
 
-    [SyncVar, SerializeField]
+    [SerializeField]
     private Slot equipedSlot;
     
 
@@ -623,12 +623,16 @@ public class PlayerScript : NetworkBehaviour
     private void cmdChangeSlot(int i)
     {
         equipedSlot = WeaponSlots[i];
+        rpcChangeSlot(i);
     }
 
     [ClientRpc]
     private void rpcChangeSlot(int i)
     {
-        equipedSlot = WeaponSlots[i];
+        if(!isLocalPlayer)
+        {
+            equipedSlot = WeaponSlots[i];
+        }
     }
 
 
@@ -673,11 +677,11 @@ public class PlayerScript : NetworkBehaviour
 [System.Serializable]
 public class Slot
 {
-    [SerializeField]
+    [SerializeField, SyncVar]
     private WeaponClass myWeapon;
-    [SerializeField]
+    [SerializeField, SyncVar]
     private WeaponClass otherHand;
-    [SerializeField]
+    [SerializeField, SyncVar]
     private int myIndex;
 
     public Slot()
