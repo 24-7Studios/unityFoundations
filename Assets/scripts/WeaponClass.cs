@@ -55,9 +55,9 @@ public class WeaponClass : NetworkBehaviour, Ipickup
     void Start()
     {
         
-        if(player != null)
+        if(player != null && transform.parent == null)
         {
-            forcedPickup(player, slot.getIndex(), hand);
+            forcedPickup(player, index, hand);
         }
         else
         {
