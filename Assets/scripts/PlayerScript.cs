@@ -444,7 +444,7 @@ public class PlayerScript : NetworkBehaviour
             }
             else
             {
-                RpcSyncPlayerPosistion(playerPhysBody.position);
+                RpcSyncPlayerPosistion(InputMovement, playerPhysBody.position);
             }
 
 
@@ -486,7 +486,7 @@ public class PlayerScript : NetworkBehaviour
     void CmdMovePlayer(Vector3 IM, Vector3 clientPos)
     {
 
-        playerPhysBody.AddForce(IM, ForceMode.Impulse);
+        //playerPhysBody.AddForce(IM, ForceMode.Impulse);
         
 
         if (!isLocalPlayer && Vector3.Distance(playerPhysBody.position, clientPos) > PostionSnapThreshold)
@@ -514,16 +514,21 @@ public class PlayerScript : NetworkBehaviour
 
         }
 
-        RpcSyncPlayerPosistion(playerPhysBody.position);
+        RpcSyncPlayerPosistion(IM, playerPhysBody.position);
 
     }
 
 
     [ClientRpc]
-    void RpcSyncPlayerPosistion(Vector3 serverPos)
+    void RpcSyncPlayerPosistion(Vector3 IM, Vector3 serverPos)
     {
 
-        if (!isLocalPlayer)
+        if (!isLocalPlayer && Vector3.Distance(playerPhysBody.position, serverPos) < PostionSnapThreshold)
+        {
+            playerPhysBody.AddForce(IM, ForceMode.Impulse);
+            playerPhysBody.position = Vector3.Lerp(playerPhysBody.position, serverPos, Time.fixedDeltaTime / PositionCompensationDamping);
+        }
+        else if(!isLocalPlayer)
         {
             playerPhysBody.position = serverPos;
         }
