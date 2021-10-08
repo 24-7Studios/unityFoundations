@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class smgScript : WeaponClass
+public class smgScript : gunClass
 {
 
 }

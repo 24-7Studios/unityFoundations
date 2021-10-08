@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Mirror;
 
 public class WeaponClass : NetworkBehaviour, Ipickup
@@ -33,7 +34,11 @@ public class WeaponClass : NetworkBehaviour, Ipickup
     [SerializeField]
     protected GameObject viewmodel;
 
+    [SerializeField]
+    protected NetworkAnimator anim;
 
+    [SerializeField]
+    protected AudioSource aud;
 
 
     public Vector3 basePosOffset = new Vector3();
@@ -59,11 +64,6 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         {
             forcedPickup(player, index, hand);
         }
-        else
-        {
-
-        }
-
 
     }
 
@@ -111,18 +111,9 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         slot = player.getEquipedSlot();
         slot.getIndex();
 
-        if(!hand)
-        {
-            slot.setWeapon(this, false);
-            player.getInputMaster().Player.Fire_1.performed += l => fire();
-            player.getInputMaster().Player.Fire_2Zoom1.performed += l => altFire();
-        }
-        else
-        {
-            slot.setWeapon(this, true);
-            player.getInputMaster().Player.Fire_2Zoom1.performed += l => fire();
-        }
+        slot.setWeapon(this, hand);
 
+        setControls(hand);
 
         player.PlayerModel.equipWeapon(this, hand);
 
@@ -178,15 +169,7 @@ public class WeaponClass : NetworkBehaviour, Ipickup
 
         player.getSlotAtIndex(s).setWeapon(this, hand);
 
-        if (!hand)
-        {
-            player.getInputMaster().Player.Fire_1.performed += l => fire();
-            player.getInputMaster().Player.Fire_2Zoom1.performed += l => altFire();
-        }
-        else
-        {
-            player.getInputMaster().Player.Fire_2Zoom1.performed += l => fire();
-        }
+        setControls(hand);
 
         player.PlayerModel.equipWeapon(this, hand);
 
@@ -231,8 +214,7 @@ public class WeaponClass : NetworkBehaviour, Ipickup
     public virtual void drop()
     {
 
-        player.getInputMaster().Player.Fire_1.performed -= l => fire();
-        player.getInputMaster().Player.Fire_2Zoom1.performed -= l => altFire();
+        unsetControls(hand);
 
         item.transform.SetParent(null);
         worldModel.transform.SetParent(transform);
@@ -269,17 +251,44 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         hand = h;
     }
 
-    protected virtual void fire()
+    protected virtual void setControls(bool hand)
     {
-        raycastHitDetect();
+        if(!hand)
+        {
+            player.getInputMaster().Player.Fire_1.performed += ctx => onFire(ctx);
+            player.getInputMaster().Player.Fire_2Zoom1.performed += ctx => onAltFire(ctx);
+            //player.getInputMaster().Player
+        }
+        else
+        {
+            player.getInputMaster().Player.Fire_2Zoom1.performed += ctx => onFire(ctx);
+        }
     }
 
-    protected virtual void altFire()
+    protected virtual void unsetControls(bool hand)
+    {
+        if (!hand)
+        {
+            player.getInputMaster().Player.Fire_1.performed -= ctx => onFire(ctx);
+            player.getInputMaster().Player.Fire_2Zoom1.performed -= ctx => onAltFire(ctx);
+        }
+        else
+        {
+            player.getInputMaster().Player.Fire_2Zoom1.performed -= ctx => onFire(ctx);
+        }
+    }
+
+    protected virtual void onFire(InputAction.CallbackContext ctx)
+    {
+        
+    }
+
+    protected virtual void onAltFire(InputAction.CallbackContext ctx)
     {
 
     }
 
-    protected virtual void raycastHitDetect()
+    protected virtual void reload(InputAction.CallbackContext ctx)
     {
 
     }

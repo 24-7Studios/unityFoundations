@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PiistolScript : WeaponClass
+public class PiistolScript : gunClass
 {
 
 }

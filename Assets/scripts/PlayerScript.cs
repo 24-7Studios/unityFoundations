@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Mirror;
 
 public class PlayerScript : NetworkBehaviour
@@ -155,8 +156,8 @@ public class PlayerScript : NetworkBehaviour
     {
 
         controls = new Inputmaster();
-        controls.Player.jump.performed += _ => activateJump();
-        controls.Player.Change.performed += __ => changeSlot();
+        controls.Player.jump.performed += ctx => activateJump();
+        controls.Player.Change.performed += ctx => changeSlot();
         
         
     }

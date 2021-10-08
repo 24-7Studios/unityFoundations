@@ -60,6 +60,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "reload",
+                    "type": "Button",
+                    "id": "1b3b9af8-9eed-4408-8268-bcfca367b39a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -181,6 +189,17 @@
                     "processors": "",
                     "groups": "mouse + keybaord",
                     "action": "Fire_2/Zoom1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "54a7d887-876d-407c-a5d7-b3cd0f6b7137",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "mouse + keybaord",
+                    "action": "reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
