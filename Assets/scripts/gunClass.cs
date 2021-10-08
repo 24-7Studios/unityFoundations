@@ -19,6 +19,12 @@ public class gunClass : WeaponClass
     protected AudioClip reloadSound;
 
     [SerializeField]
+    protected string playerModelReload;
+
+    [SerializeField]
+    protected string playerModelFire;
+
+    [SerializeField]
     protected string idleAnim;
 
     [SerializeField]
@@ -38,18 +44,24 @@ public class gunClass : WeaponClass
 
     protected double fireTimer;
 
+    protected bool reloading;
 
 
+    protected override void Start()
+    {
+        base.Start();
 
+        loadedAmmo = ammo;
+    }
 
-    protected virtual void Update()
+    protected override void Update()
     {
         fireTimer -= Time.deltaTime;
 
-        if(anim.animator.GetBool("doneReloading"))
+        if(reloading && !anim.animator.GetCurrentAnimatorStateInfo(0).IsName(reloadAnim))
         {
             loadedAmmo = ammo;
-            anim.animator.SetBool("doneRealoading", false);
+            reloading = false;
         }
     }
 
@@ -57,13 +69,13 @@ public class gunClass : WeaponClass
     protected override void onFire(InputAction.CallbackContext ctx)
     {
 
-        if(ammo > 0)
+        if(loadedAmmo > 0)
         {
             if (fireTimer <= 0)
             {
                 anim.animator.Play(fireAnim);
                 aud.PlayOneShot(fireSound);
-                ammo--;
+                loadedAmmo--;
                 fireTimer = fireDelay;
             }
         }
@@ -71,6 +83,9 @@ public class gunClass : WeaponClass
         {
             reload(ctx);
         }
+
+        
+        
 
     }
 
@@ -83,6 +98,7 @@ public class gunClass : WeaponClass
     {
         anim.animator.Play(reloadAnim);
         aud.PlayOneShot(reloadSound);
+        reloading = true;
 
     }
 

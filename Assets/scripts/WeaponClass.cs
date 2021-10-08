@@ -57,7 +57,7 @@ public class WeaponClass : NetworkBehaviour, Ipickup
 
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         
         if(player != null && transform.parent == null)
@@ -68,7 +68,7 @@ public class WeaponClass : NetworkBehaviour, Ipickup
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
 
         

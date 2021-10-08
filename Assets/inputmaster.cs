@@ -64,7 +64,7 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                     ""id"": ""92026b81-ea9e-4cb7-868d-cd5fc69714f5"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Hold""
                 },
                 {
                     ""name"": ""Fire_2/Zoom1"",
