@@ -42,9 +42,14 @@ public class gunClass : WeaponClass
     [SerializeField]
     protected double fireDelay;
 
+    [SerializeField]
+    protected double reloadDelay;
+
     protected double fireTimer;
+    protected double reloadTimer;
 
     protected bool reloading;
+    protected bool bufferedReload;
 
 
     protected override void Start()
@@ -57,47 +62,61 @@ public class gunClass : WeaponClass
     protected override void Update()
     {
         fireTimer -= Time.deltaTime;
+        reloadTimer -= Time.deltaTime;
 
-        if(reloading && !anim.animator.GetCurrentAnimatorStateInfo(0).IsName(reloadAnim))
+        if(fire1Down)
+        {
+            Fire();
+        }
+
+        if(reloading && anim.animator.GetCurrentAnimatorStateInfo(0).IsName(idleAnim) && reloadTimer <= 0)
         {
             loadedAmmo = ammo;
+            bufferedReload = false;
             reloading = false;
+        }
+
+        if(bufferedReload && anim.animator.GetCurrentAnimatorStateInfo(0).IsName(idleAnim))
+        {
+            reload();
         }
     }
 
 
-    protected override void onFire(InputAction.CallbackContext ctx)
+    protected virtual void Fire()
     {
 
         if(loadedAmmo > 0)
         {
             if (fireTimer <= 0)
             {
+                anim.animator.Rebind();
                 anim.animator.Play(fireAnim);
                 aud.PlayOneShot(fireSound);
                 loadedAmmo--;
                 fireTimer = fireDelay;
             }
         }
-        else
+        else if(!reloading)
         {
-            reload(ctx);
+            bufferedReload = true;
         }
 
         
-        
+
 
     }
 
-    protected override void onAltFire(InputAction.CallbackContext ctx)
+    protected virtual void AltFire()
     {
         
     }
 
-    protected override void reload(InputAction.CallbackContext ctx)
+    protected virtual void reload()
     {
         anim.animator.Play(reloadAnim);
         aud.PlayOneShot(reloadSound);
+        reloadTimer = reloadDelay;
         reloading = true;
 
     }

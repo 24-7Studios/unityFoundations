@@ -64,7 +64,7 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                     ""id"": ""92026b81-ea9e-4cb7-868d-cd5fc69714f5"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold""
+                    ""interactions"": """"
                 },
                 {
                     ""name"": ""Fire_2/Zoom1"",
@@ -165,7 +165,7 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""480fb3eb-c577-4d51-bb7f-8d65a2d4ec66"",
                     ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap,Hold"",
                     ""processors"": """",
                     ""groups"": ""mouse + keybaord"",
                     ""action"": ""interact"",

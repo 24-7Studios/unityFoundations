@@ -40,6 +40,9 @@ public class WeaponClass : NetworkBehaviour, Ipickup
     [SerializeField]
     protected AudioSource aud;
 
+    protected bool fire1Down;
+    protected bool fire2Down;
+    protected bool reloadDown;
 
     public Vector3 basePosOffset = new Vector3();
 
@@ -255,13 +258,16 @@ public class WeaponClass : NetworkBehaviour, Ipickup
     {
         if(!hand)
         {
-            player.getInputMaster().Player.Fire_1.performed += ctx => onFire(ctx);
-            player.getInputMaster().Player.Fire_2Zoom1.performed += ctx => onAltFire(ctx);
+            player.getInputMaster().Player.Fire_1.performed += ctx => { fire1Down = true; };
+            player.getInputMaster().Player.Fire_1.canceled += ctx => { fire1Down = false; };
+            player.getInputMaster().Player.Fire_2Zoom1.performed += ctx => { fire2Down = true; };
+            player.getInputMaster().Player.Fire_2Zoom1.canceled += ctx => { fire2Down = false; };
             //player.getInputMaster().Player
         }
         else
         {
-            player.getInputMaster().Player.Fire_2Zoom1.performed += ctx => onFire(ctx);
+            player.getInputMaster().Player.Fire_2Zoom1.performed += ctx => { fire1Down = true; };
+            player.getInputMaster().Player.Fire_2Zoom1.canceled += ctx => { fire1Down = false; };
         }
     }
 
@@ -269,29 +275,18 @@ public class WeaponClass : NetworkBehaviour, Ipickup
     {
         if (!hand)
         {
-            player.getInputMaster().Player.Fire_1.performed -= ctx => onFire(ctx);
-            player.getInputMaster().Player.Fire_2Zoom1.performed -= ctx => onAltFire(ctx);
+            player.getInputMaster().Player.Fire_1.performed -= ctx => { fire1Down = true; };
+            player.getInputMaster().Player.Fire_1.canceled -= ctx => { fire1Down = false; };
+            player.getInputMaster().Player.Fire_2Zoom1.performed -= ctx => { fire2Down = true; };
+            player.getInputMaster().Player.Fire_2Zoom1.canceled -= ctx => { fire2Down = false; };
         }
         else
         {
-            player.getInputMaster().Player.Fire_2Zoom1.performed -= ctx => onFire(ctx);
+            player.getInputMaster().Player.Fire_2Zoom1.performed -= ctx => { fire1Down = true; };
+            player.getInputMaster().Player.Fire_2Zoom1.canceled -= ctx => { fire1Down = false; };
         }
     }
 
-    protected virtual void onFire(InputAction.CallbackContext ctx)
-    {
-        
-    }
-
-    protected virtual void onAltFire(InputAction.CallbackContext ctx)
-    {
-
-    }
-
-    protected virtual void reload(InputAction.CallbackContext ctx)
-    {
-
-    }
 
 
 }

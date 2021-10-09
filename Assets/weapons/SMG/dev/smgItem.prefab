@@ -2078,12 +2078,15 @@ MonoBehaviour:
   fireSound: {fileID: 8300000, guid: 9bc6f20059c89904ebadbd67d7c45113, type: 3}
   reloadAnim: reload
   reloadSound: {fileID: 8300000, guid: 9de70e4075957824691584c32098b149, type: 3}
+  playerModelReload: 
+  playerModelFire: 
   idleAnim: idle
   viewpunch: 0
   damage: 0
   ammo: 10
   loadedAmmo: 0
-  fireDelay: 0.01
+  fireDelay: 0.08
+  reloadDelay: 1
 --- !u!82 &4434117713964672165
 AudioSource:
   m_ObjectHideFlags: 0
