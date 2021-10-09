@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 using UnityEngine.InputSystem;
 
 public class gunClass : WeaponClass
@@ -28,7 +29,7 @@ public class gunClass : WeaponClass
     protected string idleAnim;
 
     [SerializeField]
-    protected double viewpunch;
+    protected float viewpunch;
 
     [SerializeField]
     protected int damage;
@@ -36,17 +37,17 @@ public class gunClass : WeaponClass
     [SerializeField]
     protected int ammo;
 
-    [SerializeField]
+    [SerializeField, SyncVar]
     protected int loadedAmmo;
 
     [SerializeField]
-    protected double fireDelay;
+    protected float fireDelay;
 
     [SerializeField]
-    protected double reloadDelay;
+    protected float reloadDelay;
 
-    protected double fireTimer;
-    protected double reloadTimer;
+    protected float fireTimer;
+    protected float reloadTimer;
 
     protected bool reloading;
     protected bool bufferedReload;
@@ -61,50 +62,69 @@ public class gunClass : WeaponClass
 
     protected override void Update()
     {
-        fireTimer -= Time.deltaTime;
-        reloadTimer -= Time.deltaTime;
-
-        if(fire1Down)
+        if(viewmodel.activeInHierarchy)
         {
-            Fire();
-        }
+            fireTimer -= Time.deltaTime;
+            reloadTimer -= Time.deltaTime;
 
-        if(reloading && anim.animator.GetCurrentAnimatorStateInfo(0).IsName(idleAnim) && reloadTimer <= 0)
-        {
-            loadedAmmo = ammo;
-            bufferedReload = false;
-            reloading = false;
-        }
+            if (fire1Down)
+            {
+                if (loadedAmmo > 0)
+                {
+                    if (fireTimer <= 0)
+                    {
+                        Fire();
+                    }
+                }
+                else if (!reloading)
+                {
+                    bufferedReload = true;
+                }
+            }
 
-        if(bufferedReload && anim.animator.GetCurrentAnimatorStateInfo(0).IsName(idleAnim))
-        {
-            reload();
+            if (reloading && anim.animator.GetCurrentAnimatorStateInfo(0).IsName(idleAnim) && reloadTimer <= 0)
+            {
+                loadedAmmo = ammo;
+                bufferedReload = false;
+                reloading = false;
+            }
+
+            if (bufferedReload && anim.animator.GetCurrentAnimatorStateInfo(0).IsName(idleAnim))
+            {
+                reload();
+            }
         }
     }
 
 
+ 
     protected virtual void Fire()
     {
-
-        if(loadedAmmo > 0)
+        if(isServer)
         {
-            if (fireTimer <= 0)
-            {
-                anim.animator.Rebind();
-                anim.animator.Play(fireAnim);
-                aud.PlayOneShot(fireSound);
-                loadedAmmo--;
-                fireTimer = fireDelay;
-            }
+            rpcFire();
         }
-        else if(!reloading)
+        else
         {
-            bufferedReload = true;
+            cmdFire();
         }
+    }
 
-        
+    [ClientRpc]
+    protected virtual void rpcFire()
+    {
+        anim.animator.Rebind();
+        anim.animator.Play(fireAnim);
+        aud.PlayOneShot(fireSound);
+        player.viewPunch(viewpunch);
+        loadedAmmo--;
+        fireTimer = fireDelay;
+    }
 
-
+    [Command]
+    protected virtual void cmdFire()
+    {
+        rpcFire();
     }
 
     protected virtual void AltFire()
@@ -112,14 +132,34 @@ public class gunClass : WeaponClass
         
     }
 
+
     protected virtual void reload()
+    {
+        if(isServer)
+        {
+            rpcReload();
+        }
+        else
+        {
+            cmdReload();
+        }
+    }
+
+    [Command]
+    protected virtual void cmdReload()
+    {
+        rpcReload();
+    }
+
+    [ClientRpc]
+    protected virtual void rpcReload()
     {
         anim.animator.Play(reloadAnim);
         aud.PlayOneShot(reloadSound);
         reloadTimer = reloadDelay;
         reloading = true;
-
     }
+
 
     protected virtual void raycastHit()
     {

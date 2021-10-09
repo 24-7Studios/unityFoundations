@@ -2081,7 +2081,7 @@ MonoBehaviour:
   playerModelReload: 
   playerModelFire: 
   idleAnim: idle
-  viewpunch: 0
+  viewpunch: 1.5
   damage: 0
   ammo: 10
   loadedAmmo: 0
