@@ -2075,7 +2075,7 @@ MonoBehaviour:
   WModelRotOffset: {x: -90, y: 0, z: 0}
   WModelScaOffset: {x: 0.2, y: 0.2, z: 0.2}
   fireAnim: fire
-  fireSound: {fileID: 8300000, guid: 9bc6f20059c89904ebadbd67d7c45113, type: 3}
+  fireSound: {fileID: 8300000, guid: 1369b01e34cadb4448633e44b5bee192, type: 3}
   reloadAnim: reload
   reloadSound: {fileID: 8300000, guid: 9de70e4075957824691584c32098b149, type: 3}
   playerModelReload: 

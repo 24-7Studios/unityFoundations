@@ -32,7 +32,13 @@ public class gunClass : WeaponClass
     protected float viewpunch;
 
     [SerializeField]
-    protected int damage;
+    protected float damage;
+
+    [SerializeField]
+    protected float fleshMultiplier;
+
+    [SerializeField]
+    protected float spread;
 
     [SerializeField]
     protected int ammo;
@@ -62,29 +68,21 @@ public class gunClass : WeaponClass
 
     protected override void Update()
     {
+        fireTimer -= Time.deltaTime;
+        reloadTimer -= Time.deltaTime;
+
         if(viewmodel.activeInHierarchy)
         {
-            fireTimer -= Time.deltaTime;
-            reloadTimer -= Time.deltaTime;
-
-            if (fire1Down)
-            {
-                if (loadedAmmo > 0)
-                {
-                    if (fireTimer <= 0)
-                    {
-                        Fire();
-                    }
-                }
-                else if (!reloading)
-                {
-                    bufferedReload = true;
-                }
-            }
-
             if (reloading && anim.animator.GetCurrentAnimatorStateInfo(0).IsName(idleAnim) && reloadTimer <= 0)
             {
-                loadedAmmo = ammo;
+                if(!isServer)
+                {
+                    cmdSyncLoadedAmmo(ammo);
+                }
+                else
+                {
+                    loadedAmmo = ammo;
+                }
                 bufferedReload = false;
                 reloading = false;
             }
@@ -93,7 +91,23 @@ public class gunClass : WeaponClass
             {
                 reload();
             }
+
+            if (fire1Down)
+            {
+                if (fireTimer <= 0)
+                {
+                    if (loadedAmmo > 0)
+                    {
+                        Fire();
+                    }
+                    else if (!reloading)
+                    {
+                        bufferedReload = true;
+                    }
+                }
+            }
         }
+
     }
 
 
@@ -113,8 +127,11 @@ public class gunClass : WeaponClass
     [ClientRpc]
     protected virtual void rpcFire()
     {
-        anim.animator.Rebind();
-        anim.animator.Play(fireAnim);
+        if(viewmodel.activeInHierarchy)
+        {
+            anim.animator.Rebind();
+            anim.animator.Play(fireAnim);
+        }
         aud.PlayOneShot(fireSound);
         player.viewPunch(viewpunch);
         loadedAmmo--;
@@ -154,16 +171,44 @@ public class gunClass : WeaponClass
     [ClientRpc]
     protected virtual void rpcReload()
     {
-        anim.animator.Play(reloadAnim);
+        if(viewmodel.activeInHierarchy)
+        {
+            anim.animator.Play(reloadAnim);
+        }
         aud.PlayOneShot(reloadSound);
         reloadTimer = reloadDelay;
         reloading = true;
     }
 
-
-    protected virtual void raycastHit()
+    [Command]
+    protected virtual void cmdSyncLoadedAmmo(int a)
     {
+        loadedAmmo = a;
+    }
 
+    protected virtual void raycastShoot(float dam, float sp)
+    {
+        RaycastHit hit;
+
+        Vector3 shootDirection = (player.getCamTransformer().forward + Random.insideUnitSphere * sp).normalized;
+
+        if (Physics.Raycast(player.getCamTransformer().position, shootDirection, out hit, Mathf.Infinity, Layermasks.Shoot))
+        {
+
+            IDamage iD = hit.collider.GetComponent<IDamage>();
+            Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+
+            if (iD != null)
+            {
+                iD.takeDamagefromHit(damage, fleshMultiplier);
+            }
+
+            if(rb != null)
+            {
+
+            }
+
+        }
     }
 
 }
