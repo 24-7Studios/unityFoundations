@@ -9,6 +9,6 @@ public static class Layermasks
     public static LayerMask Jump;
 
     [SerializeField]
-    public static LayerMask Shoot;
+    public static LayerMask Shoot;  
 
 }

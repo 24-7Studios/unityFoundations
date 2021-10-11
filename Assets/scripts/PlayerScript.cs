@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Mirror;
 
-public class PlayerScript : NetworkBehaviour
+public class PlayerScript : NetworkBehaviour, IDamage
 {
 
     //player setup
@@ -21,6 +21,9 @@ public class PlayerScript : NetworkBehaviour
 
     [SerializeField]
     private GameObject CameraSetup;
+
+    [SerializeField]
+    private AudioSource aud;
 
     [SerializeField]
     private Camera worldCam;
@@ -123,6 +126,27 @@ public class PlayerScript : NetworkBehaviour
     float y = 0;
     Vector3 groundNormal;
 
+    //health
+    [SerializeField]
+    private float DefaultHealth = 100;
+
+    [SyncVar]
+    private float health;
+
+    [SerializeField]
+    private float DefaultShields = 100;
+
+    [SyncVar]
+    private float shields;
+
+    [SerializeField]
+    private float instantDeath;
+
+    [SerializeField]
+    private AudioClip localDamageSound;
+
+    [SerializeField]
+    private AudioClip DieSound;
 
     //backpack
     [SerializeField]
@@ -181,7 +205,10 @@ public class PlayerScript : NetworkBehaviour
         setPlayermodel(PlayerModel);
 
   
-
+        if(!isLocalPlayer)
+        {
+            gameObject.layer = 0;
+        }
 
         if (isLocalPlayer)
         {
@@ -192,7 +219,7 @@ public class PlayerScript : NetworkBehaviour
 
 
 
-            Instantiate(CameraSetup, camTransformer);
+            aud = Instantiate(CameraSetup, camTransformer).GetComponent<AudioSource>();
 
 
 
@@ -694,7 +721,75 @@ public class PlayerScript : NetworkBehaviour
         yMouseInput -= r;
     }
 
-    
+    public void die()
+    {
+
+        if(!isServer)
+        {
+            cmdDie();
+        }
+        else
+        {
+            rpcDie();
+        }
+    }
+
+    [Command]
+    private void cmdDie()
+    {
+        rpcDie();
+    }
+
+    [ClientRpc]
+    private void rpcDie()
+    {        
+        aud.PlayOneShot(DieSound);
+        Debug.Log(this + "has died");
+
+        transform.position = Vector3.zero;
+        health = DefaultHealth;
+    }
+      
+    public void takeDamagefromHit(float d, float m)
+    {
+        if(!isServer)
+        {
+            cmdTakeDamageFromHit(d, m);
+        }
+        else
+        {
+            rpcTakeDamageFromHit(health, shields);
+        }
+    }
+
+    [Command]
+    private void cmdTakeDamageFromHit(float d, float m)
+    {
+        rpcTakeDamageFromHit(d, m);
+    }
+
+    [ClientRpc]
+    private void rpcTakeDamageFromHit(float d, float s)
+    {
+        health -= d;
+
+        if(health < 0)
+        {
+            die();
+        }
+        else
+        {
+            if(isLocalPlayer)
+            {
+                aud.PlayOneShot(localDamageSound);
+            }
+        }
+    }
+
+    public void hit()
+    {
+
+    }
 
 }
 

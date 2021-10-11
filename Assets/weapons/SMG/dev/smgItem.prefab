@@ -1942,7 +1942,6 @@ GameObject:
   - component: {fileID: 2099338151919073119}
   - component: {fileID: 3386515618357562431}
   - component: {fileID: 3347196558425115628}
-  - component: {fileID: 7611167768556625404}
   m_Layer: 10
   m_Name: smgItem
   m_TagString: Untagged
@@ -2064,9 +2063,12 @@ MonoBehaviour:
   syncInterval: 0.1
   canDual: 1
   item: {fileID: 8378784299745222373}
+  Shootable:
+    serializedVersion: 2
+    m_Bits: 1025
   worldModel: {fileID: 3684016144518701247}
   viewmodel: {fileID: 3922922007142530250}
-  anim: {fileID: 7611167768556625404}
+  ViewAnim: {fileID: 6866868032737523753}
   aud: {fileID: 4434117713964672165}
   basePosOffset: {x: 0, y: 0, z: 0}
   baseRotOffset: {x: -90, y: 0, z: 0}
@@ -2082,7 +2084,10 @@ MonoBehaviour:
   playerModelFire: 
   idleAnim: idle
   viewpunch: 1.5
-  damage: 0
+  damage: 10
+  fleshMultiplier: 0
+  knockbackForce: 1
+  spread: 0.02
   ammo: 10
   loadedAmmo: 0
   fireDelay: 0.08
@@ -2245,22 +2250,6 @@ MonoBehaviour:
   syncAngularVelocity: 1
   clearAngularVelocity: 0
   angularVelocitySensitivity: 0.1
---- !u!114 &7611167768556625404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8378784299745222373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  clientAuthority: 0
-  animator: {fileID: 6866868032737523753}
 --- !u!1 &8448160359561119895
 GameObject:
   m_ObjectHideFlags: 0

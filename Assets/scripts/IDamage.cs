@@ -6,9 +6,6 @@ using Mirror;
 public interface IDamage
 {
 
-	float health { get; set; }
-	float shields { get; set; }
-	bool instantDeath { get; set; }
 
 	void die();
 

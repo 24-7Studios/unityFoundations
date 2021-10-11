@@ -29,13 +29,16 @@ public class WeaponClass : NetworkBehaviour, Ipickup
     protected GameObject item;
 
     [SerializeField]
+    protected LayerMask Shootable;
+
+    [SerializeField]
     protected GameObject worldModel;
 
     [SerializeField]
     protected GameObject viewmodel;
 
     [SerializeField]
-    protected NetworkAnimator anim;
+    protected Animator ViewAnim;
 
     [SerializeField]
     protected AudioSource aud;
@@ -108,8 +111,10 @@ public class WeaponClass : NetworkBehaviour, Ipickup
     {
         Debug.Log("player has picked up: " + this);
 
-
         player = p;
+
+        if(isServer)
+            netIdentity.AssignClientAuthority(player.connectionToClient);
 
         slot = player.getEquipedSlot();
         slot.getIndex();
@@ -218,6 +223,9 @@ public class WeaponClass : NetworkBehaviour, Ipickup
     {
 
         unsetControls(hand);
+
+        if(isServer)
+            netIdentity.RemoveClientAuthority();
 
         item.transform.SetParent(null);
         worldModel.transform.SetParent(transform);

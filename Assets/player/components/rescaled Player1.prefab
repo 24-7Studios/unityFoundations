@@ -163,6 +163,7 @@ MonoBehaviour:
   camTransformer: {fileID: 1050093693452069657}
   CameraSetup: {fileID: 2390121815867376660, guid: 73465b97eb43c3f4498aba8e3eac7909,
     type: 3}
+  aud: {fileID: 0}
   worldCam: {fileID: 0}
   gunCam: {fileID: 0}
   interactZone: {fileID: 0}
@@ -183,6 +184,11 @@ MonoBehaviour:
   SyncInterval: 0
   fly: 0
   usePhysicsGravity: 0
+  DefaultHealth: 100
+  DefaultShields: 100
+  instantDeath: 0
+  localDamageSound: {fileID: 8300000, guid: b83a514e25eaedb428ac381925fb2cd5, type: 3}
+  DieSound: {fileID: 8300000, guid: 33f3b5df65542ca468dcf5e947536414, type: 3}
   backpack: {fileID: 8525235372953113948}
   viewmodelHolder: {fileID: 1050093694719503198}
   numOfSlots: 2
