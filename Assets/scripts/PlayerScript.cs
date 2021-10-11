@@ -190,6 +190,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private void Start()
     {
 
+        health = DefaultHealth;
+
 
         for(int i = 0; i < numOfSlots; i++)
         {

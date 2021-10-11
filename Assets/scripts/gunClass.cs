@@ -200,15 +200,32 @@ public class gunClass : WeaponClass
 
             if (iD != null)
             {
-                iD.takeDamagefromHit(damage, fleshMultiplier);
+                cmdHitDamageable(hit.collider.gameObject, damage, fleshMultiplier);
             }
 
             if(rb != null)
             {
                 rb.AddForceAtPosition(shootDirection, hit.point, ForceMode.Impulse);
+                pushObject(hit.collider.gameObject, shootDirection, hit.point);
             }
 
         }
+    }
+
+    [Command]
+    protected virtual void cmdHitDamageable(GameObject thing, float damage, float fleshMultiplier)
+    {
+        IDamage id = thing.GetComponent<IDamage>();
+
+        id.takeDamagefromHit(damage, fleshMultiplier);
+    }
+
+    [Command]
+    protected virtual void pushObject(GameObject thing, Vector3 Direction, Vector3 Position)
+    {
+        Rigidbody rb = thing.GetComponent<Rigidbody>();
+
+        rb.AddForceAtPosition(Direction, Position, ForceMode.Impulse);
     }
 
 }
