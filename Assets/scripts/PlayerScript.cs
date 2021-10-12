@@ -721,6 +721,14 @@ public class PlayerScript : NetworkBehaviour, IDamage
         thing.transform.position = transform.position + transform.forward * 2;    
     }
 
+    public void drop(NetworkIdentity net)
+    {
+        Ipickup i = net.GetComponent<Ipickup>();
+
+        i.drop();
+
+        net.transform.position = transform.position + transform.forward * 2;
+    }
 
     public void viewPunch(float r)
     {
@@ -732,7 +740,10 @@ public class PlayerScript : NetworkBehaviour, IDamage
     {
         if(!isServer)
         {
-            cmdDie();
+            if(isLocalPlayer)
+            {
+                cmdDie();
+            }
         }
         else
         {
@@ -749,7 +760,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [ClientRpc]
     private void rpcDie()
     {
-        foreach (GameObject i in backpack.GetComponentsInChildren<GameObject>())
+        foreach (NetworkIdentity i in backpack.GetComponentsInChildren<NetworkIdentity>())
         {
             drop(i);
         }
