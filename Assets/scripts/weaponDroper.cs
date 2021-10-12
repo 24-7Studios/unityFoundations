@@ -19,21 +19,12 @@ public class weaponDroper : NetworkBehaviour
 
             
 
-            thing.drop(weapon.gameObject);
-            rpcDropWeapon(weapon.gameObject, thing);
+            thing.rpcDrop(weapon.gameObject);
+
 
             
         }
 
     }
-
-    [ClientRpc]
-    private void rpcDropWeapon(GameObject g, PlayerScript p)
-    {
-
-        p.drop(g);
-
-    }
-
 
 }

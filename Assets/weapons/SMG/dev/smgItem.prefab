@@ -2085,10 +2085,10 @@ MonoBehaviour:
   idleAnim: idle
   viewpunch: 1.5
   damage: 10
-  fleshMultiplier: 0
+  fleshMultiplier: 1
   knockbackForce: 1
   spread: 0.02
-  ammo: 10
+  ammo: 30
   loadedAmmo: 0
   fireDelay: 0.08
   reloadDelay: 1

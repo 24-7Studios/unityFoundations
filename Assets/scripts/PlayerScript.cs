@@ -26,6 +26,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private AudioSource aud;
 
     [SerializeField]
+    private AudioSource LocalAud;
+
+    [SerializeField]
     private Camera worldCam;
 
     [SerializeField]
@@ -221,7 +224,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
 
 
-            aud = Instantiate(CameraSetup, camTransformer).GetComponent<AudioSource>();
+            LocalAud = Instantiate(CameraSetup, camTransformer).GetComponent<AudioSource>();
 
 
 
@@ -708,7 +711,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
         return WeaponSlots[s];
     }
 
-    public void drop(GameObject thing)
+    [ClientRpc]
+    public void rpcDrop(GameObject thing)
     {   
         Ipickup i = thing.GetComponent<Ipickup>();
 
@@ -723,9 +727,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
         yMouseInput -= r;
     }
 
+
     public void die()
     {
-
         if(!isServer)
         {
             cmdDie();
@@ -739,6 +743,10 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [Command]
     private void cmdDie()
     {
+        foreach (GameObject i in backpack.GetComponentsInChildren<GameObject>())
+        {
+            rpcDrop(i);
+        }
         rpcDie();
     }
 
@@ -747,7 +755,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
     {        
         aud.PlayOneShot(DieSound);
         Debug.Log(this + "has died");
-
         transform.position = Vector3.zero;
         health = DefaultHealth;
     }
@@ -760,7 +767,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         }
         else
         {
-            rpcTakeDamageFromHit(health, shields);
+            rpcTakeDamageFromHit(d, m);
         }
     }
 
@@ -783,7 +790,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         {
             if(isLocalPlayer)
             {
-                aud.PlayOneShot(localDamageSound);
+                LocalAud.PlayOneShot(localDamageSound);
             }
         }
     }
