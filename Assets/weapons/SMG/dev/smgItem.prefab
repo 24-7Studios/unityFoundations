@@ -2088,6 +2088,7 @@ MonoBehaviour:
   fleshMultiplier: 1
   knockbackForce: 1
   spread: 0.02
+  fullAuto: 1
   ammo: 30
   loadedAmmo: 0
   fireDelay: 0.08

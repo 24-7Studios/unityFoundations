@@ -44,6 +44,9 @@ public class gunClass : WeaponClass
     protected float spread;
 
     [SerializeField]
+    protected bool fullAuto;
+
+    [SerializeField]
     protected int ammo;
 
     [SerializeField]
@@ -57,6 +60,8 @@ public class gunClass : WeaponClass
 
     protected float fireTimer;
     protected float reloadTimer;
+
+    protected bool hasShot;
 
     protected bool reloading;
     protected bool bufferedReload;
@@ -93,18 +98,43 @@ public class gunClass : WeaponClass
                 reload();
             }
 
-            if (fire1Down)
+            if(fullAuto)
             {
-                if (fireTimer <= 0)
+                if (fire1Down)
                 {
-                    if (loadedAmmo > 0)
+                    if (fireTimer <= 0)
                     {
-                        Fire();
+                        if (loadedAmmo > 0)
+                        {
+                            Fire();
+                        }
+                        else if (!reloading)
+                        {
+                            bufferedReload = true;
+                        }
                     }
-                    else if (!reloading)
+                }
+            }
+            else
+            {
+                if(fire1Down && !hasShot)
+                {
+                    if (fireTimer <= 0)
                     {
-                        bufferedReload = true;
+                        if (loadedAmmo > 0)
+                        {
+                            Fire();
+                            hasShot = true;
+                        }
+                        else if (!reloading)
+                        {
+                            bufferedReload = true;
+                        }
                     }
+                }
+                if(!fire1Down)
+                {
+                    hasShot = false;
                 }
             }
         }
