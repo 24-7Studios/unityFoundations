@@ -117,7 +117,7 @@ public class WeaponClass : NetworkBehaviour, Ipickup
             netIdentity.AssignClientAuthority(player.connectionToClient);
 
         slot = player.getEquipedSlot();
-        slot.getIndex();
+        index = slot.getIndex();
 
         slot.setWeapon(this, hand);
 
@@ -233,7 +233,7 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         viewmodel.SetActive(false);
         worldModel.SetActive(false);
 
-        hand = false;
+        player.getSlotAtIndex(index).removeWeapon(hand);
 
         foreach (MeshRenderer m in item.GetComponents<MeshRenderer>())
         {
@@ -248,6 +248,12 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         item.GetComponent<Rigidbody>().isKinematic = false;
 
         player = null;
+
+        slot = null;
+
+        index = -1;
+
+        hand = false;
 
         isitem = true;
     }

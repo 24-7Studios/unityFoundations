@@ -711,8 +711,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
         return WeaponSlots[s];
     }
 
-    [ClientRpc]
-    public void rpcDrop(GameObject thing)
+
+    public void drop(GameObject thing)
     {   
         Ipickup i = thing.GetComponent<Ipickup>();
 
@@ -743,16 +743,16 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [Command]
     private void cmdDie()
     {
-        foreach (GameObject i in backpack.GetComponentsInChildren<GameObject>())
-        {
-            rpcDrop(i);
-        }
         rpcDie();
     }
 
     [ClientRpc]
     private void rpcDie()
-    {        
+    {
+        foreach (GameObject i in backpack.GetComponentsInChildren<GameObject>())
+        {
+            drop(i);
+        }
         aud.PlayOneShot(DieSound);
         Debug.Log(this + "has died");
         transform.position = Vector3.zero;
@@ -855,7 +855,10 @@ public class Slot
     public void setWeapon(WeaponClass w, bool hand)
     {
 
-        w.setHand(hand);
+        if (w != null)
+        {
+            w.setHand(hand);
+        }
 
         if(!hand)
         {
@@ -876,6 +879,36 @@ public class Slot
             otherHand = w;
         }
 
+    }
+
+    public void dropWeapon(bool hand)
+    {
+        if(!hand)
+        {
+            if(myWeapon != null)
+            {
+                myWeapon.drop();
+            }
+        }
+        else
+        {
+            if(otherHand != null)
+            {
+                otherHand.drop();
+            }
+        }
+    }
+
+    public void removeWeapon(bool hand)
+    {
+        if(!hand)
+        {
+            myWeapon = null;
+        }
+        else
+        {
+            otherHand = null;
+        }
     }
 
 

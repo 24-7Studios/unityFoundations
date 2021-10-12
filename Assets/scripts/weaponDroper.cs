@@ -19,7 +19,7 @@ public class weaponDroper : NetworkBehaviour
 
             
 
-            thing.rpcDrop(weapon.gameObject);
+            //thing.rpcDrop(weapon.gameObject);
 
 
             
