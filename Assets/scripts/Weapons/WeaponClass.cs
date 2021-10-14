@@ -123,7 +123,7 @@ public class WeaponClass : NetworkBehaviour, Ipickup
 
         setControls(hand);
 
-        player.PlayerModel.equipWeapon(this, hand);
+        player.getPlayermodel().equipWeapon(this, hand);
 
         foreach (MeshRenderer m in item.GetComponents<MeshRenderer>())
         {
@@ -179,7 +179,7 @@ public class WeaponClass : NetworkBehaviour, Ipickup
 
         setControls(hand);
 
-        player.PlayerModel.equipWeapon(this, hand);
+        player.getPlayermodel().equipWeapon(this, hand);
 
         foreach (MeshRenderer m in item.GetComponents<MeshRenderer>())
         {

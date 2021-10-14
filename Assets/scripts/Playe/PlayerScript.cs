@@ -38,10 +38,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [SerializeField]
     private Collider interactZone;
 
-    [SerializeField] 
-    private GameObject PlayerModelPrefab;
-
-    public PlayerModelClass PlayerModel;
+    [SerializeField]
+    private PlayerModelClass PlayerModel;
 
     [SerializeField] 
     private localPlayerOptions settings;
@@ -606,6 +604,11 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         }
 
+    }
+
+    public PlayerModelClass getPlayermodel()
+    {
+        return PlayerModel;
     }
 
     public void setPlayermodel(PlayerModelClass p)
