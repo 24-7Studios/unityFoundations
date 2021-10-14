@@ -145,7 +145,10 @@ public class gunClass : WeaponClass
  
     protected virtual void Fire()
     {
-        raycastShoot(damage, spread);
+        Vector3 shootDirection = (player.getCamTransformer().forward + Random.insideUnitSphere * spread).normalized;
+
+        raycastShoot(damage, fleshMultiplier, player.getCamTransformer().position, shootDirection, Shootable);
+
         ViewAnim.Rebind();
         ViewAnim.Play(fireAnim);
         aud.PlayOneShot(fireSound);
@@ -216,13 +219,16 @@ public class gunClass : WeaponClass
         loadedAmmo = a;
     }
 
-    protected virtual void raycastShoot(float dam, float sp)
+
+
+
+
+    //**************
+    protected virtual void raycastShoot(float baseDamage, float multiplier, Vector3 position, Vector3 direction, LayerMask Shootable)
     {
         RaycastHit hit;
 
-        Vector3 shootDirection = (player.getCamTransformer().forward + Random.insideUnitSphere * sp).normalized;
-
-        if (Physics.Raycast(player.getCamTransformer().position, shootDirection, out hit, Mathf.Infinity, Shootable))
+        if (Physics.Raycast(position, direction, out hit, Mathf.Infinity, Shootable))
         {
 
             IDamage iD = hit.collider.GetComponent<IDamage>();
@@ -230,13 +236,13 @@ public class gunClass : WeaponClass
 
             if (iD != null)
             {
-                cmdHitDamageable(hit.collider.gameObject, damage, fleshMultiplier);
+                cmdHitDamageable(hit.collider.gameObject, baseDamage, multiplier);
             }
 
-            if(rb != null)
+            if (rb != null)
             {
-                rb.AddForceAtPosition(shootDirection, hit.point, ForceMode.Impulse);
-                pushObject(hit.collider.gameObject, shootDirection, hit.point);
+                rb.AddForceAtPosition(direction, hit.point, ForceMode.Impulse);
+                pushObject(hit.collider.gameObject, direction, hit.point);
             }
 
         }
