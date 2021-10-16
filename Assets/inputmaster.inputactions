@@ -68,6 +68,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "reload2",
+                    "type": "Button",
+                    "id": "99f1f650-cbbb-4716-bd97-7ba6cec839c3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -200,6 +208,17 @@
                     "processors": "",
                     "groups": "mouse + keybaord",
                     "action": "reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b100b47c-1fa8-4b37-9fb6-0aab10bafad1",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "mouse + keybaord",
+                    "action": "reload2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

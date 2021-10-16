@@ -98,43 +98,51 @@ public class gunClass : WeaponClass
                 reload();
             }
 
-            if(fullAuto)
+            if(reloadDown && loadedAmmo < ammo && !reloading)
             {
-                if (fire1Down)
-                {
-                    if (fireTimer <= 0)
-                    {
-                        if (loadedAmmo > 0)
-                        {
-                            Fire();
-                        }
-                        else if (!reloading)
-                        {
-                            bufferedReload = true;
-                        }
-                    }
-                }
+                bufferedReload = true;
             }
-            else
+
+            if(!reloading)
             {
-                if(fire1Down && !hasShot)
+                if (fullAuto)
                 {
-                    if (fireTimer <= 0)
+                    if (fire1Down)
                     {
-                        if (loadedAmmo > 0)
+                        if (fireTimer <= 0)
                         {
-                            Fire();
-                            hasShot = true;
-                        }
-                        else if (!reloading)
-                        {
-                            bufferedReload = true;
+                            if (loadedAmmo > 0)
+                            {
+                                Fire();
+                            }
+                            else if (!reloading)
+                            {
+                                bufferedReload = true;
+                            }
                         }
                     }
                 }
-                if(!fire1Down)
+                else
                 {
-                    hasShot = false;
+                    if (fire1Down && !hasShot)
+                    {
+                        if (fireTimer <= 0)
+                        {
+                            if (loadedAmmo > 0)
+                            {
+                                Fire();
+                                hasShot = true;
+                            }
+                            else if (!reloading)
+                            {
+                                bufferedReload = true;
+                            }
+                        }
+                    }
+                    if (!fire1Down)
+                    {
+                        hasShot = false;
+                    }
                 }
             }
         }
@@ -217,51 +225,6 @@ public class gunClass : WeaponClass
     protected virtual void cmdSyncLoadedAmmo(int a)
     {
         loadedAmmo = a;
-    }
-
-
-
-
-
-    //**************
-    protected virtual void raycastShoot(float baseDamage, float multiplier, Vector3 position, Vector3 direction, LayerMask Shootable)
-    {
-        RaycastHit hit;
-
-        if (Physics.Raycast(position, direction, out hit, Mathf.Infinity, Shootable))
-        {
-
-            IDamage iD = hit.collider.GetComponent<IDamage>();
-            Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
-
-            if (iD != null)
-            {
-                cmdHitDamageable(hit.collider.gameObject, baseDamage, multiplier);
-            }
-
-            if (rb != null)
-            {
-                rb.AddForceAtPosition(direction, hit.point, ForceMode.Impulse);
-                pushObject(hit.collider.gameObject, direction, hit.point);
-            }
-
-        }
-    }
-
-    [Command]
-    protected virtual void cmdHitDamageable(GameObject thing, float damage, float fleshMultiplier)
-    {
-        IDamage id = thing.GetComponent<IDamage>();
-
-        id.takeDamagefromHit(damage, fleshMultiplier);
-    }
-
-    [Command]
-    protected virtual void pushObject(GameObject thing, Vector3 Direction, Vector3 Position)
-    {
-        Rigidbody rb = thing.GetComponent<Rigidbody>();
-
-        rb.AddForceAtPosition(Direction, Position, ForceMode.Impulse);
     }
 
 }

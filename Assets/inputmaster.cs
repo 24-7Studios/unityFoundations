@@ -81,6 +81,14 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""reload2"",
+                    ""type"": ""Button"",
+                    ""id"": ""99f1f650-cbbb-4716-bd97-7ba6cec839c3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -215,6 +223,17 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                     ""action"": ""reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b100b47c-1fa8-4b37-9fb6-0aab10bafad1"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""mouse + keybaord"",
+                    ""action"": ""reload2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -248,6 +267,7 @@ public class @Inputmaster : IInputActionCollection, IDisposable
         m_Player_Fire_1 = m_Player.FindAction("Fire_1", throwIfNotFound: true);
         m_Player_Fire_2Zoom1 = m_Player.FindAction("Fire_2/Zoom1", throwIfNotFound: true);
         m_Player_reload = m_Player.FindAction("reload", throwIfNotFound: true);
+        m_Player_reload2 = m_Player.FindAction("reload2", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -305,6 +325,7 @@ public class @Inputmaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Fire_1;
     private readonly InputAction m_Player_Fire_2Zoom1;
     private readonly InputAction m_Player_reload;
+    private readonly InputAction m_Player_reload2;
     public struct PlayerActions
     {
         private @Inputmaster m_Wrapper;
@@ -317,6 +338,7 @@ public class @Inputmaster : IInputActionCollection, IDisposable
         public InputAction @Fire_1 => m_Wrapper.m_Player_Fire_1;
         public InputAction @Fire_2Zoom1 => m_Wrapper.m_Player_Fire_2Zoom1;
         public InputAction @reload => m_Wrapper.m_Player_reload;
+        public InputAction @reload2 => m_Wrapper.m_Player_reload2;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -350,6 +372,9 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                 @reload.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
                 @reload.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
                 @reload.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
+                @reload2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload2;
+                @reload2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload2;
+                @reload2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload2;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -378,6 +403,9 @@ public class @Inputmaster : IInputActionCollection, IDisposable
                 @reload.started += instance.OnReload;
                 @reload.performed += instance.OnReload;
                 @reload.canceled += instance.OnReload;
+                @reload2.started += instance.OnReload2;
+                @reload2.performed += instance.OnReload2;
+                @reload2.canceled += instance.OnReload2;
             }
         }
     }
@@ -401,5 +429,6 @@ public class @Inputmaster : IInputActionCollection, IDisposable
         void OnFire_1(InputAction.CallbackContext context);
         void OnFire_2Zoom1(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
+        void OnReload2(InputAction.CallbackContext context);
     }
 }

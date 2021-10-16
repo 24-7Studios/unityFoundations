@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 using Mirror;
 
 public class WeaponClass : NetworkBehaviour, Ipickup
@@ -171,6 +172,9 @@ public class WeaponClass : NetworkBehaviour, Ipickup
 
         player = p;
 
+        if (isServer)
+            netIdentity.AssignClientAuthority(player.connectionToClient);
+
         hand = h;
 
         index = s;
@@ -276,12 +280,15 @@ public class WeaponClass : NetworkBehaviour, Ipickup
             player.getInputMaster().Player.Fire_1.canceled += ctx => { fire1Down = false; };
             player.getInputMaster().Player.Fire_2Zoom1.performed += ctx => { fire2Down = true; };
             player.getInputMaster().Player.Fire_2Zoom1.canceled += ctx => { fire2Down = false; };
-            //player.getInputMaster().Player
+            player.getInputMaster().Player.reload.performed += ctx => { reloadDown = true; };
+            player.getInputMaster().Player.reload.canceled += ctx => { reloadDown = false; };
         }
         else
         {
             player.getInputMaster().Player.Fire_2Zoom1.performed += ctx => { fire1Down = true; };
             player.getInputMaster().Player.Fire_2Zoom1.canceled += ctx => { fire1Down = false; };
+            player.getInputMaster().Player.reload2.performed += ctx => { reloadDown = true; };
+            player.getInputMaster().Player.reload2.canceled += ctx => { reloadDown = false; };
         }
     }
 
@@ -293,14 +300,60 @@ public class WeaponClass : NetworkBehaviour, Ipickup
             player.getInputMaster().Player.Fire_1.canceled -= ctx => { fire1Down = false; };
             player.getInputMaster().Player.Fire_2Zoom1.performed -= ctx => { fire2Down = true; };
             player.getInputMaster().Player.Fire_2Zoom1.canceled -= ctx => { fire2Down = false; };
+            player.getInputMaster().Player.reload.performed -= ctx => { reloadDown = true; };
+            player.getInputMaster().Player.reload.canceled -= ctx => { reloadDown = false; };
         }
         else
         {
             player.getInputMaster().Player.Fire_2Zoom1.performed -= ctx => { fire1Down = true; };
             player.getInputMaster().Player.Fire_2Zoom1.canceled -= ctx => { fire1Down = false; };
+            player.getInputMaster().Player.reload2.performed -= ctx => { reloadDown = true; };
+            player.getInputMaster().Player.reload2.canceled -= ctx => { reloadDown = false; };
         }
     }
 
+    ///////////////////////////////////////////////
+    ///
 
+
+    protected virtual void raycastShoot(float baseDamage, float multiplier, Vector3 position, Vector3 direction, LayerMask Shootable)
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(position, direction, out hit, Mathf.Infinity, Shootable))
+        {
+
+            IDamage iD = hit.collider.GetComponent<IDamage>();
+            Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+
+            if (iD != null)
+            {
+                cmdHitDamageable(hit.collider.gameObject, baseDamage, multiplier);
+            }
+
+            if (rb != null)
+            {
+                rb.AddForceAtPosition(direction, hit.point, ForceMode.Impulse);
+                pushObject(hit.collider.gameObject, direction, hit.point);
+            }
+
+        }
+    }
+
+    [Command]
+    protected virtual void cmdHitDamageable(GameObject thing, float damage, float fleshMultiplier)
+    {
+        IDamage id = thing.GetComponent<IDamage>();
+
+        id.takeDamagefromHit(damage, fleshMultiplier);
+    }
+
+    [Command]
+    protected virtual void pushObject(GameObject thing, Vector3 Direction, Vector3 Position)
+    {
+        Rigidbody rb = thing.GetComponent<Rigidbody>();
+
+        rb.AddForceAtPosition(Direction, Position, ForceMode.Impulse);
+    }
 
 }
