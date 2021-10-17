@@ -143,6 +143,12 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [SerializeField]
     private float instantDeath;
 
+    public delegate void Spawned(PlayerScript player);
+    public static Spawned spawned;
+
+    public delegate void Died(PlayerScript player);
+    public static Died died;
+
     [SerializeField]
     private AudioClip localDamageSound;
 
@@ -183,7 +189,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
         controls = new Inputmaster();
         controls.Player.jump.performed += ctx => activateJump();
         controls.Player.Change.performed += ctx => changeSlot();
-        
+
+
         
     }
 
@@ -738,7 +745,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
         yMouseInput -= r;
     }
 
-
     public void die()
     {
         if(!isServer)
@@ -763,12 +769,12 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [ClientRpc]
     private void rpcDie()
     {
+        died?.Invoke(this);
         foreach (NetworkIdentity i in backpack.GetComponentsInChildren<NetworkIdentity>())
         {
             drop(i);
         }
         aud.PlayOneShot(DieSound);
-        Debug.Log(this + "has died");
         transform.position = Vector3.zero;
         health = DefaultHealth;
     }

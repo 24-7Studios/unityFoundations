@@ -7,8 +7,6 @@ public class PlayerModelClass : NetworkBehaviour
 {
 
     public string ModelName;
-    public GameObject baseCont;
-    public GameObject ModelPrefab;
     public List<GameObject> models;
 
     [SerializeField]
@@ -17,12 +15,16 @@ public class PlayerModelClass : NetworkBehaviour
     [SerializeField]
     protected Transform LeftHoldPos;
 
+    [SerializeField]
+    protected PlayerModelDoll ragdoll;
+
     protected PlayerScript player;
 
     public virtual void setPlayer(PlayerScript p)
     {
         player = p;
-        Debug.Log("player Set!" + player);
+        PlayerScript.died += onPlayerDeath;
+        PlayerScript.spawned += onPlayerSpawn;
     }
 
     public virtual void equipWeapon(WeaponClass w, bool hand)
@@ -49,6 +51,24 @@ public class PlayerModelClass : NetworkBehaviour
         wm.transform.localScale = w.WModelScaOffset;
         wm.transform.SetParent(targetPos, true);
 
+    }
+
+    protected void onPlayerSpawn(PlayerScript p)
+    {
+
+    }
+
+    protected void onPlayerDeath(PlayerScript p)
+    {
+        cmdOnPlayerDeath();
+    }
+
+    [Command]
+    protected void cmdOnPlayerDeath()
+    {
+        GameObject doll = Instantiate(ragdoll.gameObject, this.transform.position, this.transform.rotation);
+        NetworkServer.Spawn(doll);
+        NetworkServer.Destroy(this.gameObject);
     }
 
 }
