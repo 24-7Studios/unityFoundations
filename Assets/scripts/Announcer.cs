@@ -22,6 +22,7 @@ public class Announcer : NetworkBehaviour
         rpcBroadcast(message);
     }
 
+    [ClientRpc]
     private void rpcBroadcast(string message)
     {
         Debug.Log(message);

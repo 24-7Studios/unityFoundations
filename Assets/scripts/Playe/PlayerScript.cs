@@ -624,7 +624,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         PlayerModel = Instantiate(p, playerPhysBody.transform);
 
         PlayerModel.setPlayer(this);
-        
+        PlayerModel.netIdentity.AssignClientAuthority(connectionToClient);
 
         if (!isLocalPlayer)
         {

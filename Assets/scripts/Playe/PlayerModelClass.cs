@@ -60,7 +60,8 @@ public class PlayerModelClass : NetworkBehaviour
 
     protected void onPlayerDeath(PlayerScript p)
     {
-        cmdOnPlayerDeath();
+        if(player == p)
+            cmdOnPlayerDeath();
     }
 
     [Command]
