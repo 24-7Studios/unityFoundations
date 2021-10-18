@@ -745,19 +745,11 @@ public class PlayerScript : NetworkBehaviour, IDamage
         yMouseInput -= r;
     }
 
+    [Server]
     public void die()
     {
-        if(!isServer)
-        {
-            if(isLocalPlayer)
-            {
-                cmdDie();
-            }
-        }
-        else
-        {
-            rpcDie();
-        }
+        died?.Invoke(this);
+        rpcDie();
     }
 
     [Command]
@@ -769,7 +761,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [ClientRpc]
     private void rpcDie()
     {
-        died?.Invoke(this);
         foreach (NetworkIdentity i in backpack.GetComponentsInChildren<NetworkIdentity>())
         {
             drop(i);
@@ -778,40 +769,33 @@ public class PlayerScript : NetworkBehaviour, IDamage
         transform.position = Vector3.zero;
         health = DefaultHealth;
     }
-      
+    
+    [Server]
     public void takeDamagefromHit(float d, float m)
     {
-        if(!isServer)
-        {
-            cmdTakeDamageFromHit(d, m);
-        }
-        else
-        {
-            rpcTakeDamageFromHit(d, m);
-        }
+        cmdTakeDamageFromHit(d, m);
     }
 
     [Command]
     private void cmdTakeDamageFromHit(float d, float m)
     {
-        rpcTakeDamageFromHit(d, m);
-    }
-
-    [ClientRpc]
-    private void rpcTakeDamageFromHit(float d, float s)
-    {
         health -= d;
 
-        if(health < 0)
+        if (health < 0)
         {
             die();
         }
-        else
+        rpcSyncDamageFromHit(health, shields);
+    }
+
+    [ClientRpc]
+    private void rpcSyncDamageFromHit(float h, float s)
+    {
+        health = h;
+        shields = s;
+        if (isLocalPlayer)
         {
-            if(isLocalPlayer)
-            {
-                LocalAud.PlayOneShot(localDamageSound);
-            }
+            LocalAud.PlayOneShot(localDamageSound);
         }
     }
 
