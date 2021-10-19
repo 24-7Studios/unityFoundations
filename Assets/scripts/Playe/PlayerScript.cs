@@ -745,7 +745,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         yMouseInput -= r;
     }
 
-    [Server]
+
     public void die()
     {
         died?.Invoke(this);
@@ -770,10 +770,23 @@ public class PlayerScript : NetworkBehaviour, IDamage
         health = DefaultHealth;
     }
     
-    [Server]
+
     public void takeDamagefromHit(float d, float m)
     {
-        cmdTakeDamageFromHit(d, m);
+        if(!isServer)
+        {
+            cmdTakeDamageFromHit(d, m);
+        }
+        else
+        {
+            health -= d;
+
+            if (health < 0)
+            {
+                die();
+            }
+            rpcSyncDamageFromHit(health, shields);
+        }
     }
 
     [Command]
