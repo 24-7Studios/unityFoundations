@@ -624,7 +624,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         PlayerModel = Instantiate(p, playerPhysBody.transform);
 
         PlayerModel.setPlayer(this);
-        PlayerModel.netIdentity.AssignClientAuthority(connectionToClient);
+        //PlayerModel.netIdentity.AssignClientAuthority(connectionToClient);
 
         if (!isLocalPlayer)
         {
@@ -748,8 +748,14 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public void die()
     {
-        died?.Invoke(this);
-        rpcDie();
+        if(isServer)
+        {
+            rpcDie();
+        }
+        else
+        {
+            cmdDie();
+        }
     }
 
     [Command]
@@ -761,13 +767,15 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [ClientRpc]
     private void rpcDie()
     {
+        died?.Invoke(this);
         foreach (NetworkIdentity i in backpack.GetComponentsInChildren<NetworkIdentity>())
         {
             drop(i);
         }
-        aud.PlayOneShot(DieSound);
         transform.position = Vector3.zero;
         health = DefaultHealth;
+        Debug.Log(health);
+        aud.PlayOneShot(DieSound);
     }
     
 
@@ -780,12 +788,13 @@ public class PlayerScript : NetworkBehaviour, IDamage
         else
         {
             health -= d;
+            rpcSyncDamageFromHit(health, shields);
 
             if (health < 0)
             {
                 die();
             }
-            rpcSyncDamageFromHit(health, shields);
+
         }
     }
 
@@ -793,12 +802,12 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private void cmdTakeDamageFromHit(float d, float m)
     {
         health -= d;
+        rpcSyncDamageFromHit(health, shields);
 
         if (health < 0)
         {
             die();
         }
-        rpcSyncDamageFromHit(health, shields);
     }
 
     [ClientRpc]

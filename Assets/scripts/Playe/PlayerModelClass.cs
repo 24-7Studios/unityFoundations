@@ -23,8 +23,8 @@ public class PlayerModelClass : NetworkBehaviour
     public virtual void setPlayer(PlayerScript p)
     {
         player = p;
-        PlayerScript.died += onPlayerDeath;
-        PlayerScript.spawned += onPlayerSpawn;
+        //PlayerScript.died += onPlayerDeath;
+        //PlayerScript.spawned += onPlayerSpawn;
     }
 
     public virtual void equipWeapon(WeaponClass w, bool hand)

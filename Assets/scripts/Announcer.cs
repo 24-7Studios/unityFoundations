@@ -13,7 +13,10 @@ public class Announcer : NetworkBehaviour
 
     protected void onPlayerDied(PlayerScript p)
     {
-        cmdBroadcast(p + "had died!"); 
+        if (isServer)
+        {
+            rpcBroadcast(p + "has died!");
+        }
     }
 
     [Command]
