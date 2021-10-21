@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using Mirror.FizzySteam;
 
 
 public class newNetworkHUD : MonoBehaviour
@@ -113,8 +114,29 @@ public class newNetworkHUD : MonoBehaviour
                 {
                     currentTransport = t;
                 }
+                if (currentTransport is FizzyFacepunch)
+                {
+                    currentTransport = (FizzyFacepunch)currentTransport;
+                    GUILayout.BeginHorizontal();
+                    GUILayout.Label("Steam User ID");
+                    double id = 0;
+                    double.TryParse(GUILayout.TextField(id.ToString()), out id);
+                    //to do: set steam id.
+                }
+                if (t != currentTransport)
+                {
+                    t.enabled = false;
+                }
+                else
+                {
+                    t.enabled = true;
+                }
             }
             GUILayout.EndVertical();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Current :" + currentTransport);
+            GUILayout.EndHorizontal();
 
         }
         else
