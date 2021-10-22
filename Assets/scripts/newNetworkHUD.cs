@@ -73,19 +73,18 @@ public class newNetworkHUD : MonoBehaviour
             // Server + Client
             if (Application.platform != RuntimePlatform.WebGLPlayer)
             {
-                if (GUILayout.Button("Host (Server + Client)"))
+                if (GUILayout.Button("Host Game"))
                 {
                     manager.StartHost();
                 }
             }
 
-            // Client + IP
+            // Client
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Client"))
+            if (GUILayout.Button("Join Game"))
             {
                 manager.StartClient();
             }
-            manager.networkAddress = GUILayout.TextField(manager.networkAddress);
             GUILayout.EndHorizontal();
 
             // Server Only
@@ -96,7 +95,7 @@ public class newNetworkHUD : MonoBehaviour
             }
             else
             {
-                if (GUILayout.Button("Server Only")) manager.StartServer();
+                if (GUILayout.Button("Host Server Only")) manager.StartServer();
             }
 
             // transport
@@ -108,20 +107,12 @@ public class newNetworkHUD : MonoBehaviour
             */
 
             GUILayout.BeginVertical();
+            GUILayout.Label("--Transports--");
             foreach(Transport t in transports)
             {
                 if(GUILayout.Button(t.ToString()))
                 {
                     currentTransport = t;
-                }
-                if (currentTransport is FizzyFacepunch)
-                {
-                    currentTransport = (FizzyFacepunch)currentTransport;
-                    GUILayout.BeginHorizontal();
-                    GUILayout.Label("Steam User ID");
-                    double id = 0;
-                    double.TryParse(GUILayout.TextField(id.ToString()), out id);
-                    //to do: set steam id.
                 }
                 if (t != currentTransport)
                 {
@@ -136,6 +127,11 @@ public class newNetworkHUD : MonoBehaviour
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Current :" + currentTransport);
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Desitnation:");
+            manager.networkAddress = GUILayout.TextField(manager.networkAddress);
             GUILayout.EndHorizontal();
 
         }
