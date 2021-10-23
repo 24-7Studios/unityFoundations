@@ -189,7 +189,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         controls = new Inputmaster();
         controls.Player.jump.performed += ctx => activateJump();
         controls.Player.Change.performed += ctx => changeSlot();
-
+        died += onDeath;
 
         
     }
@@ -772,12 +772,25 @@ public class PlayerScript : NetworkBehaviour, IDamage
         {
             drop(i);
         }
-        transform.position = Vector3.zero;
         health = DefaultHealth;
         Debug.Log(health);
         aud.PlayOneShot(DieSound);
     }
     
+    private void onDeath(PlayerScript p)
+    {
+        if(isServer && p == this)
+        {
+            List<NetworkStartPosition> positions = FindObjectsOfType<NetworkStartPosition>().ToList<NetworkStartPosition>();
+            spawn(positions[(int)(Random.value * positions.Count)].transform.position);  
+        }
+    }
+
+    [ClientRpc]
+    private void spawn(Vector3 spawnpos)
+    {
+        transform.position = spawnpos;
+    }
 
     public void takeDamagefromHit(float d, float m)
     {
