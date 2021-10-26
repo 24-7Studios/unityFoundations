@@ -11,16 +11,16 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -6919215801562813595}
-    m_Position: {x: 360, y: 260, z: 0}
+    m_Position: {x: 360, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4379257243335557978}
-    m_Position: {x: 750, y: -530, z: 0}
+    m_Position: {x: 720, y: -80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6827511204912988715}
-    m_Position: {x: 350, y: -550, z: 0}
+    m_Position: {x: 360, y: -80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1523311504692431278}
-    m_Position: {x: 340, y: -130, z: 0}
+    m_Position: {x: 360, y: -10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6965351223667793226}
     m_Position: {x: 360, y: 50, z: 0}
@@ -191,7 +191,13 @@ AnimatorController:
   m_PrefabAsset: {fileID: 0}
   m_Name: pistolAnim
   serializedVersion: 5
-  m_AnimatorParameters: []
+  m_AnimatorParameters:
+  - m_Name: DoneCooling
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -234,7 +240,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: DoneCooling
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 0}
   m_Solo: 0

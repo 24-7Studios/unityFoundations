@@ -218,7 +218,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1399968401232785994}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
@@ -226,7 +226,7 @@ Transform:
   - {fileID: 7919195205392767469}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3425450334388954965
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -293,8 +293,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9374285, y: 1.7365336, z: 0.465602}
-  m_Center: {x: 1.1377258, y: 0.0258798, z: 2.6573118e-17}
+  m_Size: {x: 0.6, y: 1.7365336, z: 1.4149781}
+  m_Center: {x: 0, y: 0, z: -0.8746881}
 --- !u!65 &1399968401232785995
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -306,8 +306,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.9104824, y: 1.1304016, z: 0.465602}
-  m_Center: {x: -0.7680497, y: 0.3362605, z: -6.344243e-16}
+  m_Size: {x: 0.6, y: 1.1525311, z: 2.5}
+  m_Center: {x: 0, y: 0.27626547, z: 1}
 --- !u!54 &1399968401232785991
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -348,10 +348,10 @@ MonoBehaviour:
   ViewAnim: {fileID: 8932223051446666706}
   aud: {fileID: 7599429597232043718}
   basePosOffset: {x: 0, y: 0, z: 0}
-  baseRotOffset: {x: 0, y: 90, z: 0}
+  baseRotOffset: {x: 0, y: 0, z: 0}
   baseScaOffset: {x: 0.5, y: 0.5, z: 0.5}
   WModelPosOffset: {x: 0, y: 0, z: 0}
-  WModelRotOffset: {x: 0, y: 90, z: 0}
+  WModelRotOffset: {x: 0, y: 0, z: 0}
   WModelScaOffset: {x: 0.5, y: 0.5, z: 0.5}
   fireAnim: shoot
   fireSound: {fileID: 8300000, guid: 8e2a8f560d2f221458e28ea02079f64a, type: 3}
@@ -360,7 +360,7 @@ MonoBehaviour:
   playerModelReload: 
   playerModelFire: 
   idleAnim: idle
-  viewpunch: 10
+  viewpunch: 5
   damage: 15
   fleshMultiplier: 1
   knockbackForce: 15
@@ -1777,7 +1777,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7398695899567342423}
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.19999996, y: 0.2, z: 0.19999996}
   m_Children:
