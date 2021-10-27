@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
-  syncInterval: 0.1
+  syncInterval: 0
   canDual: 1
   item: {fileID: 1399968401232785994}
   Shootable:
@@ -370,6 +370,9 @@ MonoBehaviour:
   loadedAmmo: 0
   fireDelay: 0.01
   reloadDelay: 0.1
+  coolRate: 50
+  heatPerShot: 10
+  coolAnim: overheatPull
 --- !u!82 &7599429597232043718
 AudioSource:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 using Mirror;
 using UnityEngine.InputSystem;
 
-public class gunClass : WeaponClass
+public class gunClass : raycastWeapon
 {
 
     [SerializeField]
@@ -20,31 +20,7 @@ public class gunClass : WeaponClass
     protected AudioClip reloadSound;
 
     [SerializeField]
-    protected string playerModelReload;
-
-    [SerializeField]
-    protected string playerModelFire;
-
-    [SerializeField]
     protected string idleAnim;
-
-    [SerializeField]
-    protected float viewpunch;
-
-    [SerializeField]
-    protected float damage;
-
-    [SerializeField]
-    protected float fleshMultiplier;
-
-    [SerializeField]
-    protected float knockbackForce;
-
-    [SerializeField]
-    protected float spread;
-
-    [SerializeField]
-    protected bool fullAuto;
 
     [SerializeField]
     protected int ammo;
@@ -53,15 +29,9 @@ public class gunClass : WeaponClass
     protected int loadedAmmo;
 
     [SerializeField]
-    protected float fireDelay;
-
-    [SerializeField]
     protected float reloadDelay;
 
-    protected float fireTimer;
     protected float reloadTimer;
-
-    protected bool hasShot;
 
     protected bool reloading;
     protected bool bufferedReload;
@@ -151,7 +121,7 @@ public class gunClass : WeaponClass
 
 
  
-    protected virtual void Fire()
+    protected override void Fire()
     {
         Vector3 shootDirection = (player.getCamTransformer().forward + Random.insideUnitSphere * spread).normalized;
 

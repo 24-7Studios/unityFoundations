@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 using Mirror;
 
-public class WeaponClass : NetworkBehaviour, Ipickup
+public abstract class WeaponClass : NetworkBehaviour, Ipickup
 {
 
     [SyncVar]
@@ -312,10 +312,9 @@ public class WeaponClass : NetworkBehaviour, Ipickup
         }
     }
 
+
     ///////////////////////////////////////////////
-    ///
-
-
+    /// common uses
     protected virtual void raycastShoot(float baseDamage, float multiplier, Vector3 position, Vector3 direction, LayerMask Shootable)
     {
         RaycastHit hit;
