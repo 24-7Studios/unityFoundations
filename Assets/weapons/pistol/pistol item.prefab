@@ -353,24 +353,22 @@ MonoBehaviour:
   WModelPosOffset: {x: 0, y: 0, z: 0}
   WModelRotOffset: {x: 0, y: 0, z: 0}
   WModelScaOffset: {x: 0.5, y: 0.5, z: 0.5}
-  fireAnim: shoot
-  fireSound: {fileID: 8300000, guid: 8e2a8f560d2f221458e28ea02079f64a, type: 3}
-  reloadAnim: overheatPull
-  reloadSound: {fileID: 8300000, guid: f6f11a53c75dfa94fae9b18b9fbace6d, type: 3}
-  playerModelReload: 
-  playerModelFire: 
-  idleAnim: idle
   viewpunch: 5
   damage: 15
   fleshMultiplier: 1
   knockbackForce: 15
   spread: 0.02
   fullAuto: 0
+  fireDelay: 0.08
+  fireAnim: shoot
+  fireSound: {fileID: 8300000, guid: 8e2a8f560d2f221458e28ea02079f64a, type: 3}
+  reloadAnim: overheatPull
+  reloadSound: {fileID: 8300000, guid: f6f11a53c75dfa94fae9b18b9fbace6d, type: 3}
+  idleAnim: idle
   ammo: 10
   loadedAmmo: 0
-  fireDelay: 0.01
   reloadDelay: 0.1
-  coolRate: 50
+  coolRate: 25
   heatPerShot: 10
   coolAnim: overheatPull
 --- !u!82 &7599429597232043718

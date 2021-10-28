@@ -74,10 +74,7 @@ public class BlasterClass : gunClass
 
     protected override void Fire()
     {
-        Vector3 shootDirection = (player.getCamTransformer().forward + Random.insideUnitSphere * spread).normalized;
-
-        raycastShoot(damage, fleshMultiplier, player.getCamTransformer().position, shootDirection, Shootable);
-
+        base.Fire();
         ViewAnim.Rebind();
         ViewAnim.Play(fireAnim);
         aud.PlayOneShot(fireSound);
@@ -101,6 +98,19 @@ public class BlasterClass : gunClass
     protected void cmdSyncHeat(float h)
     {
         heat = h;
+    }
+
+
+    [ClientRpc]
+    protected override void rpcFire()
+    {
+        aud.PlayOneShot(fireSound);
+    }
+
+    [Command]
+    protected override void cmdFire()
+    {
+        rpcFire();
     }
 
 }

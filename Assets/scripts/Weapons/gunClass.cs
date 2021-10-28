@@ -146,18 +146,18 @@ public class gunClass : raycastWeapon
     }
 
     [ClientRpc]
-    protected virtual void rpcFire()
+    protected override void rpcFire()
     {
         aud.PlayOneShot(fireSound);
     }
 
     [Command]
-    protected virtual void cmdFire()
+    protected override void cmdFire()
     {
         rpcFire();
     }
 
-    protected virtual void AltFire()
+    protected override void AltFire()
     {
         
     }
