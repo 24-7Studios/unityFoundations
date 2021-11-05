@@ -790,7 +790,7 @@ Transform:
   m_GameObject: {fileID: 3536624332776049524}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 5111472231519945040}
   - {fileID: 7687184453238026161}
@@ -1510,6 +1510,7 @@ GameObject:
   - component: {fileID: 6940346115762487360}
   - component: {fileID: 6340729145093656549}
   - component: {fileID: 8077835788581534511}
+  - component: {fileID: 2114045438613492114}
   - component: {fileID: 4282506938438291045}
   - component: {fileID: 1977627620440618473}
   - component: {fileID: 5481656280350149699}
@@ -1531,7 +1532,7 @@ Transform:
   m_GameObject: {fileID: 7717692746940111610}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 6980880544116682227}
   - {fileID: 4206166044046184910}
@@ -1591,6 +1592,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2114045438613492114
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7717692746940111610}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.295001, y: 6.8002872, z: 24.546638}
+  m_Center: {x: 0.0021100044, y: -1.6061054, z: 0.41253853}
 --- !u!114 &4282506938438291045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1616,10 +1630,10 @@ MonoBehaviour:
   aud: {fileID: 5481656280350149699}
   basePosOffset: {x: 0, y: 0, z: 0}
   baseRotOffset: {x: 0, y: 0, z: 0}
-  baseScaOffset: {x: 0, y: 0, z: 0}
+  baseScaOffset: {x: 0.1, y: 0.1, z: 0.1}
   WModelPosOffset: {x: 0, y: 0, z: 0}
   WModelRotOffset: {x: 0, y: 0, z: 0}
-  WModelScaOffset: {x: 0, y: 0, z: 0}
+  WModelScaOffset: {x: 0.1, y: 0.1, z: 0.1}
   viewpunch: 25
   damage: 50
   fleshMultiplier: 1
