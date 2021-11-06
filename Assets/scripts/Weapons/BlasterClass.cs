@@ -104,7 +104,10 @@ public class BlasterClass : gunClass
     [ClientRpc]
     protected override void rpcFire()
     {
-        aud.PlayOneShot(fireSound);
+        if(!player.isLocalPlayer)
+        {
+            aud.PlayOneShot(fireSound);
+        }
     }
 
     [Command]

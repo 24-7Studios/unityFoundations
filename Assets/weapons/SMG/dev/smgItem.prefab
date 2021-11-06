@@ -2076,22 +2076,20 @@ MonoBehaviour:
   WModelPosOffset: {x: 0, y: 0, z: 0}
   WModelRotOffset: {x: 0, y: 0, z: 0}
   WModelScaOffset: {x: 0.1, y: 0.1, z: 0.1}
-  fireAnim: fire
-  fireSound: {fileID: 8300000, guid: 1369b01e34cadb4448633e44b5bee192, type: 3}
-  reloadAnim: reload
-  reloadSound: {fileID: 8300000, guid: 9de70e4075957824691584c32098b149, type: 3}
-  playerModelReload: 
-  playerModelFire: 
-  idleAnim: idle
   viewpunch: 1.5
   damage: 10
   fleshMultiplier: 1
   knockbackForce: 1
   spread: 0.02
   fullAuto: 1
+  fireDelay: 0.08
+  fireAnim: fire
+  fireSound: {fileID: 8300000, guid: 1369b01e34cadb4448633e44b5bee192, type: 3}
+  reloadAnim: reload
+  reloadSound: {fileID: 8300000, guid: 9de70e4075957824691584c32098b149, type: 3}
+  idleAnim: idle
   ammo: 30
   loadedAmmo: 0
-  fireDelay: 0.08
   reloadDelay: 1
 --- !u!82 &4434117713964672165
 AudioSource:
@@ -2149,7 +2147,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

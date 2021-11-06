@@ -1635,9 +1635,9 @@ MonoBehaviour:
   WModelRotOffset: {x: 0, y: 0, z: 0}
   WModelScaOffset: {x: 0.1, y: 0.1, z: 0.1}
   viewpunch: 25
-  damage: 50
+  damage: 75
   fleshMultiplier: 1
-  knockbackForce: 10
+  knockbackForce: 50
   spread: 0
   fullAuto: 0
   fireDelay: 0.3
@@ -1721,7 +1721,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
