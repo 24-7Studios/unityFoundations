@@ -44,6 +44,12 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     [SerializeField]
     protected AudioSource aud;
 
+    [SerializeField]
+    protected IShootBehaviour primFireAction;
+
+    [SerializeField]
+    protected IShootBehaviour secFireAction;
+
     protected bool fire1Down;
     protected bool fire2Down;
     protected bool reloadDown;
