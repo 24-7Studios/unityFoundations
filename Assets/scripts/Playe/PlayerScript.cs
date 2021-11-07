@@ -745,6 +745,15 @@ public class PlayerScript : NetworkBehaviour, IDamage
         yMouseInput -= r;
     }
 
+    public float getHealth()
+    {
+        return health;
+    }
+
+    public float getShields()
+    {
+        return shields;
+    }
 
     public void die()
     {

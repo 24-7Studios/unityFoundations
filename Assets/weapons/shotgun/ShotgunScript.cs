@@ -8,6 +8,9 @@ public class ShotgunScript : gunClass
     [SerializeField]
     protected int shots = 10;
 
+    [SerializeField]
+    protected float altFireSpread = 0.5f;
+
     // Update is called once per frame
     protected override void Update()
     {
@@ -35,8 +38,14 @@ public class ShotgunScript : gunClass
 
     protected override void AltFire()
     {
+        float Tspread = spread;
+
+        spread = altFireSpread;
+
         Fire();
         Fire();
+
+        spread = Tspread;
     }
 
     protected override void Fire()
