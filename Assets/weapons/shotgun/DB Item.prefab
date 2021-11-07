@@ -1628,7 +1628,7 @@ MonoBehaviour:
   viewmodel: {fileID: 3536624332776049524}
   ViewAnim: {fileID: 442695515377518177}
   aud: {fileID: 5481656280350149699}
-  debugMode: 1
+  debugMode: 0
   debugMarker: {fileID: 4837419253238934036, guid: d294ffef25fbe1a4ca7ed8440f33ecc3,
     type: 3}
   basePosOffset: {x: 0, y: 0, z: 0}
@@ -1653,6 +1653,7 @@ MonoBehaviour:
   loadedAmmo: 0
   reloadDelay: 0
   shots: 10
+  altFireSpread: 0.5
 --- !u!54 &1977627620440618473
 Rigidbody:
   m_ObjectHideFlags: 0
