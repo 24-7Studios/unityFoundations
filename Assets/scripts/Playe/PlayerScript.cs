@@ -789,6 +789,10 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [ClientRpc]
     private void spawn(Vector3 spawnpos)
     {
+        if(isServer)
+        {
+            RpcCorrectPlayerPos(spawnpos);
+        }
         transform.position = spawnpos;
     }
 
