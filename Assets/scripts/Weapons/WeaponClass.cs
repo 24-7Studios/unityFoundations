@@ -44,6 +44,12 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     [SerializeField]
     protected AudioSource aud;
 
+    [SerializeField]
+    protected bool debugMode;
+
+    [SerializeField]
+    protected GameObject debugMarker;
+
     protected List<AudioClip> sounds = new List<AudioClip>();
 
     protected bool fire1Down;
@@ -377,6 +383,14 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
             {
                 rb.AddForceAtPosition(direction, hit.point, ForceMode.Impulse);
                 pushObject(hit.collider.gameObject, direction, hit.point);
+            }
+
+            if(iD == null && rb == null)
+            {
+                if(debugMode)
+                {
+                    Instantiate(debugMarker, hit.point, Quaternion.Euler(hit.normal));
+                }
             }
 
         }

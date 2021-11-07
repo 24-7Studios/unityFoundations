@@ -113,14 +113,13 @@ public class gunClass : raycastWeapon
                             }
                         }
                     }
-                    if (!fire1Down)
+                    if (!fire1Down && !fire2Down)
                     {
                         hasShot = false;
                     }
                 }
             }
         }
-
     }
 
 
