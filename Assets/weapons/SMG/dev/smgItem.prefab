@@ -2070,6 +2070,9 @@ MonoBehaviour:
   viewmodel: {fileID: 3922922007142530250}
   ViewAnim: {fileID: 6866868032737523753}
   aud: {fileID: 4434117713964672165}
+  sounds:
+  - {fileID: 8300000, guid: 9bc6f20059c89904ebadbd67d7c45113, type: 3}
+  - {fileID: 8300000, guid: 9de70e4075957824691584c32098b149, type: 3}
   basePosOffset: {x: 0, y: 0, z: 0}
   baseRotOffset: {x: 0, y: 0, z: 0}
   baseScaOffset: {x: 0.1, y: 0.1, z: 0.1}

@@ -41,6 +41,9 @@ public class gunClass : raycastWeapon
     {
         base.Start();
 
+        fireSound = sounds[0];
+        reloadSound = sounds[1];
+
         loadedAmmo = ammo;
     }
 
@@ -129,7 +132,7 @@ public class gunClass : raycastWeapon
 
         ViewAnim.Rebind();
         ViewAnim.Play(fireAnim);
-        aud.PlayOneShot(fireSound);
+        playsound(0);
         player.viewPunch(viewpunch);
         loadedAmmo--;
         fireTimer = fireDelay;
@@ -150,7 +153,7 @@ public class gunClass : raycastWeapon
     {
         if(!player.isLocalPlayer)
         {
-            aud.PlayOneShot(fireSound);
+           aud.PlayOneShot(fireSound);
         }
     }
 
@@ -169,7 +172,7 @@ public class gunClass : raycastWeapon
     protected virtual void reload()
     {
         ViewAnim.Play(reloadAnim);
-        aud.PlayOneShot(reloadSound);
+        playsound(1);
         reloadTimer = reloadDelay;
         reloading = true;
         if (isServer)

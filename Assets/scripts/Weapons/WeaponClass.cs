@@ -45,10 +45,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     protected AudioSource aud;
 
     [SerializeField]
-    protected IShootBehaviour primFireAction;
-
-    [SerializeField]
-    protected IShootBehaviour secFireAction;
+    protected List<AudioClip> sounds = new List<AudioClip>();
 
     protected bool fire1Down;
     protected bool fire2Down;
@@ -320,7 +317,48 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
 
     ///////////////////////////////////////////////
-    /// common uses
+    /// common use functions
+    /// 
+
+
+    protected virtual void playsound(int index)
+    {
+        AudioClip clip = sounds[index];
+
+        aud.PlayOneShot(clip);
+
+        if(!isServer)
+        {
+            cmdPlaySound(index);
+        }
+        else
+        {
+            rpcPlaySound(index);
+        }
+    }
+
+    [Command]
+    protected virtual void cmdPlaySound(int index)
+    {
+        rpcPlaySound(index);
+    }
+
+    [ClientRpc]
+    protected virtual void rpcPlaySound(int index)
+    {
+
+        AudioClip clip = sounds[index];
+
+        if (player != null && !player.isLocalPlayer)
+        {
+            aud.PlayOneShot(clip);
+        }
+        else if(player == null)
+        {
+            aud.PlayOneShot(clip);
+        }
+    }
+
     protected virtual void raycastShoot(float baseDamage, float multiplier, Vector3 position, Vector3 direction, LayerMask Shootable)
     {
         RaycastHit hit;
