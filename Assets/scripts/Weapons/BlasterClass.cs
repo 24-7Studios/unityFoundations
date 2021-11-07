@@ -77,7 +77,7 @@ public class BlasterClass : gunClass
         base.Fire();
         ViewAnim.Rebind();
         ViewAnim.Play(fireAnim);
-        aud.PlayOneShot(fireSound);
+        playsound(sounds.IndexOf(fireSound));
         player.viewPunch(viewpunch);
         heat += heatPerShot;
         fireTimer = fireDelay;
@@ -104,10 +104,7 @@ public class BlasterClass : gunClass
     [ClientRpc]
     protected override void rpcFire()
     {
-        if(!player.isLocalPlayer)
-        {
-            aud.PlayOneShot(fireSound);
-        }
+
     }
 
     [Command]

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Mirror;
 using UnityEngine.InputSystem;
@@ -41,8 +42,8 @@ public class gunClass : raycastWeapon
     {
         base.Start();
 
-        fireSound = sounds[0];
-        reloadSound = sounds[1];
+        sounds.Add(fireSound);
+        sounds.Add(reloadSound);
 
         loadedAmmo = ammo;
     }
@@ -132,7 +133,7 @@ public class gunClass : raycastWeapon
 
         ViewAnim.Rebind();
         ViewAnim.Play(fireAnim);
-        playsound(0);
+        playsound(sounds.IndexOf(fireSound));
         player.viewPunch(viewpunch);
         loadedAmmo--;
         fireTimer = fireDelay;
@@ -151,10 +152,7 @@ public class gunClass : raycastWeapon
     [ClientRpc]
     protected override void rpcFire()
     {
-        if(!player.isLocalPlayer)
-        {
-           aud.PlayOneShot(fireSound);
-        }
+        
     }
 
     [Command]
@@ -172,7 +170,7 @@ public class gunClass : raycastWeapon
     protected virtual void reload()
     {
         ViewAnim.Play(reloadAnim);
-        playsound(1);
+        playsound(sounds.IndexOf(reloadSound));
         reloadTimer = reloadDelay;
         reloading = true;
         if (isServer)
@@ -194,10 +192,7 @@ public class gunClass : raycastWeapon
     [ClientRpc]
     protected virtual void rpcReload()
     {
-        if(!player.isLocalPlayer)
-        {
-            aud.PlayOneShot(reloadSound);
-        }
+        
     }
 
     [Command]

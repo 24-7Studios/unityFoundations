@@ -62,5 +62,15 @@ public abstract class raycastWeapon : WeaponClass
 
     }
 
+    [Command]
+    protected virtual void cmdAltFire()
+    {
+        rpcAltFire();
+    }
 
+    [ClientRpc]
+    protected virtual void rpcAltFire()
+    {
+
+    }
 }

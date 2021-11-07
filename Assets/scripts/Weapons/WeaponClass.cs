@@ -44,7 +44,6 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     [SerializeField]
     protected AudioSource aud;
 
-    [SerializeField]
     protected List<AudioClip> sounds = new List<AudioClip>();
 
     protected bool fire1Down;
