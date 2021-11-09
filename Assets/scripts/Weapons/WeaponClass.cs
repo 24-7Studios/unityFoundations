@@ -50,6 +50,9 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     [SerializeField]
     protected GameObject debugMarker;
 
+    [SerializeField]
+    protected GameObject hitEffect;
+
     protected List<AudioClip> sounds = new List<AudioClip>();
 
     protected bool fire1Down;
@@ -385,11 +388,20 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
                 pushObject(hit.collider.gameObject, direction, hit.point);
             }
 
-            if(iD == null && rb == null)
+            if(hitEffect != null)
+            {
+                Debug.Log(hit.normal);
+                Instantiate(hitEffect, hit.point, Quaternion.Euler(hit.normal));
+            }
+
+            if (iD == null && rb == null)
             {
                 if(debugMode)
                 {
-                    Instantiate(debugMarker, hit.point, Quaternion.Euler(hit.normal));
+                    if(debugMarker != null)
+                    {
+                        Instantiate(debugMarker, hit.point, Quaternion.Euler(hit.normal));
+                    }
                 }
             }
 

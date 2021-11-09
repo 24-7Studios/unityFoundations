@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8228248526373692128}
   - component: {fileID: 3062195841685954932}
   - component: {fileID: 2808966418510509966}
-  - component: {fileID: 7722374265644460906}
+  - component: {fileID: 3439569118455314733}
   m_Layer: 0
   m_Name: impact
   m_TagString: Untagged
@@ -29,6 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -4783,6 +4784,7 @@ ParticleSystemRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_RenderMode: 0
+  m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
@@ -4806,8 +4808,12 @@ ParticleSystemRenderer:
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
+  m_MeshWeighting: 1
+  m_MeshWeighting1: 1
+  m_MeshWeighting2: 1
+  m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &7722374265644460906
+--- !u!114 &3439569118455314733
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4816,7 +4822,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5718995469900101050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05cdad1fb850e3b4789c1a811f7f54c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 00f3f42e718bd9240bee81f4be54e4b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
+  timer: 0.3
