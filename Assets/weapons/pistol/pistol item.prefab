@@ -383,8 +383,9 @@ MonoBehaviour:
   coolRate: 25
   heatPerShot: 10
   coolAnim: overheatPull
-  burstAmount: 0
+  burstAmount: 3
   clickSound: {fileID: 8300000, guid: f6f11a53c75dfa94fae9b18b9fbace6d, type: 3}
+  burstDelay: 1
 --- !u!82 &7599429597232043718
 AudioSource:
   m_ObjectHideFlags: 0

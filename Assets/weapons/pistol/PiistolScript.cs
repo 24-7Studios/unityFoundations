@@ -11,9 +11,13 @@ public class PiistolScript : BlasterClass
     [SerializeField]
     protected AudioClip clickSound;
 
+    [SerializeField]
+    protected float burstDelay;
+
     protected bool burst;
     protected bool inBurst;
     protected int burstCounter;
+    protected float burstTimer;
 
 
     protected override void Start()
@@ -26,6 +30,7 @@ public class PiistolScript : BlasterClass
     protected override void Update()
     {
         base.Update();
+        burstTimer -= Time.fixedDeltaTime;
 
         if(viewmodel.activeSelf)
         {
@@ -61,12 +66,18 @@ public class PiistolScript : BlasterClass
 
     protected override void Fire()
     {
-        if(burst)
+        if(burst && !inBurst)
         {
-            inBurst = true;
-            return;
+            if(burstTimer <= 0)
+            {
+                inBurst = true;
+                burstTimer = burstDelay;
+            }
         }
-        base.Fire();
+        else
+        {
+            base.Fire();
+        }
     }
 
 

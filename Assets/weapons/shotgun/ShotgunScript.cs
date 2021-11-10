@@ -22,7 +22,7 @@ public class ShotgunScript : gunClass
             {
                 if (fireTimer <= 0)
                 {
-                    if (loadedAmmo > 1)
+                    if (loadedAmmo > 0)
                     {
                         AltFire();
                         hasShot = true;
@@ -43,7 +43,10 @@ public class ShotgunScript : gunClass
         spread = altFireSpread;
 
         Fire();
-        Fire();
+        if(loadedAmmo > 1)
+        {
+            Fire();
+        }
 
         spread = Tspread;
     }
