@@ -365,7 +365,7 @@ MonoBehaviour:
   WModelPosOffset: {x: 0, y: 0, z: 0}
   WModelRotOffset: {x: 0, y: 0, z: 0}
   WModelScaOffset: {x: 0.5, y: 0.5, z: 0.5}
-  viewpunch: 5
+  viewpunch: 2
   damage: 15
   fleshMultiplier: 1
   knockbackForce: 15
@@ -383,6 +383,8 @@ MonoBehaviour:
   coolRate: 25
   heatPerShot: 10
   coolAnim: overheatPull
+  burstAmount: 0
+  clickSound: {fileID: 8300000, guid: f6f11a53c75dfa94fae9b18b9fbace6d, type: 3}
 --- !u!82 &7599429597232043718
 AudioSource:
   m_ObjectHideFlags: 0

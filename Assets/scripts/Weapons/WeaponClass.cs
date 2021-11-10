@@ -390,8 +390,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
             if(hitEffect != null)
             {
-                Debug.Log(hit.normal);
-                Instantiate(hitEffect, hit.point, Quaternion.Euler(hit.normal));
+                Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
             }
 
             if (iD == null && rb == null)
