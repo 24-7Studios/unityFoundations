@@ -42,11 +42,11 @@ public class ShotgunScript : gunClass
 
         spread = altFireSpread;
 
-        Fire();
         if(loadedAmmo > 1)
         {
             Fire();
         }
+        Fire();
 
         spread = Tspread;
     }

@@ -777,22 +777,21 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private void rpcDie()
     {
         died?.Invoke(this);
-        foreach (NetworkIdentity i in backpack.GetComponentsInChildren<NetworkIdentity>())
-        {
-            drop(i);
-        }
-        health = DefaultHealth;
-        Debug.Log(health);
-        aud.PlayOneShot(DieSound);
     }
     
     private void onDeath(PlayerScript p)
     {
-        if(isServer && p == this)
+        foreach (NetworkIdentity i in backpack.GetComponentsInChildren<NetworkIdentity>())
+        {
+            drop(i);
+        }
+        if (isServer && p == this)
         {
             List<NetworkStartPosition> positions = FindObjectsOfType<NetworkStartPosition>().ToList<NetworkStartPosition>();
             spawn(positions[(int)(Random.value * positions.Count)].transform.position);  
         }
+        health = DefaultHealth;
+        aud.PlayOneShot(DieSound);
     }
 
     [ClientRpc]
