@@ -781,12 +781,12 @@ public class PlayerScript : NetworkBehaviour, IDamage
     
     private void onDeath(PlayerScript p)
     {
-        foreach (NetworkIdentity i in backpack.GetComponentsInChildren<NetworkIdentity>())
-        {
-            drop(i);
-        }
         if (isServer && p == this)
         {
+            foreach (NetworkIdentity i in backpack.GetComponentsInChildren<NetworkIdentity>())
+            {
+                drop(i);
+            }
             List<NetworkStartPosition> positions = FindObjectsOfType<NetworkStartPosition>().ToList<NetworkStartPosition>();
             spawn(positions[(int)(Random.value * positions.Count)].transform.position);  
         }
