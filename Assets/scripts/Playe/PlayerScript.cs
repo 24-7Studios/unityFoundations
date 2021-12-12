@@ -174,6 +174,12 @@ public class PlayerScript : NetworkBehaviour, IDamage
     Slot secondary;
 
     [SerializeField]
+    Slot meleeSlot;
+
+    [SerializeField]
+    WeaponClass defaultMelee;
+
+    [SerializeField]
     private Slot equipedSlot;
     
 
@@ -201,16 +207,18 @@ public class PlayerScript : NetworkBehaviour, IDamage
         health = DefaultHealth;
 
 
-        for(int i = 0; i < numOfSlots; i++)
+        for(int i = 0; i <= numOfSlots; i++)
         {
             Slot s = new Slot(i);
             WeaponSlots.Add(s);
         }
 
-        primary = WeaponSlots[0];
-        secondary = WeaponSlots[1];
+        meleeSlot = WeaponSlots[0];
+        primary = WeaponSlots[1];
+        secondary = WeaponSlots[2];
 
-        equipedSlot = primary;
+        equipedSlot = meleeSlot;
+
 
         setPlayermodel(PlayerModel);
 
@@ -368,6 +376,45 @@ public class PlayerScript : NetworkBehaviour, IDamage
         ////////////////////////////////////////////////////////
         //backpack 
         
+        if(isLocalPlayer)
+        {
+            if(meleeSlot.getWeapon() == null)
+            {
+                GameObject melee = Instantiate(defaultMelee.gameObject);
+                NetworkServer.Spawn(melee);
+                melee.GetComponent<WeaponClass>().forcedPickup(this, meleeSlot.getIndex(), false);
+            }
+        }
+
+        if(equipedSlot.getWeapon() != null)
+        {
+            equipedSlot.getWeapon().getViewmodelOb().SetActive(true);
+            equipedSlot.getWeapon().getWorldModelOb().SetActive(true);
+        }
+        if(equipedSlot.getOtherHand() != null)
+        {
+            equipedSlot.getOtherHand().getViewmodelOb().SetActive(true);
+            equipedSlot.getOtherHand().getWorldModelOb().SetActive(true);
+        }
+
+        foreach (Slot s in WeaponSlots)
+        {
+            if(s != equipedSlot)
+            {
+                if(s.getWeapon() != null)
+                {
+                    s.getWeapon().getViewmodelOb().SetActive(false);
+                    s.getWeapon().getWorldModelOb().SetActive(false);
+                }
+                if (s.getOtherHand() != null)
+                {
+                    s.getOtherHand().getViewmodelOb().SetActive(false);
+                    s.getOtherHand().getWorldModelOb().SetActive(false);
+                }
+            }
+        }
+
+        /*
         if(equipedSlot.getWeapon() != null)
         {
             if(isLocalPlayer)
@@ -436,6 +483,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
                 }
             }
         }
+        */
 
     }
 
@@ -665,13 +713,13 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private void changeSlot()
     {
-        if(equipedSlot == primary)
+        if(equipedSlot.getIndex() == numOfSlots)
         {
-            equipedSlot = secondary;
+            equipedSlot = WeaponSlots[0];
         }
         else
         {
-            equipedSlot = primary;
+            equipedSlot = WeaponSlots[equipedSlot.getIndex() + 1];
         }
 
         if(!isServer)

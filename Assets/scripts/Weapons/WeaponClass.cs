@@ -77,22 +77,18 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        
-        if(player != null && transform.parent == null)
+
+        if (player != null && transform.parent == null)
         {
             forcedPickup(player, index, hand);
         }
 
     }
 
-    // Update is called once per frame
     protected virtual void Update()
     {
-
         
-
     }
-
 
     public GameObject getWorldModelOb()
     {
@@ -405,6 +401,11 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
             }
 
         }
+    }
+
+    protected virtual void smack(float damage, float multiplier, float radius, LayerMask shootable)
+    {
+
     }
 
     [Command]
