@@ -167,11 +167,11 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [SyncVar]
     List<Slot> WeaponSlots = new List<Slot>();
 
-    [SerializeField]
+    /*[SerializeField]
     Slot primary;
 
     [SerializeField]
-    Slot secondary;
+    Slot secondary;*/
 
     [SerializeField]
     Slot meleeSlot;
@@ -217,8 +217,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
         }
 
         meleeSlot = WeaponSlots[0];
-        primary = WeaponSlots[1];
-        secondary = WeaponSlots[2];
+        //primary = WeaponSlots[1];
+        //secondary = WeaponSlots[2];
 
         equipedSlot = meleeSlot;
 
@@ -724,13 +724,14 @@ public class PlayerScript : NetworkBehaviour, IDamage
         else
         {
             equipedSlot = WeaponSlots[equipedSlot.getIndex() + 1];
-            if (WeaponSlots[equipedSlot.getIndex()].getWeapon() == null)
-            {
-                changeSlot();
-            }
         }
 
-        if(!isServer)
+        if (equipedSlot.getWeapon() == null || equipedSlot == meleeSlot)
+        {
+            changeSlot();
+        }
+
+        if (!isServer)
         {
             cmdChangeSlot(equipedSlot.getIndex());
         }
