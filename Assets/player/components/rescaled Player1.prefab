@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acdfc876a8d586d46b023dc0822eab56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MouseSens: 100
+  MouseSens: 25
 --- !u!114 &9197878631791620066
 MonoBehaviour:
   m_ObjectHideFlags: 0

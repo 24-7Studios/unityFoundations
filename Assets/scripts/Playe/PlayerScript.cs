@@ -181,6 +181,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     [SerializeField]
     private Slot equipedSlot;
+
+    [SerializeField]
+    private Slot previousSlot;
     
 
 
@@ -713,13 +716,18 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private void changeSlot()
     {
+        previousSlot = equipedSlot;
         if(equipedSlot.getIndex() == numOfSlots)
         {
-            equipedSlot = WeaponSlots[0];
+                equipedSlot = WeaponSlots[0];
         }
         else
         {
             equipedSlot = WeaponSlots[equipedSlot.getIndex() + 1];
+            if (WeaponSlots[equipedSlot.getIndex()].getWeapon() == null)
+            {
+                changeSlot();
+            }
         }
 
         if(!isServer)
@@ -736,6 +744,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [Command]
     private void cmdChangeSlot(int i)
     {
+        previousSlot = equipedSlot;
         equipedSlot = WeaponSlots[i];
         rpcChangeSlot(i);
     }
@@ -745,6 +754,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     {
         if(!isLocalPlayer)
         {
+            previousSlot = equipedSlot;
             equipedSlot = WeaponSlots[i];
         }
     }
@@ -769,6 +779,25 @@ public class PlayerScript : NetworkBehaviour, IDamage
         return WeaponSlots[s];
     }
 
+    public Slot getPickupSlot()
+    {
+        foreach(Slot s in WeaponSlots)
+        {
+            if (s.getWeapon() == null)
+            {
+                return s;
+            }
+        }
+
+        if(equipedSlot != meleeSlot)
+        {
+            return equipedSlot;
+        }
+        else
+        {
+            return previousSlot;
+        }
+    }
 
     public void drop(GameObject thing)
     {   

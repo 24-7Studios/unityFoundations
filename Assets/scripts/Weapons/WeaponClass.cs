@@ -124,7 +124,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         if(isServer)
             netIdentity.AssignClientAuthority(player.connectionToClient);
 
-        slot = player.getEquipedSlot();
+        slot = player.getPickupSlot();
         index = slot.getIndex();
 
         slot.setWeapon(this, hand);
