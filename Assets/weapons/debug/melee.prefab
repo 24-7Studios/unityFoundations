@@ -999,8 +999,8 @@ MonoBehaviour:
   idle: idle breath
   inspect: 
   inspectTime: 10
-  punch1: {fileID: 0}
-  punch2: {fileID: 0}
+  punch1: {fileID: 8300000, guid: ee1974807b87561418d5af31a9ff5359, type: 3}
+  punch2: {fileID: 8300000, guid: 16b35c68432efba4f90b61a9300b749f, type: 3}
   inspectSound: {fileID: 0}
   hitRadius: 0
   damage: 0
