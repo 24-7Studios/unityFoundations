@@ -738,7 +738,20 @@ public class PlayerScript : NetworkBehaviour, IDamage
         {
             rpcChangeSlot(equipedSlot.getIndex());
         }
+    }
 
+    private void equipToMelee()
+    {
+        previousSlot = equipedSlot;
+        equipedSlot = meleeSlot;
+        if (!isServer)
+        {
+            cmdChangeSlot(equipedSlot.getIndex());
+        }
+        else
+        {
+            rpcChangeSlot(equipedSlot.getIndex());
+        }
     }
 
     [Command]

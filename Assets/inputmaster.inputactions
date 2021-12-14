@@ -11,7 +11,8 @@
                     "id": "e761f024-addf-4cf5-a38a-f0a15a112488",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "jump",
@@ -19,7 +20,8 @@
                     "id": "451f71ac-93f8-4e63-8c8c-f8ef0c2f30cb",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Movement",
@@ -27,7 +29,8 @@
                     "id": "5d3149f4-2a4b-4a54-af55-91d2f96b3be4",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Change",
@@ -35,7 +38,8 @@
                     "id": "c3b2bfbf-9a55-4025-a929-6c2af0258380",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "interact",
@@ -43,7 +47,8 @@
                     "id": "140ded67-27fb-439c-bf63-5a9df26ed819",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Fire_1",
@@ -51,7 +56,8 @@
                     "id": "92026b81-ea9e-4cb7-868d-cd5fc69714f5",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Fire_2/Zoom1",
@@ -59,7 +65,8 @@
                     "id": "3154bfe1-127f-4536-81a0-6f034a659eff",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "reload",
@@ -67,7 +74,8 @@
                     "id": "1b3b9af8-9eed-4408-8268-bcfca367b39a",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "reload2",
@@ -75,7 +83,8 @@
                     "id": "99f1f650-cbbb-4716-bd97-7ba6cec839c3",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -237,6 +246,17 @@
                 },
                 {
                     "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "gamepad",
+            "bindingGroup": "gamepad",
+            "devices": [
+                {
+                    "devicePath": "<WebGLGamepad>",
                     "isOptional": false,
                     "isOR": false
                 }

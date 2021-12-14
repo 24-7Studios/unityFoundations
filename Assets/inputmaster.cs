@@ -272,6 +272,17 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                     ""isOR"": false
                 }
             ]
+        },
+        {
+            ""name"": ""gamepad"",
+            ""bindingGroup"": ""gamepad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<WebGLGamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
@@ -445,6 +456,15 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
         {
             if (m_mousekeybaordSchemeIndex == -1) m_mousekeybaordSchemeIndex = asset.FindControlSchemeIndex("mouse + keybaord");
             return asset.controlSchemes[m_mousekeybaordSchemeIndex];
+        }
+    }
+    private int m_gamepadSchemeIndex = -1;
+    public InputControlScheme gamepadScheme
+    {
+        get
+        {
+            if (m_gamepadSchemeIndex == -1) m_gamepadSchemeIndex = asset.FindControlSchemeIndex("gamepad");
+            return asset.controlSchemes[m_gamepadSchemeIndex];
         }
     }
     public interface IPlayerActions
