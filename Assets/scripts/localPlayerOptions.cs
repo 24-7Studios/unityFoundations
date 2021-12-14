@@ -7,7 +7,7 @@ public class localPlayerOptions : MonoBehaviour
 
 
     public float MouseSens = 10;
-
+    public float controllerSens = 100;
 
 
 

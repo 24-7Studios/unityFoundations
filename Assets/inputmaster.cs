@@ -102,7 +102,16 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""reload2"",
                     ""type"": ""Button"",
-                    ""id"": ""99f1f650-cbbb-4716-bd97-7ba6cec839c3"",
+                    ""id"": ""7d2cb123-8ff9-4447-a713-d6cb739a8409"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""melee"",
+                    ""type"": ""Button"",
+                    ""id"": ""9798b9a0-aa45-4f96-af2c-575c45aa7e21"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -117,6 +126,17 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""mouse + keybaord"",
+                    ""action"": ""jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a7a723c2-c844-47e5-b48d-4292d0e66ad1"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""gamepad"",
                     ""action"": ""jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -178,11 +198,33 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""49979ae2-7f06-4a70-be3f-fd41082a31a5"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""f85e59ce-1b03-44f4-8370-5593c2b787b0"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""mouse + keybaord"",
+                    ""action"": ""looking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""943b2ae3-a14b-43bf-a66a-eaf8aa2d4f45"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""gamepad"",
                     ""action"": ""looking"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -200,11 +242,33 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""5595f04c-8195-43ef-96fd-7f7bccb7bbe4"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""gamepad"",
+                    ""action"": ""interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""85694f22-a308-4d5f-9808-84a181edd587"",
                     ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""mouse + keybaord"",
+                    ""action"": ""Change"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""39cbfbf7-41a3-46a9-aed9-f20cd88b10e1"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""gamepad"",
                     ""action"": ""Change"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -222,11 +286,33 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""411f0d48-1b7c-4dc2-af7d-89c577b2820e"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""gamepad"",
+                    ""action"": ""Fire_1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""29a78e4f-3e55-48b6-9f04-746864e1ffa6"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""mouse + keybaord"",
+                    ""action"": ""Fire_2/Zoom1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ab76664a-cccd-4adf-92ea-6628ae140c37"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""gamepad"",
                     ""action"": ""Fire_2/Zoom1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -244,11 +330,55 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b100b47c-1fa8-4b37-9fb6-0aab10bafad1"",
+                    ""id"": ""b08edc27-5cb2-4ff3-8ccb-93f47f2c37e5"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""gamepad"",
+                    ""action"": ""reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""91418210-6667-44d4-af2c-8bbf01633c62"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""mouse + keybaord"",
+                    ""action"": ""melee"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""126a64b2-d96f-4221-bcec-2627103f4199"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""gamepad"",
+                    ""action"": ""melee"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f4950f31-471d-4816-bca0-1acc40756fcb"",
                     ""path"": ""<Keyboard>/v"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""mouse + keybaord"",
+                    ""action"": ""reload2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""339a6e94-5e8a-4d23-b0ba-8af1dc81a46c"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""gamepad"",
                     ""action"": ""reload2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -278,7 +408,7 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
             ""bindingGroup"": ""gamepad"",
             ""devices"": [
                 {
-                    ""devicePath"": ""<WebGLGamepad>"",
+                    ""devicePath"": ""<XInputController>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -297,6 +427,7 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
         m_Player_Fire_2Zoom1 = m_Player.FindAction("Fire_2/Zoom1", throwIfNotFound: true);
         m_Player_reload = m_Player.FindAction("reload", throwIfNotFound: true);
         m_Player_reload2 = m_Player.FindAction("reload2", throwIfNotFound: true);
+        m_Player_melee = m_Player.FindAction("melee", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -365,6 +496,7 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Fire_2Zoom1;
     private readonly InputAction m_Player_reload;
     private readonly InputAction m_Player_reload2;
+    private readonly InputAction m_Player_melee;
     public struct PlayerActions
     {
         private @Inputmaster m_Wrapper;
@@ -378,6 +510,7 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
         public InputAction @Fire_2Zoom1 => m_Wrapper.m_Player_Fire_2Zoom1;
         public InputAction @reload => m_Wrapper.m_Player_reload;
         public InputAction @reload2 => m_Wrapper.m_Player_reload2;
+        public InputAction @melee => m_Wrapper.m_Player_melee;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -414,6 +547,9 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                 @reload2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload2;
                 @reload2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload2;
                 @reload2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload2;
+                @melee.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMelee;
+                @melee.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMelee;
+                @melee.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMelee;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -445,6 +581,9 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                 @reload2.started += instance.OnReload2;
                 @reload2.performed += instance.OnReload2;
                 @reload2.canceled += instance.OnReload2;
+                @melee.started += instance.OnMelee;
+                @melee.performed += instance.OnMelee;
+                @melee.canceled += instance.OnMelee;
             }
         }
     }
@@ -478,5 +617,6 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
         void OnFire_2Zoom1(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnReload2(InputAction.CallbackContext context);
+        void OnMelee(InputAction.CallbackContext context);
     }
 }

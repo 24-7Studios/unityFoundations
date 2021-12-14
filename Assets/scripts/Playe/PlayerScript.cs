@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 using Mirror;
 
 public class PlayerScript : NetworkBehaviour, IDamage
@@ -198,6 +199,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         controls = new Inputmaster();
         controls.Player.jump.performed += ctx => activateJump();
         controls.Player.Change.performed += ctx => changeSlot();
+        controls.Player.melee.performed += ctx => equipToMelee();
         died += onDeath;
 
         
@@ -236,7 +238,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
             controls.Player.Enable();
 
-            sens = settings.MouseSens;
+            
 
 
 
@@ -278,10 +280,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
         if (isLocalPlayer)
         {
 
-
-
-            float MouseX = controls.Player.looking.ReadValue<Vector2>().x * sens * Time.deltaTime;
-            float MouseY = controls.Player.looking.ReadValue<Vector2>().y * sens * Time.deltaTime;
+            
+            float MouseX = controls.Player.looking.ReadValue<Vector2>().x * settings.MouseSens * Time.deltaTime;
+            float MouseY = controls.Player.looking.ReadValue<Vector2>().y * settings.MouseSens * Time.deltaTime;
 
 
             yMouseInput -= MouseY;
@@ -743,8 +744,17 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private void equipToMelee()
     {
-        previousSlot = equipedSlot;
-        equipedSlot = meleeSlot;
+        if(equipedSlot == meleeSlot && previousSlot != null)
+        { 
+            equipedSlot = previousSlot;
+            previousSlot = meleeSlot;
+        }
+        else
+        {
+            previousSlot = equipedSlot;
+            equipedSlot = meleeSlot;
+        }
+
         if (!isServer)
         {
             cmdChangeSlot(equipedSlot.getIndex());
