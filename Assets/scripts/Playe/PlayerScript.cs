@@ -280,19 +280,24 @@ public class PlayerScript : NetworkBehaviour, IDamage
         if (isLocalPlayer)
         {
 
-            float MouseX;
-            float MouseY;
+            float MouseX = 0;
+            float MouseY = 0;
+            
+            if (controls.Player.looking.activeControl != null)
+            {
+                if (controls.Player.looking.activeControl.device.description.deviceClass == "Gamepad")
+                {
+                    MouseX = controls.Player.looking.ReadValue<Vector2>().x * settings.controllerSens * Time.deltaTime;
+                    MouseY = controls.Player.looking.ReadValue<Vector2>().y * settings.controllerSens * Time.deltaTime;
+                }
+                else
+                {
+                    MouseX = controls.Player.looking.ReadValue<Vector2>().x * settings.MouseSens * Time.deltaTime;
+                    MouseY = controls.Player.looking.ReadValue<Vector2>().y * settings.MouseSens * Time.deltaTime;
+                }
+            }
 
-            if (controls.Player.looking.activeControl.device.description.deviceClass == "Gamepad")
-            {
-                MouseX = controls.Player.looking.ReadValue<Vector2>().x * settings.controllerSens * Time.deltaTime;
-                MouseY = controls.Player.looking.ReadValue<Vector2>().y * settings.controllerSens * Time.deltaTime;
-            }
-            else
-            {
-                MouseX = controls.Player.looking.ReadValue<Vector2>().x * settings.MouseSens * Time.deltaTime;
-                MouseY = controls.Player.looking.ReadValue<Vector2>().y * settings.MouseSens * Time.deltaTime;
-            }
+            
 
 
             yMouseInput -= MouseY;
