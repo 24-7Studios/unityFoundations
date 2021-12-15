@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.InputSystem.Users;
 using Mirror;
 
 public class PlayerScript : NetworkBehaviour, IDamage
@@ -190,6 +191,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     //controls
     private Inputmaster controls;
+    private PlayerInput input;
     
 
 
@@ -197,6 +199,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     {
 
         controls = new Inputmaster();
+        input = GetComponent<PlayerInput>();
         controls.Player.jump.performed += ctx => activateJump();
         controls.Player.Change.performed += ctx => changeSlot();
         controls.Player.melee.performed += ctx => equipToMelee();
@@ -282,22 +285,22 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
             float MouseX = 0;
             float MouseY = 0;
-            
-            if (controls.Player.looking.activeControl != null)
+
+
+
+            if (input.currentControlScheme.Equals("gamepad"))
             {
-                if (controls.Player.looking.activeControl.device.description.deviceClass == "Gamepad")
-                {
-                    MouseX = controls.Player.looking.ReadValue<Vector2>().x * settings.controllerSens * Time.deltaTime;
-                    MouseY = controls.Player.looking.ReadValue<Vector2>().y * settings.controllerSens * Time.deltaTime;
-                }
-                else
-                {
-                    MouseX = controls.Player.looking.ReadValue<Vector2>().x * settings.MouseSens * Time.deltaTime;
-                    MouseY = controls.Player.looking.ReadValue<Vector2>().y * settings.MouseSens * Time.deltaTime;
-                }
+                MouseX = controls.Player.looking.ReadValue<Vector2>().x * settings.controllerSens * Time.deltaTime;
+                MouseY = controls.Player.looking.ReadValue<Vector2>().y * settings.controllerSens * Time.deltaTime;
+            }
+            else
+            {
+                MouseX = controls.Player.looking.ReadValue<Vector2>().x * settings.MouseSens * Time.deltaTime;
+                MouseY = controls.Player.looking.ReadValue<Vector2>().y * settings.MouseSens * Time.deltaTime;
             }
 
-            
+
+
 
 
             yMouseInput -= MouseY;
