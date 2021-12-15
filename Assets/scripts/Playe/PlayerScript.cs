@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Users;
+using UnityEngine.InputSystem.Controls;
 using Mirror;
 
 public class PlayerScript : NetworkBehaviour, IDamage
@@ -280,9 +280,19 @@ public class PlayerScript : NetworkBehaviour, IDamage
         if (isLocalPlayer)
         {
 
-            
-            float MouseX = controls.Player.looking.ReadValue<Vector2>().x * settings.MouseSens * Time.deltaTime;
-            float MouseY = controls.Player.looking.ReadValue<Vector2>().y * settings.MouseSens * Time.deltaTime;
+            float MouseX;
+            float MouseY;
+
+            if (controls.Player.looking.activeControl.device.description.deviceClass == "Gamepad")
+            {
+                MouseX = controls.Player.looking.ReadValue<Vector2>().x * settings.controllerSens * Time.deltaTime;
+                MouseY = controls.Player.looking.ReadValue<Vector2>().y * settings.controllerSens * Time.deltaTime;
+            }
+            else
+            {
+                MouseX = controls.Player.looking.ReadValue<Vector2>().x * settings.MouseSens * Time.deltaTime;
+                MouseY = controls.Player.looking.ReadValue<Vector2>().y * settings.MouseSens * Time.deltaTime;
+            }
 
 
             yMouseInput -= MouseY;
