@@ -766,7 +766,14 @@ public class PlayerScript : NetworkBehaviour, IDamage
             }
             else
             {
-                equipedSlot = previousSlot;
+                if(previousSlot != null)
+                {
+                    equipedSlot = previousSlot;
+                }
+                else
+                {
+                    equipedSlot = WeaponSlots[equipedSlot.getIndex() + 1];
+                }
             }
             
 
