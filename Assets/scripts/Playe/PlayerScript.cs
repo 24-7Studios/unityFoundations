@@ -202,9 +202,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
         input = GetComponent<PlayerInput>();
         controls.Player.jump.performed += ctx => activateJump();
         controls.Player.Change.performed += ctx => changeSlot();
+        controls.Player.interact.performed += ctx => manualPickup(ctx);
         controls.Player.melee.performed += ctx => equipToMelee();
         died += onDeath;
-
         
     }
 
@@ -737,7 +737,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     {
         foreach(Slot s in WeaponSlots)
         {
-            if(s.getWeapon() != null && s != meleeSlot)
+            if(s.getWeapon() != null && s != meleeSlot && s != equipedSlot)
             {
                 return true;
             }
@@ -766,7 +766,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
             }
             else
             {
-                if(previousSlot != null)
+                if(previousSlot.getWeapon() != null)
                 {
                     equipedSlot = previousSlot;
                 }
@@ -831,6 +831,13 @@ public class PlayerScript : NetworkBehaviour, IDamage
         }
     }
 
+    private void manualPickup(InputAction.CallbackContext context)
+    {
+        if(context.time >= 3)
+        {
+            Debug.Log("tried to pick something up");
+        }
+    }
 
     public void pickup(GameObject thing)
     {
