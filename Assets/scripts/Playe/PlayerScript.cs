@@ -779,17 +779,17 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
             if (equipedSlot.getWeapon() == null || equipedSlot == meleeSlot)
             {
-                changeSlot();
+                //changeSlot();
             }
             
 
             if (!isServer)
             {
-                cmdChangeSlot(equipedSlot.getIndex());
+                cmdChangeSlot(equipedSlot.getIndex(), previousSlot.getIndex());
             }
             else
             {
-                rpcChangeSlot(equipedSlot.getIndex());
+                rpcChangeSlot(equipedSlot.getIndex(), previousSlot.getIndex());
             }
         }
     }
@@ -805,29 +805,29 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         if (!isServer)
         {
-            cmdChangeSlot(equipedSlot.getIndex());
+            cmdChangeSlot(equipedSlot.getIndex(), previousSlot.getIndex());
         }
         else
         {
-            rpcChangeSlot(equipedSlot.getIndex());
+            rpcChangeSlot(equipedSlot.getIndex(), previousSlot.getIndex());
         }
     }
 
     [Command]
-    private void cmdChangeSlot(int i)
+    private void cmdChangeSlot(int e, int p)
     {
-        previousSlot = equipedSlot;
-        equipedSlot = WeaponSlots[i];
-        rpcChangeSlot(i);
+        equipedSlot = WeaponSlots[e];
+        previousSlot = WeaponSlots[p];
+        rpcChangeSlot(e, p);
     }
 
     [ClientRpc]
-    private void rpcChangeSlot(int i)
+    private void rpcChangeSlot(int e, int p)
     {
         if(!isLocalPlayer)
         {
-            previousSlot = equipedSlot;
-            equipedSlot = WeaponSlots[i];
+            equipedSlot = WeaponSlots[e];
+            previousSlot = WeaponSlots[p];
         }
     }
 
