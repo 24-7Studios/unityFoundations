@@ -120,9 +120,9 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!136 &1050093693558037607
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -176,7 +176,47 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e761f024-addf-4cf5-a38a-f0a15a112488
+    m_ActionName: Player/looking[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 451f71ac-93f8-4e63-8c8c-f8ef0c2f30cb
+    m_ActionName: Player/jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5d3149f4-2a4b-4a54-af55-91d2f96b3be4
+    m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c3b2bfbf-9a55-4025-a929-6c2af0258380
+    m_ActionName: Player/Change[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 140ded67-27fb-439c-bf63-5a9df26ed819
+    m_ActionName: Player/interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 92026b81-ea9e-4cb7-868d-cd5fc69714f5
+    m_ActionName: Player/Fire_1[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3154bfe1-127f-4536-81a0-6f034a659eff
+    m_ActionName: Player/Fire_2/Zoom1[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1b3b9af8-9eed-4408-8268-bcfca367b39a
+    m_ActionName: Player/reload[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7d2cb123-8ff9-4447-a713-d6cb739a8409
+    m_ActionName: Player/reload2[/Keyboard/v]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9798b9a0-aa45-4f96-af2c-575c45aa7e21
+    m_ActionName: Player/melee[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

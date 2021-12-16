@@ -733,45 +733,68 @@ public class PlayerScript : NetworkBehaviour, IDamage
         return controls;
     }
 
-    private void changeSlot()
+    private bool canChange()
     {
-        previousSlot = equipedSlot;
-        if(equipedSlot.getIndex() == numOfSlots)
+        foreach(Slot s in WeaponSlots)
         {
-                equipedSlot = WeaponSlots[0];
-        }
-        else
-        {
-            equipedSlot = WeaponSlots[equipedSlot.getIndex() + 1];
+            if(s.getWeapon() != null && s != meleeSlot)
+            {
+                return true;
+            }
         }
 
-        if (equipedSlot.getWeapon() == null || equipedSlot == meleeSlot)
-        {
-            changeSlot();
-        }
+        return false;
+    }
 
-        if (!isServer)
+    public  void changeSlot()
+    {
+        if(canChange())
         {
-            cmdChangeSlot(equipedSlot.getIndex());
-        }
-        else
-        {
-            rpcChangeSlot(equipedSlot.getIndex());
+
+            
+            if(equipedSlot != meleeSlot)
+            {
+                previousSlot = equipedSlot;
+                if(equipedSlot.getIndex() == numOfSlots)
+                {
+                    equipedSlot = WeaponSlots[1];
+                }
+                else
+                {
+                    equipedSlot = WeaponSlots[equipedSlot.getIndex() + 1];
+                }
+            }
+            else
+            {
+                equipedSlot = previousSlot;
+            }
+            
+
+            if (equipedSlot.getWeapon() == null || equipedSlot == meleeSlot)
+            {
+                changeSlot();
+            }
+            
+
+            if (!isServer)
+            {
+                cmdChangeSlot(equipedSlot.getIndex());
+            }
+            else
+            {
+                rpcChangeSlot(equipedSlot.getIndex());
+            }
         }
     }
 
     private void equipToMelee()
     {
-        if(equipedSlot == meleeSlot && previousSlot != null)
-        { 
-            equipedSlot = previousSlot;
-            previousSlot = meleeSlot;
-        }
-        else
+        if(equipedSlot != meleeSlot)
         {
             previousSlot = equipedSlot;
-            equipedSlot = meleeSlot;
         }
+        equipedSlot = meleeSlot;
+
 
         if (!isServer)
         {

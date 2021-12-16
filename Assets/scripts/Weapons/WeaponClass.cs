@@ -169,6 +169,11 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
             worldModel.layer = 0;
         }
 
+        if(slot != player.getEquipedSlot() && player.isLocalPlayer)
+        {
+            player.changeSlot();
+        }
+
     }
 
     public virtual void forcedPickup(PlayerScript p, int s, bool h)
