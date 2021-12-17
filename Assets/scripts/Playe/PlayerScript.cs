@@ -38,7 +38,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     
 
     [SerializeField]
-    private Collider interactZone;
+    private CapsuleCollider interactZone;
 
     [SerializeField]
     private PlayerModelClass PlayerModel;
@@ -436,77 +436,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
             }
         }
 
-        /*
-        if(equipedSlot.getWeapon() != null)
-        {
-            if(isLocalPlayer)
-            {
-                equipedSlot.getWeapon().getViewmodelOb().SetActive(true);
-            }
-
-            equipedSlot.getWeapon().getWorldModelOb().SetActive(true);
-
-            if (equipedSlot.getOtherHand() != null)
-            {
-                if(isLocalPlayer)
-                {
-                    equipedSlot.getOtherHand().getViewmodelOb().SetActive(true);
-                }
-
-                equipedSlot.getOtherHand().getWorldModelOb().SetActive(true);
-
-            }
-        }
-        
-        if(primary != equipedSlot)
-        {
-            if (primary.getWeapon() != null)
-            {
-                if (isLocalPlayer)
-                {
-                    primary.getWeapon().getViewmodelOb().SetActive(false);
-                }
-
-                primary.getWeapon().getWorldModelOb().SetActive(false);
-
-                if (primary.getOtherHand() != null)
-                {
-                    if (isLocalPlayer)
-                    {
-                        primary.getOtherHand().getViewmodelOb().SetActive(false);
-                    }
-
-                    primary.getOtherHand().getWorldModelOb().SetActive(false);
-
-                }
-            }
-        }
-
-        if (secondary != equipedSlot)
-        {
-            if (secondary.getWeapon() != null)
-            {
-                if (isLocalPlayer)
-                {
-                    secondary.getWeapon().getViewmodelOb().SetActive(false);
-                }
-
-                secondary.getWeapon().getWorldModelOb().SetActive(false);
-
-                if (secondary.getOtherHand() != null)
-                {
-                    if (isLocalPlayer)
-                    {
-                        secondary.getOtherHand().getViewmodelOb().SetActive(false);
-                    }
-
-                    secondary.getOtherHand().getWorldModelOb().SetActive(false);
-
-                }
-            }
-        }
-        */
-
     }
 
     
@@ -593,8 +522,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [Command]
     void CmdMovePlayer(Vector3 IM, Vector3 clientPos)
     {
-
-        //playerPhysBody.AddForce(IM, ForceMode.Impulse);
         
 
         if (!isLocalPlayer && Vector3.Distance(playerPhysBody.position, clientPos) > PostionSnapThreshold)
@@ -777,12 +704,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
             }
             
 
-            if (equipedSlot.getWeapon() == null || equipedSlot == meleeSlot)
-            {
-                //changeSlot();
-            }
-            
-
             if (!isServer)
             {
                 cmdChangeSlot(equipedSlot.getIndex(), previousSlot.getIndex());
@@ -836,6 +757,12 @@ public class PlayerScript : NetworkBehaviour, IDamage
         if(context.time >= 3)
         {
             Debug.Log("tried to pick something up");
+
+            Vector3 center = interactZone.transform.position + interactZone.center;
+            float radius = interactZone.radius;
+            float height = interactZone.height;
+
+            //Collider[] allOverlappingColliders = Physics.OverlapCapsule();
         }
     }
 
