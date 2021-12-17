@@ -755,33 +755,32 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private void manualPickup()
     {
         Debug.Log("tried to pick something up");
-
-        List < Ipickup > list = interactZone.getList();
+        Ipickup[] list = interactZone.getList();
         Ipickup target = null;
-        float distance = 0;
-
-        if(list.Count > 0)
+        if(list.Length > 0)
         {
-            foreach(Ipickup i in list)
+
+            float distance = Vector3.Distance(list[0].getObject().transform.position, camTransformer.position);
+
+            foreach (Ipickup i in list)
             {
-                if(Vector3.Distance(i.getObject().transform.position, camTransformer.position) > distance)
+                Debug.Log(i);
+                if (Vector3.Distance(i.getObject().transform.position, camTransformer.position) <= distance)
                 {
                     distance = Vector3.Distance(i.getObject().transform.position, camTransformer.position);
                     target = i;
                 }
             }
 
-            pickup(target.getObject());
+            if (target != null)
+            {
+                pickup(target.getObject());
+            }
         }
     }
 
     public void pickup(GameObject thing)
-    {
-
-        Ipickup i = thing.GetComponent<Ipickup>();
-
-        i.pickup(this);
-        
+    {        
         if(!isServer)
         {
             cmdPickup(thing);
@@ -790,7 +789,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
         {
             rpcPickup(thing);
         }
-
     }
 
     [Command]

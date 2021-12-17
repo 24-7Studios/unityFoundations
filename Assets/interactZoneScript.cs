@@ -6,21 +6,22 @@ using UnityEngine;
 public class interactZoneScript : MonoBehaviour
 {
 
-    private List<Ipickup> pickups = new List<Ipickup>();
+    
+    public List<Ipickup> pickups = new List<Ipickup>();
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Ipickup pickup = collision.gameObject.GetComponent<Ipickup>();
+        Ipickup pickup = other.gameObject.GetComponent<Ipickup>();
 
-        if(pickup != null)
+        if (pickup != null)
         {
             pickups.Add(pickup);
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        Ipickup pickup = collision.gameObject.GetComponent<Ipickup>();
+        Ipickup pickup = other.gameObject.GetComponent<Ipickup>();
 
         if (pickup != null)
         {
@@ -28,8 +29,8 @@ public class interactZoneScript : MonoBehaviour
         }
     }
 
-    public List<Ipickup> getList()
+    public Ipickup[] getList()
     {
-        return pickups;
+        return pickups.ToArray();
     }
 }

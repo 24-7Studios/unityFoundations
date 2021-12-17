@@ -148,8 +148,8 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         isitem = false;
 
         transform.SetParent(player.getBackpack(), false);
-        //transform.localPosition = basePosOffset;
-        //transform.localRotation = Quaternion.Euler(baseRotOffset);
+        transform.localPosition = basePosOffset;
+        transform.localRotation = Quaternion.Euler(baseRotOffset);
         //transform.localScale = baseScaOffset;
         viewmodel.transform.SetParent(player.getViewmodelHolder(), false);
         viewmodel.transform.localPosition = Vector3.zero;
