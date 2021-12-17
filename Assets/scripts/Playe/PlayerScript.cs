@@ -38,7 +38,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     
 
     [SerializeField]
-    private CapsuleCollider interactZone;
+    private interactZoneScript interactZone;
 
     [SerializeField]
     private PlayerModelClass PlayerModel;
@@ -169,12 +169,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [SyncVar]
     List<Slot> WeaponSlots = new List<Slot>();
 
-    /*[SerializeField]
-    Slot primary;
-
-    [SerializeField]
-    Slot secondary;*/
-
     [SerializeField]
     Slot meleeSlot;
 
@@ -202,7 +196,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
         input = GetComponent<PlayerInput>();
         controls.Player.jump.performed += ctx => activateJump();
         controls.Player.Change.performed += ctx => changeSlot();
-        controls.Player.interact.performed += ctx => manualPickup(ctx);
+        controls.Player.interact.started += ctx => interact();
+        controls.Player.interact.performed += ctx => manualPickup();
         controls.Player.melee.performed += ctx => equipToMelee();
         died += onDeath;
         
@@ -752,17 +747,31 @@ public class PlayerScript : NetworkBehaviour, IDamage
         }
     }
 
-    private void manualPickup(InputAction.CallbackContext context)
+    private void interact()
     {
-        if(context.time >= 3)
+
+    }
+
+    private void manualPickup()
+    {
+        Debug.Log("tried to pick something up");
+
+        List < Ipickup > list = interactZone.getList();
+        Ipickup target = null;
+        float distance = 0;
+
+        if(list.Count > 0)
         {
-            Debug.Log("tried to pick something up");
+            foreach(Ipickup i in list)
+            {
+                if(Vector3.Distance(i.getObject().transform.position, camTransformer.position) > distance)
+                {
+                    distance = Vector3.Distance(i.getObject().transform.position, camTransformer.position);
+                    target = i;
+                }
+            }
 
-            Vector3 center = interactZone.transform.position + interactZone.center;
-            float radius = interactZone.radius;
-            float height = interactZone.height;
-
-            //Collider[] allOverlappingColliders = Physics.OverlapCapsule();
+            pickup(target.getObject());
         }
     }
 
@@ -773,6 +782,29 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         i.pickup(this);
         
+        if(!isServer)
+        {
+            cmdPickup(thing);
+        }
+        else
+        {
+            rpcPickup(thing);
+        }
+
+    }
+
+    [Command]
+    private void cmdPickup(GameObject thing)
+    {
+        rpcPickup(thing);
+    }
+
+    [ClientRpc]
+    private void rpcPickup(GameObject thing)
+    {
+        Ipickup i = thing.GetComponent<Ipickup>();
+
+        i.pickup(this);
     }
 
     public Slot getEquipedSlot()

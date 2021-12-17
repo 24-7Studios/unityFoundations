@@ -69,7 +69,7 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                     ""id"": ""140ded67-27fb-439c-bf63-5a9df26ed819"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -233,7 +233,7 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""480fb3eb-c577-4d51-bb7f-8d65a2d4ec66"",
                     ""path"": ""<Keyboard>/e"",
-                    ""interactions"": ""Tap,Hold"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""mouse + keybaord"",
                     ""action"": ""interact"",
