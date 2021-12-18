@@ -156,7 +156,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         transform.localPosition = basePosOffset;
         transform.localRotation = Quaternion.Euler(baseRotOffset);
         transform.localScale = baseScaOffset;
-        viewmodel.transform.SetParent(player.getViewmodelHolder(), false);
+        viewmodel.transform.SetParent(player.getViewmodelHolder(), true);
         viewmodel.transform.localPosition = Vector3.zero;
 
 
