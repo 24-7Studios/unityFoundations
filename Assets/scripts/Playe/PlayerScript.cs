@@ -754,6 +754,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private void manualPickup()
     {
+
         Debug.Log("tried to pick something up");
         Ipickup[] list = interactZone.getList();
         Ipickup target = null;
@@ -761,6 +762,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         {
 
             float distance = Vector3.Distance(list[0].getObject().transform.position, camTransformer.position);
+            target = list[0];
 
             foreach (Ipickup i in list)
             {
@@ -780,29 +782,41 @@ public class PlayerScript : NetworkBehaviour, IDamage
     }
 
     public void pickup(GameObject thing)
-    {        
-        if(!isServer)
+    {
+        if(isServer)
         {
-            cmdPickup(thing);
+            Ipickup i = thing.GetComponent<Ipickup>();
+
+            i.pickup(this);
+
+            rpcPickup(thing);
         }
         else
         {
-            rpcPickup(thing);
+            cmdPickup(thing);
         }
     }
 
     [Command]
     private void cmdPickup(GameObject thing)
     {
-        rpcPickup(thing);
+        Ipickup i = thing.GetComponent<Ipickup>();
+
+        i.pickup(this);
+
+        rpcPickup(thing);   
     }
 
     [ClientRpc]
     private void rpcPickup(GameObject thing)
     {
-        Ipickup i = thing.GetComponent<Ipickup>();
 
-        i.pickup(this);
+        if(!isServer)
+        {
+            Ipickup i = thing.GetComponent<Ipickup>();
+
+            i.pickup(this);
+        }
     }
 
     public Slot getEquipedSlot()
@@ -825,13 +839,13 @@ public class PlayerScript : NetworkBehaviour, IDamage
             }
         }
 
-        if(equipedSlot != meleeSlot)
+        if(equipedSlot == meleeSlot)
         {
-            return equipedSlot;
+            return previousSlot;
         }
         else
         {
-            return previousSlot;
+            return equipedSlot;
         }
     }
 

@@ -8,6 +8,13 @@ public class interactZoneScript : MonoBehaviour
 
     
     public List<Ipickup> pickups = new List<Ipickup>();
+    private PlayerScript player;
+
+    private void Awake()
+    {
+        player = GetComponentInParent<PlayerScript>();
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -29,8 +36,21 @@ public class interactZoneScript : MonoBehaviour
         }
     }
 
+    public void remove(Ipickup i)
+    {
+        pickups.Remove(i);
+    }
+
     public Ipickup[] getList()
     {
+        for(int i = pickups.Count-1; i >= 0; i--)
+        {
+            if(pickups.ElementAt(i).getObject().transform.parent == player.getBackpack())
+            {
+                pickups.RemoveAt(i);
+            }
+        }
+
         return pickups.ToArray();
     }
 }

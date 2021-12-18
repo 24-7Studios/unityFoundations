@@ -117,12 +117,17 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
     public virtual void pickup(PlayerScript p)
     {
-        Debug.Log("player has picked up: " + this);
-
         player = p;
 
+        Debug.Log(player + " has picked up: " + this);
+
+
+
         if(isServer)
-            netIdentity.AssignClientAuthority(player.connectionToClient);
+        {
+            netIdentity.AssignClientAuthority(p.connectionToClient);
+        }
+
 
         slot = player.getPickupSlot();
         index = slot.getIndex();
@@ -150,7 +155,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         transform.SetParent(player.getBackpack(), false);
         transform.localPosition = basePosOffset;
         transform.localRotation = Quaternion.Euler(baseRotOffset);
-        //transform.localScale = baseScaOffset;
+        transform.localScale = baseScaOffset;
         viewmodel.transform.SetParent(player.getViewmodelHolder(), false);
         viewmodel.transform.localPosition = Vector3.zero;
 
@@ -237,19 +242,20 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
     public virtual void drop()
     {
-
         unsetControls(hand);
 
-        if(isServer)
+        player = null;
+
+        if (isServer)
             netIdentity.RemoveClientAuthority();
+
+        slot.removeWeapon(hand);
 
         item.transform.SetParent(null);
         worldModel.transform.SetParent(transform);
         viewmodel.transform.SetParent(transform);
         viewmodel.SetActive(false);
         worldModel.SetActive(false);
-
-        player.getSlotAtIndex(index).removeWeapon(hand);
 
         foreach (MeshRenderer m in item.GetComponents<MeshRenderer>())
         {
@@ -262,8 +268,6 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         }
 
         item.GetComponent<Rigidbody>().isKinematic = false;
-
-        player = null;
 
         slot = null;
 
@@ -288,19 +292,19 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     {
         if(!hand)
         {
-            player.getInputMaster().Player.Fire_1.performed += ctx => { fire1Down = true; };
-            player.getInputMaster().Player.Fire_1.canceled += ctx => { fire1Down = false; };
-            player.getInputMaster().Player.Fire_2Zoom1.performed += ctx => { fire2Down = true; };
-            player.getInputMaster().Player.Fire_2Zoom1.canceled += ctx => { fire2Down = false; };
-            player.getInputMaster().Player.reload.performed += ctx => { reloadDown = true; };
-            player.getInputMaster().Player.reload.canceled += ctx => { reloadDown = false; };
+            player.getInputMaster().Player.Fire_1.performed += Fire1Down;
+            player.getInputMaster().Player.Fire_1.canceled += Fire1Up;
+            player.getInputMaster().Player.Fire_2Zoom1.performed += Fire2Down;
+            player.getInputMaster().Player.Fire_2Zoom1.canceled += Fire2Up;
+            player.getInputMaster().Player.reload.performed += ReloadDown;
+            player.getInputMaster().Player.reload.canceled += ReloadUp;
         }
         else
         {
-            player.getInputMaster().Player.Fire_2Zoom1.performed += ctx => { fire1Down = true; };
-            player.getInputMaster().Player.Fire_2Zoom1.canceled += ctx => { fire1Down = false; };
-            player.getInputMaster().Player.reload2.performed += ctx => { reloadDown = true; };
-            player.getInputMaster().Player.reload2.canceled += ctx => { reloadDown = false; };
+            player.getInputMaster().Player.Fire_2Zoom1.performed += Fire1Down;
+            player.getInputMaster().Player.Fire_2Zoom1.canceled += Fire1Up;
+            player.getInputMaster().Player.reload2.performed += ReloadDown;
+            player.getInputMaster().Player.reload2.canceled += ReloadUp;
         }
     }
 
@@ -308,27 +312,57 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     {
         if (!hand)
         {
-            player.getInputMaster().Player.Fire_1.performed -= ctx => { fire1Down = true; };
-            player.getInputMaster().Player.Fire_1.canceled -= ctx => { fire1Down = false; };
-            player.getInputMaster().Player.Fire_2Zoom1.performed -= ctx => { fire2Down = true; };
-            player.getInputMaster().Player.Fire_2Zoom1.canceled -= ctx => { fire2Down = false; };
-            player.getInputMaster().Player.reload.performed -= ctx => { reloadDown = true; };
-            player.getInputMaster().Player.reload.canceled -= ctx => { reloadDown = false; };
+            player.getInputMaster().Player.Fire_1.performed -= Fire1Down;
+            player.getInputMaster().Player.Fire_1.canceled -= Fire1Up;
+            player.getInputMaster().Player.Fire_2Zoom1.performed -= Fire2Down;
+            player.getInputMaster().Player.Fire_2Zoom1.canceled -= Fire2Up;
+            player.getInputMaster().Player.reload.performed -= ReloadDown;
+            player.getInputMaster().Player.reload.canceled -= ReloadUp;
         }
         else
         {
-            player.getInputMaster().Player.Fire_2Zoom1.performed -= ctx => { fire1Down = true; };
-            player.getInputMaster().Player.Fire_2Zoom1.canceled -= ctx => { fire1Down = false; };
-            player.getInputMaster().Player.reload2.performed -= ctx => { reloadDown = true; };
-            player.getInputMaster().Player.reload2.canceled -= ctx => { reloadDown = false; };
+            player.getInputMaster().Player.Fire_2Zoom1.performed -= Fire1Down;
+            player.getInputMaster().Player.Fire_2Zoom1.canceled -= Fire1Up;
+            player.getInputMaster().Player.reload2.performed -= ReloadDown;
+            player.getInputMaster().Player.reload2.canceled -= ReloadUp;
         }
     }
+
+    protected virtual void Fire1Down(InputAction.CallbackContext context)
+    {
+        fire1Down = true;
+    }
+
+    protected virtual void Fire1Up(InputAction.CallbackContext context)
+    {
+        fire1Down = false;
+    }
+
+    protected virtual void Fire2Down(InputAction.CallbackContext context)
+    {
+        fire2Down = true;
+    }
+
+    protected virtual void Fire2Up(InputAction.CallbackContext context)
+    {
+        fire2Down = false;
+    }
+
+    protected virtual void ReloadDown(InputAction.CallbackContext context)
+    {
+        reloadDown = true;
+    }
+
+    protected virtual void ReloadUp(InputAction.CallbackContext context)
+    {
+        reloadDown = false;
+    }
+
 
 
     ///////////////////////////////////////////////
     /// common use functions
     /// 
-
 
     protected virtual void playsound(int index)
     {
