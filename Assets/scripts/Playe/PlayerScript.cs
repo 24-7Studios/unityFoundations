@@ -185,13 +185,14 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     //controls
     private Inputmaster controls;
+
+    [SerializeField]
     private PlayerInput input;
     
 
 
     private void Awake()
     {
-
         controls = new Inputmaster();
         input = GetComponent<PlayerInput>();
         controls.Player.jump.performed += ctx => activateJump();
@@ -200,7 +201,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
         controls.Player.interact.performed += ctx => manualPickup();
         controls.Player.melee.performed += ctx => equipToMelee();
         died += onDeath;
-        
     }
 
 
@@ -235,14 +235,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
         {
 
             controls.Player.Enable();
-
-            
-
-
+            input.enabled = true;
 
             LocalAud = Instantiate(CameraSetup, camTransformer).GetComponent<AudioSource>();
-
-
 
             Cursor.lockState = CursorLockMode.Locked;
 
@@ -282,18 +277,19 @@ public class PlayerScript : NetworkBehaviour, IDamage
             float MouseY = 0;
 
 
-
-            if (input.currentControlScheme.Equals("gamepad"))
+            if(input.currentControlScheme != null)
             {
-                MouseX = controls.Player.looking.ReadValue<Vector2>().x * settings.controllerSens * Time.deltaTime;
-                MouseY = controls.Player.looking.ReadValue<Vector2>().y * settings.controllerSens * Time.deltaTime;
+                if (input.currentControlScheme.Equals("gamepad"))
+                {
+                    MouseX = controls.Player.looking.ReadValue<Vector2>().x * settings.controllerSens * Time.deltaTime;
+                    MouseY = controls.Player.looking.ReadValue<Vector2>().y * settings.controllerSens * Time.deltaTime;
+                }
+                else
+                {
+                    MouseX = controls.Player.looking.ReadValue<Vector2>().x * settings.MouseSens * Time.deltaTime;
+                    MouseY = controls.Player.looking.ReadValue<Vector2>().y * settings.MouseSens * Time.deltaTime;
+                }
             }
-            else
-            {
-                MouseX = controls.Player.looking.ReadValue<Vector2>().x * settings.MouseSens * Time.deltaTime;
-                MouseY = controls.Player.looking.ReadValue<Vector2>().y * settings.MouseSens * Time.deltaTime;
-            }
-
 
 
 
@@ -397,9 +393,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         {
             if(meleeSlot.getWeapon() == null)
             {
-                GameObject melee = Instantiate(defaultMelee.gameObject);
-                NetworkServer.Spawn(melee);
-                melee.GetComponent<WeaponClass>().forcedPickup(this, meleeSlot.getIndex(), false);
+                giveMelee();
             }
         }
 
@@ -701,13 +695,65 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
             if (!isServer)
             {
-                cmdChangeSlot(equipedSlot.getIndex(), previousSlot.getIndex());
+                cmdSyncSlots(equipedSlot.getIndex(), previousSlot.getIndex());
             }
             else
             {
-                rpcChangeSlot(equipedSlot.getIndex(), previousSlot.getIndex());
+                rpcSyncSlots(equipedSlot.getIndex(), previousSlot.getIndex());
             }
         }
+    }
+
+    [Command]
+    private void cmdSyncSlots(int e, int p)
+    {
+        equipedSlot = WeaponSlots[e];
+        if(p >= 0)
+        {
+            previousSlot = WeaponSlots[p];
+        }
+        rpcSyncSlots(e, p);
+    }
+
+    [ClientRpc]
+    private void rpcSyncSlots(int e, int p)
+    {
+        if (!isLocalPlayer)
+        {
+            equipedSlot = WeaponSlots[e];
+            if (p >= 0)
+            {
+                previousSlot = WeaponSlots[p];
+            }
+        }
+    }
+
+    private void giveMelee()
+    {
+        if(isServer)
+        {
+            GameObject melee = Instantiate(defaultMelee.gameObject);
+            NetworkServer.Spawn(melee);
+            rpcGiveMelee(melee);
+        }
+        else
+        {
+            cmdGiveMelee();
+        }
+    }
+
+    [Command]
+    private void cmdGiveMelee()
+    {
+        GameObject melee = Instantiate(defaultMelee.gameObject);
+        NetworkServer.Spawn(melee);
+        rpcGiveMelee(melee);
+    }
+
+    [ClientRpc]
+    private void rpcGiveMelee(GameObject melee)
+    {
+        melee.GetComponent<WeaponClass>().forcedPickup(this, meleeSlot.getIndex(), false);
     }
 
     private void equipToMelee()
@@ -717,34 +763,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
             previousSlot = equipedSlot;
         }
         equipedSlot = meleeSlot;
-
-
-        if (!isServer)
-        {
-            cmdChangeSlot(equipedSlot.getIndex(), previousSlot.getIndex());
-        }
-        else
-        {
-            rpcChangeSlot(equipedSlot.getIndex(), previousSlot.getIndex());
-        }
-    }
-
-    [Command]
-    private void cmdChangeSlot(int e, int p)
-    {
-        equipedSlot = WeaponSlots[e];
-        previousSlot = WeaponSlots[p];
-        rpcChangeSlot(e, p);
-    }
-
-    [ClientRpc]
-    private void rpcChangeSlot(int e, int p)
-    {
-        if(!isLocalPlayer)
-        {
-            equipedSlot = WeaponSlots[e];
-            previousSlot = WeaponSlots[p];
-        }
     }
 
     private void interact()

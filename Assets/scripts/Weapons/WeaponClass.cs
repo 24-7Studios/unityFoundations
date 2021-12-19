@@ -12,7 +12,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     protected PlayerScript player;
     
     [SyncVar]
-    protected Slot slot;    // this is just to check the index from. Do not acually reference this  for anything else;
+     protected Slot slot;    // this is just to check the index from. Do not acually reference this  for anything else;
 
     [SyncVar]
     protected int index;
@@ -195,6 +195,8 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         hand = h;
 
         index = s;
+
+        slot = player.getSlotAtIndex(s);
 
         player.getSlotAtIndex(s).setWeapon(this, hand);
 

@@ -54,7 +54,10 @@ public class meleescript : WeaponClass
         sounds.Add(inspectSound);
 
         hitTimer = hitDelay;
-        ViewAnim.SetFloat("idleTimer", inspectTime);
+        if(viewmodel.activeSelf)
+        {
+            ViewAnim.SetFloat("idleTimer", inspectTime);
+        }
     }
 
     protected override void Update()
