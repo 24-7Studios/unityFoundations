@@ -116,8 +116,8 @@ Rigidbody:
   m_GameObject: {fileID: 1050093693558037594}
   serializedVersion: 2
   m_Mass: 0.5
-  m_Drag: 2
-  m_AngularDrag: 2
+  m_Drag: 4
+  m_AngularDrag: 4
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -249,7 +249,7 @@ MonoBehaviour:
   PlayerModel: {fileID: -7493404476013411301, guid: c8d4cf5569e590747bd755a71fefbf17,
     type: 3}
   settings: {fileID: 5242603199734816841}
-  moveSpeed: 0.75
+  moveSpeed: 1
   jumpForce: 20
   playerGravity: -1
   groundCheck: {fileID: 1050093693641089723}
