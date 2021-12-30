@@ -461,7 +461,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
 
 
-            playerPhysBody.AddForce(InputMovement, ForceMode.Impulse);
+            playerPhysBody.AddForce(InputMovement, ForceMode.VelocityChange);
 
 
             if (!isServer)
@@ -549,7 +549,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         if (!isLocalPlayer && Vector3.Distance(playerPhysBody.position, serverPos) < PostionSnapThreshold)
         {
-            playerPhysBody.AddForce(IM, ForceMode.Impulse);
+            playerPhysBody.AddForce(IM, ForceMode.VelocityChange);
             playerPhysBody.position = Vector3.Lerp(playerPhysBody.position, serverPos, Time.fixedDeltaTime / PositionCompensationDamping);
         }
         else if(!isLocalPlayer)
