@@ -610,6 +610,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         PlayerModel = Instantiate(p, playerPhysBody.transform);
 
         PlayerModel.setPlayer(this);
+
         //PlayerModel.netIdentity.AssignClientAuthority(connectionToClient);
 
         if (!isLocalPlayer)
@@ -617,6 +618,14 @@ public class PlayerScript : NetworkBehaviour, IDamage
             foreach (GameObject part in PlayerModel.models)
             {
                 part.layer = 0;
+            }
+            if (PlayerModel.hitBoxes.Capacity > 0)
+            {
+                gameObject.layer = 2;
+            }
+            else
+            {
+                gameObject.layer = 0;
             }
         }
 
@@ -632,6 +641,16 @@ public class PlayerScript : NetworkBehaviour, IDamage
     public Transform getCamTransformer()
     {
         return camTransformer;
+    }
+
+    public Vector3 getInputMovement()
+    {
+        return InputMovement;
+    }
+
+    public Vector3 getBasicInputMovement()
+    {
+        return (Vector3.right * x) + (Vector3.up * y) + (Vector3.forward * z);
     }
 
     public Transform getBackpack()

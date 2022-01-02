@@ -8,15 +8,14 @@ public class PlayerModelClass : NetworkBehaviour
 
     public string ModelName;
     public List<GameObject> models;
+    public List<GameObject> hitBoxes;
+    
 
     [SerializeField]
     protected Transform RightHoldPos;
 
     [SerializeField]
     protected Transform LeftHoldPos;
-
-    [SerializeField]
-    protected PlayerModelDoll ragdoll;
 
     protected PlayerScript player;
 
@@ -32,7 +31,7 @@ public class PlayerModelClass : NetworkBehaviour
 
         Transform targetPos;
 
-        if(hand)
+        if (hand)
         {
             targetPos = LeftHoldPos;
         }
@@ -60,16 +59,8 @@ public class PlayerModelClass : NetworkBehaviour
 
     protected void onPlayerDeath(PlayerScript p)
     {
-        if(player == p)
-            cmdOnPlayerDeath();
+
     }
 
-    [Command]
-    protected void cmdOnPlayerDeath()
-    {
-        GameObject doll = Instantiate(ragdoll.gameObject, this.transform.position, this.transform.rotation);
-        NetworkServer.Spawn(doll);
-        NetworkServer.Destroy(this.gameObject);
-    }
 
 }
