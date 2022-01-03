@@ -162,15 +162,11 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
         if(player.isLocalPlayer)
         {
-            viewmodel.SetActive(true);
             viewmodel.layer = 11;
-            worldModel.SetActive(true);
             worldModel.layer = 6;
         }
         else
         {
-            viewmodel.SetActive(false);
-            worldModel.SetActive(true);
             worldModel.layer = 0;
         }
 
@@ -327,6 +323,26 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
             player.getInputMaster().Player.Fire_2Zoom1.canceled -= Fire1Up;
             player.getInputMaster().Player.reload2.performed -= ReloadDown;
             player.getInputMaster().Player.reload2.canceled -= ReloadUp;
+        }
+    }
+
+    public virtual void onEquip()
+    {
+        worldModel.SetActive(true);
+
+        if (player.isLocalPlayer)
+        {
+            viewmodel.SetActive(true);
+        }
+    }
+
+    public virtual void onDequip()
+    {
+        worldModel.SetActive(false);
+
+        if (player.isLocalPlayer)
+        {
+            viewmodel.SetActive(false);
         }
     }
 

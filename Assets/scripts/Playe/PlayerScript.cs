@@ -93,7 +93,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private LayerMask Jumpable;
 
     //[SerializeField]
-    private float groundDistance = 0.3f;
+    private float groundDistance = 0.4f;
 
     //[SerializeField]
     private float groundingForce = 0.1f;
@@ -120,13 +120,15 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     
 
-    Vector3 InputMovement;
+    
     bool grounded;
     bool canJump;
     bool jump = false;
     float x = 0;
     float z = 0;
     float y = 0;
+    Vector3 BasicInputMovement;
+    Vector3 InputMovement;
     Vector3 groundNormal;
 
     //health
@@ -178,9 +180,12 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [SerializeField]
     private Slot equipedSlot;
 
+    int ee;
+
     [SerializeField]
     private Slot previousSlot;
-    
+
+    int pp;
 
 
     //controls
@@ -258,14 +263,18 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     }
 
-    
-    
+
+    private void OnConnectedToServer()
+    {
+        cmdSyncSlots(equipedSlot.getIndex(), previousSlot.getIndex());
+    }
 
     private void Update()
     {
 
 
-
+        ee = equipedSlot.getIndex();
+        pp = previousSlot.getIndex();
 
         //mouse looking
 
@@ -371,9 +380,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
             }
 
 
-            
 
 
+            BasicInputMovement = (Vector3.right * x) + (Vector3.up * y) + (Vector3.forward * z);
 
             if (fly)
             {
@@ -382,6 +391,15 @@ public class PlayerScript : NetworkBehaviour, IDamage
             else
             {
                 InputMovement = ((((groundCheck.transform.right) * x + (groundCheck.transform.forward) * z) * moveSpeed) + groundCheck.transform.up * y);
+            }
+
+            if(isServer)
+            {
+                RpcSyncPlayerInput(BasicInputMovement, InputMovement);
+            }
+            else
+            {
+                CmdSyncPlayerInput(BasicInputMovement, InputMovement);
             }
 
         }
@@ -397,6 +415,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
             }
         }
 
+        /*
         if(equipedSlot.getWeapon() != null)
         {
             equipedSlot.getWeapon().getViewmodelOb().SetActive(true);
@@ -424,6 +443,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
                 }
             }
         }
+        */
+
 
     }
 
@@ -599,6 +620,25 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     }
 
+    [Command]
+    void CmdSyncPlayerInput(Vector3 BIM, Vector3 IM)
+    {
+        BasicInputMovement = BIM;
+        InputMovement = IM;
+
+        RpcSyncPlayerInput(BasicInputMovement, InputMovement);
+    }
+
+    [ClientRpc]
+    void RpcSyncPlayerInput(Vector3 BIM, Vector3 IM)
+    {
+        if(!isLocalPlayer)
+        {
+            BasicInputMovement = BIM;
+            InputMovement = IM;
+        }
+    }
+
     public PlayerModelClass getPlayermodel()
     {
         return PlayerModel;
@@ -613,19 +653,42 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         //PlayerModel.netIdentity.AssignClientAuthority(connectionToClient);
 
+        if(PlayerModel.hitBoxes.Capacity > 0)
+        {
+            gameObject.layer = 2;
+
+            if(!isLocalPlayer)
+            {
+                foreach (hitbox part in PlayerModel.hitBoxes)
+                {
+                    part.gameObject.layer = 0;
+                }
+            }
+            else
+            {
+                foreach (hitbox part in PlayerModel.hitBoxes)
+                {
+                    part.gameObject.layer = 6;
+                }
+            }
+        }
+        else
+        {
+            if(!isLocalPlayer)
+            {
+                gameObject.layer = 0;
+            }
+            else
+            {
+                gameObject.layer = 6;
+            }
+        }
+
         if (!isLocalPlayer)
         {
             foreach (GameObject part in PlayerModel.models)
             {
                 part.layer = 0;
-            }
-            if (PlayerModel.hitBoxes.Capacity > 0)
-            {
-                gameObject.layer = 2;
-            }
-            else
-            {
-                gameObject.layer = 0;
             }
         }
 
@@ -650,7 +713,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public Vector3 getBasicInputMovement()
     {
-        return (Vector3.right * x) + (Vector3.up * y) + (Vector3.forward * z);
+        return BasicInputMovement;
     }
 
     public Transform getBackpack()
@@ -681,12 +744,49 @@ public class PlayerScript : NetworkBehaviour, IDamage
         return false;
     }
 
-    public  void changeSlot()
+    private void equipToMelee()
+    {
+        if (equipedSlot != meleeSlot)
+        {
+            previousSlot = equipedSlot;
+        }
+
+        equipedSlot = meleeSlot;
+
+        if(previousSlot.getWeapon() != null)
+        {
+            previousSlot.getWeapon().onDequip();
+            if(previousSlot.getOtherHand() != null)
+            {
+                previousSlot.getOtherHand().onDequip();
+            }
+        }
+        else
+        {
+            meleeSlot.getWeapon().onDequip();
+        }
+
+        equipedSlot.getWeapon().onEquip();
+        if(equipedSlot.getOtherHand() != null)
+        {
+            equipedSlot.getOtherHand().onEquip();
+        }
+
+        if (!isServer)
+        {
+            cmdSyncSlots(equipedSlot.getIndex(), previousSlot.getIndex());
+        }
+        else
+        {
+            rpcSyncSlots(equipedSlot.getIndex(), previousSlot.getIndex());
+        }
+    }
+
+    public void changeSlot()
     {
         if(canChange())
         {
 
-            
             if(equipedSlot != meleeSlot)
             {
                 previousSlot = equipedSlot;
@@ -710,7 +810,24 @@ public class PlayerScript : NetworkBehaviour, IDamage
                     equipedSlot = WeaponSlots[equipedSlot.getIndex() + 1];
                 }
             }
-            
+
+
+            if (previousSlot.getWeapon() != null)
+            {
+                previousSlot.getWeapon().onDequip();
+                if (previousSlot.getOtherHand() != null)
+                {
+                    previousSlot.getOtherHand().onDequip();
+                }
+            }
+
+            meleeSlot.getWeapon().onDequip();
+
+            equipedSlot.getWeapon().onEquip();
+            if (equipedSlot.getOtherHand() != null)
+            {
+                equipedSlot.getOtherHand().onEquip();
+            }
 
             if (!isServer)
             {
@@ -727,7 +844,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private void cmdSyncSlots(int e, int p)
     {
         equipedSlot = WeaponSlots[e];
-        if(p >= 0)
+        if (p >= 0)
         {
             previousSlot = WeaponSlots[p];
         }
@@ -740,10 +857,31 @@ public class PlayerScript : NetworkBehaviour, IDamage
         if (!isLocalPlayer)
         {
             equipedSlot = WeaponSlots[e];
+
             if (p >= 0)
             {
                 previousSlot = WeaponSlots[p];
             }
+
+            if (previousSlot.getWeapon() != null)
+            {
+                previousSlot.getWeapon().onDequip();
+                if (previousSlot.getOtherHand() != null)
+                {
+                    previousSlot.getOtherHand().onDequip();
+                }
+            }
+            else
+            {
+                meleeSlot.getWeapon().onDequip();
+            }
+
+            equipedSlot.getWeapon().onEquip();
+            if (equipedSlot.getOtherHand() != null)
+            {
+                equipedSlot.getOtherHand().onEquip();
+            }
+
         }
     }
 
@@ -773,15 +911,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private void rpcGiveMelee(GameObject melee)
     {
         melee.GetComponent<WeaponClass>().forcedPickup(this, meleeSlot.getIndex(), false);
-    }
-
-    private void equipToMelee()
-    {
-        if(equipedSlot != meleeSlot)
-        {
-            previousSlot = equipedSlot;
-        }
-        equipedSlot = meleeSlot;
     }
 
     private void interact()

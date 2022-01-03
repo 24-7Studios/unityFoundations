@@ -8,7 +8,7 @@ public class PlayerModelClass : NetworkBehaviour
 
     public string ModelName;
     public List<GameObject> models;
-    public List<GameObject> hitBoxes;
+    public List<hitbox> hitBoxes;
     
 
     [SerializeField]
@@ -22,6 +22,11 @@ public class PlayerModelClass : NetworkBehaviour
     public virtual void setPlayer(PlayerScript p)
     {
         player = p;
+
+        foreach(hitbox hitB in hitBoxes)
+        {
+            hitB.setObject(player);
+        }
         //PlayerScript.died += onPlayerDeath;
         //PlayerScript.spawned += onPlayerSpawn;
     }

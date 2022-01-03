@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class hitbox : MonoBehaviour, IDamage
+public class hitbox : NetworkBehaviour, IDamage
 {
     [SerializeField]
     private IDamage mainObject;
