@@ -183,9 +183,16 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
             worldModel.layer = 0;
         }
 
-        if(slot != player.getEquipedSlot() && player.isLocalPlayer)
+        if (player.isLocalPlayer)
         {
-            player.changeSlot();
+            if (slot != player.getEquipedSlot())
+            {
+                player.changeSlot();
+            }
+            else
+            {
+                player.syncSlots();
+            }
         }
 
     }

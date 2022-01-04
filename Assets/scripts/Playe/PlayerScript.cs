@@ -769,14 +769,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
             equipedSlot.getOtherHand().onEquip();
         }
 
-        if (!isServer)
-        {
-            cmdSyncSlots(equipedSlot.getIndex(), previousSlot.getIndex());
-        }
-        else
-        {
-            rpcSyncSlots(equipedSlot.getIndex(), previousSlot.getIndex());
-        }
+        syncSlots();
     }
 
     public void changeSlot()
@@ -860,14 +853,19 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
 
 
-            if (!isServer)
-            {
-                cmdSyncSlots(equipedSlot.getIndex(), previousSlot.getIndex());
-            }
-            else
-            {
-                rpcSyncSlots(equipedSlot.getIndex(), previousSlot.getIndex());
-            }
+            syncSlots();
+        }
+    }
+
+    public void syncSlots()
+    {
+        if (!isServer)
+        {
+            cmdSyncSlots(equipedSlot.getIndex(), previousSlot.getIndex());
+        }
+        else
+        {
+            rpcSyncSlots(equipedSlot.getIndex(), previousSlot.getIndex());
         }
     }
 
