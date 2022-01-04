@@ -34,7 +34,7 @@ public abstract class raycastWeapon : WeaponClass
 
     protected override void Update()
     {
-        
+
     }
 
 

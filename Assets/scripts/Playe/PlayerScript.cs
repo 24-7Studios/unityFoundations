@@ -748,7 +748,10 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private void equipToMelee()
     {
-        previousSlot = equipedSlot;
+        if(equipedSlot != meleeSlot)
+        {
+            previousSlot = equipedSlot;
+        }
         equipedSlot = meleeSlot;
 
         if (previousSlot.getWeapon() != null)
@@ -807,14 +810,22 @@ public class PlayerScript : NetworkBehaviour, IDamage
             */
             if(equipedSlot == meleeSlot)
             {
-                previousSlot = meleeSlot;
-                if(primarySlot.getWeapon() != null)
+                if(previousSlot.getWeapon() != null)
                 {
-                    equipedSlot = primarySlot;
+                    equipedSlot = previousSlot;
+                    previousSlot = meleeSlot;
                 }
                 else
                 {
-                    equipedSlot = secondarySlot;
+                    previousSlot = meleeSlot;
+                    if (primarySlot.getWeapon() != null)
+                    {
+                        equipedSlot = primarySlot;
+                    }
+                    else
+                    {
+                        equipedSlot = secondarySlot;
+                    }
                 }
             }
             else if(equipedSlot == primarySlot)
@@ -839,11 +850,15 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
             //meleeSlot.getWeapon().onDequip();
 
+
             equipedSlot.getWeapon().onEquip();
+
             if (equipedSlot.getOtherHand() != null)
             {
                 equipedSlot.getOtherHand().onEquip();
             }
+
+
 
             if (!isServer)
             {
@@ -864,10 +879,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         {
             previousSlot = WeaponSlots[p];
         }
-        else
-        {
-            previousSlot = null;
-        }
+
         rpcSyncSlots(e, p);
     }
 
@@ -882,10 +894,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
             {
                 previousSlot = WeaponSlots[p];
             }
-            else
-            {
-                previousSlot = null;
-            }
 
             if (previousSlot.getWeapon() != null)
             {
@@ -896,14 +904,22 @@ public class PlayerScript : NetworkBehaviour, IDamage
                 }
             }
 
-            equipedSlot.getWeapon().onEquip();
-            if (equipedSlot.getOtherHand() != null)
+            if (equipedSlot.getWeapon() != null)
             {
-                equipedSlot.getOtherHand().onEquip();
+                equipedSlot.getWeapon().onEquip();
+
+                if (equipedSlot.getOtherHand() != null)
+                {
+                    equipedSlot.getOtherHand().onEquip();
+                }
             }
+
+
+            Debug.Log(equipedSlot.getWeapon());
 
         }
     }
+
 
     private void giveMelee()
     {
@@ -971,10 +987,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
     {
         if(isServer)
         {
-            Ipickup i = thing.GetComponent<Ipickup>();
-
-            i.pickup(this);
-
             rpcPickup(thing);
         }
         else
@@ -986,23 +998,15 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [Command]
     private void cmdPickup(GameObject thing)
     {
-        Ipickup i = thing.GetComponent<Ipickup>();
-
-        i.pickup(this);
-
         rpcPickup(thing);   
     }
 
     [ClientRpc]
     private void rpcPickup(GameObject thing)
     {
+        Ipickup i = thing.GetComponent<Ipickup>();
 
-        if(!isServer)
-        {
-            Ipickup i = thing.GetComponent<Ipickup>();
-
-            i.pickup(this);
-        }
+        i.pickup(this);
     }
 
     public Slot getEquipedSlot()

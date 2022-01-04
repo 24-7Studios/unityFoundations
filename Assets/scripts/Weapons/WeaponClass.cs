@@ -24,6 +24,11 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     private bool hand;
 
     [SyncVar]
+    private bool isEquiped;
+
+    private bool clientEquiped;
+
+    [SyncVar]
     protected bool isitem;
 
     [SerializeField]
@@ -81,6 +86,14 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         if (player != null && transform.parent == null)
         {
             forcedPickup(player, index, hand);
+            if(isEquiped)
+            {
+                onEquip();
+            }
+            else
+            {
+                onDequip();
+            }
         }
 
     }
@@ -328,6 +341,9 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
     public virtual void onEquip()
     {
+
+        isEquiped = true;
+
         worldModel.SetActive(true);
 
         if (player.isLocalPlayer)
@@ -338,6 +354,9 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
     public virtual void onDequip()
     {
+
+        isEquiped = false;
+
         worldModel.SetActive(false);
 
         if (player.isLocalPlayer)
