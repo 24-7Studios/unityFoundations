@@ -175,17 +175,19 @@ public class PlayerScript : NetworkBehaviour, IDamage
     Slot meleeSlot;
 
     [SerializeField]
+    private Slot primarySlot;
+
+    [SerializeField]
+    private Slot secondarySlot;
+
+    [SerializeField]
     WeaponClass defaultMelee;
 
     [SerializeField]
     private Slot equipedSlot;
 
-    int ee;
-
     [SerializeField]
     private Slot previousSlot;
-
-    int pp;
 
 
     //controls
@@ -222,8 +224,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
         }
 
         meleeSlot = WeaponSlots[0];
-        //primary = WeaponSlots[1];
-        //secondary = WeaponSlots[2];
+        primarySlot = WeaponSlots[1];
+        secondarySlot = WeaponSlots[2];
 
         equipedSlot = meleeSlot;
 
@@ -272,9 +274,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private void Update()
     {
 
-
-        ee = equipedSlot.getIndex();
-        pp = previousSlot.getIndex();
 
         //mouse looking
 
@@ -731,14 +730,17 @@ public class PlayerScript : NetworkBehaviour, IDamage
         return controls;
     }
 
+    //////////////////////////////////
     private bool canChange()
     {
-        foreach(Slot s in WeaponSlots)
+
+        if(primarySlot.getWeapon() != null && secondarySlot.getWeapon() != null)
         {
-            if(s.getWeapon() != null && s != meleeSlot && s != equipedSlot)
-            {
-                return true;
-            }
+            return true;
+        }
+        if(equipedSlot == meleeSlot && (primarySlot.getWeapon() != null || secondarySlot.getWeapon() != null))
+        {
+            return true;
         }
 
         return false;
@@ -746,28 +748,20 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private void equipToMelee()
     {
-        if (equipedSlot != meleeSlot)
-        {
-            previousSlot = equipedSlot;
-        }
-
+        previousSlot = equipedSlot;
         equipedSlot = meleeSlot;
 
-        if(previousSlot.getWeapon() != null)
+        if (previousSlot.getWeapon() != null)
         {
             previousSlot.getWeapon().onDequip();
-            if(previousSlot.getOtherHand() != null)
+            if (previousSlot.getOtherHand() != null)
             {
                 previousSlot.getOtherHand().onDequip();
             }
         }
-        else
-        {
-            meleeSlot.getWeapon().onDequip();
-        }
 
         equipedSlot.getWeapon().onEquip();
-        if(equipedSlot.getOtherHand() != null)
+        if (equipedSlot.getOtherHand() != null)
         {
             equipedSlot.getOtherHand().onEquip();
         }
@@ -786,7 +780,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     {
         if(canChange())
         {
-
+            /*
             if(equipedSlot != meleeSlot)
             {
                 previousSlot = equipedSlot;
@@ -810,7 +804,29 @@ public class PlayerScript : NetworkBehaviour, IDamage
                     equipedSlot = WeaponSlots[equipedSlot.getIndex() + 1];
                 }
             }
-
+            */
+            if(equipedSlot == meleeSlot)
+            {
+                previousSlot = meleeSlot;
+                if(primarySlot.getWeapon() != null)
+                {
+                    equipedSlot = primarySlot;
+                }
+                else
+                {
+                    equipedSlot = secondarySlot;
+                }
+            }
+            else if(equipedSlot == primarySlot)
+            {
+                previousSlot = primarySlot;
+                equipedSlot = secondarySlot;
+            }
+            else
+            {
+                previousSlot = secondarySlot;
+                equipedSlot = primarySlot;
+            }
 
             if (previousSlot.getWeapon() != null)
             {
@@ -821,7 +837,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
                 }
             }
 
-            meleeSlot.getWeapon().onDequip();
+            //meleeSlot.getWeapon().onDequip();
 
             equipedSlot.getWeapon().onEquip();
             if (equipedSlot.getOtherHand() != null)
@@ -848,6 +864,10 @@ public class PlayerScript : NetworkBehaviour, IDamage
         {
             previousSlot = WeaponSlots[p];
         }
+        else
+        {
+            previousSlot = null;
+        }
         rpcSyncSlots(e, p);
     }
 
@@ -862,6 +882,10 @@ public class PlayerScript : NetworkBehaviour, IDamage
             {
                 previousSlot = WeaponSlots[p];
             }
+            else
+            {
+                previousSlot = null;
+            }
 
             if (previousSlot.getWeapon() != null)
             {
@@ -870,10 +894,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
                 {
                     previousSlot.getOtherHand().onDequip();
                 }
-            }
-            else
-            {
-                meleeSlot.getWeapon().onDequip();
             }
 
             equipedSlot.getWeapon().onEquip();

@@ -9,7 +9,9 @@ public class PlayerModelClass : NetworkBehaviour
     public string ModelName;
     public List<GameObject> models;
     public List<hitbox> hitBoxes;
-    
+
+    [SerializeField]
+    protected Transform CameraOffset;
 
     [SerializeField]
     protected Transform RightHoldPos;
