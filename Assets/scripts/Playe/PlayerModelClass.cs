@@ -25,7 +25,7 @@ public class PlayerModelClass : NetworkBehaviour
 
         foreach(hitbox hitB in hitBoxes)
         {
-            hitB.setObject(player);
+            hitB.setObject(player.gameObject);
         }
         //PlayerScript.died += onPlayerDeath;
         //PlayerScript.spawned += onPlayerSpawn;

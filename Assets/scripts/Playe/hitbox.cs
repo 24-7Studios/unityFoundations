@@ -3,30 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class hitbox : NetworkBehaviour, IDamage
+public class hitbox : MonoBehaviour
 {
     [SerializeField]
-    private IDamage mainObject;
+    private GameObject mainObject;
 
-    public float hitMultiplier;
+    [SerializeField]
+    private float defaultMultiplier;
 
-    public void die()
-    {
-        mainObject.die();
-    }
+    [SerializeField]
+    private string type;
 
-    public void takeDamagefromHit(float baseDamage, float fleshMulitplier)
-    {
-        mainObject.takeDamagefromHit(baseDamage * hitMultiplier, fleshMulitplier);
-    }
-
-    public void hit()
-    {
-        mainObject.hit();
-    }
-
-    public void setObject(IDamage i)
+    
+    public void setObject(GameObject i)
     {
         mainObject = i;
     }
+
+    public GameObject getObject()
+    {
+        return mainObject;
+    }
+
+    public float getMultiplier()
+    {
+        return defaultMultiplier;
+    }
+    
+    public string getType()
+    {
+        return type;
+    }
 }
+

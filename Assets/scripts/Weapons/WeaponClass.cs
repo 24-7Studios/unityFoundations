@@ -428,9 +428,14 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         {
 
             IDamage iD = hit.collider.GetComponent<IDamage>();
+            hitbox hb = hit.collider.GetComponent<hitbox>();
             Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
-
-            if (iD != null)
+            
+            if(hb != null)
+            {
+                cmdHitDamageable(hb.getObject(), baseDamage * hb.getMultiplier(), multiplier);
+            }
+            else if (iD != null)
             {
                 cmdHitDamageable(hit.collider.gameObject, baseDamage, multiplier);
             }
