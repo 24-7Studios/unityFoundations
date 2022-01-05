@@ -18,7 +18,22 @@ ModelImporter:
   - first:
       74: 5894491979384236916
     second: fire
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SuitGloves.001
+    second: {fileID: 2100000, guid: d90f67bf166b928498921b4f0394b42a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SuitGlow.001
+    second: {fileID: 2100000, guid: 605cdc16a419c7446bbbbdb411193ef0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SuitSleeves.001
+    second: {fileID: 2100000, guid: 09147f6043241844884b2df1133246e0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -146,7 +161,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
