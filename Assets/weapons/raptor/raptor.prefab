@@ -2450,14 +2450,14 @@ MonoBehaviour:
   fullAuto: 0
   fireDelay: 0.01
   fireAnim: fire
-  fireSound: {fileID: 0}
+  fireSound: {fileID: 8300000, guid: 0a36cb28f21e3f042b1ae85a927bb374, type: 3}
   reloadAnim: load pull
-  reloadSound: {fileID: 0}
+  reloadSound: {fileID: 8300000, guid: 8ea0de11e85e33f4ebc8fc428b1648c4, type: 3}
   idleAnim: idle
   ammo: 8
   loadedAmmo: 8
   reloadDelay: 0
-  ChamberClicksound: {fileID: 0}
+  ChamberClicksound: {fileID: 8300000, guid: e7030fedf5fb0e640a70ce3a5c2477fd, type: 3}
 --- !u!82 &2473615908862402957
 AudioSource:
   m_ObjectHideFlags: 0
