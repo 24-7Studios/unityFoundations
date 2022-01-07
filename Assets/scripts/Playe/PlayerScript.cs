@@ -35,7 +35,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     [SerializeField]
     private Camera gunCam;
-    
+
 
     [SerializeField]
     private interactZoneScript interactZone;
@@ -43,7 +43,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [SerializeField]
     private PlayerModelClass PlayerModel;
 
-    [SerializeField] 
+    [SerializeField]
     private localPlayerOptions settings;
 
 
@@ -57,9 +57,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private float sens;
 
-    
+
     private float yMouseInput = 0;
-    
+
     private float xMouseInput = 0;
 
 
@@ -96,7 +96,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private float groundDistance = 0.4f;
 
     //[SerializeField]
-    private float groundingForce = 0.1f;
+    private float groundingForce = 0.05f;
 
     //[SerializeField]
     private float maxAngle = 20;
@@ -108,7 +108,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private float PostionSnapThreshold = 10;
 
     [SerializeField]
-    private float SyncInterval = 999f;
+    private float SyncInterval = 100f;
 
     float SyncTimer = 0;
 
@@ -118,9 +118,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [SerializeField]
     private bool usePhysicsGravity = false;
 
-    
 
-    
+
+
     bool grounded;
     bool canJump;
     bool jump = false;
@@ -195,7 +195,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     [SerializeField]
     private PlayerInput input;
-    
+
 
 
     private void Awake()
@@ -217,7 +217,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         health = DefaultHealth;
 
 
-        for(int i = 0; i <= numOfSlots; i++)
+        for (int i = 0; i <= numOfSlots; i++)
         {
             Slot s = new Slot(i);
             WeaponSlots.Add(s);
@@ -232,8 +232,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         setPlayermodel(PlayerModel);
 
-  
-        if(!isLocalPlayer)
+
+        if (!isLocalPlayer)
         {
             gameObject.layer = 0;
         }
@@ -250,9 +250,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         }
 
-        
-        
-        
+
+
+
         if (usePhysicsGravity)
         {
             playerGravity = Physics.gravity.y;
@@ -261,7 +261,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         footPostition = foot.localPosition;
 
 
-        
+
 
     }
 
@@ -285,7 +285,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
             float MouseY = 0;
 
 
-            if(input.currentControlScheme != null)
+            if (input.currentControlScheme != null)
             {
                 if (input.currentControlScheme.Equals("gamepad"))
                 {
@@ -308,52 +308,52 @@ public class PlayerScript : NetworkBehaviour, IDamage
             xMouseInput -= MouseX;
 
             camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * yMouseInput);
-            
+
             playerPhysBody.transform.rotation = Quaternion.Euler(Vector3.up * -xMouseInput);
-            
+
             CmdSyncPlayerRotation(yMouseInput, xMouseInput);
 
         }
 
-        
 
 
-            
-            
 
-        
-        
+
+
+
+
+
 
         ///////////////////////////////////////////////////////////////////////////////////////
 
 
         //movement
 
-            grounded = isGrounded();
-            canJump = CanJump();
+        grounded = isGrounded();
+        canJump = CanJump();
 
 
 
-            RaycastHit FloorSnap;
+        RaycastHit FloorSnap;
 
-            if (Physics.Raycast(groundCheck.position, -groundCheck.up, out FloorSnap) && ((FloorSnap.normal.x! < maxAngle) || (FloorSnap.normal.y! < maxAngle)) && grounded)
-            {
+        if (Physics.Raycast(groundCheck.position, -groundCheck.up, out FloorSnap) && ((FloorSnap.normal.x! < maxAngle) || (FloorSnap.normal.y! < maxAngle)) && grounded)
+        {
 
-                Quaternion toRotation = Quaternion.FromToRotation(transform.up, FloorSnap.normal) * transform.rotation;
-                groundCheck.rotation = toRotation;
+            Quaternion toRotation = Quaternion.FromToRotation(transform.up, FloorSnap.normal) * transform.rotation;
+            groundCheck.rotation = toRotation;
 
 
-            }
-            else
-            {
-                groundCheck.rotation = playerPhysBody.rotation;
+        }
+        else
+        {
+            groundCheck.rotation = playerPhysBody.rotation;
 
-            }
+        }
 
-            foot.rotation = groundCheck.rotation;
-            foot.localPosition = footPostition;
+        foot.rotation = groundCheck.rotation;
+        foot.localPosition = footPostition;
 
-        
+
 
         if (isLocalPlayer)
         {
@@ -361,7 +361,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
             x = controls.Player.Movement.ReadValue<Vector2>().x;
             z = controls.Player.Movement.ReadValue<Vector2>().y;
 
-            
+
             if (fly)
             {
                 if (Input.GetKey("space"))
@@ -392,7 +392,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
                 InputMovement = ((((groundCheck.transform.right) * x + (groundCheck.transform.forward) * z) * moveSpeed) + groundCheck.transform.up * y);
             }
 
-            if(isServer)
+            if (isServer)
             {
                 RpcSyncPlayerInput(BasicInputMovement, InputMovement);
             }
@@ -405,10 +405,10 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         ////////////////////////////////////////////////////////
         //backpack 
-        
-        if(isLocalPlayer)
+
+        if (isLocalPlayer)
         {
-            if(meleeSlot.getWeapon() == null)
+            if (meleeSlot.getWeapon() == null)
             {
                 giveMelee();
             }
@@ -447,17 +447,17 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     }
 
-    
+
     public void FixedUpdate()
     {
 
         if (isLocalPlayer)
         {
 
-            
+
 
             if (jump)
-            {   
+            {
 
                 playerPhysBody.velocity += transform.up * jumpForce;
                 jump = false;
@@ -497,7 +497,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         }
 
-        
+
     }
 
 
@@ -510,28 +510,28 @@ public class PlayerScript : NetworkBehaviour, IDamage
     {
         return isGrounded();
     }
-    
+
     void activateJump()
-    {           
-        if(!fly && (canJump == true) && jump == false )
+    {
+        if (!fly && (canJump == true) && jump == false)
         {
             jump = true;
         }
-            
+
     }
 
     [Command]
     void CmdJump()
     {
 
-            playerPhysBody.velocity += transform.up * jumpForce;
+        playerPhysBody.velocity += transform.up * jumpForce;
 
     }
 
     [Command]
     void CmdMovePlayer(Vector3 IM, Vector3 clientPos)
     {
-        
+
 
         if (!isLocalPlayer && Vector3.Distance(playerPhysBody.position, clientPos) > PostionSnapThreshold)
         {
@@ -572,11 +572,11 @@ public class PlayerScript : NetworkBehaviour, IDamage
             playerPhysBody.AddForce(IM, ForceMode.VelocityChange);
             playerPhysBody.position = Vector3.Lerp(playerPhysBody.position, serverPos, Time.fixedDeltaTime / PositionCompensationDamping);
         }
-        else if(!isLocalPlayer)
+        else if (!isLocalPlayer)
         {
             playerPhysBody.position = serverPos;
         }
-      
+
 
     }
     [ClientRpc]
@@ -592,7 +592,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [Command]
     void CmdSyncPlayerRotation(float y, float x)
     {
-        
+
         yMouseInput = y;
         xMouseInput = x;
 
@@ -631,7 +631,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [ClientRpc]
     void RpcSyncPlayerInput(Vector3 BIM, Vector3 IM)
     {
-        if(!isLocalPlayer)
+        if (!isLocalPlayer)
         {
             BasicInputMovement = BIM;
             InputMovement = IM;
@@ -652,11 +652,11 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         //PlayerModel.netIdentity.AssignClientAuthority(connectionToClient);
 
-        if(PlayerModel.hitBoxes.Capacity > 0)
+        if (PlayerModel.hitBoxes.Capacity > 0)
         {
             gameObject.layer = 2;
 
-            if(!isLocalPlayer)
+            if (!isLocalPlayer)
             {
                 foreach (hitbox part in PlayerModel.hitBoxes)
                 {
@@ -673,7 +673,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         }
         else
         {
-            if(!isLocalPlayer)
+            if (!isLocalPlayer)
             {
                 gameObject.layer = 0;
             }
@@ -734,11 +734,11 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private bool canChange()
     {
 
-        if(primarySlot.getWeapon() != null && secondarySlot.getWeapon() != null)
+        if (primarySlot.getWeapon() != null && secondarySlot.getWeapon() != null)
         {
             return true;
         }
-        if(equipedSlot == meleeSlot && (primarySlot.getWeapon() != null || secondarySlot.getWeapon() != null))
+        if (equipedSlot == meleeSlot && (primarySlot.getWeapon() != null || secondarySlot.getWeapon() != null))
         {
             return true;
         }
@@ -748,7 +748,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private void equipToMelee()
     {
-        if(equipedSlot != meleeSlot)
+        if (equipedSlot != meleeSlot)
         {
             previousSlot = equipedSlot;
         }
@@ -774,7 +774,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public void changeSlot()
     {
-        if(canChange())
+        if (canChange())
         {
             /*
             if(equipedSlot != meleeSlot)
@@ -801,9 +801,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
                 }
             }
             */
-            if(equipedSlot == meleeSlot)
+            if (equipedSlot == meleeSlot)
             {
-                if(previousSlot.getWeapon() != null)
+                if (previousSlot.getWeapon() != null)
                 {
                     equipedSlot = previousSlot;
                     previousSlot = meleeSlot;
@@ -821,7 +821,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
                     }
                 }
             }
-            else if(equipedSlot == primarySlot)
+            else if (equipedSlot == primarySlot)
             {
                 previousSlot = primarySlot;
                 equipedSlot = secondarySlot;
@@ -859,13 +859,23 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public void syncSlots()
     {
-        if (!isServer)
+        if (isLocalPlayer)
         {
-            cmdSyncSlots(equipedSlot.getIndex(), previousSlot.getIndex());
-        }
-        else
-        {
-            rpcSyncSlots(equipedSlot.getIndex(), previousSlot.getIndex());
+            equipedSlot.getWeapon().onEquip();
+
+            if (equipedSlot.getOtherHand() != null)
+            {
+                equipedSlot.getOtherHand().onEquip();
+            }
+
+            if (!isServer)
+            {
+                cmdSyncSlots(equipedSlot.getIndex(), previousSlot.getIndex());
+            }
+            else
+            {
+                rpcSyncSlots(equipedSlot.getIndex(), previousSlot.getIndex());
+            }
         }
     }
 
@@ -921,7 +931,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private void giveMelee()
     {
-        if(isServer)
+        if (isServer)
         {
             GameObject melee = Instantiate(defaultMelee.gameObject);
             NetworkServer.Spawn(melee);
@@ -958,7 +968,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         Debug.Log("tried to pick something up");
         Ipickup[] list = interactZone.getList();
         Ipickup target = null;
-        if(list.Length > 0)
+        if (list.Length > 0)
         {
 
             float distance = Vector3.Distance(list[0].getObject().transform.position, camTransformer.position);
@@ -983,7 +993,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public void pickup(GameObject thing)
     {
-        if(isServer)
+        if (isServer)
         {
             rpcPickup(thing);
         }
@@ -996,7 +1006,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [Command]
     private void cmdPickup(GameObject thing)
     {
-        rpcPickup(thing);   
+        rpcPickup(thing);
     }
 
     [ClientRpc]
@@ -1019,7 +1029,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public Slot getPickupSlot()
     {
-        foreach(Slot s in WeaponSlots)
+        foreach (Slot s in WeaponSlots)
         {
             if (s.getWeapon() == null)
             {
@@ -1027,7 +1037,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
             }
         }
 
-        if(equipedSlot == meleeSlot)
+        if (equipedSlot == meleeSlot)
         {
             return previousSlot;
         }
@@ -1035,6 +1045,32 @@ public class PlayerScript : NetworkBehaviour, IDamage
         {
             return equipedSlot;
         }
+    }
+
+
+
+    private void tryDrop(NetworkIdentity thing)
+    {
+        if(isServer)
+        {
+            rpcDrop(thing);
+        }
+        else
+        {
+            cmdDrop(thing);
+        }
+    }
+
+    [Command]
+    private void cmdDrop(NetworkIdentity thing)
+    {
+        rpcDrop(thing);
+    }
+
+    [ClientRpc]
+    private void rpcDrop(NetworkIdentity thing)
+    {
+        drop(thing);
     }
 
     public void drop(GameObject thing)
@@ -1100,7 +1136,10 @@ public class PlayerScript : NetworkBehaviour, IDamage
         {
             foreach (NetworkIdentity i in backpack.GetComponentsInChildren<NetworkIdentity>())
             {
-                drop(i);
+                if (i.GetComponent<meleescript>() == null)
+                {
+                    tryDrop(i);
+                }
             }
             List<NetworkStartPosition> positions = FindObjectsOfType<NetworkStartPosition>().ToList<NetworkStartPosition>();
             spawn(positions[(int)(Random.value * positions.Count)].transform.position);  

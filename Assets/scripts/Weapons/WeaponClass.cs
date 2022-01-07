@@ -262,11 +262,6 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     {
         unsetControls(hand);
 
-        player = null;
-
-        if (isServer)
-            netIdentity.RemoveClientAuthority();
-
         slot.removeWeapon(hand);
 
         item.transform.SetParent(null);
@@ -294,6 +289,16 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         hand = false;
 
         isitem = true;
+
+        if(player.isLocalPlayer)
+        {
+            player.syncSlots();
+        }
+
+        player = null;
+
+        if (isServer)
+            netIdentity.RemoveClientAuthority();
     }
 
     public bool getHand()
