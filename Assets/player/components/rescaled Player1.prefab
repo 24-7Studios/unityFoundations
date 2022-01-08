@@ -102,7 +102,6 @@ Transform:
   - {fileID: 7833590480305607623}
   - {fileID: 1050093693400443210}
   - {fileID: 1050093693452069657}
-  - {fileID: 1050093693641089723}
   - {fileID: 1050093693734197462}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -257,6 +256,9 @@ MonoBehaviour:
   Jumpable:
     serializedVersion: 2
     m_Bits: 1033
+  groundDistance: 0.2
+  groundingForce: 0.05
+  maxAngle: 20
   PositionCompensationDamping: 0.25
   PostionSnapThreshold: 5
   SyncInterval: 0
@@ -271,6 +273,14 @@ MonoBehaviour:
   viewmodelHolder: {fileID: 1050093694719503198}
   numOfSlots: 2
   meleeSlot:
+    myWeapon: {fileID: 0}
+    otherHand: {fileID: 0}
+    myIndex: -1
+  primarySlot:
+    myWeapon: {fileID: 0}
+    otherHand: {fileID: 0}
+    myIndex: -1
+  secondarySlot:
     myWeapon: {fileID: 0}
     otherHand: {fileID: 0}
     myIndex: -1
@@ -423,12 +433,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1050093693641089722}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalPosition: {x: 0, y: -0.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1050093693558037595}
-  m_RootOrder: 3
+  m_Father: {fileID: 1050093693734197462}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1050093693641089860
 SphereCollider:
@@ -441,7 +451,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1050093693734197461
 GameObject:
@@ -471,9 +481,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1050093693641089723}
   m_Father: {fileID: 1050093693558037595}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1050093693734197463
 CapsuleCollider:

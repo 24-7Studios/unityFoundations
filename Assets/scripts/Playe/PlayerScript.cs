@@ -92,13 +92,13 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [SerializeField]
     private LayerMask Jumpable;
 
-    //[SerializeField]
-    private float groundDistance = 0.4f;
+    [SerializeField]
+    private float groundDistance = 0.25f;
 
-    //[SerializeField]
+    [SerializeField]
     private float groundingForce = 0.05f;
 
-    //[SerializeField]
+    [SerializeField]
     private float maxAngle = 20;
 
     [SerializeField]
