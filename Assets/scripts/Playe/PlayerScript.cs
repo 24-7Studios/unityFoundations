@@ -861,11 +861,14 @@ public class PlayerScript : NetworkBehaviour, IDamage
     {
         if (isLocalPlayer)
         {
-            equipedSlot.getWeapon().onEquip();
-
-            if (equipedSlot.getOtherHand() != null)
+            if(equipedSlot.getWeapon() != null)
             {
-                equipedSlot.getOtherHand().onEquip();
+                equipedSlot.getWeapon().onEquip();
+
+                if (equipedSlot.getOtherHand() != null)
+                {
+                    equipedSlot.getOtherHand().onEquip();
+                }
             }
 
             if (!isServer)
