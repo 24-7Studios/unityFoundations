@@ -42,6 +42,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "drop",
+                    "type": "Button",
+                    "id": "590c09c7-69b0-43ee-980e-f3b6be6ce383",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "interact",
                     "type": "Button",
                     "id": "140ded67-27fb-439c-bf63-5a9df26ed819",
@@ -358,6 +367,17 @@
                     "processors": "",
                     "groups": "gamepad",
                     "action": "reload2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12a84156-277f-4c5b-ba7c-f0031b41b229",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "mouse + keybaord",
+                    "action": "drop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

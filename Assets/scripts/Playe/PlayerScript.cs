@@ -206,6 +206,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         controls.Player.Change.performed += ctx => changeSlot();
         controls.Player.interact.started += ctx => interact();
         controls.Player.interact.performed += ctx => manualPickup();
+        controls.Player.drop.performed += ctx => manualDrop();
         controls.Player.melee.performed += ctx => equipToMelee();
         died += onDeath;
     }
@@ -411,6 +412,11 @@ public class PlayerScript : NetworkBehaviour, IDamage
             if (meleeSlot.getWeapon() == null)
             {
                 giveMelee();
+            }
+
+            if(equipedSlot.getWeapon() == null)
+            {
+                changeSlot();
             }
         }
 
@@ -748,6 +754,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private void equipToMelee()
     {
+        Debug.Log("swapped to  melee");
+
         if (equipedSlot != meleeSlot)
         {
             previousSlot = equipedSlot;
@@ -763,10 +771,13 @@ public class PlayerScript : NetworkBehaviour, IDamage
             }
         }
 
-        equipedSlot.getWeapon().onEquip();
-        if (equipedSlot.getOtherHand() != null)
+        if(equipedSlot.getWeapon() != null)
         {
-            equipedSlot.getOtherHand().onEquip();
+            equipedSlot.getWeapon().onEquip();
+            if (equipedSlot.getOtherHand() != null)
+            {
+                equipedSlot.getOtherHand().onEquip();
+            }
         }
 
         syncSlots();
@@ -774,33 +785,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public void changeSlot()
     {
-        if (canChange())
+        //Debug.Log("1212121212");
+        if (!(primarySlot.getWeapon() == null && secondarySlot.getWeapon() == null))
         {
-            /*
-            if(equipedSlot != meleeSlot)
-            {
-                previousSlot = equipedSlot;
-                if(equipedSlot.getIndex() == numOfSlots)
-                {
-                    equipedSlot = WeaponSlots[1];
-                }
-                else
-                {
-                    equipedSlot = WeaponSlots[equipedSlot.getIndex() + 1];
-                }
-            }
-            else
-            {
-                if(previousSlot.getWeapon() != null)
-                {
-                    equipedSlot = previousSlot;
-                }
-                else
-                {
-                    equipedSlot = WeaponSlots[equipedSlot.getIndex() + 1];
-                }
-            }
-            */
             if (equipedSlot == meleeSlot)
             {
                 if (previousSlot.getWeapon() != null)
@@ -821,12 +808,12 @@ public class PlayerScript : NetworkBehaviour, IDamage
                     }
                 }
             }
-            else if (equipedSlot == primarySlot)
+            else if (equipedSlot == primarySlot && secondarySlot.getWeapon() != null)
             {
                 previousSlot = primarySlot;
                 equipedSlot = secondarySlot;
             }
-            else
+            else if (equipedSlot == secondarySlot && primarySlot.getWeapon() != null)
             {
                 previousSlot = secondarySlot;
                 equipedSlot = primarySlot;
@@ -851,9 +838,18 @@ public class PlayerScript : NetworkBehaviour, IDamage
                 equipedSlot.getOtherHand().onEquip();
             }
 
-
-
             syncSlots();
+
+        }
+        else
+        {
+            /*
+            if(primarySlot.getWeapon() == null && secondarySlot.getWeapon() == null)
+            {
+                equipToMelee();
+            }
+            */
+            equipToMelee();
         }
     }
 
@@ -1050,7 +1046,14 @@ public class PlayerScript : NetworkBehaviour, IDamage
         }
     }
 
-
+    
+    private void manualDrop()
+    {
+        if(equipedSlot != meleeSlot)
+        {
+            tryDrop(equipedSlot.getWeapon().netIdentity);
+        }
+    }
 
     private void tryDrop(NetworkIdentity thing)
     {
@@ -1070,10 +1073,23 @@ public class PlayerScript : NetworkBehaviour, IDamage
         rpcDrop(thing);
     }
 
+    [Command]
+    private void cmdDoDrop(NetworkIdentity thing)
+    {
+        drop(thing);
+    }
+
     [ClientRpc]
     private void rpcDrop(NetworkIdentity thing)
     {
-        drop(thing);
+        if(!isServer)
+        {
+            drop(thing);
+        }
+        if(isLocalPlayer)
+        {
+            cmdDoDrop(thing);
+        }
     }
 
     public void drop(GameObject thing)
@@ -1309,7 +1325,9 @@ public class Slot
 
     public void removeWeapon(bool hand)
     {
-        if(!hand)
+
+
+        if (!hand)
         {
             myWeapon = null;
         }

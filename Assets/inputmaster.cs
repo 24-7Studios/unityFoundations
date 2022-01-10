@@ -64,6 +64,15 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""drop"",
+                    ""type"": ""Button"",
+                    ""id"": ""590c09c7-69b0-43ee-980e-f3b6be6ce383"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""interact"",
                     ""type"": ""Button"",
                     ""id"": ""140ded67-27fb-439c-bf63-5a9df26ed819"",
@@ -382,6 +391,17 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                     ""action"": ""reload2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""12a84156-277f-4c5b-ba7c-f0031b41b229"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""mouse + keybaord"",
+                    ""action"": ""drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -422,6 +442,7 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
         m_Player_jump = m_Player.FindAction("jump", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Change = m_Player.FindAction("Change", throwIfNotFound: true);
+        m_Player_drop = m_Player.FindAction("drop", throwIfNotFound: true);
         m_Player_interact = m_Player.FindAction("interact", throwIfNotFound: true);
         m_Player_Fire_1 = m_Player.FindAction("Fire_1", throwIfNotFound: true);
         m_Player_Fire_2Zoom1 = m_Player.FindAction("Fire_2/Zoom1", throwIfNotFound: true);
@@ -491,6 +512,7 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_jump;
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Change;
+    private readonly InputAction m_Player_drop;
     private readonly InputAction m_Player_interact;
     private readonly InputAction m_Player_Fire_1;
     private readonly InputAction m_Player_Fire_2Zoom1;
@@ -505,6 +527,7 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
         public InputAction @jump => m_Wrapper.m_Player_jump;
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Change => m_Wrapper.m_Player_Change;
+        public InputAction @drop => m_Wrapper.m_Player_drop;
         public InputAction @interact => m_Wrapper.m_Player_interact;
         public InputAction @Fire_1 => m_Wrapper.m_Player_Fire_1;
         public InputAction @Fire_2Zoom1 => m_Wrapper.m_Player_Fire_2Zoom1;
@@ -532,6 +555,9 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                 @Change.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChange;
                 @Change.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChange;
                 @Change.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChange;
+                @drop.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrop;
+                @drop.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrop;
+                @drop.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrop;
                 @interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
@@ -566,6 +592,9 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                 @Change.started += instance.OnChange;
                 @Change.performed += instance.OnChange;
                 @Change.canceled += instance.OnChange;
+                @drop.started += instance.OnDrop;
+                @drop.performed += instance.OnDrop;
+                @drop.canceled += instance.OnDrop;
                 @interact.started += instance.OnInteract;
                 @interact.performed += instance.OnInteract;
                 @interact.canceled += instance.OnInteract;
@@ -612,6 +641,7 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
         void OnChange(InputAction.CallbackContext context);
+        void OnDrop(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnFire_1(InputAction.CallbackContext context);
         void OnFire_2Zoom1(InputAction.CallbackContext context);

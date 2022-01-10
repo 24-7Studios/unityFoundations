@@ -1246,24 +1246,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 2
---- !u!114 &1847541456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1847541448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 3775234726
-  serverOnly: 0
-  visible: 0
-  m_AssetId: e033a3ff4543c794abd3be64fa32af44
-  hasSpawned: 0
+  m_CollisionDetection: 1
 --- !u!1001 &1899149200
 PrefabInstance:
   m_ObjectHideFlags: 0

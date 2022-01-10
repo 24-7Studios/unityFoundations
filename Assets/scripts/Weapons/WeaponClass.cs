@@ -11,8 +11,8 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     [SyncVar]
     protected PlayerScript player;
     
-    [SyncVar]
-     protected Slot slot;    // this is just to check the index from. Do not acually reference this  for anything else;
+    
+    protected Slot slot;    // this is just to check the index from. Do not acually reference this  for anything else;
 
     [SyncVar]
     protected int index;
@@ -147,7 +147,10 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
         slot.setWeapon(this, hand);
 
-        setControls(hand);
+        if(player.isLocalPlayer)
+        {
+            setControls(hand);
+        }
 
         player.getPlayermodel().equipWeapon(this, hand);
 
@@ -216,7 +219,10 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
         player.getSlotAtIndex(s).setWeapon(this, hand);
 
-        setControls(hand);
+        if (player.isLocalPlayer)
+        {
+            setControls(hand);
+        }
 
         player.getPlayermodel().equipWeapon(this, hand);
 
@@ -260,7 +266,16 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
     public virtual void drop()
     {
-        unsetControls(hand);
+
+
+
+        if(player != null)
+        {
+            if (player.isLocalPlayer)
+            {
+                unsetControls(hand);
+            }
+        }
 
         slot.removeWeapon(hand);
 
@@ -289,11 +304,6 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         hand = false;
 
         isitem = true;
-
-        if(player.isLocalPlayer)
-        {
-            player.syncSlots();
-        }
 
         player = null;
 
@@ -459,6 +469,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         {
 
             IDamage iD = hit.collider.GetComponent<IDamage>();
+            NetworkIdentity netId = hit.collider.GetComponent<NetworkIdentity>();
             hitbox hb = hit.collider.GetComponent<hitbox>();
             Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
             
@@ -474,7 +485,10 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
             if (rb != null)
             {
                 rb.AddForceAtPosition(direction, hit.point, ForceMode.Impulse);
-                pushObject(hit.collider.gameObject, direction, hit.point);
+                if(netId != null)
+                {
+                    pushObject(hit.collider.gameObject, direction, hit.point);
+                }
             }
 
             if(hitEffect != null)
