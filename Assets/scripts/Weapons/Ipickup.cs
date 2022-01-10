@@ -10,6 +10,8 @@ public interface Ipickup
 
     void pickup(PlayerScript p);
 
+    void serverPickup(PlayerScript p);
+
     void drop();
 
 

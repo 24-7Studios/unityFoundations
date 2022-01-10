@@ -11,7 +11,6 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     [SyncVar]
     protected PlayerScript player;
     
-    
     protected Slot slot;    // this is just to check the index from. Do not acually reference this  for anything else;
 
     [SyncVar]
@@ -25,8 +24,6 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
     [SyncVar]
     private bool isEquiped;
-
-    private bool clientEquiped;
 
     [SyncVar]
     protected bool isitem;
@@ -128,7 +125,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         return canDual;
     }
 
-    public virtual void pickup(PlayerScript p)
+    public virtual void oldpickup(PlayerScript p)
     {
         player = p;
 
@@ -198,6 +195,62 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
             }
         }
 
+    }
+
+    public virtual void pickup(PlayerScript p)
+    {
+        Debug.Log(player);
+
+        slot = player.getSlotAtIndex(index);
+
+        slot.setWeapon(this, hand);
+
+        player.getPlayermodel().equipWeapon(this, hand);
+
+        foreach (MeshRenderer m in item.GetComponents<MeshRenderer>())
+        {
+            m.enabled = false;
+        }
+
+        foreach (Collider c in item.GetComponents<Collider>())
+        {
+            c.enabled = false;
+        }
+
+        item.GetComponent<Rigidbody>().isKinematic = true;
+        transform.SetParent(player.getBackpack(), false);
+        transform.localPosition = basePosOffset;
+        transform.localRotation = Quaternion.Euler(baseRotOffset);
+        transform.localScale = baseScaOffset;
+        viewmodel.transform.SetParent(player.getViewmodelHolder(), true);
+        viewmodel.transform.localPosition = Vector3.zero;
+
+        if (player.isLocalPlayer)
+        {
+            viewmodel.layer = 11;
+            worldModel.layer = 6;
+            setControls(hand);
+            if (slot != player.getEquipedSlot())
+            {
+                player.changeSlot();
+            }
+            else
+            {
+                player.syncSlots();
+            }
+        }
+        else
+        {
+            worldModel.layer = 0;
+        }
+    }
+
+    public  void serverPickup(PlayerScript p)
+    {
+        player = p;
+        index = player.getPickupSlot().getIndex();
+        netIdentity.AssignClientAuthority(p.connectionToClient);
+        isitem = false;
     }
 
     public virtual void forcedPickup(PlayerScript p, int s, bool h)
