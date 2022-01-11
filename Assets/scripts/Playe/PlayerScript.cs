@@ -998,7 +998,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
             i.serverPickup(this);
 
-            rpcPickup(thing);
+            //rpcPickup(thing);
         }
         else
         {
@@ -1013,7 +1013,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         i.serverPickup(this);
 
-        rpcPickup(thing);
+        //rpcPickup(thing);
     }
 
     [ClientRpc]

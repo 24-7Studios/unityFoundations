@@ -8,6 +8,7 @@ using Mirror;
 public abstract class WeaponClass : NetworkBehaviour, Ipickup
 {
 
+    
     [SyncVar]
     protected PlayerScript player;
     
@@ -245,6 +246,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         }
     }
 
+    [Server]
     public  void serverPickup(PlayerScript p)
     {
         player = p;
