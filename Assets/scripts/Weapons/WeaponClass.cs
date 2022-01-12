@@ -200,8 +200,9 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
     public virtual void pickup(PlayerScript p)
     {
-        Debug.Log(player);
 
+        Debug.Log(player);
+        /*
         slot = player.getSlotAtIndex(index);
 
         slot.setWeapon(this, hand);
@@ -244,6 +245,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         {
             worldModel.layer = 0;
         }
+        */
     }
 
     [Server]
