@@ -992,18 +992,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public void pickup(GameObject thing)
     {
-        if (isServer)
-        {
-            Ipickup i = thing.GetComponent<Ipickup>();
-
-            i.serverPickup(this);
-
-            rpcPickup(thing);
-        }
-        else
-        {
-            cmdPickup(thing);
-        }
+        cmdPickup(thing);
     }
 
     [Command]
@@ -1015,6 +1004,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         rpcPickup(thing);
     }
+
 
     [ClientRpc]
     private void rpcPickup(GameObject thing)

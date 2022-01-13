@@ -202,7 +202,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     {
 
         Debug.Log(player);
-        /*
+        
         slot = player.getSlotAtIndex(index);
 
         slot.setWeapon(this, hand);
@@ -245,8 +245,9 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         {
             worldModel.layer = 0;
         }
-        */
+        
     }
+
 
     [Server]
     public  void serverPickup(PlayerScript p)
@@ -255,6 +256,16 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         index = player.getPickupSlot().getIndex();
         netIdentity.AssignClientAuthority(p.connectionToClient);
         isitem = false;
+        clientPickup(player, index, isitem);
+    }
+
+
+    [ClientRpc]
+    public void clientPickup(PlayerScript p, int i, bool b)
+    {
+        player = p;
+        index = i;
+        isitem = b;
     }
 
     public virtual void forcedPickup(PlayerScript p, int s, bool h)
