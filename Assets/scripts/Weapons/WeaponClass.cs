@@ -379,6 +379,13 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
             netIdentity.RemoveClientAuthority();
     }
 
+
+    [Server]
+    public void serverDrop()
+    {
+
+    }
+
     public bool getHand()
     {
         return hand;

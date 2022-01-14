@@ -1091,14 +1091,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [ClientRpc]
     private void rpcDrop(NetworkIdentity thing)
     {
-        if(!isServer)
-        {
-            drop(thing);
-        }
-        if(isLocalPlayer)
-        {
-            cmdDoDrop(thing);
-        }
+        drop(thing);
+        //cmdDoDrop(thing);
     }
 
     public void drop(GameObject thing)

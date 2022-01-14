@@ -14,5 +14,7 @@ public interface Ipickup
 
     void drop();
 
+    void serverDrop();
+
 
 }
