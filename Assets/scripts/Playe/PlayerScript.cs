@@ -234,9 +234,13 @@ public class PlayerScript : NetworkBehaviour, IDamage
         setPlayermodel(PlayerModel);
 
 
-        if (!isLocalPlayer)
+        if (isLocalPlayer)
         {
-            gameObject.layer = 0;
+            gameObject.layer = 6;
+        }
+        else
+        {
+            gameObject.layer = 7;
         }
 
         if (isLocalPlayer)
@@ -1101,7 +1105,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         i.drop();
 
-        thing.transform.position = transform.position + transform.forward * 2;    
+        //thing.transform.position = transform.position + transform.forward * 2;    
     }
 
     public void drop(NetworkIdentity net)
@@ -1110,7 +1114,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         i.drop();
 
-        net.transform.position = transform.position + transform.forward * 2;
+        //net.transform.position = transform.position + transform.forward * 2;
     }
 
     public void viewPunch(float r)

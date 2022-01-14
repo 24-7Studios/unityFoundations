@@ -13,7 +13,7 @@ TagManager:
   - Water
   - UI
   - thisPlayer
-  - drops
+  - otherPlayer
   - camera
   - throwable
   - pickups
