@@ -11,13 +11,13 @@ public class PlayerModelClass : NetworkBehaviour
     public List<hitbox> hitBoxes;
 
     [SerializeField]
-    protected Transform CameraOffset;
+    public Transform CameraOffset;
 
     [SerializeField]
-    protected Transform RightHoldPos;
+    protected Transform RightHoldParent;
 
     [SerializeField]
-    protected Transform LeftHoldPos;
+    protected Transform LeftHoldParent;
 
     protected PlayerScript player;
 
@@ -40,11 +40,11 @@ public class PlayerModelClass : NetworkBehaviour
 
         if (hand)
         {
-            targetPos = LeftHoldPos;
+            targetPos = LeftHoldParent;
         }
         else
         {
-            targetPos = RightHoldPos;
+            targetPos = RightHoldParent;
         }
 
         GameObject wm = w.getWorldModelOb();
@@ -54,7 +54,7 @@ public class PlayerModelClass : NetworkBehaviour
         wm.transform.localRotation = Quaternion.Euler(w.WModelRotOffset);
 
         wm.transform.SetParent(null, true);
-        wm.transform.localScale = w.WModelScaOffset;
+        wm.transform.localScale = w.WModelScaOffset/transform.localScale.y;
         wm.transform.SetParent(targetPos, true);
 
     }

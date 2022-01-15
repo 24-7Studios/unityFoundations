@@ -16,6 +16,12 @@ public class DudePlayermodel : PlayerModelClass
     private Transform virtualAimTarget;
 
     [SerializeField]
+    private Transform rightArmTarget;
+
+    [SerializeField]
+    private Transform leftArmTarget;
+
+    [SerializeField]
     private float animationDamping;
 
     // Start is called before the first frame update
@@ -39,5 +45,14 @@ public class DudePlayermodel : PlayerModelClass
         anim.SetFloat("y", player.getBasicInputMovement().normalized.z, animationDamping, Time.fixedDeltaTime);
 
         actualAimTarget.position = virtualAimTarget.position;
+        if(player.getEquipedSlot().getWeapon().rightHoldPos != null)
+        {
+            rightArmTarget.position = player.getEquipedSlot().getWeapon().rightHoldPos.position;
+        }
+
+        if (player.getEquipedSlot().getWeapon().leftHoldPos != null)
+        {
+            leftArmTarget.position = player.getEquipedSlot().getWeapon().leftHoldPos.position;
+        }
     }
 }

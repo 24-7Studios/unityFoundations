@@ -39,6 +39,12 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     protected GameObject worldModel;
 
     [SerializeField]
+    public Transform rightHoldPos;
+
+    [SerializeField]
+    public Transform leftHoldPos;
+
+    [SerializeField]
     protected GameObject viewmodel;
 
     [SerializeField]

@@ -660,6 +660,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         PlayerModel.setPlayer(this);
 
+        camTransformer.position = PlayerModel.CameraOffset.position;
+
+
         //PlayerModel.netIdentity.AssignClientAuthority(connectionToClient);
 
         if (PlayerModel.hitBoxes.Capacity > 0)
