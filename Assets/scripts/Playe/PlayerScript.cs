@@ -147,6 +147,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [SerializeField]
     private float instantDeath;
 
+    [SyncVar]
+    private bool isDead;
+
     public delegate void Spawned(PlayerScript player);
     public static Spawned spawned;
 
@@ -1137,7 +1140,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public void die()
     {
-        if(isServer)
+        if (isServer)
         {
             rpcDie();
         }
@@ -1198,7 +1201,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
             health -= d;
             rpcSyncDamageFromHit(health, shields);
 
-            if (health < 0)
+            if (health < 0 && isDead == false)
             {
                 die();
             }

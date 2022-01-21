@@ -1766,7 +1766,7 @@ MonoBehaviour:
   ammo: 2
   loadedAmmo: 0
   reloadDelay: 0
-  shots: 10
+  shots: 20
   altFireSpread: 0.5
 --- !u!54 &1977627620440618473
 Rigidbody:
