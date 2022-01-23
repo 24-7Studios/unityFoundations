@@ -449,13 +449,13 @@ MonoBehaviour:
   WModelPosOffset: {x: 0, y: 0, z: 0}
   WModelRotOffset: {x: 0, y: 0, z: 0}
   WModelScaOffset: {x: 0.1, y: 0.1, z: 0.1}
-  viewpunch: 5
+  viewpunch: 2
   damage: 10
   fleshMultiplier: 1
   knockbackForce: 100
   spread: 0.05
   fullAuto: 1
-  fireDelay: 0.1
+  fireDelay: 0.09
   fireAnim: fire
   fireSound: {fileID: 8300000, guid: aee1d4950f36ced4bbfe759ff75185a9, type: 3}
   reloadAnim: reload
