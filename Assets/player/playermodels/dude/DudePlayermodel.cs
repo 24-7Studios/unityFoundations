@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using Mirror;
 
 public class DudePlayermodel : PlayerModelClass
@@ -19,7 +20,13 @@ public class DudePlayermodel : PlayerModelClass
     private Transform rightArmTarget;
 
     [SerializeField]
+    private ChainIKConstraint rightChainConstraint;
+
+    [SerializeField]
     private Transform leftArmTarget;
+
+    [SerializeField]
+    private ChainIKConstraint leftChainConstraint;
 
     [SerializeField]
     private float animationDamping;
@@ -47,12 +54,22 @@ public class DudePlayermodel : PlayerModelClass
         actualAimTarget.position = virtualAimTarget.position;
         if(player.getEquipedSlot().getWeapon().rightHoldPos != null)
         {
+            rightChainConstraint.weight = 1;
             rightArmTarget.position = player.getEquipedSlot().getWeapon().rightHoldPos.position;
+        }
+        else
+        {
+            rightChainConstraint.weight = 0;
         }
 
         if (player.getEquipedSlot().getWeapon().leftHoldPos != null)
         {
+            leftChainConstraint.weight = 1;
             leftArmTarget.position = player.getEquipedSlot().getWeapon().leftHoldPos.position;
+        }
+        else
+        {
+            leftChainConstraint.weight = 0;
         }
     }
 }
