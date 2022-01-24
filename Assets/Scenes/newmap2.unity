@@ -2557,6 +2557,17 @@ PrefabInstance:
       propertyPath: onlineScene
       value: Assets/Scenes/newmap2.unity
       objectReference: {fileID: 0}
+    - target: {fileID: 1600252153341213414, guid: 89b559a4c358f3142a3667019d42e244,
+        type: 3}
+      propertyPath: spawnPrefabs.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1600252153341213414, guid: 89b559a4c358f3142a3667019d42e244,
+        type: 3}
+      propertyPath: spawnPrefabs.Array.data[7]
+      value: 
+      objectReference: {fileID: 1499291853810097086, guid: 30154681f4f5e6a4fa4871d2fc72f10d,
+        type: 3}
     - target: {fileID: 1600252153341213415, guid: 89b559a4c358f3142a3667019d42e244,
         type: 3}
       propertyPath: m_RootOrder

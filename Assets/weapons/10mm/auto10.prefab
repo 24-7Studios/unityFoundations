@@ -1154,7 +1154,7 @@ MonoBehaviour:
   basePosOffset: {x: 0, y: 0, z: 0}
   baseRotOffset: {x: 0, y: 0, z: 0}
   baseScaOffset: {x: 0.1, y: 0.1, z: 0.1}
-  WModelPosOffset: {x: 0, y: 0, z: 0}
+  WModelPosOffset: {x: 0.07, y: 0.034, z: 0.253}
   WModelRotOffset: {x: 0, y: 0, z: 0}
   WModelScaOffset: {x: 0.1, y: 0.1, z: 0.1}
   viewpunch: 5
