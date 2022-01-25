@@ -1142,7 +1142,7 @@ MonoBehaviour:
     m_Bits: 1025
   worldModel: {fileID: 6643909261960458282}
   rightHoldPos: {fileID: 6691687860613427685}
-  leftHoldPos: {fileID: 5527814467511341}
+  leftHoldPos: {fileID: 0}
   viewmodel: {fileID: 1265706074170677654}
   ViewAnim: {fileID: 3858103158081942651}
   aud: {fileID: 6453581027293962206}
@@ -1154,7 +1154,7 @@ MonoBehaviour:
   basePosOffset: {x: 0, y: 0, z: 0}
   baseRotOffset: {x: 0, y: 0, z: 0}
   baseScaOffset: {x: 0.1, y: 0.1, z: 0.1}
-  WModelPosOffset: {x: 0.07, y: 0.034, z: 0.253}
+  WModelPosOffset: {x: 0, y: 0, z: 0}
   WModelRotOffset: {x: 0, y: 0, z: 0}
   WModelScaOffset: {x: 0.1, y: 0.1, z: 0.1}
   viewpunch: 5

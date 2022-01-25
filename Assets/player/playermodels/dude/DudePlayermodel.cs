@@ -23,10 +23,16 @@ public class DudePlayermodel : PlayerModelClass
     private ChainIKConstraint rightChainConstraint;
 
     [SerializeField]
+    private MultiAimConstraint rightAimConstriant;
+
+    [SerializeField]
     private Transform leftArmTarget;
 
     [SerializeField]
     private ChainIKConstraint leftChainConstraint;
+
+    [SerializeField]
+    private MultiAimConstraint leftAimConstraint;
 
     [SerializeField]
     private float animationDamping;
@@ -52,24 +58,35 @@ public class DudePlayermodel : PlayerModelClass
         anim.SetFloat("y", player.getBasicInputMovement().normalized.z, animationDamping, Time.fixedDeltaTime);
 
         actualAimTarget.position = virtualAimTarget.position;
-        if(player.getEquipedSlot().getWeapon().rightHoldPos != null)
-        {
-            rightChainConstraint.weight = 1;
-            rightArmTarget.position = player.getEquipedSlot().getWeapon().rightHoldPos.position;
-        }
-        else
-        {
-            rightChainConstraint.weight = 0;
-        }
 
-        if (player.getEquipedSlot().getWeapon().leftHoldPos != null)
+
+        if(player.getEquipedSlot().getWeapon().leftHoldPos != null && player.getEquipedSlot().getWeapon().rightHoldPos != null)
         {
-            leftChainConstraint.weight = 1;
+            anim.SetLayerWeight(1, 0);
+            anim.SetLayerWeight(2, 0);
+            anim.SetLayerWeight(3, 1);
+            rightAimConstriant.weight = 1;
+            leftAimConstraint.weight = 0;
             leftArmTarget.position = player.getEquipedSlot().getWeapon().leftHoldPos.position;
         }
+        else if(player.getEquipedSlot().getWeapon().rightHoldPos != null)
+        {
+            anim.SetLayerWeight(1, 1);
+            anim.SetLayerWeight(2, 0);
+            anim.SetLayerWeight(3, 0);
+            rightAimConstriant.weight = 1;
+            leftAimConstraint.weight = 0; 
+            leftArmTarget.localPosition = Vector3.zero;
+        }
         else
         {
-            leftChainConstraint.weight = 0;
+            anim.SetLayerWeight(1, 0);
+            anim.SetLayerWeight(2, 0);
+            anim.SetLayerWeight(3, 0);
+            rightAimConstriant.weight = 0;
+            leftAimConstraint.weight = 0;
+            leftArmTarget.localPosition = Vector3.zero;
         }
+
     }
 }
