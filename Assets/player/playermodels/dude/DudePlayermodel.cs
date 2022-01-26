@@ -104,4 +104,15 @@ public class DudePlayermodel : PlayerModelClass
         }
 
     }
+
+    public override void equipWeapon(WeaponClass w, bool hand)
+    {
+        base.equipWeapon(w, hand);
+
+        if(w.rightHoldPos != null)
+        {
+            w.getWorldModelOb().transform.localPosition = w.rightHoldPos.position * w.getWorldModelOb().transform.localScale.x;            
+        }
+
+    }
 }
