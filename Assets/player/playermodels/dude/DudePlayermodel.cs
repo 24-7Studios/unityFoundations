@@ -17,6 +17,9 @@ public class DudePlayermodel : PlayerModelClass
     private Transform virtualAimTarget;
 
     [SerializeField]
+    private Transform rightHand;
+
+    [SerializeField]
     private Transform rightArmTarget;
 
     [SerializeField]
@@ -24,6 +27,9 @@ public class DudePlayermodel : PlayerModelClass
 
     [SerializeField]
     private MultiAimConstraint rightAimConstriant;
+
+    [SerializeField]
+    private Transform leftHand;
 
     [SerializeField]
     private Transform leftArmTarget;
@@ -67,6 +73,9 @@ public class DudePlayermodel : PlayerModelClass
             anim.SetLayerWeight(3, 1);
             rightAimConstriant.weight = 1;
             leftAimConstraint.weight = 0;
+            rightChainConstraint.weight = 0;
+            leftChainConstraint.weight = 1;
+            rightArmTarget.position = player.getEquipedSlot().getWeapon().rightHoldPos.position;
             leftArmTarget.position = player.getEquipedSlot().getWeapon().leftHoldPos.position;
         }
         else if(player.getEquipedSlot().getWeapon().rightHoldPos != null)
@@ -75,8 +84,11 @@ public class DudePlayermodel : PlayerModelClass
             anim.SetLayerWeight(2, 0);
             anim.SetLayerWeight(3, 0);
             rightAimConstriant.weight = 1;
-            leftAimConstraint.weight = 0; 
-            leftArmTarget.localPosition = Vector3.zero;
+            leftAimConstraint.weight = 0;
+            rightChainConstraint.weight = 0;
+            leftChainConstraint.weight = 0;
+            rightArmTarget.position = player.getEquipedSlot().getWeapon().rightHoldPos.position;
+            leftArmTarget.position = leftHand.position;
         }
         else
         {
@@ -85,7 +97,10 @@ public class DudePlayermodel : PlayerModelClass
             anim.SetLayerWeight(3, 0);
             rightAimConstriant.weight = 0;
             leftAimConstraint.weight = 0;
-            leftArmTarget.localPosition = Vector3.zero;
+            rightChainConstraint.weight = 0;
+            leftChainConstraint.weight = 0;
+            rightArmTarget.position = rightHand.position;
+            leftArmTarget.position = leftHand.position;
         }
 
     }
