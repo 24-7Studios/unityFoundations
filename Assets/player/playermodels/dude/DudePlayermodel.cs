@@ -111,7 +111,7 @@ public class DudePlayermodel : PlayerModelClass
 
         if(w.rightHoldPos != null)
         {
-            w.getWorldModelOb().transform.localPosition = w.rightHoldPos.position * w.getWorldModelOb().transform.localScale.x;            
+            w.getWorldModelOb().transform.position = RightHoldParent.position - w.rightHoldPos.position/4;
         }
 
     }
