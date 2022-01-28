@@ -322,7 +322,7 @@ Transform:
   m_GameObject: {fileID: 1499291853810097086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7594552852454110898}
@@ -445,10 +445,10 @@ MonoBehaviour:
     type: 3}
   basePosOffset: {x: 0, y: 0, z: 0}
   baseRotOffset: {x: 0, y: 0, z: 0}
-  baseScaOffset: {x: 0.1, y: 0.1, z: 0.1}
+  baseScaOffset: {x: 1, y: 1, z: 1}
   WModelPosOffset: {x: 0, y: 0, z: 0}
   WModelRotOffset: {x: 6, y: 0, z: 0}
-  WModelScaOffset: {x: 0.1, y: 0.1, z: 0.1}
+  WModelScaOffset: {x: 1, y: 1, z: 1}
   viewpunch: 2
   damage: 10
   fleshMultiplier: 1
@@ -1832,7 +1832,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5457537803253601012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.94, z: 8.94}
+  m_LocalPosition: {x: 0, y: 0.148, z: 0.868}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1862,14 +1862,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5671942703009002287}
-  m_LocalRotation: {x: 0.2200165, y: 0, z: 0, w: 0.9754962}
-  m_LocalPosition: {x: 0, y: 0.53, z: -0.71}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.006, z: -0.101}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2063071765836644882}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 25.42, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6237898568499356933
 GameObject:
   m_ObjectHideFlags: 0
@@ -2245,7 +2245,7 @@ Transform:
   m_GameObject: {fileID: 7074756134489598984}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1573322825196840492}
