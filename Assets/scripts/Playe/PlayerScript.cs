@@ -167,6 +167,18 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private Transform backpack;
     [SerializeField]
     private Transform viewmodelHolder;
+    [SerializeField]
+    private bool viewmodelSway = true;
+    [SerializeField]
+    private float viewmodelSwayFactor = 0;
+    [SerializeField]
+    private float viewmodelSwaySmoothing = 0;
+    [SerializeField]
+    private bool viewmodelShift = true;
+    [SerializeField]
+    private float viewmodelShiftFactor = 0;
+    [SerializeField]
+    private float viewmodelShiftSmoothing = 0;
 
     [SerializeField]
     private int numOfSlots = 2;
@@ -321,13 +333,25 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
             CmdSyncPlayerRotation(yMouseInput, xMouseInput);
 
+
+
+            //viewmodel sway and roation
+
+            Quaternion swayX = Quaternion.AngleAxis(-controls.Player.looking.ReadValue<Vector2>().y * settings.MouseSens * viewmodelSwayFactor, Vector3.right);
+            Quaternion swayY = Quaternion.AngleAxis(controls.Player.looking.ReadValue<Vector2>().x * settings.MouseSens * viewmodelSwayFactor, Vector3.up);
+
+            Debug.Log(swayX);
+            Debug.Log(swayY);
+
+            Quaternion targetSway = swayX * swayY;
+
+            viewmodelHolder.localRotation = Quaternion.Slerp(viewmodelHolder.localRotation, targetSway, viewmodelSwaySmoothing * Time.deltaTime);
+
+            Vector3 targetShift = BasicInputMovement * viewmodelShiftFactor;
+
+            viewmodelHolder.localPosition = Vector3.Slerp(viewmodelHolder.localPosition, targetShift, viewmodelShiftSmoothing * Time.deltaTime);    
+
         }
-
-
-
-
-
-
 
 
 

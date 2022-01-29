@@ -355,6 +355,12 @@ MonoBehaviour:
   DieSound: {fileID: 8300000, guid: 33f3b5df65542ca468dcf5e947536414, type: 3}
   backpack: {fileID: 8525235372953113948}
   viewmodelHolder: {fileID: 1050093694719503198}
+  viewmodelSway: 1
+  viewmodelSwayFactor: 0.02
+  viewmodelSwaySmoothing: 8
+  viewmodelShift: 1
+  viewmodelShiftFactor: 0.075
+  viewmodelShiftSmoothing: 8
   numOfSlots: 2
   meleeSlot:
     myWeapon: {fileID: 0}
