@@ -198,6 +198,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [SerializeField]
     WeaponClass defaultMelee;
 
+    private bool requestedMelee = false;
+
     [SerializeField]
     private Slot equipedSlot;
 
@@ -340,9 +342,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
             Quaternion swayX = Quaternion.AngleAxis(-controls.Player.looking.ReadValue<Vector2>().y * settings.MouseSens * viewmodelSwayFactor, Vector3.right);
             Quaternion swayY = Quaternion.AngleAxis(controls.Player.looking.ReadValue<Vector2>().x * settings.MouseSens * viewmodelSwayFactor, Vector3.up);
 
-            Debug.Log(swayX);
-            Debug.Log(swayY);
-
             Quaternion targetSway = swayX * swayY;
 
             viewmodelHolder.localRotation = Quaternion.Slerp(viewmodelHolder.localRotation, targetSway, viewmodelSwaySmoothing * Time.deltaTime);
@@ -440,7 +439,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         if (isLocalPlayer)
         {
-            if (meleeSlot.getWeapon() == null)
+            if (meleeSlot.getWeapon() == null && requestedMelee == false)
             {
                 giveMelee();
             }
@@ -788,7 +787,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private void equipToMelee()
     {
-        Debug.Log("swapped to  melee");
 
         if (equipedSlot != meleeSlot)
         {
@@ -819,7 +817,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public void changeSlot()
     {
-        //Debug.Log("1212121212");
         if (!(primarySlot.getWeapon() == null && secondarySlot.getWeapon() == null))
         {
             if (equipedSlot == meleeSlot)
@@ -964,6 +961,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private void giveMelee()
     {
+        requestedMelee = true;
         if (isServer)
         {
             GameObject melee = Instantiate(defaultMelee.gameObject);
@@ -987,6 +985,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [ClientRpc]
     private void rpcGiveMelee(GameObject melee)
     {
+        requestedMelee = false;
         melee.GetComponent<WeaponClass>().forcedPickup(this, meleeSlot.getIndex(), false);
     }
 
@@ -998,7 +997,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private void manualPickup()
     {
 
-        Debug.Log("tried to pick something up");
+
         Ipickup[] list = interactZone.getList();
         Ipickup target = null;
         if (list.Length > 0)
@@ -1132,7 +1131,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     public void drop(GameObject thing)
     {   
         Ipickup i = thing.GetComponent<Ipickup>();
-
+        interactZone.remove(i);
         i.drop();
 
         //thing.transform.position = transform.position + transform.forward * 2;    
@@ -1141,7 +1140,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     public void drop(NetworkIdentity net)
     {
         Ipickup i = net.GetComponent<Ipickup>();
-
+        interactZone.remove(i);
         i.drop();
 
         //net.transform.position = transform.position + transform.forward * 2;
