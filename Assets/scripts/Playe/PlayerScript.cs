@@ -63,8 +63,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private float xMouseInput = 0;
 
 
+    private float viewpunchP = 0;
 
-
+    private float viewpunchSmoothing = 1;
 
     //movement
     /// <summary>
@@ -335,7 +336,11 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
             CmdSyncPlayerRotation(yMouseInput, xMouseInput);
 
+            Vector3 viewpunchTarget = Vector3.up * viewpunchP;
 
+            CameraSetup.transform.localRotation = Quaternion.Euler(Vector3.Slerp(CameraSetup.transform.localRotation.eulerAngles, viewpunchTarget, Time.deltaTime * viewpunchSmoothing));
+
+            //viewpunchP -= Time.deltaTime;
 
             //viewmodel sway and roation
 
@@ -1148,7 +1153,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public void viewPunch(float r)
     {
-        yMouseInput -= r;
+        //yMouseInput -= r;
+        viewpunchP = r;
     }
 
     public float getHealth()
