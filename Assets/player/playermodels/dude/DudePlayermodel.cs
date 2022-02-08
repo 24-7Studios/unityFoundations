@@ -60,6 +60,8 @@ public class DudePlayermodel : PlayerModelClass
     // Update is called once per frame
     void Update()
     {
+        if (player == null) return;
+
         anim.SetFloat("x", player.getBasicInputMovement().normalized.x, animationDamping, Time.fixedDeltaTime);
         anim.SetFloat("y", player.getBasicInputMovement().normalized.z, animationDamping, Time.fixedDeltaTime);
 
