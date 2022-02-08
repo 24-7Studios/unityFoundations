@@ -62,6 +62,19 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private float xMouseInput = 0;
 
+    private float viewPunchRecovery = 4.25f;
+
+    private float punch = 0;
+
+    [SerializeField]
+    private bool bob = true;
+
+    [SerializeField]
+    private float bobAmp = 0.015f;
+
+    [SerializeField]
+    private float bobFreq = 10.0f;
+
 
     //movement
     /// <summary>
@@ -325,9 +338,14 @@ public class PlayerScript : NetworkBehaviour, IDamage
             yMouseInput = Mathf.Clamp(yMouseInput, -90f, 90f);
 
             xMouseInput -= MouseX;
-            
-            camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * yMouseInput);
-           
+
+
+            //camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * yMouseInput);
+
+            punch = Mathf.Lerp(punch, 0, Time.deltaTime * viewPunchRecovery);
+
+
+            camTransformer.transform.localRotation = Quaternion.Euler((yMouseInput + punch) * Vector3.right);
 
             playerPhysBody.transform.rotation = Quaternion.Euler(Vector3.up * -xMouseInput);
 
@@ -335,8 +353,16 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
             CmdSyncPlayerRotation(yMouseInput, xMouseInput);
 
-   
+            //camera bob
+            Vector3 bobTarget = Vector3.zero;
 
+            bobTarget.y += Mathf.Sin(Time.time * bobFreq) * bobAmp;
+            bobTarget.x += Mathf.Cos(Time.time * bobFreq / 2) * bobAmp * 2;
+
+            if(isGrounded())
+            {
+                //camTransformer.localPosition += bobTarget * getBasicInputMovement().magnitude;
+            }
 
             //viewmodel sway and roation
 
@@ -1149,8 +1175,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public void viewPunch(float r)
     {
-
-
+        punch -= r;
     }
 
     public float getHealth()

@@ -1755,7 +1755,7 @@ MonoBehaviour:
   damage: 25
   fleshMultiplier: 1
   knockbackForce: 50
-  spread: 0.2
+  spread: 0.1
   fullAuto: 0
   fireDelay: 0.3
   fireAnim: fire
@@ -1766,7 +1766,7 @@ MonoBehaviour:
   ammo: 2
   loadedAmmo: 0
   reloadDelay: 0
-  shots: 20
+  shots: 10
   altFireSpread: 0.5
 --- !u!54 &1977627620440618473
 Rigidbody:
