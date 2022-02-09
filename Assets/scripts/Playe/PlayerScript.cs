@@ -76,7 +76,20 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [SerializeField]
     private float bobFreq = 10.0f;
 
+    [SerializeField]
+    private float bobSmoothing = 4;
+
+    [SerializeField]
+    private bool cameraTilt;
+
+    [SerializeField]
+    private float tiltAmount = 2;
+
+    [SerializeField]
+    private float tiltSmoothing = 1;
+
     private Vector3 defaultCameraPos;
+    private Vector3 defaultCameraRot;
 
     //movement
     /// <summary>
@@ -355,18 +368,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
             CmdSyncPlayerRotation(yMouseTotal, xMouseTotal);
 
-            //camera bob
-            Vector3 bobTarget = Vector3.zero;
+            //Camera Tilt
 
-            bobTarget.y += (Mathf.Sin(Time.time * bobFreq) * bobAmp) + getBasicInputMovement().y;
-            bobTarget.x += Mathf.Cos(Time.time * bobFreq / 2) * bobAmp * 2 + getBasicInputMovement().z;
-
-            bobTarget += camTransformer.localPosition;
-
-            if(isGrounded())
-            {
-                camTransformer.localPosition = bobTarget;
-            }
+            camTransformer.localRotation = Quaternion.Euler((getBasicInputMovement().normalized * tiltAmount) + camTransformer.localRotation.eulerAngles);
 
             //viewmodel sway and roation
 
@@ -712,6 +716,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         camTransformer.position = PlayerModel.CameraOffset.position;
         defaultCameraPos = camTransformer.localPosition;
+        defaultCameraRot = camTransformer.localRotation.eulerAngles;
 
         //PlayerModel.netIdentity.AssignClientAuthority(connectionToClient);
 
