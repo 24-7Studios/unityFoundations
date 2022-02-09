@@ -379,7 +379,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
             Vector3 targetShift = BasicInputMovement * viewmodelShiftFactor;
 
-            viewmodelHolder.localPosition = Vector3.Slerp(viewmodelHolder.localPosition, targetShift, viewmodelShiftSmoothing * Time.deltaTime);    
+            viewmodelHolder.localPosition = Vector3.Lerp(viewmodelHolder.localPosition, targetShift, viewmodelShiftSmoothing * Time.deltaTime);    
 
         }
 
