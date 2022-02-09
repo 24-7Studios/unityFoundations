@@ -50,7 +50,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
 
 
-    //mouse
+    //mouse and camera effects
     /// <summary>
     /// pee pee poo poo what do u think it is
     /// </summary>
@@ -62,6 +62,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private float xMouseInput = 0;
 
+    [SerializeField]
     private float viewPunchRecovery = 4.25f;
 
     private float punch = 0;
@@ -75,6 +76,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [SerializeField]
     private float bobFreq = 10.0f;
 
+    private Vector3 defaultCameraPos;
 
     //movement
     /// <summary>
@@ -336,32 +338,34 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
             yMouseInput -= MouseY;
             yMouseInput = Mathf.Clamp(yMouseInput, -90f, 90f);
-
             xMouseInput -= MouseX;
 
-
+            float yMouseTotal = yMouseInput + punch;
+            float xMouseTotal = xMouseInput;
             //camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * yMouseInput);
 
             punch = Mathf.Lerp(punch, 0, Time.deltaTime * viewPunchRecovery);
 
 
-            camTransformer.transform.localRotation = Quaternion.Euler((yMouseInput + punch) * Vector3.right);
+            camTransformer.transform.localRotation = Quaternion.Euler((yMouseTotal) * Vector3.right);
 
-            playerPhysBody.transform.rotation = Quaternion.Euler(Vector3.up * -xMouseInput);
+            playerPhysBody.transform.rotation = Quaternion.Euler(Vector3.up * -xMouseTotal);
 
 
 
-            CmdSyncPlayerRotation(yMouseInput, xMouseInput);
+            CmdSyncPlayerRotation(yMouseTotal, xMouseTotal);
 
             //camera bob
             Vector3 bobTarget = Vector3.zero;
 
-            bobTarget.y += Mathf.Sin(Time.time * bobFreq) * bobAmp;
-            bobTarget.x += Mathf.Cos(Time.time * bobFreq / 2) * bobAmp * 2;
+            bobTarget.y += (Mathf.Sin(Time.time * bobFreq) * bobAmp) + getBasicInputMovement().y;
+            bobTarget.x += Mathf.Cos(Time.time * bobFreq / 2) * bobAmp * 2 + getBasicInputMovement().z;
+
+            bobTarget += camTransformer.localPosition;
 
             if(isGrounded())
             {
-                //camTransformer.localPosition += bobTarget * getBasicInputMovement().magnitude;
+                camTransformer.localPosition = bobTarget;
             }
 
             //viewmodel sway and roation
@@ -656,9 +660,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
     void CmdSyncPlayerRotation(float y, float x)
     {
 
-        yMouseInput = y;
-        xMouseInput = x;
-
         RpcSyncPlayerRotation(y, x);
 
     }
@@ -668,11 +669,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     {
 
         if (!isLocalPlayer)
-
         {
-
-            yMouseInput = y;
-            xMouseInput = x;
 
             camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * y);
             playerPhysBody.transform.rotation = Quaternion.Euler(Vector3.up * -x);
@@ -714,7 +711,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         PlayerModel.setPlayer(this);
 
         camTransformer.position = PlayerModel.CameraOffset.position;
-
+        defaultCameraPos = camTransformer.localPosition;
 
         //PlayerModel.netIdentity.AssignClientAuthority(connectionToClient);
 
