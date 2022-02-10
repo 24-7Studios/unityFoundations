@@ -62,8 +62,12 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private float xMouseInput = 0;
 
-    [SerializeField]
+    //[SerializeField]
+    private float viewpunchAttack = 1;
+
     private float viewPunchRecovery = 4.25f;
+
+    private float currentPunch = 0;
 
     private float punch = 0;
 
@@ -353,11 +357,19 @@ public class PlayerScript : NetworkBehaviour, IDamage
             yMouseInput = Mathf.Clamp(yMouseInput, -90f, 90f);
             xMouseInput -= MouseX;
 
-            float yMouseTotal = yMouseInput + punch;
+            float yMouseTotal = yMouseInput + currentPunch;
             float xMouseTotal = xMouseInput;
             //camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * yMouseInput);
-
             punch = Mathf.Lerp(punch, 0, Time.deltaTime * viewPunchRecovery);
+
+            if (currentPunch < punch)
+            {
+                currentPunch = Mathf.Lerp(currentPunch, punch, Time.deltaTime * viewpunchAttack);
+            }
+            else
+            {
+                currentPunch = punch;
+            }
 
 
             camTransformer.transform.localRotation = Quaternion.Euler((yMouseTotal) * Vector3.right);
@@ -370,7 +382,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
             //Camera Tilt
 
-            camTransformer.localRotation = Quaternion.Euler((getBasicInputMovement().normalized * tiltAmount) + camTransformer.localRotation.eulerAngles);
+            //camTransformer.localRotation = Quaternion.Euler((getBasicInputMovement().normalized * tiltAmount) + camTransformer.localRotation.eulerAngles);
 
             //viewmodel sway and roation
 
@@ -1175,9 +1187,11 @@ public class PlayerScript : NetworkBehaviour, IDamage
         //net.transform.position = transform.position + transform.forward * 2;
     }
 
-    public void viewPunch(float r)
+    public void viewPunch(float p, float a, float r)
     {
-        punch -= r;
+        punch -= p;
+        viewpunchAttack = a;
+        viewPunchRecovery = r;
     }
 
     public float getHealth()

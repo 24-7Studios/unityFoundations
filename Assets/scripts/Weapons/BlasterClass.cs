@@ -78,7 +78,7 @@ public class BlasterClass : gunClass
         ViewAnim.Rebind();
         ViewAnim.Play(fireAnim);
         playsound(sounds.IndexOf(fireSound));
-        player.viewPunch(viewpunch);
+        player.viewPunch(viewpunch,viewpunchAttack, viewpunchRecovery);
         heat += heatPerShot;
         fireTimer = fireDelay;
 

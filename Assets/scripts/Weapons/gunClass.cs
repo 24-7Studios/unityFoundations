@@ -133,7 +133,7 @@ public class gunClass : raycastWeapon
         ViewAnim.Rebind();
         ViewAnim.Play(fireAnim);
         playsound(sounds.IndexOf(fireSound));
-        player.viewPunch(viewpunch);
+        player.viewPunch(viewpunch, viewpunchAttack, viewpunchRecovery);
         loadedAmmo--;
         fireTimer = fireDelay;
 
