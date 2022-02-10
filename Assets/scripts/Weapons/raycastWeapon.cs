@@ -12,7 +12,7 @@ public abstract class raycastWeapon : WeaponClass
     protected float viewpunchAttack = 5f;
 
     [SerializeField]
-    protected float viewpunchRecovery = 0.05f;
+    protected float viewpunchRecovery = 1f;
 
     [SerializeField]
     protected float damage;

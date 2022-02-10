@@ -67,9 +67,11 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private float viewPunchRecovery = 4.25f;
 
-    private float currentPunch = 0;
+    private float CurrentPunch = 0;
 
-    private float punch = 0;
+    private float TotalPunch = 0;
+
+    private float AppliedPunch;
 
     [SerializeField]
     private bool bob = true;
@@ -357,19 +359,23 @@ public class PlayerScript : NetworkBehaviour, IDamage
             yMouseInput = Mathf.Clamp(yMouseInput, -90f, 90f);
             xMouseInput -= MouseX;
 
-            float yMouseTotal = yMouseInput + currentPunch;
+            //CurrentPunch = Mathf.Lerp(CurrentPunch, punch, Time.deltaTime * viewpunchAttack);
+            //punch = Mathf.Lerp(CurrentPunch, 0, Time.deltaTime * viewPunchRecovery);
+
+            TotalPunch = Mathf.Lerp(TotalPunch, 0, Time.deltaTime * viewPunchRecovery);
+            CurrentPunch = Mathf.Lerp(CurrentPunch, TotalPunch, Time.deltaTime * viewpunchAttack);
+
+            AppliedPunch = CurrentPunch;
+
+            if(TotalPunch > CurrentPunch)
+            {
+                AppliedPunch = TotalPunch;
+            }
+
+            float yMouseTotal = yMouseInput + AppliedPunch;
             float xMouseTotal = xMouseInput;
             //camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * yMouseInput);
-            punch = Mathf.Lerp(punch, 0, Time.deltaTime * viewPunchRecovery);
 
-            if (currentPunch < punch)
-            {
-                currentPunch = Mathf.Lerp(currentPunch, punch, Time.deltaTime * viewpunchAttack);
-            }
-            else
-            {
-                currentPunch = punch;
-            }
 
 
             camTransformer.transform.localRotation = Quaternion.Euler((yMouseTotal) * Vector3.right);
@@ -1189,7 +1195,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public void viewPunch(float p, float a, float r)
     {
-        punch -= p;
+        TotalPunch -= p;
         viewpunchAttack = a;
         viewPunchRecovery = r;
     }
