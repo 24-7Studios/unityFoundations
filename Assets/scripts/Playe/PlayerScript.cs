@@ -359,23 +359,16 @@ public class PlayerScript : NetworkBehaviour, IDamage
             yMouseInput = Mathf.Clamp(yMouseInput, -90f, 90f);
             xMouseInput -= MouseX;
 
-            //CurrentPunch = Mathf.Lerp(CurrentPunch, punch, Time.deltaTime * viewpunchAttack);
-            //punch = Mathf.Lerp(CurrentPunch, 0, Time.deltaTime * viewPunchRecovery);
-
-            TotalPunch = Mathf.Lerp(TotalPunch, 0, Time.deltaTime * viewPunchRecovery);
+            //TotalPunch = Mathf.Lerp(TotalPunch, 0, viewPunchRecovery * Time.deltaTime);
+            //AppliedPunch = Mathf.Lerp(AppliedPunch, TotalPunch, viewpunchAttack * Time.deltaTime);
             CurrentPunch = Mathf.Lerp(CurrentPunch, TotalPunch, Time.deltaTime * viewpunchAttack);
+            TotalPunch = Mathf.Lerp(TotalPunch, 0, Time.deltaTime * viewPunchRecovery);
+            AppliedPunch = (TotalPunch + CurrentPunch) / 2;
 
-            AppliedPunch = CurrentPunch;
-
-            if(TotalPunch > CurrentPunch)
-            {
-                AppliedPunch = TotalPunch;
-            }
 
             float yMouseTotal = yMouseInput + AppliedPunch;
             float xMouseTotal = xMouseInput;
             //camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * yMouseInput);
-
 
 
             camTransformer.transform.localRotation = Quaternion.Euler((yMouseTotal) * Vector3.right);
