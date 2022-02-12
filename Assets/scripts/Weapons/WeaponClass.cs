@@ -62,6 +62,9 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     [SerializeField]
     protected GameObject hitEffect;
 
+    [SerializeField]
+    protected float pushBack = 0;
+
     protected List<AudioClip> sounds = new List<AudioClip>();
 
     protected bool fire1Down;

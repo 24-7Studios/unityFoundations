@@ -1751,7 +1751,9 @@ MonoBehaviour:
   WModelPosOffset: {x: 0, y: 0, z: 0}
   WModelRotOffset: {x: 0, y: 0, z: 0}
   WModelScaOffset: {x: 0.075, y: 0.075, z: 0.075}
-  viewpunch: 25
+  viewpunch: 5
+  viewpunchAttack: 10
+  viewpunchRecovery: 10
   damage: 25
   fleshMultiplier: 1
   knockbackForce: 50
