@@ -15,6 +15,15 @@ public abstract class raycastWeapon : WeaponClass
     protected float viewpunchRecovery = 1f;
 
     [SerializeField]
+    protected float recoilAmount = 10;
+
+    [SerializeField]
+    protected float recoilAttack = 0.5f;
+
+    [SerializeField]
+    protected float recoilSmoothing = 10f;
+
+    [SerializeField]
     protected float damage;
 
     [SerializeField]

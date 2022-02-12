@@ -1745,15 +1745,19 @@ MonoBehaviour:
     type: 3}
   hitEffect: {fileID: 5718995469900101050, guid: 8e06fde96679c1248a8bca766fc413a1,
     type: 3}
+  pushBack: 0
   basePosOffset: {x: 0, y: 0, z: 0}
   baseRotOffset: {x: 0, y: 0, z: 0}
   baseScaOffset: {x: 0.075, y: 0.075, z: 0.075}
   WModelPosOffset: {x: 0, y: 0, z: 0}
   WModelRotOffset: {x: 0, y: 0, z: 0}
   WModelScaOffset: {x: 0.075, y: 0.075, z: 0.075}
-  viewpunch: 5
-  viewpunchAttack: 10
-  viewpunchRecovery: 10
+  viewpunch: 10
+  viewpunchAttack: 5
+  viewpunchRecovery: 12
+  recoilAmount: 45
+  recoilAttack: 1
+  recoilSmoothing: 10
   damage: 25
   fleshMultiplier: 1
   knockbackForce: 50

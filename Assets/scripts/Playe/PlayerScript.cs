@@ -73,6 +73,16 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private float AppliedPunch;
 
+    private float recoilAttack;
+
+    private float recoilSmoothing;
+
+    private float Totalrecoil;
+
+    private float currentRecoil;
+
+    private float appliedRecoil;
+
     [SerializeField]
     private bool bob = true;
 
@@ -361,6 +371,11 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
             //TotalPunch = Mathf.Lerp(TotalPunch, 0, viewPunchRecovery * Time.deltaTime);
             //AppliedPunch = Mathf.Lerp(AppliedPunch, TotalPunch, viewpunchAttack * Time.deltaTime);
+
+            currentRecoil = Mathf.Lerp(currentRecoil, currentRecoil + Totalrecoil, recoilAttack * Time.deltaTime);
+            Totalrecoil = Mathf.Lerp(Totalrecoil, 0, recoilSmoothing * Time.deltaTime);
+            yMouseInput += Totalrecoil * Time.deltaTime * recoilAttack;
+
             CurrentPunch = Mathf.Lerp(CurrentPunch, TotalPunch, Time.deltaTime * viewpunchAttack);
             TotalPunch = Mathf.Lerp(TotalPunch, 0, Time.deltaTime * viewPunchRecovery);
             AppliedPunch = (TotalPunch + CurrentPunch) / 2;
@@ -1191,6 +1206,13 @@ public class PlayerScript : NetworkBehaviour, IDamage
         TotalPunch -= p;
         viewpunchAttack = a;
         viewPunchRecovery = r;
+    }
+
+    public void recoil(float p, float a, float r)
+    {
+        Totalrecoil -= p;
+        recoilAttack = a;
+        recoilSmoothing = r;
     }
 
     public float getHealth()

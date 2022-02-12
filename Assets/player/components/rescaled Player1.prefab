@@ -332,11 +332,13 @@ MonoBehaviour:
   PlayerModel: {fileID: 7196012451863958847, guid: 86b942d668b4e0e40a0886cb618845f1,
     type: 3}
   settings: {fileID: 5242603199734816841}
-  viewPunchRecovery: 4.25
   bob: 1
   bobAmp: 2
   bobFreq: 10
   bobSmoothing: 1
+  cameraTilt: 0
+  tiltAmount: 2
+  tiltSmoothing: 1
   moveSpeed: 2
   jumpForce: 30
   playerGravity: -3
@@ -361,8 +363,8 @@ MonoBehaviour:
   backpack: {fileID: 8525235372953113948}
   viewmodelHolder: {fileID: 1050093694719503198}
   viewmodelSway: 1
-  viewmodelSwayFactor: 0.02
-  viewmodelSwaySmoothing: 8
+  viewmodelSwayFactor: 0.025
+  viewmodelSwaySmoothing: 15
   viewmodelShift: 1
   viewmodelShiftFactor: 0.075
   viewmodelShiftSmoothing: 8

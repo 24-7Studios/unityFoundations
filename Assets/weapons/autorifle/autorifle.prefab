@@ -443,6 +443,7 @@ MonoBehaviour:
   debugMarker: {fileID: 0}
   hitEffect: {fileID: 5718995469900101050, guid: 8e06fde96679c1248a8bca766fc413a1,
     type: 3}
+  pushBack: 0
   basePosOffset: {x: 0, y: 0, z: 0}
   baseRotOffset: {x: 0, y: 0, z: 0}
   baseScaOffset: {x: 1, y: 1, z: 1}
@@ -451,7 +452,10 @@ MonoBehaviour:
   WModelScaOffset: {x: 1, y: 1, z: 1}
   viewpunch: 2
   viewpunchAttack: 12
-  viewpunchRecovery: 10
+  viewpunchRecovery: 8
+  recoilAmount: 10
+  recoilAttack: 0.5
+  recoilSmoothing: 10
   damage: 10
   fleshMultiplier: 1
   knockbackForce: 100
