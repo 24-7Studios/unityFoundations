@@ -103,7 +103,7 @@ public class raptorScript : gunClass
 
 
 
-
+    /*
     protected override void Fire()
     {
         Vector3 shootDirection = (player.getCamTransformer().forward + Random.insideUnitSphere * spread).normalized;
@@ -128,7 +128,7 @@ public class raptorScript : gunClass
             rpcFire();
         }
     }
-
+    */
 
 
 

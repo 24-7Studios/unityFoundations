@@ -1171,8 +1171,11 @@ MonoBehaviour:
   spread: 0.02
   fullAuto: 0
   fireDelay: 0.05
-  flash: {fileID: 4314926972769928921, guid: 4e5e209968c3140498b9c719202d5482, type: 3}
-  flashPos: {fileID: 261121022644504825}
+  ViewmodelFlash: {fileID: 4314926972769928921, guid: 4e5e209968c3140498b9c719202d5482,
+    type: 3}
+  ViewmodelflashPos: {fileID: 261121022644504825}
+  WorldmodelFlash: {fileID: 0}
+  WorldmodelFlashPos: {fileID: 0}
   fireAnim: fire
   fireSound: {fileID: 8300000, guid: 5da8836f202c28044a0cb905451cdb68, type: 3}
   reloadAnim: reload

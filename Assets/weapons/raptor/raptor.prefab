@@ -1018,6 +1018,7 @@ Transform:
   - {fileID: 6822323591578794678}
   - {fileID: 3144280022449174576}
   - {fileID: 5703487909774976070}
+  - {fileID: 5534477180453663735}
   m_Father: {fileID: 4093614455966912295}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1241,6 +1242,37 @@ Transform:
   m_Father: {fileID: 2195211184340062852}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4794864764451352907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4089315755127665949}
+  m_Layer: 0
+  m_Name: flashpos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4089315755127665949
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4794864764451352907}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 6.68, z: 44.99}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5329349984109580391}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5137526986194051232
 GameObject:
   m_ObjectHideFlags: 0
@@ -1304,6 +1336,7 @@ Transform:
   m_Children:
   - {fileID: 3633382879353194927}
   - {fileID: 6433316948893161547}
+  - {fileID: 4089315755127665949}
   m_Father: {fileID: 8262136716681108230}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1498,6 +1531,37 @@ Transform:
   m_Father: {fileID: 286926093609731433}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5579626584062031509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5534477180453663735}
+  m_Layer: 11
+  m_Name: flashpos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5534477180453663735
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5579626584062031509}
+  m_LocalRotation: {x: -0.5328763, y: 0, z: 0, w: 0.84619313}
+  m_LocalPosition: {x: -0, y: 21.78, z: 6.85}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2137532995347375136}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: -64.4, y: 0, z: 0}
 --- !u!1 &5580813657434198304
 GameObject:
   m_ObjectHideFlags: 0
@@ -2521,6 +2585,11 @@ MonoBehaviour:
   spread: 0.01
   fullAuto: 0
   fireDelay: 0.01
+  ViewmodelFlash: {fileID: 4314926972769928921, guid: 4e5e209968c3140498b9c719202d5482,
+    type: 3}
+  ViewmodelflashPos: {fileID: 5534477180453663735}
+  WorldmodelFlash: {fileID: 0}
+  WorldmodelFlashPos: {fileID: 4089315755127665949}
   fireAnim: fire
   fireSound: {fileID: 8300000, guid: 0a36cb28f21e3f042b1ae85a927bb374, type: 3}
   reloadAnim: load pull

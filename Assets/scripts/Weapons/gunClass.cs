@@ -139,9 +139,14 @@ public class gunClass : raycastWeapon
         loadedAmmo--;
         fireTimer = fireDelay;
 
-        if(flash != null)
+        if(ViewmodelFlash!= null)
         {
-            GameObject.Instantiate(flash, flashPos.position, flashPos.rotation);
+            GameObject.Instantiate(ViewmodelFlash, ViewmodelflashPos.position, ViewmodelflashPos.rotation);
+        }
+
+        if(WorldmodelFlash != null)
+        {
+            GameObject.Instantiate(WorldmodelFlash, WorldmodelFlashPos.position, WorldmodelFlashPos.rotation);
         }
 
         if (!isServer)
