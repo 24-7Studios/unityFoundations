@@ -41,6 +41,12 @@ public abstract class raycastWeapon : WeaponClass
     [SerializeField]
     protected float fireDelay;
 
+    [SerializeField]
+    protected GameObject flash;
+
+    [SerializeField]
+    protected Transform flashPos;
+
     protected float fireTimer;
 
     protected bool hasShot;

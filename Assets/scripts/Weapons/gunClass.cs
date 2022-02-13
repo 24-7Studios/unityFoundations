@@ -129,6 +129,7 @@ public class gunClass : raycastWeapon
         Vector3 shootDirection = (player.getCamTransformer().forward + Random.insideUnitSphere * spread).normalized;
 
         raycastShoot(damage, fleshMultiplier, player.getCamTransformer().position, shootDirection, Shootable);
+        
 
         ViewAnim.Rebind();
         ViewAnim.Play(fireAnim);
@@ -137,6 +138,11 @@ public class gunClass : raycastWeapon
         player.recoil(recoilAmount, recoilAttack, recoilSmoothing);
         loadedAmmo--;
         fireTimer = fireDelay;
+
+        if(flash != null)
+        {
+            GameObject.Instantiate(flash, flashPos.position, flashPos.rotation);
+        }
 
         if (!isServer)
         {

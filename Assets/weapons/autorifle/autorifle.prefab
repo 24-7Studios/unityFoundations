@@ -462,6 +462,8 @@ MonoBehaviour:
   spread: 0.05
   fullAuto: 1
   fireDelay: 0.09
+  flash: {fileID: 4314926972769928921, guid: 4e5e209968c3140498b9c719202d5482, type: 3}
+  flashPos: {fileID: 3082209757371970207}
   fireAnim: fire
   fireSound: {fileID: 8300000, guid: aee1d4950f36ced4bbfe759ff75185a9, type: 3}
   reloadAnim: reload
@@ -1183,6 +1185,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7916943340278829507}
+  - {fileID: 3082209757371970207}
   m_Father: {fileID: 1573322825196840492}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1845,6 +1848,37 @@ Transform:
   m_Father: {fileID: 2063071765836644882}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5599397250785615693
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3082209757371970207}
+  m_Layer: 11
+  m_Name: flashPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3082209757371970207
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5599397250785615693}
+  m_LocalRotation: {x: -0.3117546, y: 0, z: 0, w: 0.9501627}
+  m_LocalPosition: {x: 0, y: 15.83, z: 14.31}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6986972558453893148}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -36.33, y: 0, z: 0}
 --- !u!1 &5671942703009002287
 GameObject:
   m_ObjectHideFlags: 0
