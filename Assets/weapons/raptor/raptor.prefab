@@ -2512,6 +2512,9 @@ MonoBehaviour:
   viewpunch: 10
   viewpunchAttack: 0.2
   viewpunchRecovery: 5
+  recoilAmount: 1
+  recoilAttack: 0.5
+  recoilSmoothing: 0.5
   damage: 75
   fleshMultiplier: 1
   knockbackForce: 50

@@ -1752,12 +1752,12 @@ MonoBehaviour:
   WModelPosOffset: {x: 0, y: 0, z: 0}
   WModelRotOffset: {x: 0, y: 0, z: 0}
   WModelScaOffset: {x: 0.075, y: 0.075, z: 0.075}
-  viewpunch: 10
-  viewpunchAttack: 5
-  viewpunchRecovery: 12
-  recoilAmount: 45
-  recoilAttack: 1
-  recoilSmoothing: 10
+  viewpunch: 20
+  viewpunchAttack: 2.5
+  viewpunchRecovery: 15
+  recoilAmount: 35
+  recoilAttack: 2
+  recoilSmoothing: 20
   damage: 25
   fleshMultiplier: 1
   knockbackForce: 50

@@ -63,6 +63,10 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private float xMouseInput = 0;
 
     //[SerializeField]
+
+    [SerializeField]
+    private Transform camEffector;
+
     private float viewpunchAttack = 1;
 
     private float viewPunchRecovery = 4.25f;
@@ -307,7 +311,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
             controls.Player.Enable();
             input.enabled = true;
 
-            LocalAud = Instantiate(CameraSetup, camTransformer).GetComponent<AudioSource>();
+            LocalAud = Instantiate(CameraSetup, camEffector).GetComponent<AudioSource>();
 
             Cursor.lockState = CursorLockMode.Locked;
 
@@ -381,6 +385,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
             AppliedPunch = (TotalPunch + CurrentPunch) / 2;
 
 
+
             float yMouseTotal = yMouseInput + AppliedPunch;
             float xMouseTotal = xMouseInput;
             //camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * yMouseInput);
@@ -396,7 +401,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
             //Camera Tilt
 
-            //camTransformer.localRotation = Quaternion.Euler((getBasicInputMovement().normalized * tiltAmount) + camTransformer.localRotation.eulerAngles);
+            Quaternion targetTilt = Quaternion.AngleAxis(-getBasicInputMovement().x * tiltAmount, Vector3.forward);
+
+            camEffector.localRotation = Quaternion.Slerp(camEffector.localRotation, targetTilt, Time.deltaTime * tiltSmoothing);
 
             //viewmodel sway and roation
 
@@ -694,6 +701,10 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     }
 
+    //[Command]
+    //void CmdSyncPlayerRotation(Vector3 rot)
+
+
     [ClientRpc]
     void RpcSyncPlayerRotation(float y, float x)
     {
@@ -708,6 +719,10 @@ public class PlayerScript : NetworkBehaviour, IDamage
         }
 
     }
+
+    //[ClientRpc]
+    //void RpcSyncPlayerRotation(Vector3 rot)
+
 
     [Command]
     void CmdSyncPlayerInput(Vector3 BIM, Vector3 IM)
