@@ -57,12 +57,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private float sens;
 
-
     private float yMouseInput = 0;
 
     private float xMouseInput = 0;
-
-    //[SerializeField]
 
     [SerializeField]
     private Transform camEffector;
@@ -292,8 +289,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         equipedSlot = meleeSlot;
 
-
         setPlayermodel(PlayerModel);
+
 
 
         if (isLocalPlayer)
@@ -1242,6 +1239,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public void die()
     {
+        isDead = true;
         if (isServer)
         {
             rpcDie();
@@ -1255,12 +1253,14 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [Command]
     private void cmdDie()
     {
+        isDead = true;
         rpcDie();
     }
 
     [ClientRpc]
     private void rpcDie()
     {
+        isDead = true;
         died?.Invoke(this);
     }
     
@@ -1276,10 +1276,12 @@ public class PlayerScript : NetworkBehaviour, IDamage
                 }
             }
             List<NetworkStartPosition> positions = FindObjectsOfType<NetworkStartPosition>().ToList<NetworkStartPosition>();
-            spawn(positions[(int)(Random.value * positions.Count)].transform.position);  
+            spawn(positions[(int)(Random.value * positions.Count)].transform.position);
         }
         health = DefaultHealth;
         aud.PlayOneShot(DieSound);
+
+        isDead = false;
     }
 
     [ClientRpc]
@@ -1302,12 +1304,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
         {
             health -= d;
             rpcSyncDamageFromHit(health, shields);
-
-            if (health < 0 && isDead == false)
-            {
-                die();
-            }
-
         }
     }
 
@@ -1316,11 +1312,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
     {
         health -= d;
         rpcSyncDamageFromHit(health, shields);
-
-        if (health < 0)
-        {
-            die();
-        }
     }
 
     [ClientRpc]
@@ -1328,9 +1319,12 @@ public class PlayerScript : NetworkBehaviour, IDamage
     {
         health = h;
         shields = s;
-        if (isLocalPlayer)
+        if(isServer)
         {
-            LocalAud.PlayOneShot(localDamageSound);
+            if(health < 0 && !isDead)
+            {
+                die();
+            }
         }
     }
 

@@ -452,7 +452,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         isEquiped = true;
 
         worldModel.SetActive(true);
-
+        player.getPlayermodel().equipWeapon(this, hand);
         if (player.isLocalPlayer)
         {
             viewmodel.SetActive(true);
