@@ -605,7 +605,10 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     {
         IDamage id = thing.GetComponent<IDamage>();
 
-        id.takeDamagefromHit(damage, fleshMultiplier);
+        if(id != null)
+        {
+            id.takeDamagefromHit(damage, fleshMultiplier);
+        }
     }
 
     [Command]

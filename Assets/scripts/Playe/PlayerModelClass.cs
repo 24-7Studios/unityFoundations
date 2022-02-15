@@ -33,6 +33,17 @@ public class PlayerModelClass : NetworkBehaviour
         //PlayerScript.spawned += onPlayerSpawn;
     }
 
+    public virtual void unsetPlayer()
+    {
+        transform.parent = null;
+        player = null;
+
+        foreach(hitbox hitB in hitBoxes)
+        {
+            hitB.enabled = false;
+        }
+    }
+
     public virtual void equipWeapon(WeaponClass w, bool hand)
     {
 
@@ -66,7 +77,7 @@ public class PlayerModelClass : NetworkBehaviour
 
     protected void onPlayerDeath(PlayerScript p)
     {
-
+        unsetPlayer();
     }
 
 
