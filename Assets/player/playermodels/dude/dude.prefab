@@ -1060,10 +1060,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4896644531677894092}
   - component: {fileID: 4935621106845689272}
+  - component: {fileID: 3551742752446616087}
+  - component: {fileID: 153701989463280002}
   - component: {fileID: 7196012451863958847}
   - component: {fileID: 3247741462932238357}
   - component: {fileID: 5044805452481763187}
   - component: {fileID: 2457466575000391164}
+  - component: {fileID: 721373244691897400}
+  - component: {fileID: 8511571117550220535}
   m_Layer: 0
   m_Name: dude
   m_TagString: Untagged
@@ -1112,6 +1116,35 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &3551742752446616087
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5242103030026162038}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &153701989463280002
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5242103030026162038}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!114 &7196012451863958847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1145,6 +1178,8 @@ MonoBehaviour:
   RightHoldParent: {fileID: 6895312079443944370}
   LeftHoldParent: {fileID: 8962957729015876090}
   anim: {fileID: 4935621106845689272}
+  dieAniamtion: death
+  torsoAim: {fileID: 3961696065704067048}
   actualAimTarget: {fileID: 3662085316644710695}
   virtualAimTarget: {fileID: 514906609882624049}
   rightHand: {fileID: 329975012879392561}
@@ -1156,6 +1191,10 @@ MonoBehaviour:
   leftChainConstraint: {fileID: 6362058727917502069}
   leftAimConstraint: {fileID: 4662563374914827213}
   animationDamping: 0.5
+  corpseCollider: {fileID: 153701989463280002}
+  corpseRB: {fileID: 3551742752446616087}
+  corpseSyncer: {fileID: 721373244691897400}
+  corpsePhysSync: {fileID: 8511571117550220535}
 --- !u!114 &3247741462932238357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1265,6 +1304,51 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
     m_Visible: 1
+--- !u!114 &721373244691897400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5242103030026162038}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 0
+  localPositionSensitivity: 0.01
+  localRotationSensitivity: 0.01
+  localScaleSensitivity: 0.01
+  compressRotation: 0
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  syncScale: 1
+--- !u!114 &8511571117550220535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5242103030026162038}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83392ae5c1b731446909f252fd494ae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  target: {fileID: 3551742752446616087}
+  clientAuthority: 0
+  syncVelocity: 1
+  clearVelocity: 0
+  velocitySensitivity: 0.1
+  syncAngularVelocity: 1
+  clearAngularVelocity: 0
+  angularVelocitySensitivity: 0.1
 --- !u!1 &5259714170498469026
 GameObject:
   m_ObjectHideFlags: 0

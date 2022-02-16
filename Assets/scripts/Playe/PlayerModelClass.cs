@@ -67,11 +67,16 @@ public class PlayerModelClass : NetworkBehaviour
 
     public virtual void unsetPlayer()
     {
+        player.clearLivePlayermodel();
         transform.parent = null;
         player = null;
 
+        foreach (GameObject part in models)
+        {
+            part.layer = 0;
+        }
 
-        foreach(hitbox hitB in hitBoxes)
+        foreach (hitbox hitB in hitBoxes)
         {
             hitB.setObject(null);
             hitB.enabled = false;
@@ -109,7 +114,7 @@ public class PlayerModelClass : NetworkBehaviour
 
     }
 
-    protected void onPlayerDeath(PlayerScript p)
+    protected virtual void onPlayerDeath(PlayerScript p)
     {
         if(player == p)
         {

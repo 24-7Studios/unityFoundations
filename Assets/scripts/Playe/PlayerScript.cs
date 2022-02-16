@@ -785,7 +785,15 @@ public class PlayerScript : NetworkBehaviour, IDamage
         defaultCameraRot = camTransformer.localRotation.eulerAngles;
     }
 
-    //public void
+    public void clearLivePlayermodel()
+    {
+        if (LivePlayerModel != null)
+        {
+            LivePlayerModel = null;
+        }
+
+        applyPlayermodel();
+    }
 
     public void setPlayermodel(PlayerModelClass p)
     {
