@@ -103,6 +103,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "kill",
+                    "type": "Button",
+                    "id": "d629762e-523f-4e2c-aa5b-74d15c2ba3a2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -378,6 +387,17 @@
                     "processors": "",
                     "groups": "mouse + keybaord",
                     "action": "drop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7a2841ff-1d95-491b-94a1-9484f9f70dcc",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "mouse + keybaord",
+                    "action": "kill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
