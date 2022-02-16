@@ -159,7 +159,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
             setControls(hand);
         }
 
-        player.getPlayermodel().equipWeapon(this, hand);
+        player.getLivePlayerModel().equipWeapon(this, hand);
 
         foreach (MeshRenderer m in item.GetComponents<MeshRenderer>())
         {
@@ -216,7 +216,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
         slot.setWeapon(this, hand);
 
-        player.getPlayermodel().equipWeapon(this, hand);
+        player.getLivePlayerModel().equipWeapon(this, hand);
 
         foreach (MeshRenderer m in item.GetComponents<MeshRenderer>())
         {
@@ -302,7 +302,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
             setControls(hand);
         }
 
-        player.getPlayermodel().equipWeapon(this, hand);
+        player.getLivePlayerModel().equipWeapon(this, hand);
 
         foreach (MeshRenderer m in item.GetComponents<MeshRenderer>())
         {
@@ -452,7 +452,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         isEquiped = true;
 
         worldModel.SetActive(true);
-        player.getPlayermodel().equipWeapon(this, hand);
+        player.getLivePlayerModel().equipWeapon(this, hand);
         if (player.isLocalPlayer)
         {
             viewmodel.SetActive(true);
@@ -558,9 +558,12 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
             hitbox hb = hit.collider.GetComponent<hitbox>();
             Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
             
-            if(hb != null)
+            if(hb != null && hb.enabled)
             {
-                cmdHitDamageable(hb.getObject(), baseDamage * hb.getMultiplier(), multiplier);
+                if(hb.getObject() != null)
+                {
+                    cmdHitDamageable(hb.getObject(), baseDamage * hb.getMultiplier(), multiplier);
+                }
             }
             else if (iD != null)
             {

@@ -25,12 +25,44 @@ public class PlayerModelClass : NetworkBehaviour
     {
         player = p;
 
-        foreach(hitbox hitB in hitBoxes)
+        if (!player.isLocalPlayer)
+        {
+            foreach (hitbox part in hitBoxes)
+            {
+                part.gameObject.layer = 0;
+            }
+        }
+        else
+        {
+            foreach (hitbox part in hitBoxes)
+            {
+                part.gameObject.layer = 6;
+            }
+        }
+
+        if (!player.isLocalPlayer)
+        {
+            foreach (GameObject part in models)
+            {
+                part.layer = 0;
+            }
+        }
+
+        if (player.isLocalPlayer)
+        {
+            foreach (GameObject part in models)
+            {
+                part.layer = 6;
+            }
+        }
+
+        foreach (hitbox hitB in hitBoxes)
         {
             hitB.setObject(player.gameObject);
         }
-        //PlayerScript.died += onPlayerDeath;
-        //PlayerScript.spawned += onPlayerSpawn;
+
+        PlayerScript.died += onPlayerDeath;
+        PlayerScript.spawned += onPlayerSpawn;
     }
 
     public virtual void unsetPlayer()
@@ -38,8 +70,10 @@ public class PlayerModelClass : NetworkBehaviour
         transform.parent = null;
         player = null;
 
+
         foreach(hitbox hitB in hitBoxes)
         {
+            hitB.setObject(null);
             hitB.enabled = false;
         }
     }
@@ -77,7 +111,10 @@ public class PlayerModelClass : NetworkBehaviour
 
     protected void onPlayerDeath(PlayerScript p)
     {
-        unsetPlayer();
+        if(player == p)
+        {
+            unsetPlayer();
+        }
     }
 
 

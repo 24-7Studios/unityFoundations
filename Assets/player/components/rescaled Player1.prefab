@@ -330,8 +330,9 @@ MonoBehaviour:
   worldCam: {fileID: 0}
   gunCam: {fileID: 0}
   interactZone: {fileID: 8531315878050940356}
-  PlayerModel: {fileID: 7196012451863958847, guid: 86b942d668b4e0e40a0886cb618845f1,
+  SelectedPlayerModel: {fileID: 7196012451863958847, guid: 86b942d668b4e0e40a0886cb618845f1,
     type: 3}
+  LivePlayerModel: {fileID: 0}
   settings: {fileID: 5242603199734816841}
   camEffector: {fileID: 568473319026945711}
   bob: 1

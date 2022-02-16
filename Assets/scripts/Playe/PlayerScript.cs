@@ -41,7 +41,10 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private interactZoneScript interactZone;
 
     [SerializeField]
-    private PlayerModelClass PlayerModel;
+    private PlayerModelClass SelectedPlayerModel;
+
+    [SerializeField]
+    private PlayerModelClass LivePlayerModel;
 
     [SerializeField]
     private localPlayerOptions settings;
@@ -289,7 +292,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         equipedSlot = meleeSlot;
 
-        setPlayermodel(PlayerModel);
+        setPlayermodel(SelectedPlayerModel);
+        applyPlayermodel();
 
 
 
@@ -740,42 +744,29 @@ public class PlayerScript : NetworkBehaviour, IDamage
         }
     }
 
-    public PlayerModelClass getPlayermodel()
+    public PlayerModelClass getSelectedPlayerModel()
     {
-        return PlayerModel;
+        return SelectedPlayerModel;
     }
 
-    public void setPlayermodel(PlayerModelClass p)
+    public PlayerModelClass getLivePlayerModel()
     {
+        return LivePlayerModel;
+    }
 
-        PlayerModel = Instantiate(p, playerPhysBody.transform);
+    public void applyPlayermodel()
+    {
+        if(LivePlayerModel != null)
+        {
+            Destroy(LivePlayerModel);
+        }
 
-        PlayerModel.setPlayer(this);
+        LivePlayerModel = Instantiate(SelectedPlayerModel, playerPhysBody.transform);
+        LivePlayerModel.setPlayer(this);
 
-        camTransformer.position = PlayerModel.CameraOffset.position;
-        defaultCameraPos = camTransformer.localPosition;
-        defaultCameraRot = camTransformer.localRotation.eulerAngles;
-
-        //PlayerModel.netIdentity.AssignClientAuthority(connectionToClient);
-
-        if (PlayerModel.hitBoxes.Capacity > 0)
+        if (LivePlayerModel.hitBoxes.Capacity > 0)
         {
             gameObject.layer = 2;
-
-            if (!isLocalPlayer)
-            {
-                foreach (hitbox part in PlayerModel.hitBoxes)
-                {
-                    part.gameObject.layer = 0;
-                }
-            }
-            else
-            {
-                foreach (hitbox part in PlayerModel.hitBoxes)
-                {
-                    part.gameObject.layer = 6;
-                }
-            }
         }
         else
         {
@@ -789,21 +780,18 @@ public class PlayerScript : NetworkBehaviour, IDamage
             }
         }
 
-        if (!isLocalPlayer)
-        {
-            foreach (GameObject part in PlayerModel.models)
-            {
-                part.layer = 0;
-            }
-        }
+        camTransformer.position = LivePlayerModel.CameraOffset.position;
+        defaultCameraPos = camTransformer.localPosition;
+        defaultCameraRot = camTransformer.localRotation.eulerAngles;
+    }
 
-        if (isLocalPlayer)
-        {
-            foreach (GameObject part in PlayerModel.models)
-            {
-                part.layer = 6;
-            }
-        }
+    //public void
+
+    public void setPlayermodel(PlayerModelClass p)
+    {
+
+        SelectedPlayerModel = p;
+
     }
 
     public Transform getCamTransformer()
