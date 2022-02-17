@@ -270,7 +270,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
         controls.Player.interact.performed += ctx => manualPickup();
         controls.Player.drop.performed += ctx => manualDrop();
         controls.Player.melee.performed += ctx => equipToMelee();
-        controls.Player.kill.performed += ctx => die();
         died += onDeath;
     }
 
@@ -757,45 +756,13 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public void applyPlayermodel()
     {
-        if(!isServer)
-        {
-            cmdApplyPlayermodel();
-        }
-        else
-        {
-            if (LivePlayerModel != null)
-            {
-                NetworkServer.UnSpawn(LivePlayerModel.gameObject);
-            }
-
-            LivePlayerModel = Instantiate(SelectedPlayerModel, playerPhysBody.transform);
-            NetworkServer.Spawn(LivePlayerModel.gameObject);
-
-            LivePlayerModel.setPlayer(this);
-            rpcApplyPlayermodel();
-        }
-    }
-
-    [Command]
-    public void cmdApplyPlayermodel()
-    {
         if(LivePlayerModel != null)
         {
-            NetworkServer.UnSpawn(LivePlayerModel.gameObject);
+            Destroy(LivePlayerModel);
         }
 
         LivePlayerModel = Instantiate(SelectedPlayerModel, playerPhysBody.transform);
-        NetworkServer.Spawn(LivePlayerModel.gameObject);
-
         LivePlayerModel.setPlayer(this);
-        rpcApplyPlayermodel();
-    }
-
-    [ClientRpc]
-    public void rpcApplyPlayermodel()
-    {
-        LivePlayerModel.setPlayer(this);
-        LivePlayerModel.transform.SetParent(playerPhysBody.transform, false);
 
         if (LivePlayerModel.hitBoxes.Capacity > 0)
         {
@@ -830,7 +797,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public void setPlayermodel(PlayerModelClass p)
     {
+
         SelectedPlayerModel = p;
+
     }
 
     public Transform getCamTransformer()
