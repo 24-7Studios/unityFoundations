@@ -89,13 +89,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     // Start is called before the first frame update
     protected virtual void Start()
     {
-
-
-
-    }
-
-    private void OnConnectedToServer()
-    {
+        PlayerScript.died += onPlayerDeath;
         if (player != null && transform.parent == null)
         {
             forcedPickup(player, index, hand);
@@ -108,6 +102,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
                 onDequip();
             }
         }
+
     }
 
     protected virtual void Update()
@@ -138,78 +133,6 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     public bool CanDualWield()
     {
         return canDual;
-    }
-
-    public virtual void oldpickup(PlayerScript p)
-    {
-        player = p;
-
-        Debug.Log(player + " has picked up: " + this);
-
-
-
-        if(isServer)
-        {
-            netIdentity.AssignClientAuthority(p.connectionToClient);
-        }
-
-
-        slot = player.getPickupSlot();
-        index = slot.getIndex();
-
-        slot.setWeapon(this, hand);
-
-        if(player.isLocalPlayer)
-        {
-            setControls(hand);
-        }
-
-        player.getLivePlayerModel().equipWeapon(this, hand);
-
-        foreach (MeshRenderer m in item.GetComponents<MeshRenderer>())
-        {
-            m.enabled = false;
-        }
-
-        foreach (Collider c in item.GetComponents<Collider>())
-        {
-            c.enabled = false;
-        }
-
-        item.GetComponent<Rigidbody>().isKinematic = true;
-
-        isitem = false;
-
-        transform.SetParent(player.getBackpack(), false);
-        transform.localPosition = basePosOffset;
-        transform.localRotation = Quaternion.Euler(baseRotOffset);
-        transform.localScale = baseScaOffset;
-        viewmodel.transform.SetParent(player.getViewmodelHolder(), true);
-        viewmodel.transform.localPosition = Vector3.zero;
-
-
-        if(player.isLocalPlayer)
-        {
-            viewmodel.layer = 11;
-            worldModel.layer = 6;
-        }
-        else
-        {
-            worldModel.layer = 0;
-        }
-
-        if (player.isLocalPlayer)
-        {
-            if (slot != player.getEquipedSlot())
-            {
-                player.changeSlot();
-            }
-            else
-            {
-                player.syncSlots();
-            }
-        }
-
     }
 
     public virtual void pickup(PlayerScript p)
@@ -474,6 +397,15 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         if (player.isLocalPlayer)
         {
             viewmodel.SetActive(false);
+        }
+    }
+
+    public virtual void onPlayerDeath(PlayerScript p)
+    {
+        if(p == player)
+        {
+            worldModel.SetActive(false);
+            worldModel.transform.SetParent(transform);
         }
     }
 

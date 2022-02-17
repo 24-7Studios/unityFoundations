@@ -19,7 +19,17 @@ public class PlayerModelClass : NetworkBehaviour
     [SerializeField]
     protected Transform LeftHoldParent;
 
+    [SyncVar]
     protected PlayerScript player;
+
+
+    protected virtual void Start()
+    {
+        if(player != null)
+        {
+            player.clientApplyPlayermodel(gameObject);
+        }
+    }
 
     public virtual void setPlayer(PlayerScript p)
     {

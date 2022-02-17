@@ -802,6 +802,11 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [ClientRpc]
     public void rpcApplyPlayermodel(GameObject model)
     {
+        clientApplyPlayermodel(model);
+    }
+
+    public  void clientApplyPlayermodel(GameObject model)
+    {
         LivePlayerModel = model.GetComponent<PlayerModelClass>();
         Debug.Log(LivePlayerModel);
         LivePlayerModel.setPlayer(this);
@@ -835,7 +840,10 @@ public class PlayerScript : NetworkBehaviour, IDamage
             LivePlayerModel = null;
         }
 
-        applyPlayermodel();
+        if(isServer)
+        {
+            applyPlayermodel();
+        }
     }
 
     public void setPlayermodel(PlayerModelClass p)

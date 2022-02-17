@@ -63,10 +63,6 @@ public class DudePlayermodel : PlayerModelClass
     private NetworkRigidbody corpsePhysSync;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     public override void setPlayer(PlayerScript p)
     {
