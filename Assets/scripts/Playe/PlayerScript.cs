@@ -278,6 +278,12 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private void Start()
     {
 
+        if(isLocalPlayer)
+        {
+            applyPlayermodel();
+        }
+
+
         health = DefaultHealth;
 
 
@@ -293,8 +299,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         equipedSlot = meleeSlot;
 
-        setPlayermodel(SelectedPlayerModel);
-        applyPlayermodel();
+
 
 
 
@@ -768,11 +773,12 @@ public class PlayerScript : NetworkBehaviour, IDamage
                 NetworkServer.UnSpawn(LivePlayerModel.gameObject);
             }
 
-            LivePlayerModel = Instantiate(SelectedPlayerModel, playerPhysBody.transform);
-            NetworkServer.Spawn(LivePlayerModel.gameObject);
+            PlayerModelClass p = Instantiate(SelectedPlayerModel, playerPhysBody.transform);
+            NetworkServer.Spawn(p.gameObject);
+            LivePlayerModel = p;
 
             LivePlayerModel.setPlayer(this);
-            rpcApplyPlayermodel();
+            rpcApplyPlayermodel(LivePlayerModel.gameObject);
         }
     }
 
@@ -784,16 +790,20 @@ public class PlayerScript : NetworkBehaviour, IDamage
             NetworkServer.UnSpawn(LivePlayerModel.gameObject);
         }
 
-        LivePlayerModel = Instantiate(SelectedPlayerModel, playerPhysBody.transform);
-        NetworkServer.Spawn(LivePlayerModel.gameObject);
+        //Debug.Log("spawned in playermodel");
+        PlayerModelClass p = Instantiate(SelectedPlayerModel, playerPhysBody.transform);
+        NetworkServer.Spawn(p.gameObject);
+        LivePlayerModel = p;
 
         LivePlayerModel.setPlayer(this);
-        rpcApplyPlayermodel();
+        rpcApplyPlayermodel(LivePlayerModel.gameObject);
     }
 
     [ClientRpc]
-    public void rpcApplyPlayermodel()
+    public void rpcApplyPlayermodel(GameObject model)
     {
+        LivePlayerModel = model.GetComponent<PlayerModelClass>();
+        Debug.Log(LivePlayerModel);
         LivePlayerModel.setPlayer(this);
         LivePlayerModel.transform.SetParent(playerPhysBody.transform, false);
 

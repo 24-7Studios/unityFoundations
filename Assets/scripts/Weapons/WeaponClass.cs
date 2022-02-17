@@ -90,10 +90,16 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     protected virtual void Start()
     {
 
+
+
+    }
+
+    private void OnConnectedToServer()
+    {
         if (player != null && transform.parent == null)
         {
             forcedPickup(player, index, hand);
-            if(isEquiped)
+            if (isEquiped)
             {
                 onEquip();
             }
@@ -102,7 +108,6 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
                 onDequip();
             }
         }
-
     }
 
     protected virtual void Update()
