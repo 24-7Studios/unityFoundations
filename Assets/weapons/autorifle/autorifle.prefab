@@ -459,9 +459,9 @@ MonoBehaviour:
   damage: 20
   fleshMultiplier: 1
   knockbackForce: 100
-  spread: 0.04
+  spread: 0.01
   fullAuto: 1
-  fireDelay: 0.11
+  fireDelay: 0.1
   ViewmodelFlash: {fileID: 4314926972769928921, guid: 4e5e209968c3140498b9c719202d5482,
     type: 3}
   ViewmodelflashPos: {fileID: 3082209757371970207}
