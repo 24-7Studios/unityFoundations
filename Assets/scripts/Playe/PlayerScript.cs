@@ -1327,12 +1327,13 @@ public class PlayerScript : NetworkBehaviour, IDamage
             List<NetworkStartPosition> positions = FindObjectsOfType<NetworkStartPosition>().ToList<NetworkStartPosition>();
             spawn(positions[(int)(Random.value * positions.Count)].transform.position);
         }
-        health = DefaultHealth;
-        Debug.Log(DieSound);
-        Debug.Log(aud);
-        aud.PlayOneShot(DieSound);
+        if(p == this)
+        {
+            health = DefaultHealth;
+            aud.PlayOneShot(DieSound);
 
-        isDead = false;
+            isDead = false;
+        }
     }
 
     [ClientRpc]
