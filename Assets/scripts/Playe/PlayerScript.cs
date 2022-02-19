@@ -15,7 +15,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     /// components that make the player work. also likely to be referenced by other scripts especially in the guns
     /// </summary>
 
-    [SerializeField]
+    //[SerializeField]
     private Rigidbody playerPhysBody;
 
     [SerializeField]
@@ -24,16 +24,16 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [SerializeField]
     private GameObject CameraSetup;
 
-    [SerializeField]
+    //[SerializeField]
     private AudioSource aud;
 
-    [SerializeField]
+    //[SerializeField]
     private AudioSource LocalAud;
 
-    [SerializeField]
+    //[SerializeField]
     private Camera worldCam;
 
-    [SerializeField]
+    //[SerializeField]
     private Camera gunCam;
 
 
@@ -262,6 +262,10 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private void Awake()
     {
+        //gets components
+        playerPhysBody = GetComponent<Rigidbody>();
+        aud = GetComponent<AudioSource>();
+
         controls = new Inputmaster();
         input = GetComponent<PlayerInput>();
         controls.Player.jump.performed += ctx => activateJump();
@@ -1324,6 +1328,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
             spawn(positions[(int)(Random.value * positions.Count)].transform.position);
         }
         health = DefaultHealth;
+        Debug.Log(DieSound);
+        Debug.Log(aud);
         aud.PlayOneShot(DieSound);
 
         isDead = false;
