@@ -190,7 +190,10 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private float shields;
 
     [SerializeField]
-    private float instantDeath;
+    private bool instantDeath;
+
+    [SerializeField, SyncVar]
+    private bool invinsible;
 
     [SyncVar]
     private bool isDead;
@@ -1348,6 +1351,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public void takeDamagefromHit(float d, float m)
     {
+        if (invinsible) return;
+
         if(!isServer)
         {
             cmdTakeDamageFromHit(d, m);
@@ -1362,6 +1367,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [Command]
     private void cmdTakeDamageFromHit(float d, float m)
     {
+        if (invinsible) return;
+
         health -= d;
         rpcSyncDamageFromHit(health, shields);
     }

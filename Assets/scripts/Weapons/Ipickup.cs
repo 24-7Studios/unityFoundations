@@ -5,7 +5,6 @@ using Mirror;
 
 public interface Ipickup
 {
-
     GameObject getObject();
 
     void pickup(PlayerScript p);
@@ -15,6 +14,5 @@ public interface Ipickup
     void drop();
 
     void serverDrop();
-
 
 }
