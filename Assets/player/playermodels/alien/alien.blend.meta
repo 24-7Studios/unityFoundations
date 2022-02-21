@@ -27,7 +27,12 @@ ModelImporter:
   - first:
       74: -6097591874335459295
     second: idlePistols
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 83ced8c85173ff94abc3642c0b67bb11, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
