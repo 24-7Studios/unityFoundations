@@ -321,16 +321,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 1
   syncInterval: 0.025
-  playerPhysBody: {fileID: 1050093693558037600}
   camTransformer: {fileID: 1050093693452069657}
   CameraSetup: {fileID: 2390121815867376660, guid: 73465b97eb43c3f4498aba8e3eac7909,
     type: 3}
-  aud: {fileID: 5183846604344044444}
-  LocalAud: {fileID: 0}
-  worldCam: {fileID: 0}
-  gunCam: {fileID: 0}
   interactZone: {fileID: 8531315878050940356}
-  SelectedPlayerModel: {fileID: 7196012451863958847, guid: 86b942d668b4e0e40a0886cb618845f1,
+  SelectedPlayerModel: {fileID: 6363091594461922305, guid: be746d4c3a2e9ff4eaf394a441edb9e1,
     type: 3}
   LivePlayerModel: {fileID: 0}
   settings: {fileID: 5242603199734816841}
@@ -361,6 +356,7 @@ MonoBehaviour:
   DefaultHealth: 100
   DefaultShields: 100
   instantDeath: 0
+  invinsible: 0
   localDamageSound: {fileID: 8300000, guid: b83a514e25eaedb428ac381925fb2cd5, type: 3}
   DieSound: {fileID: 8300000, guid: 33f3b5df65542ca468dcf5e947536414, type: 3}
   backpack: {fileID: 8525235372953113948}
