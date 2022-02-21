@@ -11,6 +11,8 @@ public interface Ipickup
 
     void serverPickup(PlayerScript p);
 
+    PlayerScript getPlayer();
+
     void drop();
 
     void serverDrop();

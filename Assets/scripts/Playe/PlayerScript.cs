@@ -1148,6 +1148,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
         {
             Ipickup i = thing.GetComponent<Ipickup>();
 
+            if (i.getPlayer() != null) return;
+
             i.serverPickup(this);
 
             rpcPickup(thing);
@@ -1162,6 +1164,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private void cmdPickup(GameObject thing)
     {
         Ipickup i = thing.GetComponent<Ipickup>();
+
+        if (i.getPlayer() != null) return;
 
         i.serverPickup(this);
 

@@ -324,6 +324,11 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
     }
 
+    public PlayerScript getPlayer()
+    {
+        return player;
+    }
+
     public bool getHand()
     {
         return hand;
