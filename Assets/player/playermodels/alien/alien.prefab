@@ -2049,7 +2049,7 @@ MonoBehaviour:
     m_Tip: {fileID: 8685469612246413030}
     m_Target: {fileID: 8567350985906164551}
     m_ChainRotationWeight: 1
-    m_TipRotationWeight: 1
+    m_TipRotationWeight: 0
     m_MaxIterations: 15
     m_Tolerance: 0.0001
     m_MaintainTargetPositionOffset: 0
@@ -2415,7 +2415,7 @@ MonoBehaviour:
     m_Tip: {fileID: 2252636457925101752}
     m_Target: {fileID: 8567350985597009623}
     m_ChainRotationWeight: 1
-    m_TipRotationWeight: 1
+    m_TipRotationWeight: 0
     m_MaxIterations: 15
     m_Tolerance: 0.0001
     m_MaintainTargetPositionOffset: 0
