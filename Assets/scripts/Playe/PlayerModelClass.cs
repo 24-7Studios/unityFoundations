@@ -109,14 +109,14 @@ public class PlayerModelClass : NetworkBehaviour
 
         GameObject wm = w.getWorldModelOb();
 
+        wm.transform.SetParent(targetPos, true);
+        Vector3 aScale = wm.transform.localScale;
+        wm.transform.SetParent(null, true);
+
         wm.transform.SetParent(targetPos, false);
         wm.transform.localPosition = w.WModelPosOffset;
         wm.transform.localRotation = Quaternion.Euler(w.WModelRotOffset);
-
-        wm.transform.SetParent(null, true);
-        wm.transform.localScale = w.WModelScaOffset/transform.localScale.y;
-        wm.transform.SetParent(targetPos, true);
-
+        wm.transform.localScale = aScale;
     }
 
     protected void onPlayerSpawn(PlayerScript p)
