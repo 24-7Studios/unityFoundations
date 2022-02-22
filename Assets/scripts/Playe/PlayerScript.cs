@@ -1214,7 +1214,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     
     private void manualDrop()
     {
-        if (equipedSlot.getWeapon() != null) return;
+        if (equipedSlot.getWeapon() == null) return;
         if (equipedSlot == meleeSlot) return;
 
 
