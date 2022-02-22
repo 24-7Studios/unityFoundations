@@ -1214,10 +1214,11 @@ public class PlayerScript : NetworkBehaviour, IDamage
     
     private void manualDrop()
     {
-        if(equipedSlot != meleeSlot)
-        {
-            tryDrop(equipedSlot.getWeapon().netIdentity);
-        }
+        if (equipedSlot.getWeapon() != null) return;
+        if (equipedSlot == meleeSlot) return;
+
+
+        tryDrop(equipedSlot.getWeapon().netIdentity);
     }
 
     private void tryDrop(NetworkIdentity thing)
