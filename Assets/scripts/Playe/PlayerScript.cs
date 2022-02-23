@@ -819,21 +819,21 @@ public class PlayerScript : NetworkBehaviour, IDamage
         LivePlayerModel.setPlayer(this);
         LivePlayerModel.transform.SetParent(playerPhysBody.transform, false);
 
-        if (LivePlayerModel.hitBoxes.Capacity > 0)
-        {
-            gameObject.layer = 2;
-        }
-        else
-        {
+        //if (LivePlayerModel.hitBoxes.Capacity > 0)
+        
+            //gameObject.layer = 2;
+        
+        //else
+        
             if (!isLocalPlayer)
             {
-                gameObject.layer = 0;
+                gameObject.layer = 7;
             }
             else
             {
                 gameObject.layer = 6;
             }
-        }
+        
 
         camTransformer.position = LivePlayerModel.CameraOffset.position;
         defaultCameraPos = camTransformer.localPosition;

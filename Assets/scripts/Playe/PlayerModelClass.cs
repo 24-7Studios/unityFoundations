@@ -39,7 +39,7 @@ public class PlayerModelClass : NetworkBehaviour
         {
             foreach (hitbox part in hitBoxes)
             {
-                part.gameObject.layer = 0;
+                part.gameObject.layer = 7;
             }
         }
         else
@@ -54,7 +54,7 @@ public class PlayerModelClass : NetworkBehaviour
         {
             foreach (GameObject part in models)
             {
-                part.layer = 0;
+                part.layer = 7;
             }
         }
 
