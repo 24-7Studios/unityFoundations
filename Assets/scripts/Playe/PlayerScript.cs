@@ -825,15 +825,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
         
         //else
         
-            if (!isLocalPlayer)
-            {
-                gameObject.layer = 7;
-            }
-            else
-            {
-                gameObject.layer = 6;
-            }
-        
 
         camTransformer.position = LivePlayerModel.CameraOffset.position;
         defaultCameraPos = camTransformer.localPosition;
