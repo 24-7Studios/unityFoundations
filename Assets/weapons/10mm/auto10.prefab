@@ -144,7 +144,7 @@ MonoBehaviour:
   item: {fileID: 3418680154138707625}
   Shootable:
     serializedVersion: 2
-    m_Bits: 1025
+    m_Bits: 1153
   worldModel: {fileID: 6643909261960458282}
   rightHoldPos: {fileID: 6691687860613427685}
   leftHoldPos: {fileID: 0}
