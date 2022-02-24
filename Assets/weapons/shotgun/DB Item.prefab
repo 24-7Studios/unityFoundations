@@ -1657,7 +1657,7 @@ GameObject:
   - component: {fileID: 5481656280350149699}
   - component: {fileID: 877634544550996972}
   - component: {fileID: 1073726317867402935}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DB Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1765,7 +1765,7 @@ MonoBehaviour:
   item: {fileID: 7717692746940111610}
   Shootable:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 1153
   worldModel: {fileID: 7758226006710875977}
   rightHoldPos: {fileID: 7844157800444728879}
   leftHoldPos: {fileID: 387780109037729895}
