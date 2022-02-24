@@ -93,14 +93,6 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         if (player != null && transform.parent == null)
         {
             forcedPickup(player, index, hand);
-            if (isEquiped)
-            {
-                onEquip();
-            }
-            else
-            {
-                onDequip();
-            }
         }
 
     }
@@ -253,6 +245,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         viewmodel.transform.SetParent(player.getViewmodelHolder());
         viewmodel.transform.localPosition = Vector3.zero;
 
+        player.reSyncSlots();        
 
         if (player.isLocalPlayer)
         {

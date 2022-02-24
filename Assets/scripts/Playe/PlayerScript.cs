@@ -341,9 +341,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         footPostition = foot.localPosition;
 
-
-
-
     }
 
 
@@ -996,27 +993,29 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public void syncSlots()
     {
-        if (isLocalPlayer)
+        if (equipedSlot.getWeapon() != null)
         {
-            if(equipedSlot.getWeapon() != null)
-            {
-                equipedSlot.getWeapon().onEquip();
+            equipedSlot.getWeapon().onEquip();
 
-                if (equipedSlot.getOtherHand() != null)
-                {
-                    equipedSlot.getOtherHand().onEquip();
-                }
-            }
-
-            if (!isServer)
+            if (equipedSlot.getOtherHand() != null)
             {
-                cmdSyncSlots(equipedSlot.getIndex(), previousSlot.getIndex());
-            }
-            else
-            {
-                rpcSyncSlots(equipedSlot.getIndex(), previousSlot.getIndex());
+                equipedSlot.getOtherHand().onEquip();
             }
         }
+
+        if (!isServer)
+        {
+            cmdSyncSlots(equipedSlot.getIndex(), previousSlot.getIndex());
+        }
+        else
+        {
+            rpcSyncSlots(equipedSlot.getIndex(), previousSlot.getIndex());
+        }
+    }
+
+    public void reSyncSlots()
+    {
+        cmdReSyncSlots();
     }
 
     [Command]
@@ -1031,9 +1030,16 @@ public class PlayerScript : NetworkBehaviour, IDamage
         rpcSyncSlots(e, p);
     }
 
+    [Command(requiresAuthority = false)]
+    private void cmdReSyncSlots()
+    {
+        rpcSyncSlots(equipedSlot.getIndex(), previousSlot.getIndex());
+    }
+
     [ClientRpc]
     private void rpcSyncSlots(int e, int p)
     {
+        Debug.Log(this + "  " + e + ":" + p);
         if (!isLocalPlayer)
         {
             equipedSlot = WeaponSlots[e];
@@ -1064,7 +1070,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
 
             Debug.Log(equipedSlot.getWeapon());
-
         }
     }
 
