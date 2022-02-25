@@ -51,6 +51,15 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     protected Animator ViewAnim;
 
     [SerializeField]
+    protected RuntimeAnimatorController defaultAnims;
+
+    [SerializeField]
+    protected AnimatorOverrideController rightHandAnims;
+
+    [SerializeField]
+    protected AnimatorOverrideController leftHandAnims;
+
+    [SerializeField]
     protected AudioSource aud;
 
     [SerializeField]
@@ -179,22 +188,39 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     }
 
 
+    public virtual void pickup(PlayerScript p, bool h)
+    {
+
+    }
+
     [Server]
     public  void serverPickup(PlayerScript p)
     {
         player = p;
         index = player.getPickupSlot().getIndex();
+        hand = false;
         netIdentity.AssignClientAuthority(p.connectionToClient);
         isitem = false;
-        clientPickup(player, index, isitem);
+        clientPickup(player, index, hand, isitem);
     }
 
+    [Server]
+    public void serverPickup(PlayerScript p, bool h)
+    {
+        player = p;
+        index = player.getPickupSlot().getIndex();
+        hand = h;
+        netIdentity.AssignClientAuthority(p.connectionToClient);
+        isitem = false;
+        clientPickup(player, index, hand, isitem);
+    }
 
     [ClientRpc]
-    public void clientPickup(PlayerScript p, int i, bool b)
+    public void clientPickup(PlayerScript p, int i, bool h, bool b)
     {
         player = p;
         index = i;
+        hand = h;
         isitem = b;
     }
 

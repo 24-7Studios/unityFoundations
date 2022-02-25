@@ -1138,6 +1138,49 @@ public class PlayerScript : NetworkBehaviour, IDamage
         }
     }
 
+    private void manualPickup(bool hand)
+    {
+        Ipickup[] list = interactZone.getList();
+        Ipickup target = null;
+        if (list.Length > 0)
+        {
+
+            float distance = Vector3.Distance(list[0].getObject().transform.position, camTransformer.position);
+            target = list[0];
+
+            foreach (Ipickup i in list)
+            {
+                Debug.Log(i);
+                if (Vector3.Distance(i.getObject().transform.position, camTransformer.position) <= distance)
+                {
+                    distance = Vector3.Distance(i.getObject().transform.position, camTransformer.position);
+                    target = i;
+                }
+            }
+
+            if (target != null)
+            {
+                //pickup(target.getObject(), hand);
+                WeaponClass weapon = target.getObject().GetComponent<WeaponClass>();
+                if(weapon != null)
+                {
+                    if(weapon.CanDualWield())
+                    {
+                        pickup(weapon.getObject(), hand);
+                    }
+                    else
+                    {
+                        pickup(weapon.getObject());
+                    }
+                }
+                else
+                {
+                    pickup(target.getObject());
+                }
+            }
+        }
+    }
+
     public void pickup(GameObject thing)
     {
         if(isServer)
@@ -1156,6 +1199,24 @@ public class PlayerScript : NetworkBehaviour, IDamage
         }
     }
 
+    public void pickup(GameObject gun, bool hand)
+    {
+        if (isServer)
+        {
+            WeaponClass i = gun.GetComponent<WeaponClass>();
+
+            if (i.getPlayer() != null) return;
+
+            i.serverPickup(this, hand);
+
+            rpcDualPickup(gun, hand);
+        }
+        else
+        {
+            cmdDualPickup(gun, hand);
+        }
+    }
+
     [Command]
     private void cmdPickup(GameObject thing)
     {
@@ -1169,12 +1230,31 @@ public class PlayerScript : NetworkBehaviour, IDamage
     }
 
 
+    [Command]
+    public void cmdDualPickup(GameObject gun, bool hand)
+    {
+        WeaponClass i = gun.GetComponent<WeaponClass>();
+
+        if (i.getPlayer() != null) return;
+
+        i.serverPickup(this, hand);
+
+        rpcDualPickup(gun, hand);
+    }
+
     [ClientRpc]
     private void rpcPickup(GameObject thing)
     {
         Ipickup i = thing.GetComponent<Ipickup>();
 
         i.pickup(this);
+    }
+
+    [ClientRpc]
+    private void rpcDualPickup(GameObject gun, bool hand)
+    {
+        WeaponClass i = gun.GetComponent<WeaponClass>();
+        i.pickup(this, hand);
     }
 
     public Slot getEquipedSlot()

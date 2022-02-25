@@ -134,6 +134,15 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""dual"",
+                    ""type"": ""Button"",
+                    ""id"": ""4662051a-3861-4f81-b855-2c12cc82a876"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -422,6 +431,17 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                     ""action"": ""kill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bce29ff7-4e25-4a7b-8e0b-17eb7b2a41d8"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""mouse + keybaord"",
+                    ""action"": ""dual"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -470,6 +490,7 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
         m_Player_reload2 = m_Player.FindAction("reload2", throwIfNotFound: true);
         m_Player_melee = m_Player.FindAction("melee", throwIfNotFound: true);
         m_Player_kill = m_Player.FindAction("kill", throwIfNotFound: true);
+        m_Player_dual = m_Player.FindAction("dual", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -541,6 +562,7 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_reload2;
     private readonly InputAction m_Player_melee;
     private readonly InputAction m_Player_kill;
+    private readonly InputAction m_Player_dual;
     public struct PlayerActions
     {
         private @Inputmaster m_Wrapper;
@@ -557,6 +579,7 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
         public InputAction @reload2 => m_Wrapper.m_Player_reload2;
         public InputAction @melee => m_Wrapper.m_Player_melee;
         public InputAction @kill => m_Wrapper.m_Player_kill;
+        public InputAction @dual => m_Wrapper.m_Player_dual;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -602,6 +625,9 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                 @kill.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnKill;
                 @kill.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnKill;
                 @kill.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnKill;
+                @dual.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDual;
+                @dual.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDual;
+                @dual.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDual;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -642,6 +668,9 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                 @kill.started += instance.OnKill;
                 @kill.performed += instance.OnKill;
                 @kill.canceled += instance.OnKill;
+                @dual.started += instance.OnDual;
+                @dual.performed += instance.OnDual;
+                @dual.canceled += instance.OnDual;
             }
         }
     }
@@ -678,5 +707,6 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
         void OnReload2(InputAction.CallbackContext context);
         void OnMelee(InputAction.CallbackContext context);
         void OnKill(InputAction.CallbackContext context);
+        void OnDual(InputAction.CallbackContext context);
     }
 }
