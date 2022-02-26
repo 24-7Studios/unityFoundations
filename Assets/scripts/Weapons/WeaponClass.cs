@@ -20,6 +20,9 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     [SerializeField]
     private bool canDual;
 
+    [SerializeField, SyncVar]
+    protected bool isInDual;
+
     [SyncVar]
     private bool hand;
 
@@ -145,6 +148,9 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
         slot.setWeapon(this, hand);
 
+        if (slot.getWeapon() != null) slot.getWeapon().setDualStatus();
+        if (slot.getOtherHand() != null) slot.getOtherHand().setDualStatus();
+
         player.getLivePlayerModel().equipWeapon(this, hand);
 
         foreach (MeshRenderer m in item.GetComponents<MeshRenderer>())
@@ -170,7 +176,6 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         {
             viewmodel.layer = 11;
             worldModel.layer = 6;
-            setControls(hand);
             if (slot != player.getEquipedSlot())
             {
                 player.changeSlot();
@@ -208,10 +213,11 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     public void serverPickup(PlayerScript p, bool h)
     {
         player = p;
-        index = player.getPickupSlot().getIndex();
+        index = player.getEquipedSlot().getIndex();
         hand = h;
         netIdentity.AssignClientAuthority(p.connectionToClient);
         isitem = false;
+
         clientPickup(player, index, hand, isitem);
     }
 
@@ -243,9 +249,11 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
         player.getSlotAtIndex(s).setWeapon(this, hand);
 
+        setDualStatus();
+
         if (player.isLocalPlayer)
         {
-            setControls(hand);
+            //setControls(hand);
         }
 
         player.getLivePlayerModel().equipWeapon(this, hand);
@@ -292,7 +300,15 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     public virtual void drop()
     {
 
-
+        WeaponClass otherHand;
+        if(hand)
+        {
+            otherHand = slot.getWeapon();
+        }
+        else
+        {
+            otherHand = slot.getOtherHand();
+        }
 
         if(player != null)
         {
@@ -334,6 +350,8 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
         if (isServer)
             netIdentity.RemoveClientAuthority();
+
+        if (otherHand != null) otherHand.setDualStatus();
     }
 
 
@@ -358,9 +376,34 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         hand = h;
     }
 
-    protected virtual void setControls(bool hand)
+    public void setDualStatus()
     {
-        if(!hand)
+        isInDual = false;
+        if(hand) isInDual = true;
+        if (slot.getOtherHand() != null) isInDual = true;
+        if (player.isLocalPlayer) { unsetControls(hand); setControls(hand); }
+    }
+
+    protected virtual void setControls(bool h)
+    {
+        if(isInDual)
+        {
+            if (h)
+            {
+                player.getInputMaster().Player.Fire_1.performed += Fire1Down;
+                player.getInputMaster().Player.Fire_1.canceled += Fire1Up;
+                player.getInputMaster().Player.reload2.performed += ReloadDown;
+                player.getInputMaster().Player.reload2.canceled += ReloadUp;
+            }
+            else
+            {
+                player.getInputMaster().Player.Fire_2Zoom1.performed += Fire1Down;
+                player.getInputMaster().Player.Fire_2Zoom1.canceled += Fire1Up;
+                player.getInputMaster().Player.reload.performed += ReloadDown;
+                player.getInputMaster().Player.reload.canceled += ReloadUp;
+            }
+        }
+        else
         {
             player.getInputMaster().Player.Fire_1.performed += Fire1Down;
             player.getInputMaster().Player.Fire_1.canceled += Fire1Up;
@@ -368,13 +411,6 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
             player.getInputMaster().Player.Fire_2Zoom1.canceled += Fire2Up;
             player.getInputMaster().Player.reload.performed += ReloadDown;
             player.getInputMaster().Player.reload.canceled += ReloadUp;
-        }
-        else
-        {
-            player.getInputMaster().Player.Fire_2Zoom1.performed += Fire1Down;
-            player.getInputMaster().Player.Fire_2Zoom1.canceled += Fire1Up;
-            player.getInputMaster().Player.reload2.performed += ReloadDown;
-            player.getInputMaster().Player.reload2.canceled += ReloadUp;
         }
     }
 
@@ -400,16 +436,54 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
     public virtual void onEquip()
     {
-
         isEquiped = true;
 
         worldModel.SetActive(true);
         player.getLivePlayerModel().equipWeapon(this, hand);
         if (player.isLocalPlayer)
         {
+
+            if (isInDual)
+            {
+                if (!hand)
+                {
+                    if (rightHandAnims != null)
+                    {
+                        ViewAnim.runtimeAnimatorController = rightHandAnims;
+                    }
+                    else
+                    {
+                        viewmodel.transform.localScale = new Vector3(Mathf.Abs(viewmodel.transform.localScale.x), viewmodel.transform.localScale.y, viewmodel.transform.localScale.z);
+                    }
+                }
+                else
+                {
+                    if (leftHandAnims != null)
+                    {
+                        ViewAnim.runtimeAnimatorController = leftHandAnims;
+                    }
+                    else
+                    {
+                        viewmodel.transform.localScale = new Vector3(-Mathf.Abs(viewmodel.transform.localScale.x), viewmodel.transform.localScale.y, viewmodel.transform.localScale.z);
+                    }
+                }
+            }
+            else
+            {
+                if (defaultAnims != null)
+                {
+                    ViewAnim.runtimeAnimatorController = defaultAnims;
+                }
+                else
+                {
+                    viewmodel.transform.localScale = new Vector3(Mathf.Abs(viewmodel.transform.localScale.x), viewmodel.transform.localScale.y, viewmodel.transform.localScale.z);
+                }
+            }
+
             viewmodel.SetActive(true);
         }
     }
+
 
     public virtual void onDequip()
     {

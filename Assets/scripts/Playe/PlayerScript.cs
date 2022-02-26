@@ -275,6 +275,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         controls.Player.Change.performed += ctx => changeSlot();
         controls.Player.interact.started += ctx => interact();
         controls.Player.interact.performed += ctx => manualPickup();
+        controls.Player.dual.performed += ctx => manualPickup(true);
         controls.Player.drop.performed += ctx => manualDrop();
         controls.Player.melee.performed += ctx => equipToMelee();
         controls.Player.kill.performed += ctx => die();
@@ -1209,7 +1210,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
             i.serverPickup(this, hand);
 
-            rpcDualPickup(gun, hand);
+            //rpcDualPickup(gun, hand);
+            rpcPickup(gun);
         }
         else
         {
@@ -1239,7 +1241,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         i.serverPickup(this, hand);
 
-        rpcDualPickup(gun, hand);
+        //rpcDualPickup(gun, hand);
+        rpcPickup(gun);
     }
 
     [ClientRpc]
@@ -1250,12 +1253,14 @@ public class PlayerScript : NetworkBehaviour, IDamage
         i.pickup(this);
     }
 
+    /*
     [ClientRpc]
     private void rpcDualPickup(GameObject gun, bool hand)
     {
         WeaponClass i = gun.GetComponent<WeaponClass>();
         i.pickup(this, hand);
     }
+    */
 
     public Slot getEquipedSlot()
     {
@@ -1293,7 +1298,11 @@ public class PlayerScript : NetworkBehaviour, IDamage
         if (equipedSlot.getWeapon() == null) return;
         if (equipedSlot == meleeSlot) return;
 
-
+        if(equipedSlot.getOtherHand() != null)
+        {
+            tryDrop(equipedSlot.getOtherHand().netIdentity);
+            return;
+        }
         tryDrop(equipedSlot.getWeapon().netIdentity);
     }
 

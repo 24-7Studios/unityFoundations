@@ -1,12 +1,46 @@
 fileFormatVersion: 2
 guid: 9cf80c5a7d8c8c14b84a906ffb096477
 ModelImporter:
-  serializedVersion: 21100
+  serializedVersion: 21202
   internalIDToNameTable:
   - first:
       74: -623603649343465320
     second: Scene
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Base_Stock
+    second: {fileID: 2895064947943234598, guid: 5723034ad98193c4fae1184511e5c17f,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bullet
+    second: {fileID: 2100000, guid: d90f67bf166b928498921b4f0394b42a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: casing
+    second: {fileID: 5407429153165912631, guid: 222cf1b379e385e4883a0e6935530c7f,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: emmisive1(blue)
+    second: {fileID: -7536910547548308473, guid: 8704c307d909eeb4b8f355f0dae45fa1,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: secondary
+    second: {fileID: 8009138033094245905, guid: 8704c307d909eeb4b8f355f0dae45fa1,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: stripes
+    second: {fileID: 2100000, guid: af51b65ec9ef0ad409f75b70f8a94c6e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -17,6 +51,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -46,6 +81,7 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -57,6 +93,7 @@ ModelImporter:
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
+    optimizeBones: 1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8

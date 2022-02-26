@@ -6,7 +6,57 @@ ModelImporter:
   - first:
       74: 6365926014387069646
     second: bruh
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Base_Stock
+    second: {fileID: 2100000, guid: a761bc7c50c383f46aacf20eb383914d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SuitGloves
+    second: {fileID: 2100000, guid: d90f67bf166b928498921b4f0394b42a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SuitGlow
+    second: {fileID: 2100000, guid: 605cdc16a419c7446bbbbdb411193ef0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SuitSleeves
+    second: {fileID: 8001261108238520146, guid: b2b679f3d49734b4291ccc4cbf304b0e,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bullet
+    second: {fileID: 5407429153165912631, guid: 222cf1b379e385e4883a0e6935530c7f,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: casing
+    second: {fileID: 7465012541371680254, guid: 8704c307d909eeb4b8f355f0dae45fa1,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: emmisive1(blue)
+    second: {fileID: -7536910547548308473, guid: 5723034ad98193c4fae1184511e5c17f,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: secondary
+    second: {fileID: 8009138033094245905, guid: 5723034ad98193c4fae1184511e5c17f,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: stripes
+    second: {fileID: 2100000, guid: af51b65ec9ef0ad409f75b70f8a94c6e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

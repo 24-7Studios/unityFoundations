@@ -140,7 +140,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.01
-  canDual: 0
+  canDual: 1
+  isInDual: 0
   item: {fileID: 3418680154138707625}
   Shootable:
     serializedVersion: 2
@@ -150,8 +151,11 @@ MonoBehaviour:
   leftHoldPos: {fileID: 0}
   viewmodel: {fileID: 2786483985261900192}
   ViewAnim: {fileID: 1355694226009062147}
+  defaultAnims: {fileID: 0}
+  rightHandAnims: {fileID: 0}
+  leftHandAnims: {fileID: 0}
   aud: {fileID: 6453581027293962206}
-  debugMode: 0
+  debugMode: 1
   debugMarker: {fileID: 4837419253238934036, guid: d294ffef25fbe1a4ca7ed8440f33ecc3,
     type: 3}
   hitEffect: {fileID: 5718995469900101050, guid: 8e06fde96679c1248a8bca766fc413a1,
