@@ -1524,6 +1524,11 @@ public class Slot
         return otherHand;
     }
 
+    public bool isDual()
+    {
+        return (myWeapon != null) && (otherHand != null);
+    }
+
     public void setWeapon(WeaponClass w)
     {
         if(myWeapon != null)
@@ -1549,7 +1554,12 @@ public class Slot
                 myWeapon.drop();
             }
 
-            myWeapon = w; 
+            myWeapon = w;
+
+            if(!myWeapon.CanDualWield() && otherHand != null)
+            {
+                otherHand.drop();
+            }
         }
         else
         {
