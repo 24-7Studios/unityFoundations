@@ -199,15 +199,15 @@ MonoBehaviour:
   WModelRotOffset: {x: 0, y: 0, z: 0}
   WModelScaOffset: {x: 0.4, y: 0.4, z: 0.4}
   viewpunch: 5
-  viewpunchAttack: 0.2
+  viewpunchAttack: 1
   viewpunchRecovery: 1
-  recoilAmount: 10
+  recoilAmount: 12
   recoilAttack: 0.5
-  recoilSmoothing: 10
+  recoilSmoothing: 12
   damage: 15
   fleshMultiplier: 1
   knockbackForce: 50
-  spread: 0.1
+  spread: 0.025
   fullAuto: 1
   fireDelay: 0.1
   ViewmodelFlash: {fileID: 4314926972769928921, guid: 4e5e209968c3140498b9c719202d5482,
@@ -216,15 +216,15 @@ MonoBehaviour:
   WorldmodelFlash: {fileID: 0}
   WorldmodelFlashPos: {fileID: 0}
   fireAnim: fire
-  fireSound: {fileID: 8300000, guid: aee1d4950f36ced4bbfe759ff75185a9, type: 3}
+  fireSound: {fileID: 8300000, guid: 468a693d4feeb394bb33990fcd1c1e82, type: 3}
   reloadAnim: reload
   reloadSound: {fileID: 0}
   idleAnim: idle
-  ammo: 50
-  loadedAmmo: 50
+  ammo: 75
+  loadedAmmo: 75
   reloadDelay: 1
-  magInSound: {fileID: 8300000, guid: fbf36fe85f0df6d4f8056211cc5a0bbb, type: 3}
-  magOutSound: {fileID: 8300000, guid: 80b44876bbccee14192232420de4c13b, type: 3}
+  magInSound: {fileID: 8300000, guid: 4e0bb83710054ec46be8fa873419b656, type: 3}
+  magOutSound: {fileID: 8300000, guid: cbd97c13ab9910142895024ed401029e, type: 3}
 --- !u!82 &8001342172731941317
 AudioSource:
   m_ObjectHideFlags: 0

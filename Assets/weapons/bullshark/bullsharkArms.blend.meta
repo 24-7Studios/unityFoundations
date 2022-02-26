@@ -210,7 +210,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.28962898
-        functionName: magIn
+        functionName: magOut
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
