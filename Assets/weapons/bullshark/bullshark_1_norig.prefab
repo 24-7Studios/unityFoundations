@@ -186,7 +186,7 @@ MonoBehaviour:
   rightHandAnims: {fileID: 0}
   leftHandAnims: {fileID: 0}
   aud: {fileID: 8001342172731941317}
-  debugMode: 1
+  debugMode: 0
   debugMarker: {fileID: 4837419253238934036, guid: d294ffef25fbe1a4ca7ed8440f33ecc3,
     type: 3}
   hitEffect: {fileID: 5718995469900101050, guid: 8e06fde96679c1248a8bca766fc413a1,
