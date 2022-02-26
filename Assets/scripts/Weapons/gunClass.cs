@@ -146,7 +146,7 @@ public class gunClass : raycastWeapon
 
         if(WorldmodelFlash != null)
         {
-            GameObject.Instantiate(WorldmodelFlash, WorldmodelFlashPos.position, WorldmodelFlashPos.rotation);
+            GameObject.Instantiate(WorldmodelFlash, WorldmodelFlashPos.position, WorldmodelFlashPos.rotation).layer = 6;
         }
 
         if (!isServer)
@@ -163,7 +163,11 @@ public class gunClass : raycastWeapon
     [ClientRpc]
     protected override void rpcFire()
     {
-        
+        if (isLocalPlayer) return;
+        if (WorldmodelFlash != null)
+        {
+            GameObject.Instantiate(WorldmodelFlash, WorldmodelFlashPos.position, WorldmodelFlashPos.rotation).layer = 7; ;       
+        }
     }
 
     [Command]

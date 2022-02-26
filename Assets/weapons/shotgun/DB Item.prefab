@@ -1762,6 +1762,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   canDual: 0
+  isInDual: 0
   item: {fileID: 7717692746940111610}
   Shootable:
     serializedVersion: 2
@@ -1771,6 +1772,9 @@ MonoBehaviour:
   leftHoldPos: {fileID: 387780109037729895}
   viewmodel: {fileID: 3536624332776049524}
   ViewAnim: {fileID: 442695515377518177}
+  defaultAnims: {fileID: 0}
+  rightHandAnims: {fileID: 0}
+  leftHandAnims: {fileID: 0}
   aud: {fileID: 5481656280350149699}
   debugMode: 0
   debugMarker: {fileID: 4837419253238934036, guid: d294ffef25fbe1a4ca7ed8440f33ecc3,
@@ -1810,7 +1814,7 @@ MonoBehaviour:
   loadedAmmo: 0
   reloadDelay: 0
   shots: 10
-  altFireSpread: 0.5
+  altFireSpread: 0.2
 --- !u!54 &1977627620440618473
 Rigidbody:
   m_ObjectHideFlags: 0
