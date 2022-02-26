@@ -1165,7 +1165,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
                 WeaponClass weapon = target.getObject().GetComponent<WeaponClass>();
                 if(weapon != null)
                 {
-                    if(weapon.CanDualWield())
+                    if(weapon.CanDualWield() && equipedSlot.getWeapon().CanDualWield())
                     {
                         pickup(weapon.getObject(), hand);
                     }
