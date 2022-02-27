@@ -37,6 +37,8 @@ public class gunClass : raycastWeapon
     protected bool reloading;
     protected bool bufferedReload;
 
+    private bool flash;
+
 
     protected override void Start()
     {
@@ -122,8 +124,18 @@ public class gunClass : raycastWeapon
         }
     }
 
+    protected virtual void LateUpdate()
+    {
+        if(flash)
+        {
+            if(ViewmodelFlash != null)
+            {
+                GameObject.Instantiate(ViewmodelFlash, ViewmodelflashPos.position, ViewmodelflashPos.rotation);
+                flash = false;
+            }
+        }
+    }
 
- 
     protected override void Fire()
     {
         Vector3 shootDirection = (player.getCamTransformer().forward + Random.insideUnitSphere * spread).normalized;
@@ -139,10 +151,7 @@ public class gunClass : raycastWeapon
         loadedAmmo--;
         fireTimer = fireDelay;
 
-        if(ViewmodelFlash!= null)
-        {
-            GameObject.Instantiate(ViewmodelFlash, ViewmodelflashPos.position, ViewmodelflashPos.rotation);
-        }
+        flash = true;
 
         if(WorldmodelFlash != null)
         {

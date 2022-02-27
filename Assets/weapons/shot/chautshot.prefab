@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &554991260513930061
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3412899673381479178}
-  m_Layer: 11
-  m_Name: viewflash
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3412899673381479178
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 554991260513930061}
-  m_LocalRotation: {x: 0.69806886, y: -0.06370212, z: -0.026498258, w: 0.7126989}
-  m_LocalPosition: {x: 0.06946065, y: 0.9328927, z: 4.1821556}
-  m_LocalScale: {x: 0.755149, y: 0.75514925, z: 0.7551493}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4420454700372089684}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1439568051586794600
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +154,7 @@ MonoBehaviour:
   rightHandAnims: {fileID: 22100000, guid: 8cf44ae96f2145f478c1f7c2baffdee2, type: 2}
   leftHandAnims: {fileID: 22100000, guid: f5c86fccd7a229348ac3bc4b10ee4437, type: 2}
   aud: {fileID: 6185063988141133011}
-  debugMode: 1
+  debugMode: 0
   debugMarker: {fileID: 4837419253238934036, guid: d294ffef25fbe1a4ca7ed8440f33ecc3,
     type: 3}
   hitEffect: {fileID: 5718995469900101050, guid: 8e06fde96679c1248a8bca766fc413a1,
@@ -211,7 +180,7 @@ MonoBehaviour:
   fireDelay: 0.35
   ViewmodelFlash: {fileID: 4314926972769928921, guid: 4e5e209968c3140498b9c719202d5482,
     type: 3}
-  ViewmodelflashPos: {fileID: 3412899673381479178}
+  ViewmodelflashPos: {fileID: 6884648085649267609}
   WorldmodelFlash: {fileID: 0}
   WorldmodelFlashPos: {fileID: 0}
   fireAnim: fire
@@ -932,12 +901,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efa456348b1138445995213895f9e5dd, type: 3}
---- !u!4 &4420454700372089684 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -2016350628690256801, guid: efa456348b1138445995213895f9e5dd,
-    type: 3}
-  m_PrefabInstance: {fileID: 6439276552649328395}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6169243442433456730 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: efa456348b1138445995213895f9e5dd,
@@ -956,7 +919,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 189c41e8326f1824ab58bd44e6840b5a, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 1
+  m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -980,6 +943,12 @@ MonoBehaviour:
 --- !u!4 &6833753478986670304 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: efa456348b1138445995213895f9e5dd,
+    type: 3}
+  m_PrefabInstance: {fileID: 6439276552649328395}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6884648085649267609 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8730288224236675950, guid: efa456348b1138445995213895f9e5dd,
     type: 3}
   m_PrefabInstance: {fileID: 6439276552649328395}
   m_PrefabAsset: {fileID: 0}
