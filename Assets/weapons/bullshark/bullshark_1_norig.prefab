@@ -244,8 +244,7 @@ MonoBehaviour:
   ViewmodelFlash: {fileID: 4314926972769928921, guid: 4e5e209968c3140498b9c719202d5482,
     type: 3}
   ViewmodelflashPos: {fileID: 8654728130543415312}
-  WorldmodelFlash: {fileID: 4314926972769928921, guid: 4e5e209968c3140498b9c719202d5482,
-    type: 3}
+  WorldmodelFlash: {fileID: 0}
   WorldmodelFlashPos: {fileID: 513573561996838327}
   fireAnim: fire
   fireSound: {fileID: 8300000, guid: 468a693d4feeb394bb33990fcd1c1e82, type: 3}
