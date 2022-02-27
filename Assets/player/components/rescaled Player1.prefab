@@ -325,7 +325,7 @@ MonoBehaviour:
   CameraSetup: {fileID: 2390121815867376660, guid: 73465b97eb43c3f4498aba8e3eac7909,
     type: 3}
   interactZone: {fileID: 8531315878050940356}
-  SelectedPlayerModel: {fileID: -7493404476013411301, guid: c8d4cf5569e590747bd755a71fefbf17,
+  SelectedPlayerModel: {fileID: 7196012451863958847, guid: 86b942d668b4e0e40a0886cb618845f1,
     type: 3}
   LivePlayerModel: {fileID: 0}
   settings: {fileID: 5242603199734816841}
