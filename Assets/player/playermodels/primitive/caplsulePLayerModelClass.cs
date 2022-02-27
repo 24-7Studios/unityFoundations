@@ -14,18 +14,16 @@ public class caplsulePLayerModelClass : PlayerModelClass
     [SerializeField]
     private Transform LeftArm;
 
-
-    private void Start()
-    {
-        
-    }
-
+    
 
     void Update()
     {
-        head.rotation = player.getCamTransformer().rotation;
-        RightArm.rotation = player.getCamTransformer().rotation;
-        LeftArm.rotation = player.getCamTransformer().rotation;
+        if (player != null)
+        {
+            head.rotation = player.getCamTransformer().rotation;
+            RightArm.rotation = player.getCamTransformer().rotation;
+            LeftArm.rotation = player.getCamTransformer().rotation;
+        }
     }
 
     
