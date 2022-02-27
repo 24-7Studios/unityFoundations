@@ -6,6 +6,9 @@ public class ChautShot : gunClass
 {
 
     [SerializeField]
+    protected int shots = 8;
+
+    [SerializeField]
     private AudioClip openSound;
 
     [SerializeField]
@@ -30,6 +33,7 @@ public class ChautShot : gunClass
 
     protected override void reload()
     {
+        bufferedReload = false;
         ViewAnim.Play(reloadAnim);
         reloadTimer = reloadDelay;
         reloading = true;
@@ -40,6 +44,17 @@ public class ChautShot : gunClass
         else
         {
             cmdReload();
+        }
+    }
+
+    protected override void Fire()
+    {
+        base.Fire();
+        for (int i = 0; i < shots - 1; i++)
+        {
+            Vector3 shootDirection = (player.getCamTransformer().forward + Random.insideUnitSphere * spread).normalized;
+
+            raycastShoot(damage, fleshMultiplier, player.getCamTransformer().position, shootDirection, Shootable);
         }
     }
 

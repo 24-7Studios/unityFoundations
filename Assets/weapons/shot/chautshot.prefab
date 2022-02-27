@@ -23,13 +23,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 554991260513930061}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 1.46, y: 0.67, z: 8.56}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.69806886, y: -0.06370212, z: -0.026498258, w: 0.7126989}
+  m_LocalPosition: {x: 0.06946065, y: 0.9328927, z: 4.1821556}
+  m_LocalScale: {x: 0.755149, y: 0.75514925, z: 0.7551493}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2698795338876362222}
-  m_RootOrder: 0
+  m_Father: {fileID: 4420454700372089684}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1439568051586794600
 GameObject:
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  canDual: 0
+  canDual: 1
   isInDual: 0
   item: {fileID: 1439568051586794600}
   Shootable:
@@ -181,9 +181,9 @@ MonoBehaviour:
   leftHoldPos: {fileID: 0}
   viewmodel: {fileID: 6169243442433456730}
   ViewAnim: {fileID: 7972524232794524464}
-  defaultAnims: {fileID: 0}
-  rightHandAnims: {fileID: 0}
-  leftHandAnims: {fileID: 0}
+  defaultAnims: {fileID: 9100000, guid: 189c41e8326f1824ab58bd44e6840b5a, type: 2}
+  rightHandAnims: {fileID: 22100000, guid: 8cf44ae96f2145f478c1f7c2baffdee2, type: 2}
+  leftHandAnims: {fileID: 22100000, guid: f5c86fccd7a229348ac3bc4b10ee4437, type: 2}
   aud: {fileID: 6185063988141133011}
   debugMode: 1
   debugMarker: {fileID: 4837419253238934036, guid: d294ffef25fbe1a4ca7ed8440f33ecc3,
@@ -203,25 +203,26 @@ MonoBehaviour:
   recoilAmount: 5
   recoilAttack: 0.5
   recoilSmoothing: 10
-  damage: 20
+  damage: 10
   fleshMultiplier: 1
   knockbackForce: 50
   spread: 0.075
   fullAuto: 1
-  fireDelay: 0.25
+  fireDelay: 0.35
   ViewmodelFlash: {fileID: 4314926972769928921, guid: 4e5e209968c3140498b9c719202d5482,
     type: 3}
   ViewmodelflashPos: {fileID: 3412899673381479178}
   WorldmodelFlash: {fileID: 0}
   WorldmodelFlashPos: {fileID: 0}
   fireAnim: fire
-  fireSound: {fileID: 8300000, guid: 6fbafa9d809c93d4b81cec9c67797a15, type: 3}
+  fireSound: {fileID: 8300000, guid: bf008f37066aa044294aa204c6b82e2b, type: 3}
   reloadAnim: reload
   reloadSound: {fileID: 0}
   idleAnim: idle
   ammo: 10
   loadedAmmo: 10
   reloadDelay: 2
+  shots: 8
   openSound: {fileID: 8300000, guid: 4e0bb83710054ec46be8fa873419b656, type: 3}
   closeSound: {fileID: 8300000, guid: cbd97c13ab9910142895024ed401029e, type: 3}
   magInSound: {fileID: 8300000, guid: fbf36fe85f0df6d4f8056211cc5a0bbb, type: 3}
@@ -931,9 +932,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efa456348b1138445995213895f9e5dd, type: 3}
---- !u!4 &2698795338876362222 stripped
+--- !u!4 &4420454700372089684 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8946660040297601765, guid: efa456348b1138445995213895f9e5dd,
+  m_CorrespondingSourceObject: {fileID: -2016350628690256801, guid: efa456348b1138445995213895f9e5dd,
     type: 3}
   m_PrefabInstance: {fileID: 6439276552649328395}
   m_PrefabAsset: {fileID: 0}
@@ -955,7 +956,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 189c41e8326f1824ab58bd44e6840b5a, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0

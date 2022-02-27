@@ -184,6 +184,7 @@ public class gunClass : raycastWeapon
 
     protected virtual void reload()
     {
+        bufferedReload = false;
         ViewAnim.Play(reloadAnim);
         playsound(sounds.IndexOf(reloadSound));
         reloadTimer = reloadDelay;

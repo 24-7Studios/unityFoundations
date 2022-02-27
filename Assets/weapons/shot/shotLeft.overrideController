@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: shotLeft
+  m_Controller: {fileID: 9100000, guid: 189c41e8326f1824ab58bd44e6840b5a, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: -5252816984213320552, guid: efa456348b1138445995213895f9e5dd,
+      type: 3}
+    m_OverrideClip: {fileID: -8083237412459657978, guid: efa456348b1138445995213895f9e5dd,
+      type: 3}
+  - m_OriginalClip: {fileID: 641136364113939877, guid: efa456348b1138445995213895f9e5dd,
+      type: 3}
+    m_OverrideClip: {fileID: -4141705143987577749, guid: efa456348b1138445995213895f9e5dd,
+      type: 3}
+  - m_OriginalClip: {fileID: 5894491979384236916, guid: efa456348b1138445995213895f9e5dd,
+      type: 3}
+    m_OverrideClip: {fileID: 1611774617999030286, guid: efa456348b1138445995213895f9e5dd,
+      type: 3}
