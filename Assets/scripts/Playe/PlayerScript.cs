@@ -1379,6 +1379,13 @@ public class PlayerScript : NetworkBehaviour, IDamage
         return shields;
     }
 
+    [Server]
+    public void setInv(bool i)
+    {
+        invinsible = i;
+    }
+
+
     public void die()
     {
         isDead = true;
