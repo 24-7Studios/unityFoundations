@@ -213,6 +213,7 @@ MonoBehaviour:
   leftHoldPos: {fileID: 2930784423037272396}
   viewmodel: {fileID: 4700634218778148085}
   ViewAnim: {fileID: 8410980769709063946}
+  drawAnim: draw
   defaultAnims: {fileID: 0}
   rightHandAnims: {fileID: 0}
   leftHandAnims: {fileID: 0}

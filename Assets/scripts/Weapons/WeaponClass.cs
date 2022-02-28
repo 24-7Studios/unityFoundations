@@ -54,6 +54,9 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     protected Animator ViewAnim;
 
     [SerializeField]
+    protected string drawAnim;
+
+    [SerializeField]
     protected RuntimeAnimatorController defaultAnims;
 
     [SerializeField]
@@ -479,8 +482,8 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
                     viewmodel.transform.localScale = new Vector3(Mathf.Abs(viewmodel.transform.localScale.x), viewmodel.transform.localScale.y, viewmodel.transform.localScale.z);
                 }
             }
-
             viewmodel.SetActive(true);
+            if (drawAnim != null) ViewAnim.Play(drawAnim);
         }
     }
 
