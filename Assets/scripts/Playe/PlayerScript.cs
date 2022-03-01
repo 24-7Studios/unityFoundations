@@ -308,18 +308,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
         equipedSlot = meleeSlot;
 
 
-
-
-
-        if (isLocalPlayer)
-        {
-            gameObject.layer = 6;
-        }
-        else
-        {
-            gameObject.layer = 7;
-        }
-
         if (isLocalPlayer)
         {
 
@@ -331,9 +319,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
             Cursor.lockState = CursorLockMode.Locked;
 
         }
-
-
-
 
         if (usePhysicsGravity)
         {
@@ -529,38 +514,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
                 changeSlot();
             }
         }
-
-        /*
-        if(equipedSlot.getWeapon() != null)
-        {
-            equipedSlot.getWeapon().getViewmodelOb().SetActive(true);
-            equipedSlot.getWeapon().getWorldModelOb().SetActive(true);
-        }
-        if(equipedSlot.getOtherHand() != null)
-        {
-            equipedSlot.getOtherHand().getViewmodelOb().SetActive(true);
-            equipedSlot.getOtherHand().getWorldModelOb().SetActive(true);
-        }
-
-        foreach (Slot s in WeaponSlots)
-        {
-            if(s != equipedSlot)
-            {
-                if(s.getWeapon() != null)
-                {
-                    s.getWeapon().getViewmodelOb().SetActive(false);
-                    s.getWeapon().getWorldModelOb().SetActive(false);
-                }
-                if (s.getOtherHand() != null)
-                {
-                    s.getOtherHand().getViewmodelOb().SetActive(false);
-                    s.getOtherHand().getWorldModelOb().SetActive(false);
-                }
-            }
-        }
-        */
-
-
     }
 
 
@@ -569,9 +522,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         if (isLocalPlayer)
         {
-
-
-
             if (jump)
             {
 
@@ -817,12 +767,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
         LivePlayerModel.setPlayer(this);
         LivePlayerModel.transform.SetParent(playerPhysBody.transform, false);
 
-        //if (LivePlayerModel.hitBoxes.Capacity > 0)
-        
-            //gameObject.layer = 2;
-        
-        //else
-        
 
         camTransformer.position = LivePlayerModel.CameraOffset.position;
         defaultCameraPos = camTransformer.localPosition;

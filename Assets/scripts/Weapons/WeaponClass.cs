@@ -601,6 +601,8 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
                 if(hb.getObject() != null)
                 {
                     cmdHitDamageable(hb.getObject(), baseDamage * hb.getMultiplier(), multiplier);
+                    netId = hb.getObject().GetComponent<NetworkIdentity>();
+                    rb = hb.getObject().GetComponent<Rigidbody>();
                 }
             }
             else if (iD != null)
@@ -610,10 +612,13 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
             if (rb != null)
             {
-                rb.AddForceAtPosition(direction, hit.point, ForceMode.Impulse);
                 if(netId != null)
                 {
-                    pushObject(hit.collider.gameObject, direction, hit.point);
+                    cmdPushObject(netId.gameObject, direction, hit.point);
+                }
+                else
+                {
+                    rb.AddForceAtPosition(direction, hit.point, ForceMode.Impulse);
                 }
             }
 
@@ -653,11 +658,18 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     }
 
     [Command]
-    protected virtual void pushObject(GameObject thing, Vector3 Direction, Vector3 Position)
+    protected virtual void cmdPushObject(GameObject thing, Vector3 Direction, Vector3 Position)
+    {
+        Rigidbody rb = thing.GetComponent<Rigidbody>();
+
+        rpcPushObject(thing, Direction, Position);
+    }
+
+    [ClientRpc]
+    protected virtual void rpcPushObject(GameObject thing, Vector3 Direction, Vector3 Position)
     {
         Rigidbody rb = thing.GetComponent<Rigidbody>();
 
         rb.AddForceAtPosition(Direction, Position, ForceMode.Impulse);
     }
-
 }
