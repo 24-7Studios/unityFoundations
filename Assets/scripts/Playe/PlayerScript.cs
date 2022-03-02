@@ -99,15 +99,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [SerializeField]
     private float bobSmoothing = 4;
 
-    [SerializeField]
-    private bool cameraTilt;
-
-    [SerializeField]
-    private float tiltAmount = 2;
-
-    [SerializeField]
-    private float tiltSmoothing = 1;
-
     private Vector3 defaultCameraPos;
     private Vector3 defaultCameraRot;
 
@@ -215,18 +206,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private Transform backpack;
     [SerializeField]
     private Transform viewmodelHolder;
-    [SerializeField]
-    private bool viewmodelSway = true;
-    [SerializeField]
-    private float viewmodelSwayFactor = 0;
-    [SerializeField]
-    private float viewmodelSwaySmoothing = 0;
-    [SerializeField]
-    private bool viewmodelShift = true;
-    [SerializeField]
-    private float viewmodelShiftFactor = 0;
-    [SerializeField]
-    private float viewmodelShiftSmoothing = 0;
 
     [SerializeField]
     private int numOfSlots = 2;
@@ -398,22 +377,22 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
             //Camera Tilt
 
-            Quaternion targetTilt = Quaternion.AngleAxis(-getBasicInputMovement().x * tiltAmount, Vector3.forward);
+            Quaternion targetTilt = Quaternion.AngleAxis(-getBasicInputMovement().x * settings.tiltAmount, Vector3.forward);
 
-            camEffector.localRotation = Quaternion.Slerp(camEffector.localRotation, targetTilt, Time.deltaTime * tiltSmoothing);
+            camEffector.localRotation = Quaternion.Slerp(camEffector.localRotation, targetTilt, Time.deltaTime * settings.tiltSmoothing);
 
             //viewmodel sway and roation
 
-            Quaternion swayX = Quaternion.AngleAxis(-controls.Player.looking.ReadValue<Vector2>().y * settings.MouseSens * viewmodelSwayFactor, Vector3.right);
-            Quaternion swayY = Quaternion.AngleAxis(controls.Player.looking.ReadValue<Vector2>().x * settings.MouseSens * viewmodelSwayFactor, Vector3.up);
+            Quaternion swayX = Quaternion.AngleAxis(-controls.Player.looking.ReadValue<Vector2>().y * settings.MouseSens * settings.viewmodelSwayFactor, Vector3.right);
+            Quaternion swayY = Quaternion.AngleAxis(controls.Player.looking.ReadValue<Vector2>().x * settings.MouseSens * settings.viewmodelSwayFactor, Vector3.up);
 
             Quaternion targetSway = swayX * swayY;
 
-            viewmodelHolder.localRotation = Quaternion.Slerp(viewmodelHolder.localRotation, targetSway, viewmodelSwaySmoothing * Time.deltaTime);
+            viewmodelHolder.localRotation = Quaternion.Slerp(viewmodelHolder.localRotation, targetSway, settings.viewmodelSwaySmoothing * Time.deltaTime);
 
-            Vector3 targetShift = BasicInputMovement * viewmodelShiftFactor;
+            Vector3 targetShift = BasicInputMovement * settings.viewmodelShiftFactor;
 
-            viewmodelHolder.localPosition = Vector3.Lerp(viewmodelHolder.localPosition, targetShift, viewmodelShiftSmoothing * Time.deltaTime);    
+            viewmodelHolder.localPosition = Vector3.Lerp(viewmodelHolder.localPosition, targetShift, settings.viewmodelShiftSmoothing * Time.deltaTime);    
 
         }
 

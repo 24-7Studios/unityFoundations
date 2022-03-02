@@ -160,7 +160,6 @@ GameObject:
   - component: {fileID: 1050093693558037595}
   - component: {fileID: 1050093693558037600}
   - component: {fileID: 1050093693558037607}
-  - component: {fileID: 5242603199734816841}
   - component: {fileID: 5850964999359303794}
   - component: {fileID: 9197878631791620066}
   - component: {fileID: 5183846604344044444}
@@ -221,21 +220,6 @@ CapsuleCollider:
   m_Height: 2.1
   m_Direction: 1
   m_Center: {x: 0, y: 1.05, z: 0}
---- !u!114 &5242603199734816841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1050093693558037594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acdfc876a8d586d46b023dc0822eab56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MouseSens: 25
-  controllerSens: 500
-  interactTime: 1
 --- !u!114 &5850964999359303794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,15 +312,12 @@ MonoBehaviour:
   SelectedPlayerModel: {fileID: 6363091594461922305, guid: be746d4c3a2e9ff4eaf394a441edb9e1,
     type: 3}
   LivePlayerModel: {fileID: 0}
-  settings: {fileID: 5242603199734816841}
+  settings: {fileID: 11400000, guid: a346613a265afb34cac0128b8f767ccc, type: 2}
   camEffector: {fileID: 568473319026945711}
   bob: 1
   bobAmp: 2
   bobFreq: 10
   bobSmoothing: 1
-  cameraTilt: 0
-  tiltAmount: 2
-  tiltSmoothing: 8
   moveSpeed: 2
   jumpForce: 30
   playerGravity: -3
@@ -361,12 +342,6 @@ MonoBehaviour:
   DieSound: {fileID: 8300000, guid: 33f3b5df65542ca468dcf5e947536414, type: 3}
   backpack: {fileID: 8525235372953113948}
   viewmodelHolder: {fileID: 1050093694719503198}
-  viewmodelSway: 1
-  viewmodelSwayFactor: 0.025
-  viewmodelSwaySmoothing: 15
-  viewmodelShift: 1
-  viewmodelShiftFactor: 0.075
-  viewmodelShiftSmoothing: 8
   numOfSlots: 2
   meleeSlot:
     myWeapon: {fileID: 0}
