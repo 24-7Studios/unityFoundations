@@ -15,6 +15,10 @@ public class PlayerScript : NetworkBehaviour, IDamage
     /// components that make the player work. also likely to be referenced by other scripts especially in the guns
     /// </summary>
 
+
+    [SerializeField]
+    private PlayerStuffScriptableObject parameters;
+
     //[SerializeField]
     private Rigidbody playerPhysBody;
 
@@ -45,9 +49,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     [SerializeField]
     private PlayerModelClass LivePlayerModel;
-
-    [SerializeField]
-    private localPlayerOptions settings;
 
 
 
@@ -87,35 +88,16 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private float appliedRecoil;
 
-    [SerializeField]
-    private bool bob = true;
-
-    [SerializeField]
-    private float bobAmp = 0.015f;
-
-    [SerializeField]
-    private float bobFreq = 10.0f;
-
-    [SerializeField]
-    private float bobSmoothing = 4;
-
     private Vector3 defaultCameraPos;
     private Vector3 defaultCameraRot;
+
+
+
 
     //movement
     /// <summary>
     /// stuff with movement. mostly just modifiers and some stuff with network syncing
     /// </summary>
-
-
-    [SerializeField]
-    private float moveSpeed = 1.35f;
-
-    [SerializeField]
-    private float jumpForce = 20;
-
-    [SerializeField]
-    private float playerGravity = -0.75f;
 
     [SerializeField]
     private Transform groundCheck;
@@ -125,27 +107,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private Vector3 footPostition;
 
-    [SerializeField]
-    private LayerMask Jumpable;
-
-    [SerializeField]
-    private float groundDistance = 0.25f;
-
-    [SerializeField]
-    private float groundingForce = 0.05f;
-
-    [SerializeField]
-    private float maxAngle = 20;
-
-    [SerializeField]
-    private float PositionCompensationDamping = 0.25f;
-
-    [SerializeField]
-    private float PostionSnapThreshold = 10;
-
-    [SerializeField]
-    private float SyncInterval = 100f;
-
     float SyncTimer = 0;
 
     [SerializeField]
@@ -153,9 +114,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     [SerializeField]
     private bool usePhysicsGravity = false;
-
-
-
 
     bool grounded;
     bool canJump;
@@ -167,15 +125,12 @@ public class PlayerScript : NetworkBehaviour, IDamage
     Vector3 InputMovement;
     Vector3 groundNormal;
 
+
+
     //health
-    [SerializeField]
-    private float DefaultHealth = 100;
 
     [SyncVar]
     private float health;
-
-    [SerializeField]
-    private float DefaultShields = 100;
 
     [SyncVar]
     private float shields;
@@ -271,7 +226,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         }
 
 
-        health = DefaultHealth;
+        health = parameters.playerHealth.defaultHealth;
 
 
         for (int i = 0; i <= numOfSlots; i++)
@@ -301,7 +256,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         if (usePhysicsGravity)
         {
-            playerGravity = Physics.gravity.y;
+            // = Physics.gravity.y;
         }
 
         footPostition = foot.localPosition;
@@ -332,13 +287,13 @@ public class PlayerScript : NetworkBehaviour, IDamage
             {
                 if (input.currentControlScheme.Equals("gamepad"))
                 {
-                    MouseX = controls.Player.looking.ReadValue<Vector2>().x * settings.controllerSens * Time.deltaTime;
-                    MouseY = controls.Player.looking.ReadValue<Vector2>().y * settings.controllerSens * Time.deltaTime;
+                    MouseX = controls.Player.looking.ReadValue<Vector2>().x * parameters.playerOptions.controllerSens * Time.deltaTime;
+                    MouseY = controls.Player.looking.ReadValue<Vector2>().y * parameters.playerOptions.controllerSens * Time.deltaTime;
                 }
                 else
                 {
-                    MouseX = controls.Player.looking.ReadValue<Vector2>().x * settings.MouseSens * Time.deltaTime;
-                    MouseY = controls.Player.looking.ReadValue<Vector2>().y * settings.MouseSens * Time.deltaTime;
+                    MouseX = controls.Player.looking.ReadValue<Vector2>().x * parameters.playerOptions.MouseSens * Time.deltaTime;
+                    MouseY = controls.Player.looking.ReadValue<Vector2>().y * parameters.playerOptions.MouseSens * Time.deltaTime;
                 }
             }
 
@@ -377,22 +332,22 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
             //Camera Tilt
 
-            Quaternion targetTilt = Quaternion.AngleAxis(-getBasicInputMovement().x * settings.tiltAmount, Vector3.forward);
+            Quaternion targetTilt = Quaternion.AngleAxis(-getBasicInputMovement().x * parameters.playerOptions.tiltAmount, Vector3.forward);
 
-            camEffector.localRotation = Quaternion.Slerp(camEffector.localRotation, targetTilt, Time.deltaTime * settings.tiltSmoothing);
+            camEffector.localRotation = Quaternion.Slerp(camEffector.localRotation, targetTilt, Time.deltaTime * parameters.playerOptions.tiltSmoothing);
 
             //viewmodel sway and roation
 
-            Quaternion swayX = Quaternion.AngleAxis(-controls.Player.looking.ReadValue<Vector2>().y * settings.MouseSens * settings.viewmodelSwayFactor, Vector3.right);
-            Quaternion swayY = Quaternion.AngleAxis(controls.Player.looking.ReadValue<Vector2>().x * settings.MouseSens * settings.viewmodelSwayFactor, Vector3.up);
+            Quaternion swayX = Quaternion.AngleAxis(-controls.Player.looking.ReadValue<Vector2>().y * parameters.playerOptions.MouseSens * parameters.playerOptions.viewmodelSwayFactor, Vector3.right);
+            Quaternion swayY = Quaternion.AngleAxis(controls.Player.looking.ReadValue<Vector2>().x * parameters.playerOptions.MouseSens * parameters.playerOptions.viewmodelSwayFactor, Vector3.up);
 
             Quaternion targetSway = swayX * swayY;
 
-            viewmodelHolder.localRotation = Quaternion.Slerp(viewmodelHolder.localRotation, targetSway, settings.viewmodelSwaySmoothing * Time.deltaTime);
+            viewmodelHolder.localRotation = Quaternion.Slerp(viewmodelHolder.localRotation, targetSway, parameters.playerOptions.viewmodelSwaySmoothing * Time.deltaTime);
 
-            Vector3 targetShift = BasicInputMovement * settings.viewmodelShiftFactor;
+            Vector3 targetShift = BasicInputMovement * parameters.playerOptions.viewmodelShiftFactor;
 
-            viewmodelHolder.localPosition = Vector3.Lerp(viewmodelHolder.localPosition, targetShift, settings.viewmodelShiftSmoothing * Time.deltaTime);    
+            viewmodelHolder.localPosition = Vector3.Lerp(viewmodelHolder.localPosition, targetShift, parameters.playerOptions.viewmodelShiftSmoothing * Time.deltaTime);    
 
         }
 
@@ -411,7 +366,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         RaycastHit FloorSnap;
 
-        if (Physics.Raycast(groundCheck.position, -groundCheck.up, out FloorSnap) && ((FloorSnap.normal.x! < maxAngle) || (FloorSnap.normal.y! < maxAngle)) && grounded)
+        if (Physics.Raycast(groundCheck.position, -groundCheck.up, out FloorSnap) && ((FloorSnap.normal.x! < parameters.playerMovement.maxAngle) || (FloorSnap.normal.y! < parameters.playerMovement.maxAngle)) && grounded)
         {
 
             Quaternion toRotation = Quaternion.FromToRotation(transform.up, FloorSnap.normal) * transform.rotation;
@@ -460,11 +415,11 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
             if (fly)
             {
-                InputMovement = (((camTransformer.transform.right * x + camTransformer.transform.forward * z) * moveSpeed) + camTransformer.transform.up * y);
+                InputMovement = (((camTransformer.transform.right * x + camTransformer.transform.forward * z) * parameters.playerMovement.moveForce) + camTransformer.transform.up * y);
             }
             else
             {
-                InputMovement = ((((groundCheck.transform.right) * x + (groundCheck.transform.forward) * z) * moveSpeed) + groundCheck.transform.up * y);
+                InputMovement = ((((groundCheck.transform.right) * x + (groundCheck.transform.forward) * z) * parameters.playerMovement.moveForce) + groundCheck.transform.up * y);
             }
 
             if (isServer)
@@ -504,7 +459,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
             if (jump)
             {
 
-                playerPhysBody.velocity += transform.up * jumpForce;
+                playerPhysBody.velocity += transform.up * parameters.playerMovement.jumpForce;
                 jump = false;
 
                 if (!isServer)
@@ -517,11 +472,11 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
             if (!grounded)
             {
-                y -= -playerGravity * Time.fixedDeltaTime;
+                y -= -parameters.playerMovement.playerGravity * Time.fixedDeltaTime;
             }
             if (grounded)
             {
-                y = -groundingForce;
+                y = -parameters.playerMovement.groundingForce;
             }
 
 
@@ -548,7 +503,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public bool isGrounded()
     {
-        return Physics.CheckSphere(groundCheck.position, groundDistance, Jumpable);
+        return Physics.CheckSphere(groundCheck.position, parameters.playerMovement.groundDistance, parameters.playerMovement.Jumpable);
     }
 
     public bool CanJump()
@@ -569,7 +524,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     void CmdJump()
     {
 
-        playerPhysBody.velocity += transform.up * jumpForce;
+        playerPhysBody.velocity += transform.up * parameters.playerMovement.jumpForce;
 
     }
 
@@ -578,23 +533,23 @@ public class PlayerScript : NetworkBehaviour, IDamage
     {
 
 
-        if (!isLocalPlayer && Vector3.Distance(playerPhysBody.position, clientPos) > PostionSnapThreshold)
+        if (!isLocalPlayer && Vector3.Distance(playerPhysBody.position, clientPos) > parameters.playerMovement.PostionSnapThreshold)
         {
 
             RpcCorrectPlayerPos(playerPhysBody.position);
 
         }
-        else if (!isLocalPlayer && Vector3.Distance(playerPhysBody.position, clientPos) < PostionSnapThreshold)
+        else if (!isLocalPlayer && Vector3.Distance(playerPhysBody.position, clientPos) < parameters.playerMovement.PostionSnapThreshold)
         {
 
 
             SyncTimer -= Time.deltaTime;
 
-            if (SyncTimer < SyncInterval)
+            if (SyncTimer < parameters.playerMovement.SyncInterval)
             {
 
-                SyncTimer = SyncInterval;
-                playerPhysBody.position = Vector3.Lerp(playerPhysBody.position, clientPos, Time.fixedDeltaTime / PositionCompensationDamping);
+                SyncTimer = parameters.playerMovement.SyncInterval;
+                playerPhysBody.position = Vector3.Lerp(playerPhysBody.position, clientPos, Time.fixedDeltaTime / parameters.playerMovement.PositionCompensationDamping);
 
 
             }
@@ -612,10 +567,10 @@ public class PlayerScript : NetworkBehaviour, IDamage
     void RpcSyncPlayerPosistion(Vector3 IM, Vector3 serverPos)
     {
 
-        if (!isLocalPlayer && Vector3.Distance(playerPhysBody.position, serverPos) < PostionSnapThreshold)
+        if (!isLocalPlayer && Vector3.Distance(playerPhysBody.position, serverPos) < parameters.playerMovement.PostionSnapThreshold)
         {
             playerPhysBody.AddForce(IM, ForceMode.VelocityChange);
-            playerPhysBody.position = Vector3.Lerp(playerPhysBody.position, serverPos, Time.fixedDeltaTime / PositionCompensationDamping);
+            playerPhysBody.position = Vector3.Lerp(playerPhysBody.position, serverPos, Time.fixedDeltaTime / parameters.playerMovement.PositionCompensationDamping);
         }
         else if (!isLocalPlayer)
         {
@@ -1352,7 +1307,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         }
         if(p == this)
         {
-            health = DefaultHealth;
+            health = parameters.playerHealth.defaultHealth;
             aud.PlayOneShot(DieSound);
 
             isDead = false;

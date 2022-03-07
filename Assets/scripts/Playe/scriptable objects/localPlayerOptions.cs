@@ -20,4 +20,8 @@ public class localPlayerOptions : ScriptableObject
     public bool viewmodelShift = true;
     public float viewmodelShiftFactor = 0.075f;
     public float viewmodelShiftSmoothing = 8;
+    public bool bob = true;
+    public float bobAmp = 0.015f;
+    public float bobFreq = 10.0f;
+    public float bobSmoothing = 4;
 }

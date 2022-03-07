@@ -305,6 +305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 1
   syncInterval: 0.025
+  parameters: {fileID: 11400000, guid: 2e51914eb74c3fd4e983595abe3ec5a4, type: 2}
   camTransformer: {fileID: 1050093693452069657}
   CameraSetup: {fileID: 2390121815867376660, guid: 73465b97eb43c3f4498aba8e3eac7909,
     type: 3}
@@ -312,26 +313,9 @@ MonoBehaviour:
   SelectedPlayerModel: {fileID: 6363091594461922305, guid: be746d4c3a2e9ff4eaf394a441edb9e1,
     type: 3}
   LivePlayerModel: {fileID: 0}
-  settings: {fileID: 11400000, guid: a346613a265afb34cac0128b8f767ccc, type: 2}
   camEffector: {fileID: 568473319026945711}
-  bob: 1
-  bobAmp: 2
-  bobFreq: 10
-  bobSmoothing: 1
-  moveSpeed: 2
-  jumpForce: 30
-  playerGravity: -3
   groundCheck: {fileID: 1050093693641089723}
   foot: {fileID: 1050093693734197462}
-  Jumpable:
-    serializedVersion: 2
-    m_Bits: 1033
-  groundDistance: 0.2
-  groundingForce: 0.05
-  maxAngle: 20
-  PositionCompensationDamping: 0.25
-  PostionSnapThreshold: 5
-  SyncInterval: 0
   fly: 0
   usePhysicsGravity: 0
   DefaultHealth: 100
