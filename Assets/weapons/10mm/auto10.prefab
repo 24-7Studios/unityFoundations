@@ -151,11 +151,12 @@ MonoBehaviour:
   leftHoldPos: {fileID: 0}
   viewmodel: {fileID: 2786483985261900192}
   ViewAnim: {fileID: 1355694226009062147}
+  drawAnim: 
   defaultAnims: {fileID: 0}
   rightHandAnims: {fileID: 0}
   leftHandAnims: {fileID: 0}
   aud: {fileID: 6453581027293962206}
-  debugMode: 0
+  debugMode: 1
   debugMarker: {fileID: 4837419253238934036, guid: d294ffef25fbe1a4ca7ed8440f33ecc3,
     type: 3}
   hitEffect: {fileID: 5718995469900101050, guid: 8e06fde96679c1248a8bca766fc413a1,
@@ -177,7 +178,7 @@ MonoBehaviour:
   fleshMultiplier: 1
   knockbackForce: 20
   spread: 0.02
-  fullAuto: 0
+  fullAuto: 1
   fireDelay: 0.075
   ViewmodelFlash: {fileID: 4314926972769928921, guid: 4e5e209968c3140498b9c719202d5482,
     type: 3}
@@ -194,6 +195,7 @@ MonoBehaviour:
   reloadDelay: 1
   emptyReloadAnim: reload empty
   emptyReload: {fileID: 8300000, guid: bfd69968d6f95f74c85315ac25ca8466, type: 3}
+  aimRadius: 2
 --- !u!82 &6453581027293962206
 AudioSource:
   m_ObjectHideFlags: 0

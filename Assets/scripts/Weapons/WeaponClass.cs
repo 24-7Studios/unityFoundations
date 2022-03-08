@@ -641,6 +641,64 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         }
     }
 
+
+    protected virtual void raycastMShoot(float baseDamage, float multiplier, Vector3 position, float radius, Vector3 direction, LayerMask Shootable)
+    {
+        RaycastHit hit;
+
+        if (Physics.SphereCast(position, radius, direction, out hit, Mathf.Infinity, Shootable))
+        {
+
+            IDamage iD = hit.collider.GetComponent<IDamage>();
+            NetworkIdentity netId = hit.collider.GetComponent<NetworkIdentity>();
+            hitbox hb = hit.collider.GetComponent<hitbox>();
+            Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+
+            if (hb != null && hb.enabled)
+            {
+                if (hb.getObject() != null)
+                {
+                    cmdHitDamageable(hb.getObject(), baseDamage * hb.getMultiplier(), multiplier);
+                    netId = hb.getObject().GetComponent<NetworkIdentity>();
+                    rb = hb.getObject().GetComponent<Rigidbody>();
+                }
+            }
+            else if (iD != null)
+            {
+                cmdHitDamageable(hit.collider.gameObject, baseDamage, multiplier);
+            }
+
+            if (rb != null)
+            {
+                if (netId != null)
+                {
+                    cmdPushObject(netId.gameObject, direction, hit.point);
+                }
+                else
+                {
+                    rb.AddForceAtPosition(direction, hit.point, ForceMode.Impulse);
+                }
+            }
+
+            if (hitEffect != null)
+            {
+                Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            }
+
+            if (iD == null && rb == null)
+            {
+                if (debugMode)
+                {
+                    if (debugMarker != null)
+                    {
+                        Instantiate(debugMarker, hit.point, Quaternion.Euler(hit.normal));
+                    }
+                }
+            }
+
+        }
+    }
+
     protected virtual void smack(float damage, float multiplier, float radius, LayerMask shootable)
     {
 

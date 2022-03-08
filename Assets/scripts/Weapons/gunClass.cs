@@ -37,7 +37,7 @@ public class gunClass : raycastWeapon
     protected bool reloading;
     protected bool bufferedReload;
 
-    private bool flash;
+    protected bool flash;
 
 
     protected override void Start()

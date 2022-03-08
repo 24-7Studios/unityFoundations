@@ -10,6 +10,9 @@ public class TenScript : gunClass
     [SerializeField]
     private AudioClip emptyReload;
 
+    [SerializeField]
+    protected float aimRadius = 2;
+
     protected override void Start()
     {
         base.Start();
@@ -39,6 +42,39 @@ public class TenScript : gunClass
         else
         {
             cmdReload();
+        }
+    }
+
+    protected override void Fire()
+    {
+        Vector3 shootDirection = (player.getCamTransformer().forward + Random.insideUnitSphere * spread).normalized;
+
+        raycastMShoot(damage, fleshMultiplier, player.getCamTransformer().position, aimRadius, shootDirection, Shootable);
+
+
+        ViewAnim.Rebind();
+        ViewAnim.Play(fireAnim);
+        playsound(sounds.IndexOf(fireSound));
+        player.viewPunch(viewpunch, viewpunchAttack, viewpunchRecovery);
+        player.recoil(recoilAmount, recoilAttack, recoilSmoothing);
+        loadedAmmo--;
+        fireTimer = fireDelay;
+
+        flash = true;
+
+        if (WorldmodelFlash != null)
+        {
+            GameObject.Instantiate(WorldmodelFlash, WorldmodelFlashPos.position, WorldmodelFlashPos.rotation).layer = 6;
+        }
+
+        if (!isServer)
+        {
+            cmdFire();
+            cmdSyncLoadedAmmo(loadedAmmo);
+        }
+        else
+        {
+            rpcFire();
         }
     }
 }
