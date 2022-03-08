@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerOptions: {fileID: 11400000, guid: a346613a265afb34cac0128b8f767ccc, type: 2}
   playerMovement: {fileID: 11400000, guid: 4c284108eb321364593bba0a11fdfdc2, type: 2}
-  playerHealth: {fileID: 0}
+  playerHealth: {fileID: 11400000, guid: 5805e15979301f4468eb2fc119df42b1, type: 2}

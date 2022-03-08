@@ -99,6 +99,13 @@ public class PlayerScript : NetworkBehaviour, IDamage
     /// stuff with movement. mostly just modifiers and some stuff with network syncing
     /// </summary>
 
+
+    [SerializeField]
+    private float currentMoveForce;
+
+    [SerializeField]
+    private float currenGravity;
+
     [SerializeField]
     private Transform groundCheck;
 
@@ -275,6 +282,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         //mouse looking
 
+        playerPhysBody.drag = parameters.playerMovement.playerDrag;
+        playerPhysBody.angularDrag = parameters.playerMovement.playerAngularDrag;
+        playerPhysBody.mass = parameters.playerMovement.playerMass;
 
         if (isLocalPlayer)
         {

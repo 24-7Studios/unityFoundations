@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf33b410e2aa5a9469c200f38c695db2, type: 3}
   m_Name: playerMovementOptions
   m_EditorClassIdentifier: 
-  playerMass: 0.5
-  playerDrag: 4
-  playerAngularDrag: 4
-  moveForce: 1.35
-  jumpForce: 20
-  playerGravity: -1.2
+  playerMass: 5
+  playerDrag: 4.5
+  playerAngularDrag: 4.5
+  moveForce: 2
+  jumpForce: 25
+  playerGravity: -4
   Jumpable:
     serializedVersion: 2
     m_Bits: 137
-  groundDistance: 0.25
-  groundingForce: 0.05
-  maxAngle: 20
+  groundDistance: 0.2
+  groundingForce: 0.1
+  maxAngle: 40
   PositionCompensationDamping: 0.25
   PostionSnapThreshold: 10
   SyncInterval: 100

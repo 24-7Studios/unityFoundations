@@ -198,7 +198,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1050093693558037594}
   serializedVersion: 2
-  m_Mass: 0.5
+  m_Mass: 5
   m_Drag: 4
   m_AngularDrag: 4
   m_UseGravity: 0
@@ -318,8 +318,6 @@ MonoBehaviour:
   foot: {fileID: 1050093693734197462}
   fly: 0
   usePhysicsGravity: 0
-  DefaultHealth: 100
-  DefaultShields: 100
   instantDeath: 0
   invinsible: 0
   localDamageSound: {fileID: 8300000, guid: b83a514e25eaedb428ac381925fb2cd5, type: 3}
