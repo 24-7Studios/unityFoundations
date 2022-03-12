@@ -49,7 +49,7 @@ public class TenScript : gunClass
     {
         Vector3 shootDirection = (player.getCamTransformer().forward + Random.insideUnitSphere * spread).normalized;
 
-        raycastMShoot(damage, fleshMultiplier, player.getCamTransformer().position, aimRadius, shootDirection, Shootable);
+        raycastShoot(damage, fleshMultiplier, player.getCamTransformer().position, shootDirection, Shootable);
 
 
         ViewAnim.Rebind();
