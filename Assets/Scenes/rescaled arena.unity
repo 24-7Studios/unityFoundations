@@ -1802,5 +1802,11 @@ PrefabInstance:
       propertyPath: weight
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2461951329096283323, guid: 7cd9fa067c704ce4ab55282c0f26cde4,
+        type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 5890d8b8edfa98d4093145ff2d6e337c,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cd9fa067c704ce4ab55282c0f26cde4, type: 3}
