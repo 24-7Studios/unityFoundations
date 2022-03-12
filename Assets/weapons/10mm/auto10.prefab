@@ -178,7 +178,7 @@ MonoBehaviour:
   fleshMultiplier: 1
   knockbackForce: 20
   spread: 0.02
-  fullAuto: 1
+  fullAuto: 0
   fireDelay: 0.075
   ViewmodelFlash: {fileID: 4314926972769928921, guid: 4e5e209968c3140498b9c719202d5482,
     type: 3}
