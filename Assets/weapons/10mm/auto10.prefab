@@ -186,7 +186,7 @@ MonoBehaviour:
   WorldmodelFlash: {fileID: 0}
   WorldmodelFlashPos: {fileID: 0}
   fireAnim: fire
-  fireSound: {fileID: 8300000, guid: 5da8836f202c28044a0cb905451cdb68, type: 3}
+  fireSound: {fileID: 8300000, guid: 2c04d84c08d081942991934612e49c9c, type: 3}
   reloadAnim: reload
   reloadSound: {fileID: 8300000, guid: 70b0bb18338f33d428c393c212ad4164, type: 3}
   idleAnim: idle
