@@ -750,6 +750,16 @@ public class PlayerScript : NetworkBehaviour, IDamage
         return BasicInputMovement;
     }
 
+    public Vector3 getVelocity()
+    {
+        return playerPhysBody.velocity;
+    }
+
+    public Rigidbody getPhysBody()
+    {
+        return playerPhysBody;
+    }
+
     public Transform getBackpack()
     {
         return backpack;
@@ -1230,13 +1240,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
         Ipickup i = thing.GetComponent<Ipickup>();
         interactZone.remove(i);
         i.drop();
-        Rigidbody rb = thing.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.velocity = playerPhysBody.velocity + transform.forward * 3;
-        }
-
-           
     }
 
     public void drop(NetworkIdentity net)
@@ -1244,12 +1247,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
         Ipickup i = net.GetComponent<Ipickup>();
         interactZone.remove(i);
         i.drop();
-
-        Rigidbody rb = net.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.velocity = playerPhysBody.velocity + transform.forward * 1;
-        }
     }
 
     public void viewPunch(float p, float a, float r)

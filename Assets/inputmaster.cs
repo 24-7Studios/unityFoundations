@@ -78,7 +78,7 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                     ""id"": ""140ded67-27fb-439c-bf63-5a9df26ed819"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": ""Hold(duration=0.1,pressPoint=0.2)"",
                     ""initialStateCheck"": false
                 },
                 {

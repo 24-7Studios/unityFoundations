@@ -349,12 +349,21 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
         isitem = true;
 
-        player = null;
+        
 
         if (isServer)
             netIdentity.RemoveClientAuthority();
 
         if (otherHand != null) otherHand.setDualStatus();
+
+
+        Rigidbody rb = item.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.velocity = player.getVelocity() + player.transform.forward * 1;
+        }
+
+        player = null;
     }
 
 
