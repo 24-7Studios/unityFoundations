@@ -163,6 +163,13 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [SerializeField]
     private AudioClip DieSound;
 
+    [SerializeField]
+    private float respawnTime = 5;
+
+    private float respawnTimer = 0;
+
+    private bool awaitingSpawn = true;
+
     //backpack
     [SerializeField]
     private Transform backpack;
@@ -255,7 +262,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
             controls.Player.Enable();
             input.enabled = true;
 
-            LocalAud = Instantiate(CameraSetup, camEffector).GetComponent<AudioSource>();
+            //LocalAud = Instantiate(CameraSetup, camEffector).GetComponent<AudioSource>();
 
             Cursor.lockState = CursorLockMode.Locked;
 
@@ -278,6 +285,19 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private void Update()
     {
+
+        if(isServer)
+        {
+            if (awaitingSpawn)
+            {
+                respawnTimer -= Time.deltaTime;
+                if (respawnTimer <= 0)
+                {
+                    List<NetworkStartPosition> positions = FindObjectsOfType<NetworkStartPosition>().ToList<NetworkStartPosition>();
+                    spawn(positions[(int)(Random.value * positions.Count)].transform.position);
+                }
+            }
+        }
 
 
         //mouse looking
@@ -722,11 +742,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
         if (LivePlayerModel != null)
         {
             LivePlayerModel = null;
-        }
-
-        if(isServer)
-        {
-            applyPlayermodel();
         }
     }
 
@@ -1318,26 +1333,56 @@ public class PlayerScript : NetworkBehaviour, IDamage
                     tryDrop(i);
                 }
             }
-            List<NetworkStartPosition> positions = FindObjectsOfType<NetworkStartPosition>().ToList<NetworkStartPosition>();
-            spawn(positions[(int)(Random.value * positions.Count)].transform.position);
         }
         if(p == this)
         {
-            health = parameters.playerHealth.defaultHealth;
+            isDead = true;
             aud.PlayOneShot(DieSound);
+            standbyForSpawn();
 
-            isDead = false;
+        }
+    }
+
+
+    public void standbyForSpawn()
+    {
+        awaitingSpawn = true;
+        respawnTimer = respawnTime;
+        playerPhysBody.isKinematic = true;
+        viewmodelHolder.gameObject.SetActive(false);
+        if(isLocalPlayer)
+        {
+            controls.Player.Disable();
+            controls.PlayerStandby.Enable();
+        }
+    }
+
+    public void enable()
+    {
+        playerPhysBody.isKinematic = false;
+        viewmodelHolder.gameObject.SetActive(true);
+        if(isLocalPlayer)
+        {
+            controls.Player.Enable();
+            controls.PlayerStandby.Disable();
         }
     }
 
     [ClientRpc]
     private void spawn(Vector3 spawnpos)
     {
+        awaitingSpawn = false;
+        isDead = false;
         if(isServer)
         {
             RpcCorrectPlayerPos(spawnpos);
         }
         transform.position = spawnpos;
+        if (isServer)
+        {
+            applyPlayermodel();
+        }
+        enable();
     }
 
     public void takeDamagefromHit(float d, float m)

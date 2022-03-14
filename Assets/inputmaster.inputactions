@@ -422,6 +422,45 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "PlayerStandby",
+            "id": "f04c75ea-3ed8-4ad6-a39c-2e6eedef36b4",
+            "actions": [
+                {
+                    "name": "looking",
+                    "type": "Value",
+                    "id": "5ce561f3-95fe-4352-b9eb-299e89214af1",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c5dbf8f4-77e9-4424-9e08-607400fe837e",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "mouse + keybaord",
+                    "action": "looking",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f0510197-1fab-4279-b6f5-1bf54382e796",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "gamepad",
+                    "action": "looking",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

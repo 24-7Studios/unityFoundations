@@ -444,6 +444,45 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""PlayerStandby"",
+            ""id"": ""f04c75ea-3ed8-4ad6-a39c-2e6eedef36b4"",
+            ""actions"": [
+                {
+                    ""name"": ""looking"",
+                    ""type"": ""Value"",
+                    ""id"": ""5ce561f3-95fe-4352-b9eb-299e89214af1"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""c5dbf8f4-77e9-4424-9e08-607400fe837e"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""mouse + keybaord"",
+                    ""action"": ""looking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f0510197-1fab-4279-b6f5-1bf54382e796"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""gamepad"",
+                    ""action"": ""looking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -491,6 +530,9 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
         m_Player_melee = m_Player.FindAction("melee", throwIfNotFound: true);
         m_Player_kill = m_Player.FindAction("kill", throwIfNotFound: true);
         m_Player_dual = m_Player.FindAction("dual", throwIfNotFound: true);
+        // PlayerStandby
+        m_PlayerStandby = asset.FindActionMap("PlayerStandby", throwIfNotFound: true);
+        m_PlayerStandby_looking = m_PlayerStandby.FindAction("looking", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -675,6 +717,39 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // PlayerStandby
+    private readonly InputActionMap m_PlayerStandby;
+    private IPlayerStandbyActions m_PlayerStandbyActionsCallbackInterface;
+    private readonly InputAction m_PlayerStandby_looking;
+    public struct PlayerStandbyActions
+    {
+        private @Inputmaster m_Wrapper;
+        public PlayerStandbyActions(@Inputmaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @looking => m_Wrapper.m_PlayerStandby_looking;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerStandby; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerStandbyActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerStandbyActions instance)
+        {
+            if (m_Wrapper.m_PlayerStandbyActionsCallbackInterface != null)
+            {
+                @looking.started -= m_Wrapper.m_PlayerStandbyActionsCallbackInterface.OnLooking;
+                @looking.performed -= m_Wrapper.m_PlayerStandbyActionsCallbackInterface.OnLooking;
+                @looking.canceled -= m_Wrapper.m_PlayerStandbyActionsCallbackInterface.OnLooking;
+            }
+            m_Wrapper.m_PlayerStandbyActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @looking.started += instance.OnLooking;
+                @looking.performed += instance.OnLooking;
+                @looking.canceled += instance.OnLooking;
+            }
+        }
+    }
+    public PlayerStandbyActions @PlayerStandby => new PlayerStandbyActions(this);
     private int m_mousekeybaordSchemeIndex = -1;
     public InputControlScheme mousekeybaordScheme
     {
@@ -708,5 +783,9 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
         void OnMelee(InputAction.CallbackContext context);
         void OnKill(InputAction.CallbackContext context);
         void OnDual(InputAction.CallbackContext context);
+    }
+    public interface IPlayerStandbyActions
+    {
+        void OnLooking(InputAction.CallbackContext context);
     }
 }
