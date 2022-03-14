@@ -148,6 +148,7 @@ public class biped : PlayerModelClass
         {
             corpseCollider.enabled = true;
             corpseRB.isKinematic = false;
+            corpseRB.velocity = player.getVelocity();
             corpseSyncer.enabled = true;
             corpsePhysSync.enabled = true;
             anim.SetLayerWeight(1, 0);

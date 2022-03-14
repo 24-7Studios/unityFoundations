@@ -314,6 +314,8 @@ MonoBehaviour:
     type: 3}
   LivePlayerModel: {fileID: 0}
   camEffector: {fileID: 568473319026945711}
+  currentMoveForce: 0
+  currenGravity: 0
   groundCheck: {fileID: 1050093693641089723}
   foot: {fileID: 1050093693734197462}
   fly: 0
