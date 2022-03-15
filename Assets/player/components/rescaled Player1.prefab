@@ -310,6 +310,7 @@ MonoBehaviour:
   CameraSetup: {fileID: 2390121815867376660, guid: 73465b97eb43c3f4498aba8e3eac7909,
     type: 3}
   virtualCam: {fileID: 4946973182659337587}
+  audioListener: {fileID: 4964113840752309778}
   interactZone: {fileID: 8531315878050940356}
   SelectedPlayerModel: {fileID: 6363091594461922305, guid: be746d4c3a2e9ff4eaf394a441edb9e1,
     type: 3}
@@ -802,7 +803,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8046422980813111744}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!1 &8785809065496447628
 GameObject:
   m_ObjectHideFlags: 0

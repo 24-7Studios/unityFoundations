@@ -38,6 +38,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [SerializeField]
     private CinemachineVirtualCamera virtualCam;
 
+    [SerializeField]
+    private AudioListener audioListener;
 
     [SerializeField]
     private interactZoneScript interactZone;
@@ -459,7 +461,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         ////////////////////////////////////////////////////////
         //backpack 
 
-        if (isLocalPlayer)
+        if (isLocalPlayer && !awaitingSpawn)
         {
             if (meleeSlot.getWeapon() == null && requestedMelee == false)
             {
@@ -1345,6 +1347,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         viewmodelHolder.gameObject.SetActive(false);
         if(isLocalPlayer)
         {
+            audioListener.enabled = false;
             controls.Player.Disable();
             controls.PlayerStandby.Enable();
         }
@@ -1356,6 +1359,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         viewmodelHolder.gameObject.SetActive(true);
         if(isLocalPlayer)
         {
+            audioListener.enabled = true;
             controls.Player.Enable();
             controls.PlayerStandby.Disable();
         }
