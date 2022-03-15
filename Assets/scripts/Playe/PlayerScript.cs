@@ -23,6 +23,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
     //[SerializeField]
     private Rigidbody playerPhysBody;
 
+    private Collider playerCollider;
+
     [SerializeField]
     private Transform camTransformer;
 
@@ -215,6 +217,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     {
         //gets components
         playerPhysBody = GetComponent<Rigidbody>();
+        playerCollider = GetComponent<Collider>();
         aud = GetComponent<AudioSource>();
 
         controls = new Inputmaster();
@@ -1344,6 +1347,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         awaitingSpawn = true;
         respawnTimer = respawnTime;
         playerPhysBody.isKinematic = true;
+        playerCollider.enabled = false;
         viewmodelHolder.gameObject.SetActive(false);
         if(isLocalPlayer)
         {
@@ -1356,6 +1360,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     public void enable()
     {
         playerPhysBody.isKinematic = false;
+        playerCollider.enabled = true;
         viewmodelHolder.gameObject.SetActive(true);
         if(isLocalPlayer)
         {
