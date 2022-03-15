@@ -234,12 +234,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private void Start()
     {
 
-        if(isLocalPlayer)
-        {
-            applyPlayermodel();
-        }
-
-
         health = parameters.playerHealth.defaultHealth;
 
 
