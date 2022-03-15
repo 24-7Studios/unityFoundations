@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.InputSystem.Users;
+using Cinemachine;
 using Mirror;
 
 public class PlayerScript : NetworkBehaviour, IDamage
@@ -34,11 +35,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
     //[SerializeField]
     private AudioSource LocalAud;
 
-    //[SerializeField]
-    private Camera worldCam;
-
-    //[SerializeField]
-    private Camera gunCam;
+    [SerializeField]
+    private CinemachineVirtualCamera virtualCam;
 
 
     [SerializeField]
@@ -254,6 +252,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         {
 
             controls.Player.Enable();
+            virtualCam.enabled = true;
             input.enabled = true;
 
             //LocalAud = Instantiate(CameraSetup, camEffector).GetComponent<AudioSource>();
