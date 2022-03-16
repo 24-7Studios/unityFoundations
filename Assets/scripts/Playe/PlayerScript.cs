@@ -392,7 +392,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
             if (!isGrounded())
             {
-                y -= -parameters.playerMovement.playerGravity * Time.fixedDeltaTime;
+                playerPhysBody.velocity -= (-parameters.playerMovement.playerGravity) * (playerPhysBody.transform.up);
             }
             if (isGrounded())
             {
@@ -400,9 +400,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
                 y = -parameters.playerMovement.groundingForce;
             }
 
+            
             if (doJump)
             {
-                y = 0;
                 if (playerPhysBody.velocity.y < 0)
                 {
                     playerPhysBody.velocity = transform.up * parameters.playerMovement.jumpForce;
