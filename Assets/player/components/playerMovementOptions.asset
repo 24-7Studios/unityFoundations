@@ -16,7 +16,7 @@ MonoBehaviour:
   playerDrag: 4.5
   playerAngularDrag: 4.5
   moveForce: 2
-  jumpForce: 25
+  jumpForce: 20
   playerGravity: -4
   Jumpable:
     serializedVersion: 2

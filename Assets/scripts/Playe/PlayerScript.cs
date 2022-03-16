@@ -122,14 +122,12 @@ public class PlayerScript : NetworkBehaviour, IDamage
     float SyncTimer = 0;
 
     [SerializeField]
-    private bool fly = false;
-
-    [SerializeField]
     private bool usePhysicsGravity = false;
 
-    bool grounded;
-    bool canJump;
-    bool jump = false;
+    [SerializeField]
+    int jumps = 1;
+    int currentJump = 0;
+    bool doJump = false;
     float x = 0;
     float z = 0;
     float y = 0;
@@ -313,108 +311,31 @@ public class PlayerScript : NetworkBehaviour, IDamage
         playerPhysBody.angularDrag = parameters.playerMovement.playerAngularDrag;
         playerPhysBody.mass = parameters.playerMovement.playerMass;
 
-        if (isLocalPlayer)
+
+
+        if(isLocalPlayer)
         {
-
-            float MouseX = 0;
-            float MouseY = 0;
-
-
-            if (input.currentControlScheme != null)
-            {
-                if (input.currentControlScheme.Equals("gamepad"))
-                {
-                    MouseX = controls.Player.looking.ReadValue<Vector2>().x * parameters.playerOptions.controllerSens * Time.deltaTime;
-                    MouseY = controls.Player.looking.ReadValue<Vector2>().y * parameters.playerOptions.controllerSens * Time.deltaTime;
-                }
-                else
-                {
-                    MouseX = controls.Player.looking.ReadValue<Vector2>().x * parameters.playerOptions.MouseSens * Time.deltaTime;
-                    MouseY = controls.Player.looking.ReadValue<Vector2>().y * parameters.playerOptions.MouseSens * Time.deltaTime;
-                }
-            }
-
-
-
-
-            yMouseInput -= MouseY;
-            yMouseInput = Mathf.Clamp(yMouseInput, -90f, 90f);
-            xMouseInput -= MouseX;
-
-            //TotalPunch = Mathf.Lerp(TotalPunch, 0, viewPunchRecovery * Time.deltaTime);
-            //AppliedPunch = Mathf.Lerp(AppliedPunch, TotalPunch, viewpunchAttack * Time.deltaTime);
-
-            currentRecoil = Mathf.Lerp(currentRecoil, currentRecoil + Totalrecoil, recoilAttack * Time.deltaTime);
-            Totalrecoil = Mathf.Lerp(Totalrecoil, 0, recoilSmoothing * Time.deltaTime);
-            yMouseInput += Totalrecoil * Time.deltaTime * recoilAttack;
-
-            CurrentPunch = Mathf.Lerp(CurrentPunch, TotalPunch, Time.deltaTime * viewpunchAttack);
-            TotalPunch = Mathf.Lerp(TotalPunch, 0, Time.deltaTime * viewPunchRecovery);
-            AppliedPunch = (TotalPunch + CurrentPunch) / 2;
-
-
-
-            float yMouseTotal = yMouseInput + AppliedPunch;
-            float xMouseTotal = xMouseInput;
-            //camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * yMouseInput);
-
-
-            camTransformer.transform.localRotation = Quaternion.Euler((yMouseTotal) * Vector3.right);
-
-            playerPhysBody.transform.rotation = Quaternion.Euler(Vector3.up * -xMouseTotal);
-
-
-
-            CmdSyncPlayerRotation(yMouseTotal, xMouseTotal);
-
-            //Camera Tilt
-
-            Quaternion targetTilt = Quaternion.AngleAxis(-getBasicInputMovement().x * parameters.playerOptions.tiltAmount, Vector3.forward);
-
-            camEffector.localRotation = Quaternion.Slerp(camEffector.localRotation, targetTilt, Time.deltaTime * parameters.playerOptions.tiltSmoothing);
-
-            //viewmodel sway and roation
-
-            Quaternion swayX = Quaternion.AngleAxis(-controls.Player.looking.ReadValue<Vector2>().y * parameters.playerOptions.MouseSens * parameters.playerOptions.viewmodelSwayFactor, Vector3.right);
-            Quaternion swayY = Quaternion.AngleAxis(controls.Player.looking.ReadValue<Vector2>().x * parameters.playerOptions.MouseSens * parameters.playerOptions.viewmodelSwayFactor, Vector3.up);
-
-            Quaternion targetSway = swayX * swayY;
-
-            viewmodelHolder.localRotation = Quaternion.Slerp(viewmodelHolder.localRotation, targetSway, parameters.playerOptions.viewmodelSwaySmoothing * Time.deltaTime);
-
-            Vector3 targetShift = BasicInputMovement * parameters.playerOptions.viewmodelShiftFactor;
-
-            viewmodelHolder.localPosition = Vector3.Lerp(viewmodelHolder.localPosition, targetShift, parameters.playerOptions.viewmodelShiftSmoothing * Time.deltaTime);    
-
+            handleMouseInput();
+            handleCameraTilt();
+            handleViewShift();
+            handleViewSway();
         }
-
-
 
 
         ///////////////////////////////////////////////////////////////////////////////////////
 
 
-        //movement
-
-        grounded = isGrounded();
-        canJump = CanJump();
-
-
 
         RaycastHit FloorSnap;
 
-        if (Physics.Raycast(groundCheck.position, -groundCheck.up, out FloorSnap) && ((FloorSnap.normal.x! < parameters.playerMovement.maxAngle) || (FloorSnap.normal.y! < parameters.playerMovement.maxAngle)) && grounded)
+        if (Physics.Raycast(groundCheck.position, -groundCheck.up, out FloorSnap) && ((FloorSnap.normal.x! < parameters.playerMovement.maxAngle) || (FloorSnap.normal.y! < parameters.playerMovement.maxAngle)) && isGrounded())
         {
-
             Quaternion toRotation = Quaternion.FromToRotation(transform.up, FloorSnap.normal) * transform.rotation;
             groundCheck.rotation = toRotation;
-
-
         }
         else
         {
             groundCheck.rotation = playerPhysBody.rotation;
-
         }
 
         foot.rotation = groundCheck.rotation;
@@ -424,40 +345,16 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         if (isLocalPlayer)
         {
-
             x = controls.Player.Movement.ReadValue<Vector2>().x;
             z = controls.Player.Movement.ReadValue<Vector2>().y;
 
 
-            if (fly)
-            {
-                if (Input.GetKey("space"))
-                {
-                    y = 1;
-                }
-                else if (Input.GetKey("c"))
-                {
-                    y = -1;
-                }
-                else
-                {
-                    y = 0;
-                }
-            }
 
 
 
-
-            BasicInputMovement = (Vector3.right * x) + (Vector3.up * y) + (Vector3.forward * z);
-
-            if (fly)
-            {
-                InputMovement = (((camTransformer.transform.right * x + camTransformer.transform.forward * z) * parameters.playerMovement.moveForce) + camTransformer.transform.up * y);
-            }
-            else
-            {
-                InputMovement = ((((groundCheck.transform.right) * x + (groundCheck.transform.forward) * z) * parameters.playerMovement.moveForce) + groundCheck.transform.up * y);
-            }
+            BasicInputMovement = (Vector3.right * x) + (Vector3.up * y) + (Vector3.forward * z); //for input reference only. doesnt take playerrotation into account
+            InputMovement = ((((groundCheck.transform.right) * x + (groundCheck.transform.forward) * z) * parameters.playerMovement.moveForce) + groundCheck.transform.up * y);
+            
 
             if (isServer)
             {
@@ -467,7 +364,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
             {
                 CmdSyncPlayerInput(BasicInputMovement, InputMovement);
             }
-
         }
 
         ////////////////////////////////////////////////////////
@@ -490,34 +386,40 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public void FixedUpdate()
     {
-
         if (isLocalPlayer)
         {
-            if (jump)
-            {
 
-                playerPhysBody.velocity += transform.up * parameters.playerMovement.jumpForce;
-                jump = false;
+
+            if (!isGrounded())
+            {
+                y -= -parameters.playerMovement.playerGravity * Time.fixedDeltaTime;
+            }
+            if (isGrounded())
+            {
+                currentJump = 0;
+                y = -parameters.playerMovement.groundingForce;
+            }
+
+            if (doJump)
+            {
+                y = 0;
+                if (playerPhysBody.velocity.y < 0)
+                {
+                    playerPhysBody.velocity = transform.up * parameters.playerMovement.jumpForce;
+                }
+                else
+                {
+                    playerPhysBody.velocity += transform.up * parameters.playerMovement.jumpForce;
+                }
+                currentJump++;
+                doJump = false;
 
                 if (!isServer)
                 {
                     CmdJump();
                 }
-
-
             }
-
-            if (!grounded)
-            {
-                y -= -parameters.playerMovement.playerGravity * Time.fixedDeltaTime;
-            }
-            if (grounded)
-            {
-                y = -parameters.playerMovement.groundingForce;
-            }
-
-
-
+            
             playerPhysBody.AddForce(InputMovement, ForceMode.VelocityChange);
 
 
@@ -537,6 +439,68 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     }
 
+    private void handleMouseInput()
+    {
+        float MouseX = 0;
+        float MouseY = 0;
+
+        if (input.currentControlScheme != null)
+        {
+            if (input.currentControlScheme.Equals("gamepad"))
+            {
+                MouseX = controls.Player.looking.ReadValue<Vector2>().x * parameters.playerOptions.controllerSens * Time.deltaTime;
+                MouseY = controls.Player.looking.ReadValue<Vector2>().y * parameters.playerOptions.controllerSens * Time.deltaTime;
+            }
+            else
+            {
+                MouseX = controls.Player.looking.ReadValue<Vector2>().x * parameters.playerOptions.MouseSens * Time.deltaTime;
+                MouseY = controls.Player.looking.ReadValue<Vector2>().y * parameters.playerOptions.MouseSens * Time.deltaTime;
+            }
+        }
+
+
+        yMouseInput -= MouseY;
+        yMouseInput = Mathf.Clamp(yMouseInput, -90f, 90f);
+        xMouseInput -= MouseX;
+
+
+        currentRecoil = Mathf.Lerp(currentRecoil, currentRecoil + Totalrecoil, recoilAttack * Time.deltaTime);
+        Totalrecoil = Mathf.Lerp(Totalrecoil, 0, recoilSmoothing * Time.deltaTime);
+        yMouseInput += Totalrecoil * Time.deltaTime * recoilAttack;
+
+        CurrentPunch = Mathf.Lerp(CurrentPunch, TotalPunch, Time.deltaTime * viewpunchAttack);
+        TotalPunch = Mathf.Lerp(TotalPunch, 0, Time.deltaTime * viewPunchRecovery);
+        AppliedPunch = (TotalPunch + CurrentPunch) / 2;
+
+        float yMouseTotal = yMouseInput + AppliedPunch;
+        float xMouseTotal = xMouseInput;
+
+        camTransformer.transform.localRotation = Quaternion.Euler((yMouseTotal) * Vector3.right);
+
+        playerPhysBody.transform.rotation = Quaternion.Euler(Vector3.up * -xMouseTotal);
+
+        CmdSyncPlayerRotation(yMouseTotal, xMouseTotal);
+    }
+
+    private void handleCameraTilt()
+    {
+        Quaternion targetTilt = Quaternion.AngleAxis(-getBasicInputMovement().x * parameters.playerOptions.tiltAmount, Vector3.forward);
+        camEffector.localRotation = Quaternion.Slerp(camEffector.localRotation, targetTilt, Time.deltaTime * parameters.playerOptions.tiltSmoothing);
+    }
+
+    private void handleViewSway()
+    {
+        Quaternion swayX = Quaternion.AngleAxis(-controls.Player.looking.ReadValue<Vector2>().y * parameters.playerOptions.MouseSens * parameters.playerOptions.viewmodelSwayFactor, Vector3.right);
+        Quaternion swayY = Quaternion.AngleAxis(controls.Player.looking.ReadValue<Vector2>().x * parameters.playerOptions.MouseSens * parameters.playerOptions.viewmodelSwayFactor, Vector3.up);
+        Quaternion targetSway = swayX * swayY;
+        viewmodelHolder.localRotation = Quaternion.Slerp(viewmodelHolder.localRotation, targetSway, parameters.playerOptions.viewmodelSwaySmoothing * Time.deltaTime);
+    }
+
+    private void handleViewShift()
+    {
+        Vector3 targetShift = BasicInputMovement * parameters.playerOptions.viewmodelShiftFactor;
+        viewmodelHolder.localPosition = Vector3.Lerp(viewmodelHolder.localPosition, targetShift, parameters.playerOptions.viewmodelShiftSmoothing * Time.deltaTime);
+    }
 
     public bool isGrounded()
     {
@@ -545,23 +509,20 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public bool CanJump()
     {
-        return isGrounded();
+        return isGrounded() || currentJump < jumps;
     }
 
     void activateJump()
     {
-        if (!fly && (canJump == true) && jump == false)
+        if(CanJump() && !doJump)
         {
-            jump = true;
+            doJump = true;
         }
-
     }
 
     [Command]
     void CmdJump()
     {
-
-        playerPhysBody.velocity += transform.up * parameters.playerMovement.jumpForce;
 
     }
 
