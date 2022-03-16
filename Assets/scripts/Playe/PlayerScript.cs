@@ -159,6 +159,12 @@ public class PlayerScript : NetworkBehaviour, IDamage
     public delegate void Spawned(PlayerScript player);
     public static Spawned spawned;
 
+    public delegate void StandBy(PlayerScript player);
+    public static StandBy standby;
+
+    public delegate void Enable(PlayerScript player);
+    public static Enable Renable;
+
     public delegate void Died(PlayerScript player);
     public static Died died;
 
@@ -1348,6 +1354,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public void standbyForSpawn()
     {
+        standby.Invoke(this);
         awaitingSpawn = true;
         respawnTimer = respawnTime;
         playerPhysBody.isKinematic = true;
@@ -1365,6 +1372,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public void enable()
     {
+        Renable.Invoke(this);
         playerPhysBody.isKinematic = false;
         playerCollider.enabled = true;
         viewmodelHolder.gameObject.SetActive(true);
