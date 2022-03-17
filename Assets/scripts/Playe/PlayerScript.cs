@@ -527,7 +527,30 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [Command]
     void CmdJump()
     {
+        if (playerPhysBody.velocity.y < 0)
+        {
+            playerPhysBody.velocity = (transform.up * parameters.playerMovement.jumpForce) + playerPhysBody.velocity.x * Vector3.right + playerPhysBody.velocity.z * Vector3.forward;
+        }
+        else
+        {
+            playerPhysBody.velocity += transform.up * parameters.playerMovement.jumpForce;
+        }
+        RpcJump();
+    }
 
+    [ClientRpc]
+    void RpcJump()
+    {
+        if (isLocalPlayer) return;
+
+        if (playerPhysBody.velocity.y < 0)
+        {
+            playerPhysBody.velocity = (transform.up * parameters.playerMovement.jumpForce) + playerPhysBody.velocity.x * Vector3.right + playerPhysBody.velocity.z * Vector3.forward;
+        }
+        else
+        {
+            playerPhysBody.velocity += transform.up * parameters.playerMovement.jumpForce;
+        }
     }
 
     [Command]
