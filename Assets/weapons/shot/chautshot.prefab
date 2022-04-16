@@ -150,6 +150,7 @@ MonoBehaviour:
   leftHoldPos: {fileID: 0}
   viewmodel: {fileID: 6169243442433456730}
   ViewAnim: {fileID: 7972524232794524464}
+  drawAnim: 
   defaultAnims: {fileID: 9100000, guid: 189c41e8326f1824ab58bd44e6840b5a, type: 2}
   rightHandAnims: {fileID: 22100000, guid: 8cf44ae96f2145f478c1f7c2baffdee2, type: 2}
   leftHandAnims: {fileID: 22100000, guid: f5c86fccd7a229348ac3bc4b10ee4437, type: 2}
@@ -184,7 +185,7 @@ MonoBehaviour:
   WorldmodelFlash: {fileID: 0}
   WorldmodelFlashPos: {fileID: 0}
   fireAnim: fire
-  fireSound: {fileID: 8300000, guid: bf008f37066aa044294aa204c6b82e2b, type: 3}
+  fireSound: {fileID: 8300000, guid: f10ed073da1b98b47bd00f50d090dc4c, type: 3}
   reloadAnim: reload
   reloadSound: {fileID: 0}
   idleAnim: idle
