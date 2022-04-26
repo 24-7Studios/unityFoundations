@@ -14,6 +14,9 @@ public class PlayerModelClass : NetworkBehaviour
     public Transform CameraOffset;
 
     [SerializeField]
+    private Transform root;
+
+    [SerializeField]
     protected Transform RightHoldParent;
 
     [SerializeField]
@@ -132,5 +135,13 @@ public class PlayerModelClass : NetworkBehaviour
         }
     }
 
+    public Transform getRoot()
+    {
+        if(root != null)
+        {
+            return root;
+        }
+        return transform;
+    }
 
 }

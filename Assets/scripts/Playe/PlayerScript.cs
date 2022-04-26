@@ -727,8 +727,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
         LivePlayerModel.transform.SetParent(playerPhysBody.transform, false);
 
 
-        corpseVirtualCam.Follow = model.transform;
-        corpseVirtualCam.LookAt = model.transform;
+        corpseVirtualCam.Follow = LivePlayerModel.getRoot();
+        corpseVirtualCam.LookAt = LivePlayerModel.getRoot();
         camTransformer.position = LivePlayerModel.CameraOffset.position;
         defaultCameraPos = camTransformer.localPosition;
         defaultCameraRot = camTransformer.localRotation.eulerAngles;
