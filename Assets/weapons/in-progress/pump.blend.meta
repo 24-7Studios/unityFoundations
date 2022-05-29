@@ -3,12 +3,7 @@ guid: 9c3adfe6a76e71f42a632c364dac672c
 ModelImporter:
   serializedVersion: 22102
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: redShell
-    second: {fileID: 2100000, guid: 668a523e4dc2b604c9d8b625dcd955e8, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
