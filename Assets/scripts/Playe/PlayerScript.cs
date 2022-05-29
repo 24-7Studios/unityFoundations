@@ -273,10 +273,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
         }
 
-        if (usePhysicsGravity)
-        {
-            // = Physics.gravity.y;
-        }
 
         footPostition = foot.localPosition;
 
