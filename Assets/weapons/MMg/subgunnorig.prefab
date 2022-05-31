@@ -263,7 +263,7 @@ MonoBehaviour:
   item: {fileID: 3639212011138319363}
   Shootable:
     serializedVersion: 2
-    m_Bits: 1153
+    m_Bits: 1689
   worldModel: {fileID: 3639212009489223618}
   rightHoldPos: {fileID: 4485723609084256760}
   leftHoldPos: {fileID: 4485723610494659393}
@@ -297,7 +297,7 @@ MonoBehaviour:
   knockbackForce: 20
   spread: 0
   fullAuto: 1
-  fireDelay: 0.08
+  fireDelay: 0.09
   ViewmodelFlash: {fileID: 4314926972769928921, guid: 4e5e209968c3140498b9c719202d5482,
     type: 3}
   ViewmodelflashPos: {fileID: 4485723610245200068}

@@ -382,25 +382,11 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public void FixedUpdate()
     {
+        handleGravity();
+
+
         if (isLocalPlayer)
-        {
-
-
-            if (!isGrounded())
-            {
-                playerPhysBody.velocity -= (-parameters.playerMovement.playerGravity) * (playerPhysBody.transform.up);
-                if(currentJump == 0)
-                {
-                    currentJump++;
-                }
-            }
-            if (isGrounded())
-            {
-                currentJump = 0;
-                y = -parameters.playerMovement.groundingForce;
-            }
-
-            
+        {   
             if (doJump)
             {
                 if (playerPhysBody.velocity.y < 0)
@@ -500,6 +486,25 @@ public class PlayerScript : NetworkBehaviour, IDamage
     {
         Vector3 targetShift = BasicInputMovement * parameters.playerOptions.viewmodelShiftFactor;
         viewmodelHolder.localPosition = Vector3.Lerp(viewmodelHolder.localPosition, targetShift, parameters.playerOptions.viewmodelShiftSmoothing * Time.deltaTime);
+    }
+
+    private void handleGravity()
+    {
+        if (!isLocalPlayer && !isServer) return;
+
+        if(isGrounded())
+        {
+            currentJump = 0;
+            y = -parameters.playerMovement.groundingForce;
+        }
+        else
+        {
+            playerPhysBody.velocity -= (-parameters.playerMovement.playerGravity) * (playerPhysBody.transform.up);
+            if (currentJump == 0)
+            {
+                currentJump++;
+            }
+        }
     }
 
     public bool isGrounded()
