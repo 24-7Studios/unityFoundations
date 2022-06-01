@@ -16,7 +16,7 @@ MonoBehaviour:
   controllerSens: 100
   interactTime: 1
   cameraTilt: 1
-  tiltAmount: 2
+  tiltAmount: 3
   tiltSmoothing: 8
   viewmodelSway: 1
   viewmodelSwayFactor: 0.025
@@ -24,3 +24,7 @@ MonoBehaviour:
   viewmodelShift: 1
   viewmodelShiftFactor: 0.075
   viewmodelShiftSmoothing: 8
+  bob: 1
+  bobAmp: 0.015
+  bobFreq: 10
+  bobSmoothing: 4
