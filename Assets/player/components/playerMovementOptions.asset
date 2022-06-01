@@ -18,13 +18,13 @@ MonoBehaviour:
   moveForce: 3
   jumpForce: 50
   jumps: 1
-  playerGravity: -2
+  playerGravity: -5
   Jumpable:
     serializedVersion: 2
     m_Bits: 137
   groundDistance: 0.5
   groundingForce: 0.05
-  maxAngle: 40
+  maxAngle: 1
   PositionCompensationDamping: 0.001
   PostionSnapThreshold: 10
   SyncInterval: 100

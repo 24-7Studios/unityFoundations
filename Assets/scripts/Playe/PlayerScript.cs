@@ -216,6 +216,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [SerializeField]
     private PlayerInput input;
 
+    public Vector3 floornormal;
 
 
     private void Awake()
@@ -321,8 +322,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
 
         RaycastHit FloorSnap;
+        
 
-        if (Physics.Raycast(groundCheck.position, -groundCheck.up, out FloorSnap) && ((FloorSnap.normal.x! < parameters.playerMovement.maxAngle) || (FloorSnap.normal.y! < parameters.playerMovement.maxAngle)) && isGrounded())
+        if (Physics.Raycast(groundCheck.position, -groundCheck.up, out FloorSnap) && ((FloorSnap.normal.x > parameters.playerMovement.maxAngle) && (FloorSnap.normal.y > parameters.playerMovement.maxAngle)) && isGrounded())
         {
             Quaternion toRotation = Quaternion.FromToRotation(transform.up, FloorSnap.normal) * transform.rotation;
             groundCheck.rotation = toRotation;
@@ -332,6 +334,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
             groundCheck.rotation = playerPhysBody.rotation;
         }
 
+        floornormal = FloorSnap.normal;
         foot.rotation = groundCheck.rotation;
         foot.localPosition = footPostition;
 
