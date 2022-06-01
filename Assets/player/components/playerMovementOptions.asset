@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: playerMovementOptions
   m_EditorClassIdentifier: 
   playerMass: 100
-  playerDrag: 2
-  playerAngularDrag: 2
-  moveForce: 1
-  jumpForce: 30
+  playerDrag: 4.5
+  playerAngularDrag: 4.5
+  moveForce: 3
+  jumpForce: 50
   jumps: 1
-  playerGravity: -1.5
+  playerGravity: -2
   Jumpable:
     serializedVersion: 2
     m_Bits: 137
-  groundDistance: 0.2
+  groundDistance: 0.5
   groundingForce: 0.05
   maxAngle: 40
   PositionCompensationDamping: 0.25
