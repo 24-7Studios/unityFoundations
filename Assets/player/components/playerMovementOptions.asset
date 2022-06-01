@@ -25,6 +25,6 @@ MonoBehaviour:
   groundDistance: 0.5
   groundingForce: 0.05
   maxAngle: 40
-  PositionCompensationDamping: 0.25
+  PositionCompensationDamping: 0.001
   PostionSnapThreshold: 10
   SyncInterval: 100

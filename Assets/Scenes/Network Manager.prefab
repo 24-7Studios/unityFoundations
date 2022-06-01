@@ -51,7 +51,7 @@ MonoBehaviour:
   PersistNetworkManagerToOfflineScene: 0
   runInBackground: 1
   autoStartServerBuild: 1
-  serverTickRate: 30
+  serverTickRate: 64
   offlineScene: Assets/Scenes/SampleScene.unity
   onlineScene: Assets/Scenes/new map.unity
   transport: {fileID: 0}
