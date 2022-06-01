@@ -11,6 +11,7 @@ public class PlayerMovementModifiers : ScriptableObject
     public float playerAngularDrag = 4;
     public float moveForce = 1.35f;
     public float jumpForce = 20;
+    public float jumps = 1;
     public float playerGravity = -0.75f;
     public LayerMask Jumpable;
     public float groundDistance = 0.25f;

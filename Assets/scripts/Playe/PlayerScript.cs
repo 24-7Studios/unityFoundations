@@ -124,8 +124,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [SerializeField]
     private bool usePhysicsGravity = false;
 
-    [SerializeField]
-    int jumps = 1;
     int currentJump = 0;
     bool doJump = false;
     float x = 0;
@@ -514,7 +512,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public bool CanJump()
     {
-        return isGrounded() || currentJump < jumps;
+        return isGrounded() || currentJump < parameters.playerMovement.jumps;
     }
 
     void activateJump()
