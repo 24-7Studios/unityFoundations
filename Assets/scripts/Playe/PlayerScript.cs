@@ -320,24 +320,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         ///////////////////////////////////////////////////////////////////////////////////////
 
 
-
-        RaycastHit FloorSnap;
-        
-
-        if (Physics.Raycast(groundCheck.position, -groundCheck.up, out FloorSnap) && ((FloorSnap.normal.x > parameters.playerMovement.maxAngle) && (FloorSnap.normal.y > parameters.playerMovement.maxAngle)) && isGrounded())
-        {
-            Quaternion toRotation = Quaternion.FromToRotation(transform.up, FloorSnap.normal) * transform.rotation;
-            groundCheck.rotation = toRotation;
-        }
-        else
-        {
-            groundCheck.rotation = playerPhysBody.rotation;
-        }
-
-        floornormal = FloorSnap.normal;
-        foot.rotation = groundCheck.rotation;
-        foot.localPosition = footPostition;
-
+        checkFloor();
 
 
         if (isLocalPlayer)
@@ -493,7 +476,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     {
         if (!isLocalPlayer && !isServer) return;
 
-        if(isGrounded())
+        if(isGrounded() && checkFloor())
         {
             currentJump = 0;
             y = -parameters.playerMovement.groundingForce;
@@ -508,6 +491,32 @@ public class PlayerScript : NetworkBehaviour, IDamage
         }
     }
 
+    private bool checkFloor()
+    {
+        bool on;
+
+        RaycastHit FloorSnap;
+
+
+        if (Physics.Raycast(groundCheck.position, -groundCheck.up, out FloorSnap) && !((Mathf.Abs(FloorSnap.normal.x) > parameters.playerMovement.maxAngle/90) || (Mathf.Abs(FloorSnap.normal.z) > parameters.playerMovement.maxAngle/90)) && isGrounded())
+        {
+            Quaternion toRotation = Quaternion.FromToRotation(transform.up, FloorSnap.normal) * transform.rotation;
+            groundCheck.rotation = toRotation;
+            on = true;
+        }
+        else
+        {
+            groundCheck.rotation = playerPhysBody.rotation;
+            on = false;
+        }
+
+        floornormal = FloorSnap.normal;
+        foot.rotation = groundCheck.rotation;
+        foot.localPosition = footPostition;
+        return on;
+
+    }
+
     public bool isGrounded()
     {
         return Physics.CheckSphere(groundCheck.position, parameters.playerMovement.groundDistance, parameters.playerMovement.Jumpable);
@@ -515,7 +524,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     public bool CanJump()
     {
-        return isGrounded() || currentJump < parameters.playerMovement.jumps;
+        return (isGrounded() && checkFloor()) || currentJump < parameters.playerMovement.jumps;
     }
 
     void activateJump()

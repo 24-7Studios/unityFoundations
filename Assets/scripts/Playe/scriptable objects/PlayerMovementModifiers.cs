@@ -10,6 +10,7 @@ public class PlayerMovementModifiers : ScriptableObject
     public float playerDrag = 4;
     public float playerAngularDrag = 4;
     public float moveForce = 1.35f;
+    public float airStrafeModifier = 0.2f;
     public float jumpForce = 20;
     public float jumps = 1;
     public float playerGravity = -0.75f;
