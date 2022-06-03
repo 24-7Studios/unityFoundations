@@ -15,17 +15,19 @@ MonoBehaviour:
   playerMass: 100
   playerDrag: 1
   playerAngularDrag: 1
-  moveForce: 3.2
+  playerGroundFriction: 2.75
+  moveForce: 1.75
   airStrafeModifier: 0.2
   jumpForce: 25
   jumps: 1
-  playerGravity: -2
+  playerGravity: -1
   Jumpable:
     serializedVersion: 2
     m_Bits: 137
   groundDistance: 0.5
-  groundingForce: 0.05
+  groundingForce: 0.075
   maxAngle: 60
+  angleTransitionDamping: 50
   PositionCompensationDamping: 0.001
   PostionSnapThreshold: 10
   SyncInterval: 100

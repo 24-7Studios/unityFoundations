@@ -185,7 +185,7 @@ MonoBehaviour:
   WorldmodelFlash: {fileID: 0}
   WorldmodelFlashPos: {fileID: 0}
   fireAnim: fire
-  fireSound: {fileID: 8300000, guid: f10ed073da1b98b47bd00f50d090dc4c, type: 3}
+  fireSound: {fileID: 8300000, guid: ef7e4b3c5525cfb469b49ebd0a4ef2b3, type: 3}
   reloadAnim: reload
   reloadSound: {fileID: 0}
   idleAnim: idle
@@ -422,6 +422,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1779360732205637330}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 29e9dbb03e6e2dc4cad033dc82a479b2,
@@ -510,6 +511,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 29e9dbb03e6e2dc4cad033dc82a479b2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6982478036984233584}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 29e9dbb03e6e2dc4cad033dc82a479b2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6084495871238641697}
   m_SourcePrefab: {fileID: 100100000, guid: 29e9dbb03e6e2dc4cad033dc82a479b2, type: 3}
 --- !u!4 &2373318233064916207 stripped
 Transform:
@@ -528,6 +538,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1779360732205637330}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: efa456348b1138445995213895f9e5dd,
@@ -901,6 +912,7 @@ PrefabInstance:
       value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: efa456348b1138445995213895f9e5dd, type: 3}
 --- !u!1 &6169243442433456730 stripped
 GameObject:

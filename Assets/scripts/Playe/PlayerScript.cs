@@ -371,6 +371,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     {
         handleGravity();
 
+        
 
         if (isLocalPlayer)
         {   
@@ -395,6 +396,10 @@ public class PlayerScript : NetworkBehaviour, IDamage
             
             playerPhysBody.AddForce(RelativeInputMovement, ForceMode.VelocityChange);
 
+            if(grounded)
+            {
+                playerPhysBody.AddForce(calculatePlayerFriction(), ForceMode.Acceleration);
+            }
 
             if (!isServer)
             {
@@ -504,12 +509,12 @@ public class PlayerScript : NetworkBehaviour, IDamage
         if (Physics.Raycast(groundCheck.position, -groundCheck.up, out FloorSnap) && !((Mathf.Abs(FloorSnap.normal.x) > parameters.playerMovement.maxAngle/90) || (Mathf.Abs(FloorSnap.normal.z) > parameters.playerMovement.maxAngle/90)) && checkFloor())
         {
             Quaternion toRotation = Quaternion.FromToRotation(transform.up, FloorSnap.normal) * transform.rotation;
-            groundCheck.rotation = toRotation;
+            groundCheck.rotation = Quaternion.Lerp(groundCheck.rotation, toRotation, Time.deltaTime * parameters.playerMovement.angleTransitionDamping);
             on = true;
         }
         else
         {
-            groundCheck.rotation = playerPhysBody.rotation;
+            groundCheck.rotation = Quaternion.Lerp(groundCheck.rotation, playerPhysBody.rotation, Time.deltaTime * parameters.playerMovement.angleTransitionDamping);
             on = false;
         }
 
@@ -579,7 +584,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         }
     }
 
-        private Vector3 calculateBasicInputMovement()
+    private Vector3 calculateBasicInputMovement()
     {
         return (Vector3.right * x) + (Vector3.up * y) + (Vector3.forward * z);
     }
@@ -587,6 +592,11 @@ public class PlayerScript : NetworkBehaviour, IDamage
     public Vector3 getBasicInputMovement()
     {
         return BasicInputMovement;
+    }
+
+    private Vector3 calculatePlayerFriction()
+    {
+        return -playerPhysBody.velocity * parameters.playerMovement.playerGroundFriction;
     }
 
     [Command]
