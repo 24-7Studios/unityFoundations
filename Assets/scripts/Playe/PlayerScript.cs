@@ -130,7 +130,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     float z = 0;
     float y = 0;
     Vector3 BasicInputMovement;
-    Vector3 InputMovement;
+    Vector3 RelativeInputMovement;
     Vector3 groundNormal;
 
 
@@ -300,7 +300,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         }
 
 
-        //mouse looking
+
 
         playerPhysBody.drag = parameters.playerMovement.playerDrag;
         playerPhysBody.angularDrag = parameters.playerMovement.playerAngularDrag;
@@ -332,17 +332,18 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
 
 
-            BasicInputMovement = (Vector3.right * x) + (Vector3.up * y) + (Vector3.forward * z); //for input reference only. doesnt take playerrotation into account
-            InputMovement = ((((groundCheck.transform.right) * x + (groundCheck.transform.forward) * z) * parameters.playerMovement.moveForce) + groundCheck.transform.up * y);
+            BasicInputMovement = calculateBasicInputMovement();
+
+            RelativeInputMovement = calculateRelativeInputMovement();
             
 
             if (isServer)
             {
-                RpcSyncPlayerInput(BasicInputMovement, InputMovement);
+                RpcSyncPlayerInput(BasicInputMovement, RelativeInputMovement);
             }
             else
             {
-                CmdSyncPlayerInput(BasicInputMovement, InputMovement);
+                CmdSyncPlayerInput(BasicInputMovement, RelativeInputMovement);
             }
         }
 
@@ -390,16 +391,16 @@ public class PlayerScript : NetworkBehaviour, IDamage
                 }
             }
             
-            playerPhysBody.AddForce(InputMovement, ForceMode.VelocityChange);
+            playerPhysBody.AddForce(RelativeInputMovement, ForceMode.VelocityChange);
 
 
             if (!isServer)
             {
-                CmdMovePlayer(InputMovement, playerPhysBody.position);
+                CmdMovePlayer(RelativeInputMovement, playerPhysBody.position);
             }
             else
             {
-                RpcSyncPlayerPosistion(InputMovement, playerPhysBody.position);
+                RpcSyncPlayerPosistion(RelativeInputMovement, playerPhysBody.position);
             }
 
 
@@ -454,7 +455,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private void handleCameraTilt()
     {
-        Quaternion targetTilt = Quaternion.AngleAxis(-getBasicInputMovement().x * parameters.playerOptions.tiltAmount, Vector3.forward);
+        Quaternion targetTilt = Quaternion.AngleAxis(-BasicInputMovement.x * parameters.playerOptions.tiltAmount, Vector3.forward);
         camEffector.localRotation = Quaternion.Slerp(camEffector.localRotation, targetTilt, Time.deltaTime * parameters.playerOptions.tiltSmoothing);
     }
 
@@ -564,6 +565,21 @@ public class PlayerScript : NetworkBehaviour, IDamage
         }
     }
 
+    private Vector3 calculateRelativeInputMovement()
+    {
+        return ((((groundCheck.transform.right) * x + (groundCheck.transform.forward) * z) * parameters.playerMovement.moveForce) + groundCheck.transform.up * y);
+    }
+
+    private Vector3 calculateBasicInputMovement()
+    {
+        return (Vector3.right * x) + (Vector3.up * y) + (Vector3.forward * z);
+    }
+
+    public Vector3 getBasicInputMovement()
+    {
+        return BasicInputMovement;
+    }
+
     [Command]
     void CmdMovePlayer(Vector3 IM, Vector3 clientPos)
     {
@@ -660,9 +676,9 @@ public class PlayerScript : NetworkBehaviour, IDamage
     void CmdSyncPlayerInput(Vector3 BIM, Vector3 IM)
     {
         BasicInputMovement = BIM;
-        InputMovement = IM;
+        RelativeInputMovement = IM;
 
-        RpcSyncPlayerInput(BasicInputMovement, InputMovement);
+        RpcSyncPlayerInput(BasicInputMovement, RelativeInputMovement);
     }
 
     [ClientRpc]
@@ -671,7 +687,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         if (!isLocalPlayer)
         {
             BasicInputMovement = BIM;
-            InputMovement = IM;
+            RelativeInputMovement = IM;
         }
     }
 
@@ -761,16 +777,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
     public Transform getCamTransformer()
     {
         return camTransformer;
-    }
-
-    public Vector3 getInputMovement()
-    {
-        return InputMovement;
-    }
-
-    public Vector3 getBasicInputMovement()
-    {
-        return BasicInputMovement;
     }
 
     public Vector3 getVelocity()
