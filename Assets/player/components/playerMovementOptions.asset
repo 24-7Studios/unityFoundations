@@ -15,12 +15,12 @@ MonoBehaviour:
   playerMass: 100
   playerDrag: 1
   playerAngularDrag: 1
-  playerGroundFriction: 2.75
+  playerGroundFriction: 3
   moveForce: 1.75
-  airStrafeModifier: 0.2
+  airStrafeModifier: 0.3
   jumpForce: 25
   jumps: 1
-  playerGravity: -1
+  playerGravity: -1.5
   Jumpable:
     serializedVersion: 2
     m_Bits: 137
