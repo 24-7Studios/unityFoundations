@@ -317,13 +317,13 @@ MonoBehaviour:
   SelectedPlayerModel: {fileID: 6363091594461922305, guid: be746d4c3a2e9ff4eaf394a441edb9e1,
     type: 3}
   LivePlayerModel: {fileID: 0}
+  flashL: {fileID: 3943925538353014252}
   camEffector: {fileID: 568473319026945711}
   currentMoveForce: 0
   currenGravity: 0
   groundCheck: {fileID: 1050093693641089723}
   foot: {fileID: 1050093693734197462}
   usePhysicsGravity: 0
-  jumps: 2
   instantDeath: 0
   invinsible: 0
   localDamageSound: {fileID: 8300000, guid: b83a514e25eaedb428ac381925fb2cd5, type: 3}
@@ -355,6 +355,7 @@ MonoBehaviour:
     otherHand: {fileID: 0}
     myIndex: -1
   input: {fileID: 5850964999359303794}
+  floornormal: {x: 0, y: 0, z: 0}
 --- !u!82 &5183846604344044444
 AudioSource:
   m_ObjectHideFlags: 0

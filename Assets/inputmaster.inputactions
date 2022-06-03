@@ -121,6 +121,15 @@
                     "processors": "",
                     "interactions": "Hold",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "toggleLight",
+                    "type": "Button",
+                    "id": "cd57bac0-48cc-49bf-aefb-36ec6ca2190c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -418,6 +427,17 @@
                     "processors": "",
                     "groups": "mouse + keybaord",
                     "action": "dual",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "674b75de-6f02-4fb8-864d-2dde7933559b",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "mouse + keybaord",
+                    "action": "toggleLight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

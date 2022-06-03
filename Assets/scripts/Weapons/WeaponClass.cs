@@ -462,21 +462,36 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
                     if (rightHandAnims != null)
                     {
                         ViewAnim.runtimeAnimatorController = rightHandAnims;
+                        unMirror();
                     }
                     else
                     {
-                        viewmodel.transform.localScale = new Vector3(Mathf.Abs(viewmodel.transform.localScale.x), viewmodel.transform.localScale.y, viewmodel.transform.localScale.z);
+                        if (leftHandAnims != null)
+                        {
+                            ViewAnim.runtimeAnimatorController = leftHandAnims;
+                            mirror();
+                        }
+                        else
+                        {
+                            unMirror();
+                        }
                     }
+
                 }
                 else
                 {
                     if (leftHandAnims != null)
                     {
                         ViewAnim.runtimeAnimatorController = leftHandAnims;
+                        unMirror();
                     }
                     else
                     {
-                        viewmodel.transform.localScale = new Vector3(-Mathf.Abs(viewmodel.transform.localScale.x), viewmodel.transform.localScale.y, viewmodel.transform.localScale.z);
+                        if(rightHandAnims != null)
+                        {
+                            ViewAnim.runtimeAnimatorController = rightHandAnims;
+                            mirror();
+                        } 
                     }
                 }
             }
@@ -486,16 +501,22 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
                 {
                     ViewAnim.runtimeAnimatorController = defaultAnims;
                 }
-                else
-                {
-                    viewmodel.transform.localScale = new Vector3(Mathf.Abs(viewmodel.transform.localScale.x), viewmodel.transform.localScale.y, viewmodel.transform.localScale.z);
-                }
+                unMirror();
             }
             viewmodel.SetActive(true);
             if (drawAnim != null) ViewAnim.Play(drawAnim);
         }
     }
 
+    private void mirror()
+    {
+        viewmodel.transform.localScale = new Vector3(-Mathf.Abs(viewmodel.transform.localScale.x), viewmodel.transform.localScale.y, viewmodel.transform.localScale.z);
+    }
+
+    private void unMirror()
+    {
+        viewmodel.transform.localScale = new Vector3(Mathf.Abs(viewmodel.transform.localScale.x), viewmodel.transform.localScale.y, viewmodel.transform.localScale.z);
+    }
 
     public virtual void onDequip()
     {

@@ -55,7 +55,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
     [SerializeField]
     private PlayerModelClass LivePlayerModel;
 
-
+    [SerializeField]
+    private Light flashL;
 
 
 
@@ -234,6 +235,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         controls.Player.Change.performed += ctx => changeSlot();
         controls.Player.interact.started += ctx => interact();
         controls.Player.interact.performed += ctx => manualPickup();
+        controls.Player.toggleLight.performed += ctx => toggleFlashlight();
         controls.Player.dual.performed += ctx => manualPickup(true);
         controls.Player.drop.performed += ctx => manualDrop();
         controls.Player.melee.performed += ctx => equipToMelee();
@@ -824,6 +826,12 @@ public class PlayerScript : NetworkBehaviour, IDamage
     }
 
     //////////////////////////////////
+    
+    private void toggleFlashlight()
+    {
+        flashL.enabled = !flashL.enabled;
+    }
+
     private bool canChange()
     {
 

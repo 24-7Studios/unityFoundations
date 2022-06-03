@@ -152,8 +152,8 @@ MonoBehaviour:
   viewmodel: {fileID: 2786483985261900192}
   ViewAnim: {fileID: 1355694226009062147}
   drawAnim: 
-  defaultAnims: {fileID: 0}
-  rightHandAnims: {fileID: 0}
+  defaultAnims: {fileID: 9100000, guid: 7cc574afc9f29db4abd499fd94cedbbe, type: 2}
+  rightHandAnims: {fileID: 22100000, guid: 0131df5ebdf6eb347bb3af33953f6395, type: 2}
   leftHandAnims: {fileID: 0}
   aud: {fileID: 6453581027293962206}
   debugMode: 0
@@ -541,6 +541,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 2443624695451209230}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 5e0d35d2050d9de43a9eb2c76294830c,
@@ -939,6 +940,11 @@ PrefabInstance:
       value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1889618510729499174, guid: 5e0d35d2050d9de43a9eb2c76294830c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 261121022644504825}
   m_SourcePrefab: {fileID: 100100000, guid: 5e0d35d2050d9de43a9eb2c76294830c, type: 3}
 --- !u!1 &2786483985261900192 stripped
 GameObject:

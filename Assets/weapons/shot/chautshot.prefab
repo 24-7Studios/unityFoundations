@@ -153,7 +153,7 @@ MonoBehaviour:
   drawAnim: 
   defaultAnims: {fileID: 9100000, guid: 189c41e8326f1824ab58bd44e6840b5a, type: 2}
   rightHandAnims: {fileID: 22100000, guid: 8cf44ae96f2145f478c1f7c2baffdee2, type: 2}
-  leftHandAnims: {fileID: 22100000, guid: f5c86fccd7a229348ac3bc4b10ee4437, type: 2}
+  leftHandAnims: {fileID: 0}
   aud: {fileID: 6185063988141133011}
   debugMode: 0
   debugMarker: {fileID: 4837419253238934036, guid: d294ffef25fbe1a4ca7ed8440f33ecc3,
