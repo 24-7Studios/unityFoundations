@@ -126,6 +126,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     int currentJump = 0;
     bool doJump = false;
+    bool grounded;
+    //bool 
     float x = 0;
     float z = 0;
     float y = 0;
@@ -320,7 +322,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         ///////////////////////////////////////////////////////////////////////////////////////
 
 
-        checkFloor();
+        grounded = checkSlope();
 
 
         if (isLocalPlayer)
@@ -477,7 +479,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     {
         if (!isLocalPlayer && !isServer) return;
 
-        if(isGrounded() && checkFloor())
+        if(grounded)
         {
             currentJump = 0;
             y = -parameters.playerMovement.groundingForce;
@@ -492,14 +494,14 @@ public class PlayerScript : NetworkBehaviour, IDamage
         }
     }
 
-    private bool checkFloor()
+    private bool checkSlope()
     {
         bool on;
 
         RaycastHit FloorSnap;
 
 
-        if (Physics.Raycast(groundCheck.position, -groundCheck.up, out FloorSnap) && !((Mathf.Abs(FloorSnap.normal.x) > parameters.playerMovement.maxAngle/90) || (Mathf.Abs(FloorSnap.normal.z) > parameters.playerMovement.maxAngle/90)) && isGrounded())
+        if (Physics.Raycast(groundCheck.position, -groundCheck.up, out FloorSnap) && !((Mathf.Abs(FloorSnap.normal.x) > parameters.playerMovement.maxAngle/90) || (Mathf.Abs(FloorSnap.normal.z) > parameters.playerMovement.maxAngle/90)) && checkFloor())
         {
             Quaternion toRotation = Quaternion.FromToRotation(transform.up, FloorSnap.normal) * transform.rotation;
             groundCheck.rotation = toRotation;
@@ -518,14 +520,14 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     }
 
-    public bool isGrounded()
+    public bool checkFloor()
     {
         return Physics.CheckSphere(groundCheck.position, parameters.playerMovement.groundDistance, parameters.playerMovement.Jumpable);
     }
 
     public bool CanJump()
     {
-        return (isGrounded() && checkFloor()) || currentJump < parameters.playerMovement.jumps;
+        return (grounded || currentJump < parameters.playerMovement.jumps);
     }
 
     void activateJump()
@@ -567,10 +569,17 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private Vector3 calculateRelativeInputMovement()
     {
-        return ((((groundCheck.transform.right) * x + (groundCheck.transform.forward) * z) * parameters.playerMovement.moveForce) + groundCheck.transform.up * y);
+        if (grounded)
+        {
+            return ((((groundCheck.transform.right) * x + (groundCheck.transform.forward) * z) * parameters.playerMovement.moveForce) + groundCheck.transform.up * y);
+        }
+        else
+        {
+            return ((((groundCheck.transform.right) * x + (groundCheck.transform.forward) * z) * parameters.playerMovement.moveForce) * parameters.playerMovement.airStrafeModifier + groundCheck.transform.up * y);
+        }
     }
 
-    private Vector3 calculateBasicInputMovement()
+        private Vector3 calculateBasicInputMovement()
     {
         return (Vector3.right * x) + (Vector3.up * y) + (Vector3.forward * z);
     }

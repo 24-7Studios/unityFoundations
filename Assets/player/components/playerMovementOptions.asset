@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: playerMovementOptions
   m_EditorClassIdentifier: 
   playerMass: 100
-  playerDrag: 4.5
-  playerAngularDrag: 4.5
-  moveForce: 3
+  playerDrag: 1
+  playerAngularDrag: 1
+  moveForce: 3.2
   airStrafeModifier: 0.2
-  jumpForce: 50
+  jumpForce: 25
   jumps: 1
-  playerGravity: -5
+  playerGravity: -2
   Jumpable:
     serializedVersion: 2
     m_Bits: 137
