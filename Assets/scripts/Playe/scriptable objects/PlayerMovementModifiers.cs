@@ -19,7 +19,6 @@ public class PlayerMovementModifiers : ScriptableObject
     public float groundDistance = 0.25f;
     public float groundingForce = 0.05f;
     public float maxAngle = 20;
-    public float angleTransitionDamping;
     public float PositionCompensationDamping = 0.25f;
     public float PostionSnapThreshold = 10;
     public float SyncInterval = 100f;

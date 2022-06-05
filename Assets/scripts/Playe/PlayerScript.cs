@@ -511,12 +511,12 @@ public class PlayerScript : NetworkBehaviour, IDamage
         if (Physics.Raycast(groundCheck.position, -groundCheck.up, out FloorSnap) && !((Mathf.Abs(FloorSnap.normal.x) > parameters.playerMovement.maxAngle/90) || (Mathf.Abs(FloorSnap.normal.z) > parameters.playerMovement.maxAngle/90)) && checkFloor())
         {
             Quaternion toRotation = Quaternion.FromToRotation(transform.up, FloorSnap.normal) * transform.rotation;
-            groundCheck.rotation = Quaternion.Lerp(groundCheck.rotation, toRotation, Time.deltaTime * parameters.playerMovement.angleTransitionDamping);
+            groundCheck.rotation = toRotation;
             on = true;
         }
         else
         {
-            groundCheck.rotation = Quaternion.Lerp(groundCheck.rotation, playerPhysBody.rotation, Time.deltaTime * parameters.playerMovement.angleTransitionDamping);
+            groundCheck.rotation = playerPhysBody.rotation;
             on = false;
         }
 
