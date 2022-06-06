@@ -373,35 +373,12 @@ public class PlayerScript : NetworkBehaviour, IDamage
     {
         handleGravity();
 
+        doMovement();
         
 
         if (isLocalPlayer)
-        {   
-            if (doJump)
-            {
-                if (playerPhysBody.velocity.y < 0)
-                {
-                    playerPhysBody.velocity = (transform.up * parameters.playerMovement.jumpForce) + playerPhysBody.velocity.x * Vector3.right + playerPhysBody.velocity.z * Vector3.forward;
-                }
-                else
-                {
-                    playerPhysBody.velocity += transform.up * parameters.playerMovement.jumpForce;
-                }
-                currentJump++;
-                doJump = false;
-
-                if (!isServer)
-                {
-                    CmdJump();
-                }
-            }
-            
-            playerPhysBody.AddForce(RelativeInputMovement, ForceMode.VelocityChange);
-
-            if(grounded)
-            {
-                playerPhysBody.AddForce(calculatePlayerFriction(), ForceMode.Acceleration);
-            }
+        {
+            checkJump();
 
             if (!isServer)
             {
@@ -411,9 +388,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
             {
                 RpcSyncPlayerPosistion(RelativeInputMovement, playerPhysBody.position);
             }
-
-
-
         }
 
 
@@ -484,8 +458,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private void handleGravity()
     {
-        if (!isLocalPlayer && !isServer) return;
-
         if(grounded)
         {
             currentJump = 0;
@@ -535,6 +507,28 @@ public class PlayerScript : NetworkBehaviour, IDamage
     public bool CanJump()
     {
         return (grounded || currentJump < parameters.playerMovement.jumps);
+    }
+
+    private void checkJump()
+    {
+        if (doJump)
+        {
+            if (playerPhysBody.velocity.y < 0)
+            {
+                playerPhysBody.velocity = (transform.up * parameters.playerMovement.jumpForce) + playerPhysBody.velocity.x * Vector3.right + playerPhysBody.velocity.z * Vector3.forward;
+            }
+            else
+            {
+                playerPhysBody.velocity += transform.up * parameters.playerMovement.jumpForce;
+            }
+            currentJump++;
+            doJump = false;
+
+            if (!isServer)
+            {
+                CmdJump();
+            }
+        }
     }
 
     void activateJump()
@@ -599,6 +593,16 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private Vector3 calculatePlayerFriction()
     {
         return -playerPhysBody.velocity * parameters.playerMovement.playerGroundFriction;
+    }
+
+    private void doMovement()
+    {
+        playerPhysBody.AddForce(RelativeInputMovement, ForceMode.VelocityChange);
+
+        if (grounded)
+        {
+            playerPhysBody.AddForce(calculatePlayerFriction(), ForceMode.Acceleration);
+        }
     }
 
     [Command]
