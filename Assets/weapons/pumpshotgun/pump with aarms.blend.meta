@@ -1,8 +1,11 @@
 fileFormatVersion: 2
-guid: 9c3adfe6a76e71f42a632c364dac672c
+guid: 5a6189ce68dbb1240ae88dcb24da180d
 ModelImporter:
-  serializedVersion: 22102
-  internalIDToNameTable: []
+  serializedVersion: 22103
+  internalIDToNameTable:
+  - first:
+      74: 6365926014387069646
+    second: bruh
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -101,6 +104,7 @@ ModelImporter:
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
