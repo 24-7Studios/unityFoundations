@@ -314,7 +314,7 @@ MonoBehaviour:
   corpseVirtualCam: {fileID: 5731598834737069115}
   audioListener: {fileID: 4964113840752309778}
   interactZone: {fileID: 8531315878050940356}
-  SelectedPlayerModel: {fileID: 6363091594461922305, guid: be746d4c3a2e9ff4eaf394a441edb9e1,
+  SelectedPlayerModel: {fileID: 7196012451863958847, guid: 680f1f9866e309142bb1e3e8a7234b36,
     type: 3}
   LivePlayerModel: {fileID: 0}
   flashL: {fileID: 3943925538353014252}
@@ -1043,6 +1043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerIndex: -1
+  AutoEnableInputs: 1
   XYAxis: {fileID: -5630151704836100654, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   ZAxis: {fileID: -5001942201382814882, guid: 3d02525140440134c9cbd85a77bdfbac, type: 3}
 --- !u!1 &8785809065496447628

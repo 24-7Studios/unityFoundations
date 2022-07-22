@@ -619,20 +619,13 @@ public class PlayerScript : NetworkBehaviour, IDamage
         else if (!isLocalPlayer && Vector3.Distance(playerPhysBody.position, clientPos) < parameters.playerMovement.PostionSnapThreshold)
         {
 
-
             SyncTimer -= Time.deltaTime;
 
             if (SyncTimer < parameters.playerMovement.SyncInterval)
             {
-
                 SyncTimer = parameters.playerMovement.SyncInterval;
                 playerPhysBody.position = Vector3.Lerp(playerPhysBody.position, clientPos, Time.fixedDeltaTime / parameters.playerMovement.PositionCompensationDamping);
-
-
             }
-
-
-
         }
 
         RpcSyncPlayerPosistion(IM, playerPhysBody.position);
@@ -647,6 +640,10 @@ public class PlayerScript : NetworkBehaviour, IDamage
         if (!isLocalPlayer && Vector3.Distance(playerPhysBody.position, serverPos) < parameters.playerMovement.PostionSnapThreshold)
         {
             playerPhysBody.AddForce(IM, ForceMode.VelocityChange);
+            if (grounded)
+            {
+                playerPhysBody.AddForce(calculatePlayerFriction(), ForceMode.Acceleration);
+            }
             playerPhysBody.position = Vector3.Lerp(playerPhysBody.position, serverPos, Time.fixedDeltaTime / parameters.playerMovement.PositionCompensationDamping);
         }
         else if (!isLocalPlayer)
@@ -1435,6 +1432,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
         if (isServer)
         {
             applyPlayermodel();
+            health = parameters.playerHealth.defaultHealth;
         }
         enable();
     }
