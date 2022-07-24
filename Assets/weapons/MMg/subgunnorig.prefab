@@ -39,7 +39,7 @@ Transform:
   - {fileID: 4164357023855362062}
   - {fileID: 4164357023057614200}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1037269593862918428
 MeshFilter:
@@ -103,10 +103,21 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3639212011138319363}
-  serializedVersion: 2
+  serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -120,9 +131,17 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3639212011138319363}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 4
+  serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 2534964839176971238, guid: e22b36ca1595c374e84e759e97c1ac6b, type: 3}
@@ -268,6 +287,7 @@ MonoBehaviour:
   rightHoldPos: {fileID: 4485723609084256760}
   leftHoldPos: {fileID: 4485723610494659393}
   viewmodel: {fileID: 3639212010807040692}
+  armsMesh: {fileID: 7940989323679578739}
   ViewAnim: {fileID: 4485723609135497305}
   drawAnim: 
   defaultAnims: {fileID: 9100000, guid: 015f15755159e0c449ad35de2470aa9a, type: 2}
@@ -426,7 +446,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 2
+    serializedVersion: 3
     m_TransformParent: {fileID: 4164357024455089849}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b43392caac5209d4db3e499e8aa85966,
@@ -830,11 +850,17 @@ PrefabInstance:
       value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -2577548232221058511, guid: b43392caac5209d4db3e499e8aa85966,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4485723610245200068}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b43392caac5209d4db3e499e8aa85966,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4485723609135497305}
   m_SourcePrefab: {fileID: 100100000, guid: b43392caac5209d4db3e499e8aa85966, type: 3}
 --- !u!1 &3639212010807040692 stripped
 GameObject:
@@ -874,12 +900,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4485723609392752613}
   m_PrefabAsset: {fileID: 0}
+--- !u!137 &7940989323679578739 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5797384429611982230, guid: b43392caac5209d4db3e499e8aa85966,
+    type: 3}
+  m_PrefabInstance: {fileID: 4485723609392752613}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4485723610224128659
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 2
+    serializedVersion: 3
     m_TransformParent: {fileID: 4164357024455089849}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e22b36ca1595c374e84e759e97c1ac6b,
@@ -948,6 +980,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: e22b36ca1595c374e84e759e97c1ac6b,
         type: 3}
@@ -957,6 +990,7 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4485723610494659393}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e22b36ca1595c374e84e759e97c1ac6b, type: 3}
 --- !u!1 &3639212009489223618 stripped
 GameObject:

@@ -51,6 +51,9 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     protected GameObject viewmodel;
 
     [SerializeField]
+    protected SkinnedMeshRenderer armsMesh;
+
+    [SerializeField]
     protected Animator ViewAnim;
 
     [SerializeField]
@@ -449,6 +452,12 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     public virtual void onEquip()
     {
         isEquiped = true;
+        if(player.getLivePlayerModel().getArms() != null && armsMesh != null)
+        {
+            SkinnedMeshRenderer arms = player.getLivePlayerModel().getArms();
+            armsMesh.sharedMesh = arms.sharedMesh;
+            armsMesh.materials = arms.materials;
+        }
 
         worldModel.SetActive(true);
         player.getLivePlayerModel().equipWeapon(this, hand);

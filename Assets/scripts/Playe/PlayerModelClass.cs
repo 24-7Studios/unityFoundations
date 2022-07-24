@@ -11,6 +11,9 @@ public class PlayerModelClass : NetworkBehaviour
     public List<hitbox> hitBoxes;
 
     [SerializeField]
+    protected SkinnedMeshRenderer armsMesh;
+
+    [SerializeField]
     public Transform CameraOffset;
 
     [SerializeField]
@@ -144,4 +147,8 @@ public class PlayerModelClass : NetworkBehaviour
         return transform;
     }
 
+    public SkinnedMeshRenderer getArms()
+    {
+        return armsMesh;
+    }
 }
