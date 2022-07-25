@@ -285,21 +285,9 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         viewmodel.transform.SetParent(player.getViewmodelHolder());
         viewmodel.transform.localPosition = Vector3.zero;
 
-        player.reSyncSlots();        
+        player.reSyncSlots();
 
-        if (player.isLocalPlayer)
-        {
-            viewmodel.SetActive(true);
-            viewmodel.layer = 11;
-            worldModel.SetActive(true);
-            worldModel.layer = 6;
-        }
-        else
-        {
-            viewmodel.SetActive(false);
-            worldModel.SetActive(true);
-            worldModel.layer = 0;
-        }
+        onEquip();
 
     }
 
