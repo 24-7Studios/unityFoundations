@@ -6,8 +6,14 @@ using Mirror;
 public class Target : NetworkBehaviour, IDamage
 {
 
-    public AudioClip sound;
-    public AudioSource aud;
+    [SerializeField]
+    private float health;
+
+    [SerializeField]
+    private AudioClip sound;
+
+    [SerializeField]
+    private AudioSource aud;
 
     // Start is called before the first frame update
     void Start()
@@ -23,13 +29,17 @@ public class Target : NetworkBehaviour, IDamage
 
     public void takeDamagefromHit(float dam, float mul)
     {
+        health -= dam;
         rpcPlayHitSound();
     }
 
     [ClientRpc]
     protected void rpcPlayHitSound()
     {
-        aud.PlayOneShot(sound);
+        if(aud != null && sound != null)
+        {
+            aud.PlayOneShot(sound);
+        }
     }
 
     public void hit()

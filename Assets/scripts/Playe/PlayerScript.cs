@@ -831,6 +831,20 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private void toggleFlashlight()
     {
         flashL.enabled = !flashL.enabled;
+        cmdToggFlashlight(flashL.enabled);
+    }
+
+    [Command]
+    private void cmdToggFlashlight(bool on)
+    {
+        flashL.enabled = on;
+        rpcToggFlashlight(on);
+    }
+
+    [ClientRpc]
+    private void rpcToggFlashlight(bool on)
+    {
+        flashL.enabled = on;
     }
 
     private bool canChange()
@@ -1058,6 +1072,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
     {
         requestedMelee = false;
         melee.GetComponent<WeaponClass>().forcedPickup(this, meleeSlot.getIndex(), false);
+        equipToMelee();
     }
 
     private void interact()

@@ -287,8 +287,6 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
         player.reSyncSlots();
 
-        onEquip();
-
     }
 
     public virtual void drop()
