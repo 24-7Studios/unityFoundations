@@ -1141,10 +1141,10 @@ BoxCollider:
   m_GameObject: {fileID: 5242103030026162038}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.5, z: 1}
-  m_Center: {x: 0, y: 0.25, z: 0}
+  m_Size: {x: 0.8, y: 0.5, z: 2.2}
+  m_Center: {x: 0, y: 0, z: 0.38}
 --- !u!114 &7196012451863958847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1174,7 +1174,9 @@ MonoBehaviour:
   - {fileID: 6514827237720604223}
   - {fileID: 637100831434043160}
   - {fileID: 4886398496468610942}
+  armsMesh: {fileID: 0}
   CameraOffset: {fileID: 8401856000262483585}
+  root: {fileID: 0}
   RightHoldParent: {fileID: 6895312079443944370}
   LeftHoldParent: {fileID: 8962957729015876090}
   anim: {fileID: 4935621106845689272}
@@ -2528,6 +2530,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 7608587148453020366}
     m_Modifications:
     - target: {fileID: 2358059437021906729, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
@@ -2601,6 +2604,7 @@ PrefabInstance:
       value: hitbox left thigh
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 12c74aabaf8c5b847b19d0832e25bcd3, type: 3}
 --- !u!4 &2809990727163479027 stripped
 Transform:
@@ -2645,6 +2649,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 3738138306982734492}
     m_Modifications:
     - target: {fileID: 2358059437021906729, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
@@ -2718,6 +2723,7 @@ PrefabInstance:
       value: hitbox head
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 12c74aabaf8c5b847b19d0832e25bcd3, type: 3}
 --- !u!114 &2671691945952996678 stripped
 MonoBehaviour:
@@ -2761,6 +2767,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1569018967365232769}
     m_Modifications:
     - target: {fileID: 2358059437021906729, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
@@ -2834,6 +2841,7 @@ PrefabInstance:
       value: hitbox left arm
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 12c74aabaf8c5b847b19d0832e25bcd3, type: 3}
 --- !u!4 &712278292680363369 stripped
 Transform:
@@ -2878,6 +2886,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 160024806860691689}
     m_Modifications:
     - target: {fileID: 2358059437021906729, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
@@ -2951,6 +2960,7 @@ PrefabInstance:
       value: hitbox right arm
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 12c74aabaf8c5b847b19d0832e25bcd3, type: 3}
 --- !u!114 &906402675993192705 stripped
 MonoBehaviour:
@@ -2995,6 +3005,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 5067943412078771418}
     m_Modifications:
     - target: {fileID: 2358059437021906729, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
@@ -3068,6 +3079,7 @@ PrefabInstance:
       value: hitbox right thigh
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 12c74aabaf8c5b847b19d0832e25bcd3, type: 3}
 --- !u!114 &637100831434043160 stripped
 MonoBehaviour:
@@ -3112,6 +3124,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1149086033989094460}
     m_Modifications:
     - target: {fileID: 2358059437021906729, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
@@ -3185,6 +3198,7 @@ PrefabInstance:
       value: hitbox right forearm
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 12c74aabaf8c5b847b19d0832e25bcd3, type: 3}
 --- !u!1 &2009990430437322005 stripped
 GameObject:
@@ -3229,6 +3243,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 8800177406524403261}
     m_Modifications:
     - target: {fileID: 2358059437021906729, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
@@ -3302,6 +3317,7 @@ PrefabInstance:
       value: ' hitbox left forearm'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 12c74aabaf8c5b847b19d0832e25bcd3, type: 3}
 --- !u!1 &2110520599479873801 stripped
 GameObject:
@@ -3346,6 +3362,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1055162649338335303}
     m_Modifications:
     - target: {fileID: 2358059437021906729, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
@@ -3419,6 +3436,7 @@ PrefabInstance:
       value: hitbox torso
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 12c74aabaf8c5b847b19d0832e25bcd3, type: 3}
 --- !u!1 &2613856235641050427 stripped
 GameObject:
@@ -3463,6 +3481,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 5920431150144800381}
     m_Modifications:
     - target: {fileID: 2358059437021906729, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
@@ -3536,6 +3555,7 @@ PrefabInstance:
       value: hitboxleft shin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 12c74aabaf8c5b847b19d0832e25bcd3, type: 3}
 --- !u!1 &2726587373622158123 stripped
 GameObject:
@@ -3580,6 +3600,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 8274842112243751438}
     m_Modifications:
     - target: {fileID: 2358059437021906729, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
@@ -3653,6 +3674,7 @@ PrefabInstance:
       value: hitbox right shin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 12c74aabaf8c5b847b19d0832e25bcd3, type: 3}
 --- !u!1 &4355088133146276458 stripped
 GameObject:

@@ -1996,21 +1996,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5242103030026162038}
-  serializedVersion: 4
+  serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
@@ -2024,19 +2013,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5242103030026162038}
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 1, y: 0.5, z: 1}
-  m_Center: {x: 0, y: 0.25, z: 0}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 0.5, z: 2.2}
+  m_Center: {x: 0, y: 0, z: 0.38}
 --- !u!114 &7196012451863958847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4066,7 +4047,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 3
+    serializedVersion: 2
     m_TransformParent: {fileID: 7608587148453020366}
     m_Modifications:
     - target: {fileID: 2358059437021906729, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
@@ -4140,13 +4121,7 @@ PrefabInstance:
       value: hitbox left thigh
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5256510782263274105, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 950476239308301455}
   m_SourcePrefab: {fileID: 100100000, guid: 12c74aabaf8c5b847b19d0832e25bcd3, type: 3}
 --- !u!4 &2809990727163479027 stripped
 Transform:
@@ -4180,17 +4155,8 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5671287062483594915}
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.1
   m_Height: 0.75
   m_Direction: 1
@@ -4200,7 +4166,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 3
+    serializedVersion: 2
     m_TransformParent: {fileID: 3738138306982734492}
     m_Modifications:
     - target: {fileID: 2358059437021906729, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
@@ -4274,13 +4240,7 @@ PrefabInstance:
       value: hitbox head
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5256510782263274105, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6765796016354085493}
   m_SourcePrefab: {fileID: 100100000, guid: 12c74aabaf8c5b847b19d0832e25bcd3, type: 3}
 --- !u!114 &2671691945952996678 stripped
 MonoBehaviour:
@@ -4314,17 +4274,9 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6533695794598162514}
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 2
   m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2979984121773525568
@@ -4332,7 +4284,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 3
+    serializedVersion: 2
     m_TransformParent: {fileID: 1569018967365232769}
     m_Modifications:
     - target: {fileID: 2358059437021906729, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
@@ -4406,13 +4358,7 @@ PrefabInstance:
       value: hitbox left arm
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5256510782263274105, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5895775109040348563}
   m_SourcePrefab: {fileID: 100100000, guid: 12c74aabaf8c5b847b19d0832e25bcd3, type: 3}
 --- !u!4 &712278292680363369 stripped
 Transform:
@@ -4446,17 +4392,8 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7037410369157832761}
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.08
   m_Height: 0.5
   m_Direction: 1
@@ -4466,7 +4403,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 3
+    serializedVersion: 2
     m_TransformParent: {fileID: 160024806860691689}
     m_Modifications:
     - target: {fileID: 2358059437021906729, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
@@ -4540,13 +4477,7 @@ PrefabInstance:
       value: hitbox right arm
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5256510782263274105, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5272215567108859597}
   m_SourcePrefab: {fileID: 100100000, guid: 12c74aabaf8c5b847b19d0832e25bcd3, type: 3}
 --- !u!114 &906402675993192705 stripped
 MonoBehaviour:
@@ -4580,17 +4511,8 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8298911938805101589}
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.08
   m_Height: 0.5
   m_Direction: 1
@@ -4600,7 +4522,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 3
+    serializedVersion: 2
     m_TransformParent: {fileID: 5067943412078771418}
     m_Modifications:
     - target: {fileID: 2358059437021906729, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
@@ -4674,13 +4596,7 @@ PrefabInstance:
       value: hitbox right thigh
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5256510782263274105, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4252347470866911866}
   m_SourcePrefab: {fileID: 100100000, guid: 12c74aabaf8c5b847b19d0832e25bcd3, type: 3}
 --- !u!114 &637100831434043160 stripped
 MonoBehaviour:
@@ -4714,17 +4630,8 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8604399537312444940}
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.1
   m_Height: 0.75
   m_Direction: 1
@@ -4734,7 +4641,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 3
+    serializedVersion: 2
     m_TransformParent: {fileID: 1149086033989094460}
     m_Modifications:
     - target: {fileID: 2358059437021906729, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
@@ -4808,13 +4715,7 @@ PrefabInstance:
       value: hitbox right forearm
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5256510782263274105, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2716807810295024875}
   m_SourcePrefab: {fileID: 100100000, guid: 12c74aabaf8c5b847b19d0832e25bcd3, type: 3}
 --- !u!1 &2009990430437322005 stripped
 GameObject:
@@ -4830,17 +4731,8 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2009990430437322005}
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.08
   m_Height: 0.5
   m_Direction: 1
@@ -4868,7 +4760,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 3
+    serializedVersion: 2
     m_TransformParent: {fileID: 8800177406524403261}
     m_Modifications:
     - target: {fileID: 2358059437021906729, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
@@ -4942,13 +4834,7 @@ PrefabInstance:
       value: ' hitbox left forearm'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5256510782263274105, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7771083423151746627}
   m_SourcePrefab: {fileID: 100100000, guid: 12c74aabaf8c5b847b19d0832e25bcd3, type: 3}
 --- !u!1 &2110520599479873801 stripped
 GameObject:
@@ -4964,17 +4850,8 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2110520599479873801}
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.08
   m_Height: 0.5
   m_Direction: 1
@@ -5002,7 +4879,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 3
+    serializedVersion: 2
     m_TransformParent: {fileID: 1055162649338335303}
     m_Modifications:
     - target: {fileID: 2358059437021906729, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
@@ -5076,13 +4953,7 @@ PrefabInstance:
       value: hitbox torso
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5256510782263274105, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8305100970940002678}
   m_SourcePrefab: {fileID: 100100000, guid: 12c74aabaf8c5b847b19d0832e25bcd3, type: 3}
 --- !u!1 &2613856235641050427 stripped
 GameObject:
@@ -5098,17 +4969,8 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2613856235641050427}
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.15
   m_Height: 0.8
   m_Direction: 1
@@ -5136,7 +4998,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 3
+    serializedVersion: 2
     m_TransformParent: {fileID: 5920431150144800381}
     m_Modifications:
     - target: {fileID: 2358059437021906729, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
@@ -5210,13 +5072,7 @@ PrefabInstance:
       value: hitboxleft shin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5256510782263274105, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8323557237246358219}
   m_SourcePrefab: {fileID: 100100000, guid: 12c74aabaf8c5b847b19d0832e25bcd3, type: 3}
 --- !u!1 &2726587373622158123 stripped
 GameObject:
@@ -5232,17 +5088,8 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2726587373622158123}
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.08
   m_Height: 0.5
   m_Direction: 1
@@ -5270,7 +5117,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 3
+    serializedVersion: 2
     m_TransformParent: {fileID: 8274842112243751438}
     m_Modifications:
     - target: {fileID: 2358059437021906729, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
@@ -5344,13 +5191,7 @@ PrefabInstance:
       value: hitbox right shin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5256510782263274105, guid: 12c74aabaf8c5b847b19d0832e25bcd3,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3367831721520787739}
   m_SourcePrefab: {fileID: 100100000, guid: 12c74aabaf8c5b847b19d0832e25bcd3, type: 3}
 --- !u!1 &4355088133146276458 stripped
 GameObject:
@@ -5366,17 +5207,8 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4355088133146276458}
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.08
   m_Height: 0.5
   m_Direction: 1
