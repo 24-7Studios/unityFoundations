@@ -148,6 +148,7 @@ public class gunClass : raycastWeapon
         playsound(sounds.IndexOf(fireSound));
         player.viewPunch(viewpunch, viewpunchAttack, viewpunchRecovery);
         player.recoil(recoilAmount, recoilAttack, recoilSmoothing);
+        player.viewPush(viewPushAmount, viewPushAttack, viewPushRecovery);
         loadedAmmo--;
         fireTimer = fireDelay;
 

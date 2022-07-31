@@ -84,6 +84,19 @@ public class PlayerScript : NetworkBehaviour, IDamage
 
     private float AppliedPunch;
 
+    [SerializeField]
+    private float MaxPush = 0.05f;
+
+    private float viewPushAttack;
+
+    private float viewPushRecovery;
+
+    private float currentPush;
+
+    private float totalPush;
+
+    private float appliedPush;
+
     private float recoilAttack;
 
     private float recoilSmoothing;
@@ -91,8 +104,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
     private float Totalrecoil;
 
     private float currentRecoil;
-
-    private float appliedRecoil;
 
     private Vector3 defaultCameraPos;
     private Vector3 defaultCameraRot;
@@ -318,6 +329,7 @@ public class PlayerScript : NetworkBehaviour, IDamage
             handleCameraTilt();
             handleViewShift();
             handleViewSway();
+            handleViewPush();
         }
 
 
@@ -434,6 +446,36 @@ public class PlayerScript : NetworkBehaviour, IDamage
         playerPhysBody.transform.rotation = Quaternion.Euler(Vector3.up * -xMouseTotal);
 
         CmdSyncPlayerRotation(yMouseTotal, xMouseTotal);
+    }
+
+    private void handleViewPush()
+    {
+        totalPush = Mathf.Clamp(totalPush, -totalPush, totalPush);
+        currentPush = Mathf.Lerp(currentPush, totalPush, viewPushAttack * Time.deltaTime);
+        totalPush = Mathf.Lerp(totalPush, 0, viewPushRecovery * Time.deltaTime);
+
+        camTransformer.localPosition = camTransformer.right * currentPush + camTransformer.localPosition.z * Vector3.forward + camTransformer.localPosition.z * Vector3.up;
+    }
+
+    public void viewPush(float p, float a, float r)
+    {
+        totalPush += p;
+        viewPushAttack = a;
+        viewPushRecovery = r;
+    }
+
+    public void viewPunch(float p, float a, float r)
+    {
+        TotalPunch -= p;
+        viewpunchAttack = a;
+        viewPunchRecovery = r;
+    }
+
+    public void recoil(float p, float a, float r)
+    {
+        Totalrecoil -= p;
+        recoilAttack = a;
+        recoilSmoothing = r;
     }
 
     private void handleCameraTilt()
@@ -1319,20 +1361,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
         Ipickup i = net.GetComponent<Ipickup>();
         interactZone.remove(i);
         i.drop();
-    }
-
-    public void viewPunch(float p, float a, float r)
-    {
-        TotalPunch -= p;
-        viewpunchAttack = a;
-        viewPunchRecovery = r;
-    }
-
-    public void recoil(float p, float a, float r)
-    {
-        Totalrecoil -= p;
-        recoilAttack = a;
-        recoilSmoothing = r;
     }
 
     public float getHealth()
