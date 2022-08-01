@@ -24,13 +24,13 @@ public abstract class raycastWeapon : WeaponClass
     protected float recoilSmoothing = 10f;
 
     [SerializeField]
-    protected float viewPushAmount = 0.2f;
+    protected float viewPushAmount = 0.3f;
 
     [SerializeField]
-    protected float viewPushAttack = 0.5f;
+    protected float viewPushAttack = 10f;
 
     [SerializeField]
-    protected float viewPushRecovery = 10f;
+    protected float viewPushRecovery = 20f;
 
     [SerializeField]
     protected float damage;

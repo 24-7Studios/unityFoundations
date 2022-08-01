@@ -104,17 +104,9 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3418680154138707625}
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
+  serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8989324824668654689, guid: 5686634ae6f5d1041bfd6cf2381b903d, type: 3}
@@ -125,21 +117,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3418680154138707625}
-  serializedVersion: 4
+  serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -194,6 +175,9 @@ MonoBehaviour:
   recoilAmount: 10
   recoilAttack: 0.5
   recoilSmoothing: 10
+  viewPushAmount: 0.35
+  viewPushAttack: 15
+  viewPushRecovery: 25
   damage: 25
   fleshMultiplier: 1
   knockbackForce: 20
@@ -561,7 +545,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 3
+    serializedVersion: 2
     m_TransformParent: {fileID: 2443624695451209230}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 5e0d35d2050d9de43a9eb2c76294830c,
@@ -960,17 +944,11 @@ PrefabInstance:
       value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1889618510729499174, guid: 5e0d35d2050d9de43a9eb2c76294830c,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 261121022644504825}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5e0d35d2050d9de43a9eb2c76294830c,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1355694226009062147}
   m_SourcePrefab: {fileID: 100100000, guid: 5e0d35d2050d9de43a9eb2c76294830c, type: 3}
 --- !u!1 &2786483985261900192 stripped
 GameObject:

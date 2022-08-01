@@ -454,7 +454,8 @@ public class PlayerScript : NetworkBehaviour, IDamage
         currentPush = Mathf.Lerp(currentPush, totalPush, viewPushAttack * Time.deltaTime);
         totalPush = Mathf.Lerp(totalPush, 0, viewPushRecovery * Time.deltaTime);
 
-        camTransformer.localPosition = camTransformer.right * currentPush + camTransformer.localPosition.z * Vector3.forward + camTransformer.localPosition.z * Vector3.up;
+        camTransformer.localPosition = -Vector3.forward * currentPush + defaultCameraPos;
+        
     }
 
     public void viewPush(float p, float a, float r)
