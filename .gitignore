@@ -40,4 +40,4 @@ sysinfo.txt
 *.apk
 *.unitypackage
 *.log
-Facepunch.Steamworks.Posix.dll.meta
+Assets/Plugins/Facepunch.Steamworks.2.3.2/Facepunch.Steamworks.Posix.dll.meta
