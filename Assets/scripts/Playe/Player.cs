@@ -6,10 +6,14 @@ using Mirror;
 
 public class Player : NetworkBehaviour
 {
+
+    private string UserName;
+
+    private List<iPlayable> playables = new List<iPlayable>();
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -17,4 +21,7 @@ public class Player : NetworkBehaviour
     {
         
     }
+
+
+
 }

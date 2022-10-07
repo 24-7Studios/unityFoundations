@@ -8,7 +8,7 @@ using UnityEngine.InputSystem.Users;
 using Cinemachine;
 using Mirror;
 
-public class PlayerScript : NetworkBehaviour, IDamage
+public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
 {
 
     //player setup

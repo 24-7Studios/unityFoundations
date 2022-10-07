@@ -4,16 +4,18 @@ using UnityEngine;
 
 public interface iPlayable
 {
-    private Player myPlayer { get; set; }
 
-    public void Possess(Player NewPlayer)
-    {
-        
-    }
+    public void addPlayer(Player newPlayer);
 
-    public Player DePlayer()
-    {
-        return myPlayer;
-        myPlayer = null;
-    }
+    public Player removePlayer();
+
+    public void attatch();
+
+    public void detatch();
+
+    public Player ActivatePlayer();
+
+    public Player DeactivatePlayer();
+
+
 }
