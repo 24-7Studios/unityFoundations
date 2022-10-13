@@ -16,6 +16,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
     /// components that make the player work. also likely to be referenced by other scripts especially in the guns
     /// </summary>
 
+    private Player myPlayer;
 
     [SerializeField]
     private PlayerStuffScriptableObject parameters;
@@ -235,12 +236,15 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
 
     public void addPlayer(Player newPlayer)
     {
-
+        removePlayer();
+        myPlayer = newPlayer;
     }
 
     public Player removePlayer()
     {
-        return new Player();
+        DeactivatePlayer();
+        detatchPlayer();
+        return myPlayer = null;
     }
 
     public void attatchPlayer()
@@ -255,12 +259,12 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
 
     public Player ActivatePlayer()
     {
-        return removePlayer();
+        return myPlayer;
     }
 
     public Player DeactivatePlayer()
     {
-        return removePlayer();
+        return myPlayer;
     }
 
     private void Awake()

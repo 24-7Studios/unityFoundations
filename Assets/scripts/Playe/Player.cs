@@ -11,6 +11,7 @@ public class Player : NetworkBehaviour
 
     private List<iPlayable> playables = new List<iPlayable>();
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,5 +24,9 @@ public class Player : NetworkBehaviour
     }
 
 
+    private string retrieveUsername()
+    {
+        return null;
+    }
 
 }
