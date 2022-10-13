@@ -9,9 +9,9 @@ public interface iPlayable
 
     public Player removePlayer();
 
-    public void attatch();
+    public void attatchPlayer();
 
-    public void detatch();
+    public void detatchPlayer();
 
     public Player ActivatePlayer();
 

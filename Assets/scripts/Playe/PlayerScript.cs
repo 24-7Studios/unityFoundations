@@ -8,7 +8,7 @@ using UnityEngine.InputSystem.Users;
 using Cinemachine;
 using Mirror;
 
-public class PlayerScript : NetworkBehaviour, IDamage
+public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
 {
 
     //player setup
@@ -233,6 +233,36 @@ public class PlayerScript : NetworkBehaviour, IDamage
     public Vector3 floornormal;
 
 
+    public void addPlayer(Player newPlayer)
+    {
+
+    }
+
+    public Player removePlayer()
+    {
+        return new Player();
+    }
+
+    public void attatchPlayer()
+    {
+
+    }
+
+    public void detatchPlayer()
+    {
+
+    }
+
+    public Player ActivatePlayer()
+    {
+        return removePlayer();
+    }
+
+    public Player DeactivatePlayer()
+    {
+        return removePlayer();
+    }
+
     private void Awake()
     {
         //gets components
@@ -253,7 +283,6 @@ public class PlayerScript : NetworkBehaviour, IDamage
         controls.Player.kill.performed += ctx => die();
         died += onDeath;
     }
-
 
     private void Start()
     {
