@@ -1,6 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
+using UnityEngine.InputSystem.Users;
+using Cinemachine;
 using Mirror;
 
 
@@ -10,6 +15,10 @@ public class Player : NetworkBehaviour
     private string UserName;
 
     private List<iPlayable> playables = new List<iPlayable>();
+
+    private Transform myTransfrom;
+
+    private PlayerInput myInput;
 
 
     // Start is called before the first frame update
