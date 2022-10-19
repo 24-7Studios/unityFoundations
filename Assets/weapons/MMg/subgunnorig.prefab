@@ -103,21 +103,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3639212011138319363}
-  serializedVersion: 4
+  serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -131,17 +120,9 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3639212011138319363}
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
+  serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 2534964839176971238, guid: e22b36ca1595c374e84e759e97c1ac6b, type: 3}
@@ -312,19 +293,22 @@ MonoBehaviour:
   recoilAmount: 10
   recoilAttack: 0.5
   recoilSmoothing: 10
+  viewPushAmount: 0.2
+  viewPushAttack: 0.5
+  viewPushRecovery: 10
   damage: 10
   fleshMultiplier: 1
   knockbackForce: 20
   spread: 0
   fullAuto: 1
-  fireDelay: 0.09
+  fireDelay: 0.075
   ViewmodelFlash: {fileID: 4314926972769928921, guid: 4e5e209968c3140498b9c719202d5482,
     type: 3}
   ViewmodelflashPos: {fileID: 4485723610245200068}
   WorldmodelFlash: {fileID: 0}
   WorldmodelFlashPos: {fileID: 0}
   fireAnim: fire
-  fireSound: {fileID: 8300000, guid: 5da8836f202c28044a0cb905451cdb68, type: 3}
+  fireSound: {fileID: 8300000, guid: bf008f37066aa044294aa204c6b82e2b, type: 3}
   reloadAnim: reload
   reloadSound: {fileID: 0}
   idleAnim: idle
@@ -446,7 +430,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 3
+    serializedVersion: 2
     m_TransformParent: {fileID: 4164357024455089849}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b43392caac5209d4db3e499e8aa85966,
@@ -850,17 +834,11 @@ PrefabInstance:
       value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -2577548232221058511, guid: b43392caac5209d4db3e499e8aa85966,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4485723610245200068}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b43392caac5209d4db3e499e8aa85966,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4485723609135497305}
   m_SourcePrefab: {fileID: 100100000, guid: b43392caac5209d4db3e499e8aa85966, type: 3}
 --- !u!1 &3639212010807040692 stripped
 GameObject:
@@ -911,7 +889,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 3
+    serializedVersion: 2
     m_TransformParent: {fileID: 4164357024455089849}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e22b36ca1595c374e84e759e97c1ac6b,
@@ -980,7 +958,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: e22b36ca1595c374e84e759e97c1ac6b,
         type: 3}
@@ -990,7 +967,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4485723610494659393}
-    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e22b36ca1595c374e84e759e97c1ac6b, type: 3}
 --- !u!1 &3639212009489223618 stripped
 GameObject:
