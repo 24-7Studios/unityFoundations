@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: b43392caac5209d4db3e499e8aa85966
 ModelImporter:
-  serializedVersion: 22200
+  serializedVersion: 22103
   internalIDToNameTable:
   - first:
       74: 6365926014387069646
@@ -92,8 +92,8 @@ ModelImporter:
       name: fire
       takeName: bruh
       internalID: 0
-      firstFrame: 1
-      lastFrame: 7
+      firstFrame: 2
+      lastFrame: 5
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
