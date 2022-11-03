@@ -9,12 +9,15 @@ using Cinemachine;
 using Mirror;
 
 
+
 public class Player : NetworkBehaviour
 {
 
     private string UserName;
 
-    private List<iPlayable> playables = new List<iPlayable>();
+    private List<iPlayable> myplayables = new List<iPlayable>();
+
+    private int activePlayableIndex;
 
     private Transform myTransfrom;
 
@@ -32,6 +35,38 @@ public class Player : NetworkBehaviour
         
     }
 
+    public bool activate(iPlayable play)
+    {
+        if(myplayables.Contains(play))
+        {
+            activePlayableIndex = myplayables.IndexOf(play);
+            myplayables[activePlayableIndex].ActivatePlayer();
+            return true;
+        }
+        return false;
+    }
+
+    public void addPlayable(iPlayable play)
+    {
+        if(!myplayables.Contains(play))
+            myplayables.Add(play);
+    }
+
+    public void removePlayable(iPlayable play)
+    {
+        if (myplayables.Contains(play))
+            myplayables.Remove(play);
+    }
+
+    public iPlayable getActive()
+    {
+        if(activePlayableIndex != -1)
+        {
+            return myplayables[activePlayableIndex];
+        }
+
+        return null;
+    }
 
     private string retrieveUsername()
     {
