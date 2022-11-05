@@ -46,6 +46,17 @@ public class Player : NetworkBehaviour
         return false;
     }
 
+    public bool activate(int index)
+    {
+        if (index < myplayables.Count)
+        {
+            activePlayableIndex = index;
+            myplayables[activePlayableIndex].ActivatePlayer();
+            return true;
+        }
+        return false;
+    }
+
     public void addPlayable(iPlayable play)
     {
         if(!myplayables.Contains(play))
