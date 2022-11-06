@@ -15,6 +15,13 @@ public class Player : NetworkBehaviour
 
     private string UserName;
 
+    private int playerIndex;
+
+    private LayerMask viewModel;
+    private LayerMask playermodel;
+    private LayerMask Shootable;
+
+
     private List<iPlayable> myplayables = new List<iPlayable>();
 
     private int activePlayableIndex;
@@ -23,17 +30,6 @@ public class Player : NetworkBehaviour
 
     private PlayerInput myInput;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public bool activate(iPlayable play)
     {
