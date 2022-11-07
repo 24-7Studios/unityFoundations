@@ -31,6 +31,7 @@ public class Player : NetworkBehaviour
     private PlayerInput myInput;
 
 
+
     public bool activate(iPlayable play)
     {
         if(myplayables.Contains(play))
