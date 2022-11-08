@@ -870,6 +870,7 @@ GameObject:
   m_Component:
   - component: {fileID: 777433410}
   - component: {fileID: 777433409}
+  - component: {fileID: 777433411}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -913,7 +914,7 @@ MonoBehaviour:
     m_Reference: {fileID: 0}
   m_PlayerPrefab: {fileID: 1456960714752792774, guid: dcbddc832f911bd40a83c15ccbb9af25,
     type: 3}
-  m_SplitScreen: 1
+  m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
   m_SplitScreenRect:
@@ -937,6 +938,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &777433411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777433408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eef258d6ce33d48429bbf94cf915051b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &827012049
 GameObject:
   m_ObjectHideFlags: 0

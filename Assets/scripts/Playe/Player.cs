@@ -31,6 +31,10 @@ public class Player : NetworkBehaviour
     private PlayerInput myInput;
 
 
+    private void Awake()
+    {
+            
+    }
 
     public bool activate(iPlayable play)
     {
