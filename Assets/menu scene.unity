@@ -927,14 +927,14 @@ MonoBehaviour:
   m_PlayerPrefab: {fileID: 1456960714752792774, guid: dcbddc832f911bd40a83c15ccbb9af25,
     type: 3}
   m_SplitScreen: 0
-  m_MaintainAspectRatioInSplitScreen: 0
+  m_MaintainAspectRatioInSplitScreen: 1
   m_FixedNumberOfSplitScreens: -1
   m_SplitScreenRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
-    height: 1
+    height: 0.5
 --- !u!4 &777433410
 Transform:
   m_ObjectHideFlags: 0

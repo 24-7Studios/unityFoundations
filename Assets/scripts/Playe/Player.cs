@@ -10,7 +10,7 @@ using Mirror;
 
 
 
-public class Player : NetworkBehaviour
+public class Player : MonoBehaviour
 {
 
     private string UserName;
@@ -33,7 +33,13 @@ public class Player : NetworkBehaviour
 
     private void Awake()
     {
-            
+        myInput = GetComponent<PlayerInput>();
+        playerIndex = myInput.playerIndex;
+    }
+
+    private void setLayers(int playerindex)
+    {
+
     }
 
     public bool activate(iPlayable play)

@@ -30,14 +30,19 @@ public class PlayerManager : MonoBehaviour
         {
             playermanager = this;
         }
+
+
     }
 
     public void OnPlayerJoined(PlayerInput p)
     {
-        //playerList.Add(p);
-        //playerinputmanager.playerj
-        Debug.Log("wtf");
-        Debug.Log(p);
+        Player player= p.transform.GetComponent<Player>();
+        playerList.Add(player);
     }
 
+    public void OnPlayerDropped(PlayerInput p)
+    {
+        Player player = p.transform.GetComponent<Player>();
+        playerList.Remove(player);
+    }
 }
