@@ -6,24 +6,38 @@ using UnityEngine.InputSystem;
 public class PlayerManager : MonoBehaviour
 {
 
-    private PlayerInputManager playerinputmanager;
+    private static PlayerInputManager playerinputmanager;
+    private static PlayerManager playermanager;
     private List<Player> playerList;
 
 
     private void Awake()
     {
-        //playerinputmanager.playerJoinedEvent += addPlayer;
+        if(playerinputmanager != null)
+        {
+            Debug.LogError("There is already a PlayerInputManager!");
+        }
+        else
+        {
+            playerinputmanager = gameObject.GetComponent<PlayerInputManager>();
+        }
+
+        if(playermanager != null)
+        {
+            Debug.LogError("There is already a PlayerManager!");
+        }
+        else
+        {
+            playermanager = this;
+        }
     }
 
-    public void OnPlayerJoined(Player p)
+    public void OnPlayerJoined(PlayerInput p)
     {
         //playerList.Add(p);
         //playerinputmanager.playerj
         Debug.Log("wtf");
+        Debug.Log(p);
     }
 
-    public static PlayerManager GetPlayerManager()
-    {
-        return this;
-    }
 }
