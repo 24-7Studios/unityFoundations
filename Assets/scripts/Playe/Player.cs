@@ -17,6 +17,11 @@ public class Player : MonoBehaviour
 
     private int playerIndex;
 
+    [SerializeField] private Camera myMainCamera;
+    private Vector2 cameraXY;
+    private Vector2 cameraWH;
+
+
     private LayerMask viewModel;
     private LayerMask playermodel;
     private LayerMask Shootable;
@@ -38,6 +43,11 @@ public class Player : MonoBehaviour
     }
 
     private void setLayers(int playerindex)
+    {
+
+    }
+
+    public void setCamRect(Vector2 xy, Vector2 wh)
     {
 
     }
@@ -84,6 +94,11 @@ public class Player : MonoBehaviour
         }
 
         return null;
+    }
+
+    public Camera getCamera()
+    {
+        return myMainCamera;
     }
 
     private string retrieveUsername()

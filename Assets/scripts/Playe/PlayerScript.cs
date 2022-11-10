@@ -39,10 +39,10 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
     private AudioSource LocalAud;
 
     [SerializeField]
-    private CinemachineVirtualCamera virtualCam;
+    private Transform virtualCam;
 
     [SerializeField]
-    private CinemachineVirtualCamera corpseVirtualCam;
+    private Transform corpseVirtualCam;
 
     [SerializeField]
     private AudioListener audioListener;
@@ -311,7 +311,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         {
 
             controls.Player.Enable();
-            virtualCam.enabled = true;
+
             input.enabled = true;
 
             //LocalAud = Instantiate(CameraSetup, camEffector).GetComponent<AudioSource>();
@@ -852,8 +852,6 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         LivePlayerModel.transform.SetParent(playerPhysBody.transform, false);
 
 
-        corpseVirtualCam.Follow = LivePlayerModel.getRoot();
-        corpseVirtualCam.LookAt = LivePlayerModel.getRoot();
         camTransformer.position = LivePlayerModel.CameraOffset.position;
         defaultCameraPos = camTransformer.localPosition;
         defaultCameraRot = camTransformer.localRotation.eulerAngles;
@@ -1473,8 +1471,6 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         if(isLocalPlayer)
         {
             audioListener.enabled = false;
-            virtualCam.enabled = false;
-            corpseVirtualCam.enabled = true;
             controls.Player.Disable();
             controls.PlayerStandby.Enable();
         }
@@ -1489,8 +1485,6 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         if(isLocalPlayer)
         {
             audioListener.enabled = true;
-            virtualCam.enabled = true;
-            corpseVirtualCam.enabled = false;
             controls.Player.Enable();
             controls.PlayerStandby.Disable();
         }

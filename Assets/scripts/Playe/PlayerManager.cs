@@ -20,6 +20,7 @@ public class PlayerManager : MonoBehaviour
         else
         {
             playerinputmanager = gameObject.GetComponent<PlayerInputManager>();
+            DontDestroyOnLoad(playerinputmanager.gameObject);
         }
 
         if(playermanager != null)
@@ -29,6 +30,7 @@ public class PlayerManager : MonoBehaviour
         else
         {
             playermanager = this;
+            DontDestroyOnLoad(playermanager.gameObject);
         }
 
 
