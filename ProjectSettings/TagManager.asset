@@ -20,15 +20,15 @@ TagManager:
   - viewmodel
   - PlayerColliders
   - noShoot
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - otherPlayer
+  - viewmodel0
+  - player0
+  - viewmodel1
+  - player1
+  - viewmodel2
+  - player2
+  - viewmodel3
+  - player3
   - 
   - 
   - 
