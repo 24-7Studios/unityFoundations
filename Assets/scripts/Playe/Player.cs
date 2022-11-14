@@ -33,18 +33,19 @@ public class Player : MonoBehaviour
 
     private Transform myTransfrom;
 
-    private PlayerInput myInput;
+    private PlayerInput myPlayerInput;
+    private Inputmaster myInputMaster;
 
 
     private void Awake()
     {
-        myInput = GetComponent<PlayerInput>();
-        playerIndex = myInput.playerIndex;
+        myPlayerInput = GetComponent<PlayerInput>();
+        playerIndex = myPlayerInput.playerIndex;
     }
 
-    private void setLayers(int playerindex)
+    public void setLayers()
     {
-
+        
     }
 
     public void setCamRect()
@@ -111,6 +112,16 @@ public class Player : MonoBehaviour
     public Camera getCamera()
     {
         return myMainCamera;
+    }
+
+    public PlayerInput getPlayerInput()
+    {
+        return myPlayerInput;
+    }
+
+    public Inputmaster getInputMaster()
+    {
+        return myInputMaster;
     }
 
     private string retrieveUsername()
