@@ -16,6 +16,4 @@ public interface iPlayable
     public Player ActivatePlayer();
 
     public Player DeactivatePlayer();
-
-
 }

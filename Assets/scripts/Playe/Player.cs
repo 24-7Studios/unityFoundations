@@ -18,9 +18,7 @@ public class Player : MonoBehaviour
     private int playerIndex;
 
     [SerializeField] private Camera myMainCamera;
-    private Vector2 cameraXY;
-    private Vector2 cameraWH;
-
+    [SerializeField] private GameObject blankPlayable;
 
     private LayerMask viewModel;
     private LayerMask playermodel;
@@ -40,7 +38,15 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         myPlayerInput = GetComponent<PlayerInput>();
+        myInputMaster = new Inputmaster();
         playerIndex = myPlayerInput.playerIndex;
+    }
+
+    private void Start()
+    {
+        myplayables.Add(Instantiate(blankPlayable).GetComponent<iPlayable>());
+        myplayables[0].addPlayer(this);
+        myplayables[0].ActivatePlayer();
     }
 
     public void setLayers()

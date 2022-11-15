@@ -10,9 +10,15 @@ public class blankPlayable : MonoBehaviour, iPlayable
 
     private Player myPlayer;
 
-    
+    private Inputmaster controls;
+    private PlayerInput input;
 
 
+    [SerializeField] private float sens = 0.2f;
+    [SerializeField] private float speed = 0.2f;
+    //private Vector2 inputDirection;
+    private float yMouseInput = 0;
+    private float xMouseInput = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -23,14 +29,53 @@ public class blankPlayable : MonoBehaviour, iPlayable
     // Update is called once per frame
     void Update()
     {
+
+
+        handleMouseInput();
     }
 
 
+     private void handleMouseInput()
+    {
+        float MouseX = 0;
+        float MouseY = 0;
 
+        /*
+        if (input.currentControlScheme != null)
+        {
+            if (input.currentControlScheme.Equals("gamepad"))
+            {
+                MouseX = controls.Player.looking.ReadValue<Vector2>().x * sens * Time.deltaTime;
+                MouseY = controls.Player.looking.ReadValue<Vector2>().y * sens * Time.deltaTime;
+            }
+            else
+            {
+                MouseX = controls.Player.looking.ReadValue<Vector2>().x * sens * Time.deltaTime;
+                MouseY = controls.Player.looking.ReadValue<Vector2>().y * sens * Time.deltaTime;
+            }
+        }
+        */
+
+        MouseX = controls.Player.looking.ReadValue<Vector2>().x * sens * Time.deltaTime;
+        MouseY = controls.Player.looking.ReadValue<Vector2>().y * sens * Time.deltaTime;
+
+        yMouseInput -= MouseY;
+        yMouseInput = Mathf.Clamp(yMouseInput, -90f, 90f);
+        xMouseInput -= MouseX;
+
+
+        float yMouseTotal = yMouseInput;
+        float xMouseTotal = xMouseInput;
+
+        transform.rotation = Quaternion.Euler((yMouseTotal * Vector3.right) + (Vector3.up * -xMouseTotal));
+    }
 
     public void addPlayer(Player newPlayer)
     {
-        removePlayer();
+        if(myPlayer != null)
+        {
+            removePlayer();
+        }
         myPlayer = newPlayer;
     }
 
@@ -53,8 +98,11 @@ public class blankPlayable : MonoBehaviour, iPlayable
 
     public Player ActivatePlayer()
     {
+        attatchPlayer();
         myPlayer.setCamRect();
         myPlayer.setLayers();
+        controls = myPlayer.getInputMaster();
+        input = myPlayer.getPlayerInput();
         this.gameObject.SetActive(true);
         return myPlayer;
     }

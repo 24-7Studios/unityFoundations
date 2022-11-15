@@ -13,6 +13,9 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
+
+        playerList = new List<Player>();
+
         if(playerinputmanager != null)
         {
             Debug.LogError("There is already a PlayerInputManager!");
@@ -38,8 +41,8 @@ public class PlayerManager : MonoBehaviour
 
     public void OnPlayerJoined(PlayerInput p)
     {
-        Player player= p.transform.GetComponent<Player>();
-        playerList.Add(player);
+        //Debug.Log(p.GetComponent<Player>());
+        playerList.Add(p.GetComponent<Player>());
     }
 
     public void OnPlayerDropped(PlayerInput p)
