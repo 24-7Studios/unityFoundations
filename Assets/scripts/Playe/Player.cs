@@ -32,13 +32,12 @@ public class Player : MonoBehaviour
     private Transform myTransfrom;
 
     private PlayerInput myPlayerInput;
-    private Inputmaster myInputMaster;
+
 
 
     private void Awake()
     {
         myPlayerInput = GetComponent<PlayerInput>();
-        myInputMaster = new Inputmaster();
         playerIndex = myPlayerInput.playerIndex;
     }
 
@@ -123,11 +122,6 @@ public class Player : MonoBehaviour
     public PlayerInput getPlayerInput()
     {
         return myPlayerInput;
-    }
-
-    public Inputmaster getInputMaster()
-    {
-        return myInputMaster;
     }
 
     private string retrieveUsername()

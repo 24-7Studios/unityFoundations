@@ -31,15 +31,15 @@ public class blankPlayable : MonoBehaviour, iPlayable
     {
 
 
-        handleMouseInput();
     }
 
 
-     private void handleMouseInput()
+     private void handleMouseInput(InputAction.CallbackContext context)
     {
         float MouseX = 0;
         float MouseY = 0;
 
+        Debug.Log(context.action.name);
         /*
         if (input.currentControlScheme != null)
         {
@@ -56,8 +56,11 @@ public class blankPlayable : MonoBehaviour, iPlayable
         }
         */
 
-        MouseX = controls.Player.looking.ReadValue<Vector2>().x * sens * Time.deltaTime;
-        MouseY = controls.Player.looking.ReadValue<Vector2>().y * sens * Time.deltaTime;
+        if(context.action.name.Equals("looking"))
+
+
+        MouseX = context.ReadValue<Vector2>().x * sens * Time.deltaTime;
+        MouseY = context.ReadValue<Vector2>().y * sens * Time.deltaTime;
 
         yMouseInput -= MouseY;
         yMouseInput = Mathf.Clamp(yMouseInput, -90f, 90f);
@@ -101,8 +104,8 @@ public class blankPlayable : MonoBehaviour, iPlayable
         attatchPlayer();
         myPlayer.setCamRect();
         myPlayer.setLayers();
-        controls = myPlayer.getInputMaster();
         input = myPlayer.getPlayerInput();
+        bindControls();
         this.gameObject.SetActive(true);
         return myPlayer;
     }
@@ -114,4 +117,9 @@ public class blankPlayable : MonoBehaviour, iPlayable
     }
 
 
+
+    private void bindControls()
+    {
+        input.onActionTriggered += handleMouseInput;
+    }
 }

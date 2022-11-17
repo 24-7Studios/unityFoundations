@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 3d02525140440134c9cbd85a77bdfbac,
     type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 3
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -59,7 +59,67 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e761f024-addf-4cf5-a38a-f0a15a112488
+    m_ActionName: Player/looking[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 451f71ac-93f8-4e63-8c8c-f8ef0c2f30cb
+    m_ActionName: Player/jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5d3149f4-2a4b-4a54-af55-91d2f96b3be4
+    m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c3b2bfbf-9a55-4025-a929-6c2af0258380
+    m_ActionName: Player/Change[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 590c09c7-69b0-43ee-980e-f3b6be6ce383
+    m_ActionName: Player/drop[/Keyboard/g]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 140ded67-27fb-439c-bf63-5a9df26ed819
+    m_ActionName: Player/interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 92026b81-ea9e-4cb7-868d-cd5fc69714f5
+    m_ActionName: Player/Fire_1[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3154bfe1-127f-4536-81a0-6f034a659eff
+    m_ActionName: Player/Fire_2/Zoom1[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1b3b9af8-9eed-4408-8268-bcfca367b39a
+    m_ActionName: Player/reload[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7d2cb123-8ff9-4447-a713-d6cb739a8409
+    m_ActionName: Player/reload2[/Keyboard/v]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9798b9a0-aa45-4f96-af2c-575c45aa7e21
+    m_ActionName: Player/melee[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d629762e-523f-4e2c-aa5b-74d15c2ba3a2
+    m_ActionName: Player/kill[/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4662051a-3861-4f81-b855-2c12cc82a876
+    m_ActionName: Player/dual[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cd57bac0-48cc-49bf-aefb-36ec6ca2190c
+    m_ActionName: Player/toggleLight[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5ce561f3-95fe-4352-b9eb-299e89214af1
+    m_ActionName: PlayerStandby/looking[/Mouse/delta]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
