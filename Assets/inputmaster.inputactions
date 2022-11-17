@@ -7,7 +7,7 @@
             "actions": [
                 {
                     "name": "looking",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "e761f024-addf-4cf5-a38a-f0a15a112488",
                     "expectedControlType": "Vector2",
                     "processors": "",

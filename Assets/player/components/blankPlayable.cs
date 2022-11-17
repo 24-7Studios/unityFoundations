@@ -10,8 +10,9 @@ public class blankPlayable : MonoBehaviour, iPlayable
 
     private Player myPlayer;
 
-    private Inputmaster controls;
     private PlayerInput input;
+    private InputAction lookingAction;
+
 
 
     [SerializeField] private float sens = 0.2f;
@@ -23,23 +24,21 @@ public class blankPlayable : MonoBehaviour, iPlayable
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
+        handleMouseInput();
     }
 
 
-     private void handleMouseInput(InputAction.CallbackContext context)
+     private void handleMouseInput()
     {
         float MouseX = 0;
         float MouseY = 0;
 
-        Debug.Log(context.action.name);
+        
         /*
         if (input.currentControlScheme != null)
         {
@@ -120,6 +119,8 @@ public class blankPlayable : MonoBehaviour, iPlayable
 
     private void bindControls()
     {
-        input.onActionTriggered += handleMouseInput;
+        //input.onActionTriggered += handleMouseInput;
+        lookingAction = input.actions.FindAction("looking");
+        lookingAction.Enable();
     }
 }
