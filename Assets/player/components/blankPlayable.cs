@@ -55,11 +55,9 @@ public class blankPlayable : MonoBehaviour, iPlayable
         }
         */
 
-        if(context.action.name.Equals("looking"))
 
-
-        MouseX = context.ReadValue<Vector2>().x * sens * Time.deltaTime;
-        MouseY = context.ReadValue<Vector2>().y * sens * Time.deltaTime;
+        MouseX = lookingAction.ReadValue<Vector2>().x * sens * Time.deltaTime;
+        MouseY = lookingAction.ReadValue<Vector2>().y * sens * Time.deltaTime;
 
         yMouseInput -= MouseY;
         yMouseInput = Mathf.Clamp(yMouseInput, -90f, 90f);

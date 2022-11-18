@@ -226,9 +226,6 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
 
 
     //controls
-    private Inputmaster controls;
-
-    [SerializeField]
     private PlayerInput input;
 
     public Vector3 floornormal;
@@ -249,7 +246,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
 
     public void attatchPlayer()
     {
-
+        input = myPlayer.getPlayerInput();
     }
 
     public void detatchPlayer()
@@ -267,6 +264,12 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         return myPlayer;
     }
 
+    private void assignControls()
+    {
+        input = myplayer
+    }
+
+
     private void Awake()
     {
         //gets components
@@ -274,8 +277,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         playerCollider = GetComponent<Collider>();
         aud = GetComponent<AudioSource>();
 
-        controls = new Inputmaster();
-        input = GetComponent<PlayerInput>();
+        
         controls.Player.jump.performed += ctx => activateJump();
         controls.Player.Change.performed += ctx => changeSlot();
         controls.Player.interact.started += ctx => interact();
