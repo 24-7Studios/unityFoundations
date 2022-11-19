@@ -195,4 +195,9 @@ public class newNetworkHUD : MonoBehaviour
             }
         }
     }
+
+    private void OnConnectedToServer()
+    {
+        PlayerManager.getInstance().gameObject.SetActive(true);
+    }
 }

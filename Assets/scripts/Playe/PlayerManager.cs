@@ -11,6 +11,11 @@ public class PlayerManager : MonoBehaviour
     private List<Player> playerList;
 
 
+    public static PlayerInputManager getInstance()
+    {
+        return playerinputmanager;
+    }
+
     private void Awake()
     {
 

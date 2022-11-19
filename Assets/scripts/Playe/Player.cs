@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Camera myMainCamera;
     [SerializeField] private GameObject blankPlayable;
+    [SerializeField] private GameObject player;
 
     private LayerMask viewModel;
     private LayerMask playermodel;
@@ -43,7 +44,11 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        myplayables.Add(Instantiate(blankPlayable).GetComponent<iPlayable>());
+        player = NetworkManager.singleton.playerPrefab;
+        player = Instantiate(player);
+        myplayables.Add(player.GetComponent<iPlayable>());
+        NetworkServer.Spawn(player);
+        //player.GetComponent<NetworkIdentity>().AssignClientAuthority();
         myplayables[0].addPlayer(this);
         myplayables[0].ActivatePlayer();
     }

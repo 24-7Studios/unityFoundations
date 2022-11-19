@@ -235,7 +235,10 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
 
     public void addPlayer(Player newPlayer)
     {
-        removePlayer();
+        if (myPlayer != null)
+        {
+            removePlayer();
+        }
         myPlayer = newPlayer;
     }
 
@@ -248,7 +251,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
 
     public void attatchPlayer()
     {
-        input = myPlayer.getPlayerInput();
+        myPlayer.transform.SetParent(camEffector);
     }
 
     public void detatchPlayer()
@@ -258,17 +261,38 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
 
     public Player ActivatePlayer()
     {
+        attatchPlayer();
+        //myPlayer.setLayers();
+        input = myPlayer.getPlayerInput();
+        bindControls();
+        this.gameObject.SetActive(true);
         return myPlayer;
     }
 
     public Player DeactivatePlayer()
     {
+        this.gameObject.SetActive(false);
         return myPlayer;
     }
 
-    private void assignControls()
+    private void bindControls()
     {
         input = myPlayer.getPlayerInput();
+        input.actions.FindAction("jump").performed += ctx => activateJump();
+        input.actions.FindAction("Change").performed += ctx => changeSlot();
+        input.actions.FindAction("interact").started += ctx => interact();
+        input.actions.FindAction("interact").performed += ctx => manualPickup();
+        input.actions.FindAction("toggleLight").performed += ctx => toggleFlashlight();
+        input.actions.FindAction("dual").performed += ctx => manualPickup(true);
+        input.actions.FindAction("drop").performed += ctx => manualDrop();
+        input.actions.FindAction("melee").performed += ctx => equipToMelee();
+        input.actions.FindAction("kill").performed += ctx => die();
+
+        input.ActivateInput();
+        foreach(InputAction inp in input.actions)
+        {
+            inp.Enable();
+        }
     }
 
 
@@ -279,15 +303,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         playerCollider = GetComponent<Collider>();
         aud = GetComponent<AudioSource>();
 
-        input.actions.FindAction("jump").performed += ctx => activateJump();
-        input.actions.FindAction("Change").performed += ctx => changeSlot();
-        input.actions.FindAction("interact").started += ctx => interact();
-        input.actions.FindAction("interact").performed += ctx => manualPickup();
-        input.actions.FindAction("toggleLight").performed += ctx => toggleFlashlight();
-        input.actions.FindAction("dual").performed += ctx => manualPickup(true);
-        input.actions.FindAction("drop").performed += ctx => manualDrop();
-        input.actions.FindAction("melee").performed += ctx => equipToMelee();
-        input.actions.FindAction("kill").performed += ctx => die();
+       
         died += onDeath;
     }
 
