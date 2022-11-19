@@ -227,6 +227,8 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
 
     //controls
     private PlayerInput input;
+    private InputAction looking;
+    private InputAction moving;
 
     public Vector3 floornormal;
 
@@ -266,7 +268,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
 
     private void assignControls()
     {
-        input = myplayer
+        input = myPlayer.getPlayerInput();
     }
 
 
@@ -277,16 +279,15 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         playerCollider = GetComponent<Collider>();
         aud = GetComponent<AudioSource>();
 
-        
-        controls.Player.jump.performed += ctx => activateJump();
-        controls.Player.Change.performed += ctx => changeSlot();
-        controls.Player.interact.started += ctx => interact();
-        controls.Player.interact.performed += ctx => manualPickup();
-        controls.Player.toggleLight.performed += ctx => toggleFlashlight();
-        controls.Player.dual.performed += ctx => manualPickup(true);
-        controls.Player.drop.performed += ctx => manualDrop();
-        controls.Player.melee.performed += ctx => equipToMelee();
-        controls.Player.kill.performed += ctx => die();
+        input.actions.FindAction("jump").performed += ctx => activateJump();
+        input.actions.FindAction("Change").performed += ctx => changeSlot();
+        input.actions.FindAction("interact").started += ctx => interact();
+        input.actions.FindAction("interact").performed += ctx => manualPickup();
+        input.actions.FindAction("toggleLight").performed += ctx => toggleFlashlight();
+        input.actions.FindAction("dual").performed += ctx => manualPickup(true);
+        input.actions.FindAction("drop").performed += ctx => manualDrop();
+        input.actions.FindAction("melee").performed += ctx => equipToMelee();
+        input.actions.FindAction("kill").performed += ctx => die();
         died += onDeath;
     }
 
@@ -312,7 +313,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         if (isLocalPlayer)
         {
 
-            controls.Player.Enable();
+            //controls.Player.Enable();
 
             input.enabled = true;
 
@@ -376,8 +377,8 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
 
         if (isLocalPlayer)
         {
-            x = controls.Player.Movement.ReadValue<Vector2>().x;
-            z = controls.Player.Movement.ReadValue<Vector2>().y;
+            x = moving.ReadValue<Vector2>().x;
+            z = moving.ReadValue<Vector2>().y;
 
 
 
@@ -449,13 +450,13 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         {
             if (input.currentControlScheme.Equals("gamepad"))
             {
-                MouseX = controls.Player.looking.ReadValue<Vector2>().x * parameters.playerOptions.controllerSens * Time.deltaTime;
-                MouseY = controls.Player.looking.ReadValue<Vector2>().y * parameters.playerOptions.controllerSens * Time.deltaTime;
+                MouseX = looking.ReadValue<Vector2>().x * parameters.playerOptions.controllerSens * Time.deltaTime;
+                MouseY = looking.ReadValue<Vector2>().y * parameters.playerOptions.controllerSens * Time.deltaTime;
             }
             else
             {
-                MouseX = controls.Player.looking.ReadValue<Vector2>().x * parameters.playerOptions.MouseSens * Time.deltaTime;
-                MouseY = controls.Player.looking.ReadValue<Vector2>().y * parameters.playerOptions.MouseSens * Time.deltaTime;
+                MouseX = looking.ReadValue<Vector2>().x * parameters.playerOptions.MouseSens * Time.deltaTime;
+                MouseY = looking.ReadValue<Vector2>().y * parameters.playerOptions.MouseSens * Time.deltaTime;
             }
         }
 
@@ -522,8 +523,8 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
 
     private void handleViewSway()
     {
-        Quaternion swayX = Quaternion.AngleAxis(-controls.Player.looking.ReadValue<Vector2>().y * parameters.playerOptions.MouseSens * parameters.playerOptions.viewmodelSwayFactor, Vector3.right);
-        Quaternion swayY = Quaternion.AngleAxis(controls.Player.looking.ReadValue<Vector2>().x * parameters.playerOptions.MouseSens * parameters.playerOptions.viewmodelSwayFactor, Vector3.up);
+        Quaternion swayX = Quaternion.AngleAxis(looking.ReadValue<Vector2>().y * parameters.playerOptions.MouseSens * parameters.playerOptions.viewmodelSwayFactor, Vector3.right);
+        Quaternion swayY = Quaternion.AngleAxis(looking.ReadValue<Vector2>().x * parameters.playerOptions.MouseSens * parameters.playerOptions.viewmodelSwayFactor, Vector3.up);
         Quaternion targetSway = swayX * swayY;
         viewmodelHolder.localRotation = Quaternion.Slerp(viewmodelHolder.localRotation, targetSway, parameters.playerOptions.viewmodelSwaySmoothing * Time.deltaTime);
     }
@@ -896,10 +897,12 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
     {
         return viewmodelHolder;
     }
+    
 
+    /// this needs to be fixed. Is broken rn and just to compile for  testing
     public Inputmaster getInputMaster()
     {
-        return controls;
+        return null;
     }
 
     //////////////////////////////////
@@ -1473,8 +1476,8 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         if(isLocalPlayer)
         {
             audioListener.enabled = false;
-            controls.Player.Disable();
-            controls.PlayerStandby.Enable();
+            //controls.Player.Disable();
+            //controls.PlayerStandby.Enable();
         }
     }
 
@@ -1487,8 +1490,8 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         if(isLocalPlayer)
         {
             audioListener.enabled = true;
-            controls.Player.Enable();
-            controls.PlayerStandby.Disable();
+            //controls.Player.Enable();
+            //controls.PlayerStandby.Disable();
         }
     }
 
