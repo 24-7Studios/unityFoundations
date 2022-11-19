@@ -53,21 +53,9 @@ public class Player : MonoBehaviour
         
     }
 
-    public void setCamRect()
+    public void setCamRect(Rect newRect)
     {
-        Rect newRect = new Rect();
-
-        if(PlayerInputManager.instance.playerCount > 0)
-        {
-            newRect.y = 0.5f;
-
-            if(PlayerInputManager.instance.playerCount > 2)
-            {
-                newRect.x = 0.5f;
-            }
-        }
-
-        if (playerIndex < 2 && PlayerInputManager.instance.playerCount > 0) ;
+        myMainCamera.rect = newRect;
     }
 
     public bool activate(iPlayable play)

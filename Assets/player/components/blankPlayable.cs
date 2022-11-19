@@ -12,6 +12,7 @@ public class blankPlayable : MonoBehaviour, iPlayable
 
     private PlayerInput input;
     private InputAction lookingAction;
+    private InputAction movement;
 
 
 
@@ -32,8 +33,12 @@ public class blankPlayable : MonoBehaviour, iPlayable
         handleMouseInput();
     }
 
+    private void FixedUpdate()
+    {
+        transform.position += (transform.forward * movement.ReadValue<Vector2>().y + transform.right * movement.ReadValue<Vector2>().x);
+    }
 
-     private void handleMouseInput()
+    private void handleMouseInput()
     {
         float MouseX = 0;
         float MouseY = 0;
@@ -99,8 +104,7 @@ public class blankPlayable : MonoBehaviour, iPlayable
     public Player ActivatePlayer()
     {
         attatchPlayer();
-        myPlayer.setCamRect();
-        myPlayer.setLayers();
+        //myPlayer.setLayers();
         input = myPlayer.getPlayerInput();
         bindControls();
         this.gameObject.SetActive(true);
@@ -119,6 +123,8 @@ public class blankPlayable : MonoBehaviour, iPlayable
     {
         //input.onActionTriggered += handleMouseInput;
         lookingAction = input.actions.FindAction("looking");
+        movement = input.actions.FindAction("Movement");
         lookingAction.Enable();
+        movement.Enable();
     }
 }
