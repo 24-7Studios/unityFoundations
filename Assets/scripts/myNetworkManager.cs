@@ -52,4 +52,9 @@ public class myNetworkManager : NetworkManager
 
         PlayerManager.getInstance().EnableJoining();
     }
+
+    public GameObject addPlayer()
+    {
+        return null;
+    }
 }

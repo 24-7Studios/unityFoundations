@@ -44,11 +44,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        player = NetworkManager.singleton.playerPrefab;
-        player = Instantiate(player);
-        myplayables.Add(player.GetComponent<iPlayable>());
-        NetworkServer.Spawn(player);
-        //player.GetComponent<NetworkIdentity>().AssignClientAuthority();
+        player = ((myNetworkManager)myNetworkManager.singleton).addPlayer();
         myplayables[0].addPlayer(this);
         myplayables[0].ActivatePlayer();
     }
