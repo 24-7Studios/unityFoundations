@@ -278,6 +278,8 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
     private void bindControls()
     {
         input = myPlayer.getPlayerInput();
+        looking = input.actions.FindAction("looking");
+        moving = input.actions.FindAction("Movement");
         input.actions.FindAction("jump").performed += ctx => activateJump();
         input.actions.FindAction("Change").performed += ctx => changeSlot();
         input.actions.FindAction("interact").started += ctx => interact();
@@ -289,6 +291,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         input.actions.FindAction("kill").performed += ctx => die();
 
         input.ActivateInput();
+        input.enabled = true;
         foreach(InputAction inp in input.actions)
         {
             inp.Enable();
@@ -331,14 +334,13 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
 
             //controls.Player.Enable();
 
-            input.enabled = true;
+            //input.enabled = true;
 
             //LocalAud = Instantiate(CameraSetup, camEffector).GetComponent<AudioSource>();
 
             Cursor.lockState = CursorLockMode.Locked;
 
         }
-
 
         footPostition = foot.localPosition;
 
@@ -375,7 +377,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
 
 
 
-        if(isLocalPlayer)
+        //if(isLocalPlayer)
         {
             handleMouseInput();
             handleCameraTilt();

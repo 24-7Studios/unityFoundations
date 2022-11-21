@@ -34,10 +34,22 @@ public class myNetworkManager : NetworkManager
         base.Awake();
     }
 
+    public override void Start()
+    {
+        base.Start();
+        PlayerManager.getInstance().DisableJoining();
+    }
+
     private void Update()
     {
         transport = hud.getCurrentTranport();
         Transport.activeTransport = transport;
     }
 
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+
+        PlayerManager.getInstance().EnableJoining();
+    }
 }
