@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Camera myMainCamera;
     [SerializeField] private GameObject blankPlayable;
-    [SerializeField] private GameObject player;
 
     private LayerMask viewModel;
     private LayerMask playermodel;
@@ -44,7 +43,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        player = ((myNetworkManager)myNetworkManager.singleton).addPlayer();
+        iPlayable p = ((myNetworkManager)myNetworkManager.singleton).addPlayer().GetComponent<iPlayable>();
+        myplayables.Add(p);
         myplayables[0].addPlayer(this);
         myplayables[0].ActivatePlayer();
     }

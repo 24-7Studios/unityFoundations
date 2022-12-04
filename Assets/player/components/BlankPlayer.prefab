@@ -140,6 +140,7 @@ MonoBehaviour:
   myMainCamera: {fileID: 870696335321427304}
   blankPlayable: {fileID: 2250977923257298072, guid: ad9d8e752b4608b4a9459dae26d54ef2,
     type: 3}
+  player: {fileID: 1050093693558037594, guid: 421fbb1701d3fae4dbc87b4bdb1d9825, type: 3}
 --- !u!1 &6110868412473022273
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,9 +189,17 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -255,6 +264,9 @@ MonoBehaviour:
   m_Dithering: 0
   m_ClearDepth: 1
   m_AllowXRRendering: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2

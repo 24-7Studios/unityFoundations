@@ -920,7 +920,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
     /// this needs to be fixed. Is broken rn and just to compile for  testing
     public Inputmaster getInputMaster()
     {
-        return null;
+        return ;
     }
 
     //////////////////////////////////
@@ -1493,7 +1493,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         viewmodelHolder.gameObject.SetActive(false);
         if(isLocalPlayer)
         {
-            audioListener.enabled = false;
+            //audioListener.enabled = false;
             //controls.Player.Disable();
             //controls.PlayerStandby.Enable();
         }
@@ -1507,7 +1507,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         viewmodelHolder.gameObject.SetActive(true);
         if(isLocalPlayer)
         {
-            audioListener.enabled = true;
+            //audioListener.enabled = true;
             //controls.Player.Enable();
             //controls.PlayerStandby.Disable();
         }

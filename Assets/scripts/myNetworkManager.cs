@@ -51,10 +51,17 @@ public class myNetworkManager : NetworkManager
         base.OnStartServer();
 
         PlayerManager.getInstance().EnableJoining();
+
+
+        //NetworkServer.RegisterHandler<playerStruct>(OnCreateCharacter);
     }
+
 
     public GameObject addPlayer()
     {
-        return null;
+        GameObject pl = Instantiate(playerPrefab);
+        pl.transform.position = GetStartPosition().position;
+        NetworkServer.AddPlayerForConnection(NetworkServer.localConnection, pl);
+        return pl;
     }
 }
