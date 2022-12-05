@@ -69,7 +69,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Fire_2/Zoom1",
+                    "name": "Fire_2",
                     "type": "Button",
                     "id": "3154bfe1-127f-4536-81a0-6f034a659eff",
                     "expectedControlType": "Button",
@@ -316,7 +316,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "mouse + keybaord",
-                    "action": "Fire_2/Zoom1",
+                    "action": "Fire_2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -327,7 +327,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "gamepad",
-                    "action": "Fire_2/Zoom1",
+                    "action": "Fire_2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

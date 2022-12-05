@@ -391,27 +391,27 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         {
             if (h)
             {
-                player.getInputMaster().Player.Fire_1.performed += Fire1Down;
-                player.getInputMaster().Player.Fire_1.canceled += Fire1Up;
-                player.getInputMaster().Player.reload2.performed += ReloadDown;
-                player.getInputMaster().Player.reload2.canceled += ReloadUp;
+                player.getInput().actions.FindAction("Fire_1").performed += Fire1Down;
+                player.getInput().actions.FindAction("Fire_1").canceled += Fire1Up;
+                player.getInput().actions.FindAction("reload2").performed += ReloadDown;
+                player.getInput().actions.FindAction("reload2").canceled += ReloadUp;
             }
             else
             {
-                player.getInputMaster().Player.Fire_2Zoom1.performed += Fire1Down;
-                player.getInputMaster().Player.Fire_2Zoom1.canceled += Fire1Up;
-                player.getInputMaster().Player.reload.performed += ReloadDown;
-                player.getInputMaster().Player.reload.canceled += ReloadUp;
+                player.getInput().actions.FindAction("Fire_2").performed += Fire1Down;
+                player.getInput().actions.FindAction("Fire_2").canceled += Fire1Up;
+                player.getInput().actions.FindAction("reload").performed += ReloadDown;
+                player.getInput().actions.FindAction("reload").canceled += ReloadUp;
             }
         }
         else
         {
-            player.getInputMaster().Player.Fire_1.performed += Fire1Down;
-            player.getInputMaster().Player.Fire_1.canceled += Fire1Up;
-            player.getInputMaster().Player.Fire_2Zoom1.performed += Fire2Down;
-            player.getInputMaster().Player.Fire_2Zoom1.canceled += Fire2Up;
-            player.getInputMaster().Player.reload.performed += ReloadDown;
-            player.getInputMaster().Player.reload.canceled += ReloadUp;
+            player.getInput().actions.FindAction("Fire_1").performed += Fire1Down;
+            player.getInput().actions.FindAction("Fire_1").canceled += Fire1Up;
+            player.getInput().actions.FindAction("Fire_2").performed += Fire2Down;
+            player.getInput().actions.FindAction("Fire_2").canceled += Fire2Up;
+            player.getInput().actions.FindAction("reload").performed += ReloadDown;
+            player.getInput().actions.FindAction("reload").canceled += ReloadUp;
         }
     }
 
@@ -419,19 +419,20 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     {
         if (!hand)
         {
-            player.getInputMaster().Player.Fire_1.performed -= Fire1Down;
-            player.getInputMaster().Player.Fire_1.canceled -= Fire1Up;
-            player.getInputMaster().Player.Fire_2Zoom1.performed -= Fire2Down;
-            player.getInputMaster().Player.Fire_2Zoom1.canceled -= Fire2Up;
-            player.getInputMaster().Player.reload.performed -= ReloadDown;
-            player.getInputMaster().Player.reload.canceled -= ReloadUp;
+            player.getInput().actions.FindAction("Fire_1").performed -= Fire1Down;
+            player.getInput().actions.FindAction("Fire_1").canceled -= Fire1Up;
+            //Debug.Log(player.getInput().actions.FindAction("Fire2"));
+            player.getInput().actions.FindAction("Fire_2").performed -= Fire2Down;
+            player.getInput().actions.FindAction("Fire_2").canceled -= Fire2Up;
+            player.getInput().actions.FindAction("reload").performed -= ReloadDown;
+            player.getInput().actions.FindAction("reload").canceled -= ReloadUp;
         }
         else
         {
-            player.getInputMaster().Player.Fire_2Zoom1.performed -= Fire1Down;
-            player.getInputMaster().Player.Fire_2Zoom1.canceled -= Fire1Up;
-            player.getInputMaster().Player.reload2.performed -= ReloadDown;
-            player.getInputMaster().Player.reload2.canceled -= ReloadUp;
+            player.getInput().actions.FindAction("Fire_2").performed -= Fire1Down;
+            player.getInput().actions.FindAction("Fire_2").canceled -= Fire1Up;
+            player.getInput().actions.FindAction("reload2").performed -= ReloadDown;
+            player.getInput().actions.FindAction("reload2").canceled -= ReloadUp;
         }
     }
 

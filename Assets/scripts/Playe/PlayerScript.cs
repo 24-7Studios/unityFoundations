@@ -290,6 +290,8 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         input.actions.FindAction("melee").performed += ctx => equipToMelee();
         input.actions.FindAction("kill").performed += ctx => die();
 
+
+
         input.ActivateInput();
         input.enabled = true;
         foreach(InputAction inp in input.actions)
@@ -918,9 +920,9 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
     
 
     /// this needs to be fixed. Is broken rn and just to compile for  testing
-    public Inputmaster getInputMaster()
+    public PlayerInput getInput()
     {
-        return ;
+        return input;
     }
 
     //////////////////////////////////

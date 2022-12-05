@@ -91,7 +91,7 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Fire_2/Zoom1"",
+                    ""name"": ""Fire_2"",
                     ""type"": ""Button"",
                     ""id"": ""3154bfe1-127f-4536-81a0-6f034a659eff"",
                     ""expectedControlType"": ""Button"",
@@ -338,7 +338,7 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""mouse + keybaord"",
-                    ""action"": ""Fire_2/Zoom1"",
+                    ""action"": ""Fire_2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -349,7 +349,7 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""gamepad"",
-                    ""action"": ""Fire_2/Zoom1"",
+                    ""action"": ""Fire_2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -544,7 +544,7 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
         m_Player_drop = m_Player.FindAction("drop", throwIfNotFound: true);
         m_Player_interact = m_Player.FindAction("interact", throwIfNotFound: true);
         m_Player_Fire_1 = m_Player.FindAction("Fire_1", throwIfNotFound: true);
-        m_Player_Fire_2Zoom1 = m_Player.FindAction("Fire_2/Zoom1", throwIfNotFound: true);
+        m_Player_Fire_2 = m_Player.FindAction("Fire_2", throwIfNotFound: true);
         m_Player_reload = m_Player.FindAction("reload", throwIfNotFound: true);
         m_Player_reload2 = m_Player.FindAction("reload2", throwIfNotFound: true);
         m_Player_melee = m_Player.FindAction("melee", throwIfNotFound: true);
@@ -620,7 +620,7 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_drop;
     private readonly InputAction m_Player_interact;
     private readonly InputAction m_Player_Fire_1;
-    private readonly InputAction m_Player_Fire_2Zoom1;
+    private readonly InputAction m_Player_Fire_2;
     private readonly InputAction m_Player_reload;
     private readonly InputAction m_Player_reload2;
     private readonly InputAction m_Player_melee;
@@ -638,7 +638,7 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
         public InputAction @drop => m_Wrapper.m_Player_drop;
         public InputAction @interact => m_Wrapper.m_Player_interact;
         public InputAction @Fire_1 => m_Wrapper.m_Player_Fire_1;
-        public InputAction @Fire_2Zoom1 => m_Wrapper.m_Player_Fire_2Zoom1;
+        public InputAction @Fire_2 => m_Wrapper.m_Player_Fire_2;
         public InputAction @reload => m_Wrapper.m_Player_reload;
         public InputAction @reload2 => m_Wrapper.m_Player_reload2;
         public InputAction @melee => m_Wrapper.m_Player_melee;
@@ -675,9 +675,9 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                 @Fire_1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire_1;
                 @Fire_1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire_1;
                 @Fire_1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire_1;
-                @Fire_2Zoom1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire_2Zoom1;
-                @Fire_2Zoom1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire_2Zoom1;
-                @Fire_2Zoom1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire_2Zoom1;
+                @Fire_2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire_2;
+                @Fire_2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire_2;
+                @Fire_2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire_2;
                 @reload.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
                 @reload.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
                 @reload.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
@@ -721,9 +721,9 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                 @Fire_1.started += instance.OnFire_1;
                 @Fire_1.performed += instance.OnFire_1;
                 @Fire_1.canceled += instance.OnFire_1;
-                @Fire_2Zoom1.started += instance.OnFire_2Zoom1;
-                @Fire_2Zoom1.performed += instance.OnFire_2Zoom1;
-                @Fire_2Zoom1.canceled += instance.OnFire_2Zoom1;
+                @Fire_2.started += instance.OnFire_2;
+                @Fire_2.performed += instance.OnFire_2;
+                @Fire_2.canceled += instance.OnFire_2;
                 @reload.started += instance.OnReload;
                 @reload.performed += instance.OnReload;
                 @reload.canceled += instance.OnReload;
@@ -806,7 +806,7 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
         void OnDrop(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnFire_1(InputAction.CallbackContext context);
-        void OnFire_2Zoom1(InputAction.CallbackContext context);
+        void OnFire_2(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnReload2(InputAction.CallbackContext context);
         void OnMelee(InputAction.CallbackContext context);
