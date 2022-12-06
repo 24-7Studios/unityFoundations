@@ -61,7 +61,12 @@ public class myNetworkManager : NetworkManager
     {
         GameObject pl = Instantiate(playerPrefab);
         pl.transform.position = GetStartPosition().position;
-        NetworkServer.AddPlayerForConnection(NetworkServer.localConnection, pl);
+        NetworkServer.Spawn(pl);
+        pl.GetComponent<NetworkIdentity>().AssignClientAuthority(NetworkServer.localConnection);
+        if (!NetworkServer.AddPlayerForConnection(NetworkServer.localConnection, pl))
+        {
+            
+        }
         return pl;
     }
 }

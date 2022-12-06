@@ -421,7 +421,6 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         {
             player.getInput().actions.FindAction("Fire_1").performed -= Fire1Down;
             player.getInput().actions.FindAction("Fire_1").canceled -= Fire1Up;
-            //Debug.Log(player.getInput().actions.FindAction("Fire2"));
             player.getInput().actions.FindAction("Fire_2").performed -= Fire2Down;
             player.getInput().actions.FindAction("Fire_2").canceled -= Fire2Up;
             player.getInput().actions.FindAction("reload").performed -= ReloadDown;
