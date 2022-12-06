@@ -975,8 +975,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1600252153341213414, guid: 89b559a4c358f3142a3667019d42e244,
         type: 3}
+      propertyPath: playerPrefab
+      value: 
+      objectReference: {fileID: 8958507013079270817, guid: c9d6c10bf4df86b44a154cf7c52af787,
+        type: 3}
+    - target: {fileID: 1600252153341213414, guid: 89b559a4c358f3142a3667019d42e244,
+        type: 3}
       propertyPath: autoCreatePlayer
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1600252153341213414, guid: 89b559a4c358f3142a3667019d42e244,
         type: 3}
@@ -2319,70 +2325,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1856236548}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2007516482
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2007516485}
-  - component: {fileID: 2007516484}
-  - component: {fileID: 2007516483}
-  m_Layer: 0
-  m_Name: networkPlayer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2007516483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2007516482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 106776615
-  serverOnly: 0
-  visible: 0
-  m_AssetId: 
-  hasSpawned: 0
---- !u!114 &2007516484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2007516482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e01abe3f13091a047b462c10ca324043, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
---- !u!4 &2007516485
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2007516482}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5588545506601838514
 PrefabInstance:
   m_ObjectHideFlags: 0
