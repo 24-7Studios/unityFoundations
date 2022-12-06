@@ -6,14 +6,26 @@ using UnityEngine.InputSystem;
 public class PlayerManager : MonoBehaviour
 {
 
+    [SerializeField] private GameObject defaultIPlayable;
+
     private static PlayerInputManager playerinputmanager;
     private static PlayerManager playermanager;
     private List<Player> playerList;
 
 
-    public static PlayerInputManager getInstance()
+    public static PlayerInputManager getInputManager()
     {
         return playerinputmanager;
+    }
+
+    public static PlayerManager getInstance()
+    {
+        return playermanager;
+    }
+
+    public GameObject getPlayable()
+    {
+        return defaultIPlayable;
     }
 
     private void Awake()

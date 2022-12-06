@@ -314,7 +314,6 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
 
     private void Start()
     {
-
         health = parameters.playerHealth.defaultHealth;
 
 
@@ -330,8 +329,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
 
         equipedSlot = meleeSlot;
 
-
-        if (isLocalPlayer)
+        if (IsLocalPlayer())
         {
 
             //controls.Player.Enable();
@@ -379,7 +377,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
 
 
 
-        //if(isLocalPlayer)
+        //if(IsLocalPlayer())
         {
             Debug.Log(this.connectionToServer);
             Debug.Log(this.hasAuthority);
@@ -397,7 +395,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         grounded = checkSlope();
 
 
-        if (isLocalPlayer)
+        if (IsLocalPlayer())
         {
             x = moving.ReadValue<Vector2>().x;
             z = moving.ReadValue<Vector2>().y;
@@ -424,7 +422,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         ////////////////////////////////////////////////////////
         //backpack 
 
-        if (isLocalPlayer && !awaitingSpawn)
+        if (IsLocalPlayer() && !awaitingSpawn)
         {
             if (meleeSlot.getWeapon() == null && requestedMelee == false)
             {
@@ -446,7 +444,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         doMovement();
         
 
-        if (isLocalPlayer)
+        if (IsLocalPlayer())
         {
             checkJump();
 
@@ -657,7 +655,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
     [ClientRpc]
     void RpcJump()
     {
-        if (isLocalPlayer) return;
+        if (IsLocalPlayer()) return;
 
         if (playerPhysBody.velocity.y < 0)
         {
@@ -711,13 +709,13 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
     {
 
 
-        if (!isLocalPlayer && Vector3.Distance(playerPhysBody.position, clientPos) > parameters.playerMovement.PostionSnapThreshold)
+        if (!IsLocalPlayer() && Vector3.Distance(playerPhysBody.position, clientPos) > parameters.playerMovement.PostionSnapThreshold)
         {
 
             RpcCorrectPlayerPos(playerPhysBody.position);
 
         }
-        else if (!isLocalPlayer && Vector3.Distance(playerPhysBody.position, clientPos) < parameters.playerMovement.PostionSnapThreshold)
+        else if (!IsLocalPlayer() && Vector3.Distance(playerPhysBody.position, clientPos) < parameters.playerMovement.PostionSnapThreshold)
         {
 
             SyncTimer -= Time.deltaTime;
@@ -738,7 +736,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
     void RpcSyncPlayerPosistion(Vector3 IM, Vector3 serverPos)
     {
 
-        if (!isLocalPlayer && Vector3.Distance(playerPhysBody.position, serverPos) < parameters.playerMovement.PostionSnapThreshold)
+        if (!IsLocalPlayer() && Vector3.Distance(playerPhysBody.position, serverPos) < parameters.playerMovement.PostionSnapThreshold)
         {
             playerPhysBody.AddForce(IM, ForceMode.VelocityChange);
             if (grounded)
@@ -747,7 +745,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
             }
             playerPhysBody.position = Vector3.Lerp(playerPhysBody.position, serverPos, Time.fixedDeltaTime / parameters.playerMovement.PositionCompensationDamping);
         }
-        else if (!isLocalPlayer)
+        else if (!IsLocalPlayer())
         {
             playerPhysBody.position = serverPos;
         }
@@ -780,7 +778,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
     void RpcSyncPlayerRotation(float y, float x)
     {
 
-        if (!isLocalPlayer)
+        if (!IsLocalPlayer())
         {
 
             camTransformer.transform.localRotation = Quaternion.Euler(Vector3.right * y);
@@ -807,7 +805,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
     [ClientRpc]
     void RpcSyncPlayerInput(Vector3 BIM, Vector3 IM)
     {
-        if (!isLocalPlayer)
+        if (!IsLocalPlayer())
         {
             BasicInputMovement = BIM;
             RelativeInputMovement = IM;
@@ -926,6 +924,13 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
     {
         return input;
     }
+
+
+    public bool IsLocalPlayer()
+    {
+        return networkPlayerObject.getInstance().isLocalPlayer;
+    }
+
 
     //////////////////////////////////
     
@@ -1111,7 +1116,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
     private void rpcSyncSlots(int e, int p)
     {
         Debug.Log(this + "  " + e + ":" + p);
-        if (!isLocalPlayer)
+        if (!IsLocalPlayer())
         {
             equipedSlot = WeaponSlots[e];
 
@@ -1495,7 +1500,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         playerPhysBody.isKinematic = true;
         playerCollider.enabled = false;
         viewmodelHolder.gameObject.SetActive(false);
-        if(isLocalPlayer)
+        if(IsLocalPlayer())
         {
             //audioListener.enabled = false;
             //controls.Player.Disable();
@@ -1509,7 +1514,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         playerPhysBody.isKinematic = false;
         playerCollider.enabled = true;
         viewmodelHolder.gameObject.SetActive(true);
-        if(isLocalPlayer)
+        if(IsLocalPlayer())
         {
             //audioListener.enabled = true;
             //controls.Player.Enable();

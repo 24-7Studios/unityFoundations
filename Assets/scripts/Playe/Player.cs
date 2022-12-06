@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        iPlayable p = ((myNetworkManager)myNetworkManager.singleton).addPlayer().GetComponent<iPlayable>();
+        iPlayable p = ((myNetworkManager)myNetworkManager.singleton).addPlayer(PlayerManager.getInstance().getPlayable()).GetComponent<iPlayable>();
         myplayables.Add(p);
         myplayables[0].addPlayer(this);
         myplayables[0].ActivatePlayer();

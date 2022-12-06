@@ -37,7 +37,7 @@ public class myNetworkManager : NetworkManager
     public override void Start()
     {
         base.Start();
-        PlayerManager.getInstance().DisableJoining();
+        PlayerManager.getInputManager().DisableJoining();
     }
 
     private void Update()
@@ -50,23 +50,19 @@ public class myNetworkManager : NetworkManager
     {
         base.OnStartServer();
 
-        PlayerManager.getInstance().EnableJoining();
+        PlayerManager.getInputManager().EnableJoining();
 
 
         //NetworkServer.RegisterHandler<playerStruct>(OnCreateCharacter);
     }
 
 
-    public GameObject addPlayer()
+    public GameObject addPlayer(GameObject plObject)
     {
-        GameObject pl = Instantiate(playerPrefab);
+        GameObject pl = Instantiate(plObject);
         pl.transform.position = GetStartPosition().position;
         NetworkServer.Spawn(pl);
         pl.GetComponent<NetworkIdentity>().AssignClientAuthority(NetworkServer.localConnection);
-        if (!NetworkServer.AddPlayerForConnection(NetworkServer.localConnection, pl))
-        {
-            
-        }
         return pl;
     }
 }

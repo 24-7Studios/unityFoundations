@@ -178,7 +178,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         viewmodel.transform.localPosition = Vector3.zero;
         viewmodel.transform.localRotation = Quaternion.identity;
 
-        if (player.isLocalPlayer)
+        if (player.IsLocalPlayer())
         {
             viewmodel.layer = 11;
             worldModel.layer = 6;
@@ -257,7 +257,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
         setDualStatus();
 
-        if (player.isLocalPlayer)
+        if (player.IsLocalPlayer())
         {
             //setControls(hand);
         }
@@ -304,7 +304,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
         if(player != null)
         {
-            if (player.isLocalPlayer)
+            if (player.IsLocalPlayer())
             {
                 unsetControls(hand);
             }
@@ -382,7 +382,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         isInDual = false;
         if(hand) isInDual = true;
         if (slot.getOtherHand() != null) isInDual = true;
-        if (player.isLocalPlayer) { unsetControls(hand); setControls(hand); }
+        if (player.IsLocalPlayer()) { unsetControls(hand); setControls(hand); }
     }
 
     protected virtual void setControls(bool h)
@@ -447,7 +447,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
         worldModel.SetActive(true);
         player.getLivePlayerModel().equipWeapon(this, hand);
-        if (player.isLocalPlayer)
+        if (player.IsLocalPlayer())
         {
 
             if (isInDual)
@@ -520,7 +520,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
         worldModel.SetActive(false);
 
-        if (player.isLocalPlayer)
+        if (player.IsLocalPlayer())
         {
             viewmodel.SetActive(false);
         }
@@ -599,7 +599,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
         AudioClip clip = sounds[index];
 
-        if (player != null && !player.isLocalPlayer)
+        if (player != null && !player.IsLocalPlayer())
         {
             aud.PlayOneShot(clip);
         }
