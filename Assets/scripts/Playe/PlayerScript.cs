@@ -252,6 +252,8 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
     public void attatchPlayer()
     {
         myPlayer.transform.SetParent(camEffector);
+        myPlayer.transform.localPosition = Vector3.zero;
+        myPlayer.transform.localRotation = Quaternion.Euler(Vector3.zero);
     }
 
     public void detatchPlayer()
@@ -300,6 +302,10 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
         }
     }
 
+    public Player getPlayer()
+    {
+        return myPlayer;
+    }
 
     private void Awake()
     {

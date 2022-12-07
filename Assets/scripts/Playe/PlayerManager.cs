@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour
 {
 
     [SerializeField] private GameObject defaultIPlayable;
+    [SerializeField] private LayersPlayer PlayerLayers;
 
     private static PlayerInputManager playerinputmanager;
     private static PlayerManager playermanager;
@@ -59,7 +60,9 @@ public class PlayerManager : MonoBehaviour
     public void OnPlayerJoined(PlayerInput p)
     {
         //Debug.Log(p.GetComponent<Player>());
-        playerList.Add(p.GetComponent<Player>());
+        Player pl = p.GetComponent<Player>();
+        playerList.Add(pl);
+        setLayers(pl, p.playerIndex);
         setPlayerRects();
     }
 
@@ -70,6 +73,34 @@ public class PlayerManager : MonoBehaviour
         setPlayerRects();
     }
 
+    private void setLayers(Player p, int index)
+    {
+        if(index < 1)
+        {
+            p.setPayermodelLayer(PlayerLayers.p1pm);
+            p.setViewmodelLayer(PlayerLayers.p1vm);
+            p.setShootableLayer(PlayerLayers.p1sh);
+        }
+        else if(index < 2)
+        {
+            p.setPayermodelLayer(PlayerLayers.p2pm);
+            p.setViewmodelLayer(PlayerLayers.p2vm);
+            p.setShootableLayer(PlayerLayers.p2sh);
+        }
+        else if(index < 3)
+        {
+            p.setPayermodelLayer(PlayerLayers.p3pm);
+            p.setViewmodelLayer(PlayerLayers.p3vm);
+            p.setShootableLayer(PlayerLayers.p3sh);
+        }
+        else if(index < 4)
+        {
+            p.setPayermodelLayer(PlayerLayers.p4pm);
+            p.setViewmodelLayer(PlayerLayers.p4vm);
+            p.setShootableLayer(PlayerLayers.p4sh);
+        }
+    }
+
     public void setPlayerRects()
     {
         for(int i = 0; i < playerList.Count; i++)
@@ -77,7 +108,6 @@ public class PlayerManager : MonoBehaviour
             playerList[i].setCamRect(rectGen(i, playerList.Count));
         }
     }
-
 
     private Rect rectGen(int ind, int num)
     {

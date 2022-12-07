@@ -49,9 +49,19 @@ public class Player : MonoBehaviour
         myplayables[0].ActivatePlayer();
     }
 
-    public void setLayers()
+    public void setViewmodelLayer(LayerMask l)
     {
-        
+        viewModel = l;
+    }
+
+    public void setPayermodelLayer(LayerMask l)
+    {
+        playermodel = l;
+    }
+
+    public void setShootableLayer(LayerMask l)
+    {
+        Shootable = l;
     }
 
     public void setCamRect(Rect newRect)
