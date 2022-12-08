@@ -80,24 +80,36 @@ public class PlayerManager : MonoBehaviour
             p.setPayermodelLayer(PlayerLayers.p1pm);
             p.setViewmodelLayer(PlayerLayers.p1vm);
             p.setShootableLayer(PlayerLayers.p1sh);
+            p.setHitboxLayer(PlayerLayers.p1hb);
+            p.setViewmodelCamCulling(PlayerLayers.p1vmC);
+            p.setWorldCamCulling(PlayerLayers.p1wmC);
         }
         else if(index < 2)
         {
             p.setPayermodelLayer(PlayerLayers.p2pm);
             p.setViewmodelLayer(PlayerLayers.p2vm);
             p.setShootableLayer(PlayerLayers.p2sh);
+            p.setHitboxLayer(PlayerLayers.p2hb);
+            p.setViewmodelCamCulling(PlayerLayers.p2vmC);
+            p.setWorldCamCulling(PlayerLayers.p2wmC);
         }
         else if(index < 3)
         {
             p.setPayermodelLayer(PlayerLayers.p3pm);
             p.setViewmodelLayer(PlayerLayers.p3vm);
             p.setShootableLayer(PlayerLayers.p3sh);
+            p.setHitboxLayer(PlayerLayers.p3hb);
+            p.setViewmodelCamCulling(PlayerLayers.p3vmC);
+            p.setWorldCamCulling(PlayerLayers.p3wmC);
         }
         else if(index < 4)
         {
             p.setPayermodelLayer(PlayerLayers.p4pm);
             p.setViewmodelLayer(PlayerLayers.p4vm);
             p.setShootableLayer(PlayerLayers.p4sh);
+            p.setHitboxLayer(PlayerLayers.p4hb);
+            p.setViewmodelCamCulling(PlayerLayers.p4vmC);
+            p.setWorldCamCulling(PlayerLayers.p4wmC);
         }
     }
 

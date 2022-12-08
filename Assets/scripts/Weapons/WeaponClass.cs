@@ -159,6 +159,8 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
         player.getLivePlayerModel().equipWeapon(this, hand);
 
+        Shootable = player.getPlayer().getShootableLayer();
+
         foreach (MeshRenderer m in item.GetComponents<MeshRenderer>())
         {
             m.enabled = false;
@@ -180,8 +182,8 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
         if (player.IsLocalPlayer())
         {
-            viewmodel.layer = 11;
-            worldModel.layer = 6;
+            viewmodel.layer = player.getPlayer().getViewmodelLayer();
+            worldModel.layer = player.getPlayer().getPlayermodelLayer();
             if (slot != player.getEquipedSlot())
             {
                 player.changeSlot();
@@ -193,7 +195,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         }
         else
         {
-            worldModel.layer = 0;
+            //worldModel.layer = 0;
         }
         
     }
@@ -274,6 +276,8 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
             c.enabled = false;
         }
 
+        Shootable = player.getPlayer().getShootableLayer();
+
         item.GetComponent<Rigidbody>().isKinematic = true;
 
         isitem = false;
@@ -287,6 +291,11 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
         player.reSyncSlots();
 
+        if (player.IsLocalPlayer())
+        {
+            viewmodel.layer = player.getPlayer().getViewmodelLayer();
+            worldModel.layer = player.getPlayer().getPlayermodelLayer();
+        }
     }
 
     public virtual void drop()

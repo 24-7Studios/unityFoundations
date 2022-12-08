@@ -41,7 +41,7 @@ public class PlayerModelClass : NetworkBehaviour
     {
         player = p;
 
-        if (!player.isLocalPlayer)
+        if (!player.IsLocalPlayer())
         {
             foreach (hitbox part in hitBoxes)
             {
@@ -52,11 +52,11 @@ public class PlayerModelClass : NetworkBehaviour
         {
             foreach (hitbox part in hitBoxes)
             {
-                part.gameObject.layer = 6;
+                part.gameObject.layer = player.getPlayer().getHitboxLayer();
             }
         }
 
-        if (!player.isLocalPlayer)
+        if (!player.IsLocalPlayer())
         {
             foreach (GameObject part in models)
             {
@@ -64,11 +64,11 @@ public class PlayerModelClass : NetworkBehaviour
             }
         }
 
-        if (player.isLocalPlayer)
+        if (player.IsLocalPlayer())
         {
             foreach (GameObject part in models)
             {
-                part.layer = 6;
+                part.layer = player.getPlayer().getPlayermodelLayer();
             }
         }
 

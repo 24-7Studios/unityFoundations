@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39921ac0e251f6d4d8173aacb304d155, type: 3}
+  m_Name: playerLayers
+  m_EditorClassIdentifier: 
+  p1vm: 15
+  p1pm: 16
+  p1hb: 17
+  p1vmC:
+    serializedVersion: 2
+    m_Bits: 32768
+  p1wmC:
+    serializedVersion: 2
+    m_Bits: 38299321
+  p1sh:
+    serializedVersion: 2
+    m_Bits: 76547721
+  p2vm: 18
+  p2pm: 19
+  p2hb: 20
+  p2vmC:
+    serializedVersion: 2
+    m_Bits: 262144
+  p2wmC:
+    serializedVersion: 2
+    m_Bits: 37840569
+  p2sh:
+    serializedVersion: 2
+    m_Bits: 75630217
+  p3vm: 21
+  p3pm: 22
+  p3hb: 23
+  p3vmC:
+    serializedVersion: 2
+    m_Bits: 2097152
+  p3wmC:
+    serializedVersion: 2
+    m_Bits: 34170553
+  p3sh:
+    serializedVersion: 2
+    m_Bits: 68290185
+  p4vm: 24
+  p4pm: 25
+  p4hb: 26
+  p4vmC:
+    serializedVersion: 2
+    m_Bits: 16777216
+  p4wmC:
+    serializedVersion: 2
+    m_Bits: 4810425
+  p4sh:
+    serializedVersion: 2
+    m_Bits: 9569929

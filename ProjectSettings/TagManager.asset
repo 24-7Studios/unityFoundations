@@ -17,22 +17,22 @@ TagManager:
   - camera
   - throwable
   - pickups
-  - viewmodel
+  - 
   - PlayerColliders
   - noShoot
   - otherPlayer
   - viewmodel0
   - player0
+  - hitbox0
   - viewmodel1
   - player1
+  - hitbox1
   - viewmodel2
   - player2
+  - hitbox2
   - viewmodel3
   - player3
-  - 
-  - 
-  - 
-  - 
+  - hitbox3
   - 
   - 
   - 

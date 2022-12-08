@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8808900618437464574
 MonoBehaviour:
@@ -102,3 +102,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eef258d6ce33d48429bbf94cf915051b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultIPlayable: {fileID: 0}
+  PlayerLayers: {fileID: 11400000, guid: 4b4e3023e9e0cc2438853e39838470a4, type: 2}
