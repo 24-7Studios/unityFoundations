@@ -130,7 +130,7 @@ public class gunClass : raycastWeapon
         {
             if(ViewmodelFlash != null)
             {
-                GameObject.Instantiate(ViewmodelFlash, ViewmodelflashPos.position, ViewmodelflashPos.rotation);
+                GameObject.Instantiate(ViewmodelFlash, ViewmodelflashPos.position, ViewmodelflashPos.rotation).layer = player.getPlayer().getViewmodelLayer();
                 flash = false;
             }
         }

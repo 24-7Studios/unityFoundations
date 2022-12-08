@@ -432,6 +432,17 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""6898819b-b9dd-434d-8fd7-2392682787ed"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""gamepad"",
+                    ""action"": ""drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""7a2841ff-1d95-491b-94a1-9484f9f70dcc"",
                     ""path"": ""<Keyboard>/k"",
                     ""interactions"": """",
@@ -454,11 +465,33 @@ public partial class @Inputmaster : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""9d3610fd-cba2-4473-989f-84964da745fc"",
+                    ""path"": ""<XInputController>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""gamepad"",
+                    ""action"": ""dual"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""674b75de-6f02-4fb8-864d-2dde7933559b"",
                     ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""mouse + keybaord"",
+                    ""action"": ""toggleLight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aa3c281b-55b1-40db-873d-ebd08185ddc9"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""toggleLight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

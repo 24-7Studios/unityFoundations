@@ -168,6 +168,9 @@ MonoBehaviour:
   rightHoldPos: {fileID: 219779911782981117}
   leftHoldPos: {fileID: 1122253029362614400}
   viewmodel: {fileID: 613730428815406222}
+  viewmodelMeshes:
+  - {fileID: 5138106397391137132}
+  - {fileID: 8976644676320332239}
   armsMesh: {fileID: 6066756820356682825}
   ViewAnim: {fileID: 8167688970085904558}
   drawAnim: 
@@ -192,6 +195,9 @@ MonoBehaviour:
   recoilAmount: 10
   recoilAttack: 0.5
   recoilSmoothing: 10
+  viewPushAmount: 0.3
+  viewPushAttack: 10
+  viewPushRecovery: 20
   damage: 20
   fleshMultiplier: 1
   knockbackForce: 100
@@ -986,9 +992,21 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 307653537380092383}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5138106397391137132 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4831018558786363571, guid: 2449a4f252284404d80aad6b36c4c00b,
+    type: 3}
+  m_PrefabInstance: {fileID: 307653537380092383}
+  m_PrefabAsset: {fileID: 0}
 --- !u!137 &6066756820356682825 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 5797384429611982230, guid: 2449a4f252284404d80aad6b36c4c00b,
+    type: 3}
+  m_PrefabInstance: {fileID: 307653537380092383}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8976644676320332239 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -516098083770646512, guid: 2449a4f252284404d80aad6b36c4c00b,
     type: 3}
   m_PrefabInstance: {fileID: 307653537380092383}
   m_PrefabAsset: {fileID: 0}

@@ -51,6 +51,9 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
     protected GameObject viewmodel;
 
     [SerializeField]
+    protected List<GameObject> viewmodelMeshes;
+
+    [SerializeField]
     protected SkinnedMeshRenderer armsMesh;
 
     [SerializeField]
@@ -184,6 +187,12 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         {
             viewmodel.layer = player.getPlayer().getViewmodelLayer();
             worldModel.layer = player.getPlayer().getPlayermodelLayer();
+
+            foreach(GameObject g in viewmodelMeshes)
+            {
+                g.layer = player.getPlayer().getViewmodelLayer();
+            }
+
             if (slot != player.getEquipedSlot())
             {
                 player.changeSlot();
@@ -295,6 +304,11 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
         {
             viewmodel.layer = player.getPlayer().getViewmodelLayer();
             worldModel.layer = player.getPlayer().getPlayermodelLayer();
+
+            foreach (GameObject g in viewmodelMeshes)
+            {
+                g.layer = player.getPlayer().getViewmodelLayer();
+            }
         }
     }
 
@@ -396,7 +410,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
     protected virtual void setControls(bool h)
     {
-        if(isInDual)
+        if(isInDual && !player.getInput().currentControlScheme.Equals("gamepad"))
         {
             if (h)
             {
@@ -409,6 +423,23 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
             {
                 player.getInput().actions.FindAction("Fire_2").performed += Fire1Down;
                 player.getInput().actions.FindAction("Fire_2").canceled += Fire1Up;
+                player.getInput().actions.FindAction("reload").performed += ReloadDown;
+                player.getInput().actions.FindAction("reload").canceled += ReloadUp;
+            }
+        }
+        else if(isInDual)
+        {
+            if (h)
+            {
+                player.getInput().actions.FindAction("Fire_2").performed += Fire1Down;
+                player.getInput().actions.FindAction("Fire_2").canceled += Fire1Up;
+                player.getInput().actions.FindAction("reload2").performed += ReloadDown;
+                player.getInput().actions.FindAction("reload2").canceled += ReloadUp;
+            }
+            else
+            {
+                player.getInput().actions.FindAction("Fire_1").performed += Fire1Down;
+                player.getInput().actions.FindAction("Fire_1").canceled += Fire1Up;
                 player.getInput().actions.FindAction("reload").performed += ReloadDown;
                 player.getInput().actions.FindAction("reload").canceled += ReloadUp;
             }

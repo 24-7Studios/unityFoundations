@@ -1005,6 +1005,8 @@ MonoBehaviour:
   rightHoldPos: {fileID: 0}
   leftHoldPos: {fileID: 0}
   viewmodel: {fileID: 4934615141463615217}
+  viewmodelMeshes:
+  - {fileID: 842479116639353619}
   armsMesh: {fileID: 1787469379824895542}
   ViewAnim: {fileID: 5429682085083388587}
   drawAnim: 
