@@ -963,6 +963,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1600252153341213409, guid: 89b559a4c358f3142a3667019d42e244,
+        type: 3}
+      propertyPath: Port
+      value: 25565
+      objectReference: {fileID: 0}
     - target: {fileID: 1600252153341213410, guid: 89b559a4c358f3142a3667019d42e244,
         type: 3}
       propertyPath: m_Name
@@ -987,7 +992,7 @@ PrefabInstance:
     - target: {fileID: 1600252153341213414, guid: 89b559a4c358f3142a3667019d42e244,
         type: 3}
       propertyPath: spawnPrefabs.Array.size
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1600252153341213414, guid: 89b559a4c358f3142a3667019d42e244,
         type: 3}
@@ -1024,6 +1029,12 @@ PrefabInstance:
       propertyPath: spawnPrefabs.Array.data[12]
       value: 
       objectReference: {fileID: 5242103030026162038, guid: 680f1f9866e309142bb1e3e8a7234b36,
+        type: 3}
+    - target: {fileID: 1600252153341213414, guid: 89b559a4c358f3142a3667019d42e244,
+        type: 3}
+      propertyPath: spawnPrefabs.Array.data[13]
+      value: 
+      objectReference: {fileID: 3639212011138319363, guid: 0c9ed0f30393dba4aa23b147c7bd23aa,
         type: 3}
     - target: {fileID: 1600252153341213415, guid: 89b559a4c358f3142a3667019d42e244,
         type: 3}
