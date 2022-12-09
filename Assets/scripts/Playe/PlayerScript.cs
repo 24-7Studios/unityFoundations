@@ -941,7 +941,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, networkPlayable
 
     public bool IsLocalPlayer()
     {
-        return myNetworkPlayer.isLocalPlayer;
+        return (myNetworkPlayer!=null)? myNetworkPlayer.isLocalPlayer:false;
     }
 
 
