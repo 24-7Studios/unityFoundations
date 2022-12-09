@@ -383,10 +383,8 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
 
 
 
-        //if(IsLocalPlayer())
+        if(IsLocalPlayer())
         {
-            Debug.Log(this.connectionToServer);
-            Debug.Log(this.hasAuthority);
             handleMouseInput();
             handleCameraTilt();
             handleViewShift();
