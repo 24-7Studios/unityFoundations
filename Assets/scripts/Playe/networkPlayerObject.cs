@@ -13,11 +13,14 @@ public class networkPlayerObject :  NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (networkPlayerInstance != null)
-            Debug.LogError("There is already a player for this connection!");
-        else if(isLocalPlayer)
-            networkPlayerInstance = this;
-        
+
+        if (isLocalPlayer)
+        {
+            if (networkPlayerInstance != null)
+                Debug.LogError("There is already a player for this connection!");
+            else
+                networkPlayerInstance = this;
+        }    
     }
 
     public void addPlayer(NetworkIdentity netId)

@@ -8,7 +8,7 @@ using UnityEngine.InputSystem.Users;
 using Cinemachine;
 using Mirror;
 
-public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
+public class PlayerScript : NetworkBehaviour, IDamage, networkPlayable
 {
 
     //player setup
@@ -17,6 +17,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
     /// </summary>
 
     private Player myPlayer;
+    private networkPlayerObject myNetworkPlayer;
 
     [SerializeField]
     private PlayerStuffScriptableObject parameters;
@@ -233,6 +234,11 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
     public Vector3 floornormal;
 
 
+    public void setNetworkPlayer(networkPlayerObject net)
+    {
+        myNetworkPlayer = net;
+    }
+
     public void addPlayer(Player newPlayer)
     {
         if (myPlayer != null)
@@ -264,7 +270,6 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
     public Player ActivatePlayer()
     {
         attatchPlayer();
-        //myPlayer.setLayers();
         input = myPlayer.getPlayerInput();
         bindControls();
         this.gameObject.SetActive(true);
@@ -355,6 +360,10 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
 
     private void OnConnectedToServer()
     {
+        if(networkPlayerObject.getInstance().isLocalPlayer)
+        {
+
+        }
         cmdSyncSlots(equipedSlot.getIndex(), previousSlot.getIndex());
     }
 
@@ -932,7 +941,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, iPlayable
 
     public bool IsLocalPlayer()
     {
-        return networkPlayerObject.getInstance().isLocalPlayer;
+        return myNetworkPlayer.isLocalPlayer;
     }
 
 
