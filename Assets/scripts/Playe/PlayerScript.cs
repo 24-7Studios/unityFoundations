@@ -315,6 +315,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, networkPlayable
     private void Awake()
     {
         //gets components
+        setNetworkPlayer(networkPlayerObject.getInstance());
         playerPhysBody = GetComponent<Rigidbody>();
         playerCollider = GetComponent<Collider>();
         aud = GetComponent<AudioSource>();

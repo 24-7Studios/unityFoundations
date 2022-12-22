@@ -28,6 +28,11 @@ public class networkPlayerObject :  NetworkBehaviour
         childPlayers.Add(netId);
     }
 
+    public GameObject requestPlayer()
+    {
+
+    }
+
     public void removePlayer(NetworkIdentity netId)
     {
         childPlayers.Remove(netId);

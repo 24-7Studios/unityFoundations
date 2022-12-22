@@ -265,7 +265,7 @@ MonoBehaviour:
   corpseVirtualCam: {fileID: 0}
   audioListener: {fileID: 0}
   interactZone: {fileID: 8531315878050940356}
-  SelectedPlayerModel: {fileID: 7196012451863958847, guid: 680f1f9866e309142bb1e3e8a7234b36,
+  SelectedPlayerModel: {fileID: 7196012451863958847, guid: 86b942d668b4e0e40a0886cb618845f1,
     type: 3}
   LivePlayerModel: {fileID: 0}
   flashL: {fileID: 3943925538353014252}
