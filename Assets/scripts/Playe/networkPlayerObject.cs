@@ -28,10 +28,26 @@ public class networkPlayerObject :  NetworkBehaviour
         childPlayers.Add(netId);
     }
 
-    public GameObject requestPlayer()
+    public GameObject requestPlayable()
+    {
+        if(!isServer)
+        {
+            cmdGetPlayable();
+        }
+        else
+        {
+
+        }
+    }
+
+
+
+    [Command]
+    public GameObject cmdGetPlayable()
     {
 
     }
+
 
     public void removePlayer(NetworkIdentity netId)
     {
