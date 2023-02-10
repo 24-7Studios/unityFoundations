@@ -30,6 +30,8 @@ public class networkPlayerObject :  NetworkBehaviour
 
     public GameObject requestPlayable()
     {
+        return null;
+
         if(!isServer)
         {
             cmdGetPlayable();
@@ -43,7 +45,7 @@ public class networkPlayerObject :  NetworkBehaviour
 
 
     [Command]
-    public GameObject cmdGetPlayable()
+    public void cmdGetPlayable()
     {
 
     }
