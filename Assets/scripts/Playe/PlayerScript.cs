@@ -315,7 +315,6 @@ public class PlayerScript : NetworkBehaviour, IDamage, networkPlayable
     private void Awake()
     {
         //gets components
-        setNetworkPlayer(networkPlayerObject.getInstance());
         playerPhysBody = GetComponent<Rigidbody>();
         playerCollider = GetComponent<Collider>();
         aud = GetComponent<AudioSource>();
@@ -361,7 +360,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, networkPlayable
 
     private void OnConnectedToServer()
     {
-        if(networkPlayerObject.getInstance().isLocalPlayer)
+        if(IsLocalPlayer())//networkPlayerObject.getInstance().isLocalPlayer)
         {
 
         }
@@ -390,6 +389,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, networkPlayable
         playerPhysBody.drag = parameters.playerMovement.playerDrag;
         playerPhysBody.angularDrag = parameters.playerMovement.playerAngularDrag;
         playerPhysBody.mass = parameters.playerMovement.playerMass;
+
 
 
 

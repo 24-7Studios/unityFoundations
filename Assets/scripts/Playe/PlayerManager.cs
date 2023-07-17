@@ -59,7 +59,7 @@ public class PlayerManager : MonoBehaviour
 
     public void OnPlayerJoined(PlayerInput p)
     {
-        //Debug.Log(p.GetComponent<Player>());
+        Debug.Log("local player joining");
         Player pl = p.GetComponent<Player>();
         playerList.Add(pl);
         setLayers(pl, p.playerIndex);

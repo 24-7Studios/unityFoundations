@@ -6,22 +6,15 @@ using Mirror;
 
 public class networkPlayerObject :  NetworkBehaviour
 {
-
-    static networkPlayerObject networkPlayerInstance;
+    static networkPlayerObject localPlayer;
     private List<NetworkIdentity> childPlayers;
 
     // Start is called before the first frame update
     void Start()
     {
 
-        if (isLocalPlayer)
-        {
-            if (networkPlayerInstance != null)
-                Debug.LogError("There is already a player for this connection!");
-            else
-                networkPlayerInstance = this;
-        }    
     }
+
 
     public void addPlayer(NetworkIdentity netId)
     {
@@ -56,9 +49,6 @@ public class networkPlayerObject :  NetworkBehaviour
         childPlayers.Remove(netId);
     }
 
-    public static networkPlayerObject getInstance()
-    {
-        return networkPlayerInstance;
-    }
+
 
 }

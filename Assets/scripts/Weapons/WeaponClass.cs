@@ -162,7 +162,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
         player.getLivePlayerModel().equipWeapon(this, hand);
 
-        Shootable = player.getPlayer().getShootableLayer();
+        
 
         foreach (MeshRenderer m in item.GetComponents<MeshRenderer>())
         {
@@ -185,6 +185,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
         if (player.IsLocalPlayer())
         {
+            Shootable = player.getPlayer().getShootableLayer();
             viewmodel.layer = player.getPlayer().getViewmodelLayer();
             worldModel.layer = player.getPlayer().getPlayermodelLayer();
 
@@ -285,7 +286,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
             c.enabled = false;
         }
 
-        Shootable = player.getPlayer().getShootableLayer();
+        
 
         item.GetComponent<Rigidbody>().isKinematic = true;
 
@@ -302,6 +303,7 @@ public abstract class WeaponClass : NetworkBehaviour, Ipickup
 
         if (player.IsLocalPlayer())
         {
+            Shootable = player.getPlayer().getShootableLayer();
             viewmodel.layer = player.getPlayer().getViewmodelLayer();
             worldModel.layer = player.getPlayer().getPlayermodelLayer();
 

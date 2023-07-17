@@ -18,7 +18,7 @@ public class myNetworkManager : NetworkManager
     public override void Start()
     {
         base.Start();
-        PlayerManager.getInputManager().DisableJoining();
+        //PlayerManager.getInputManager().DisableJoining();
     }
 
     private void Update()
@@ -31,19 +31,50 @@ public class myNetworkManager : NetworkManager
     {
         base.OnStartServer();
 
-        PlayerManager.getInputManager().EnableJoining();
+        //PlayerManager.getInputManager().EnableJoining();
 
 
         //NetworkServer.RegisterHandler<playerStruct>(OnCreateCharacter);
     }
 
+    public override void OnClientConnect(NetworkConnection conn)
+    {
+        base.OnClientConnect(conn);
+        Debug.Log("CONNECTED AND READY!");
+        PlayerManager.getInputManager().EnableJoining();
+        Debug.Log("Local Player Joining Enabled : " + PlayerManager.getInputManager().joiningEnabled);
+    }
+
+
 
     public GameObject addPlayer(GameObject plObject)
+    {
+        cmdAddPlayer(plObject, NetworkClient.localPlayer);
+    }
+
+    [Command]
+    private void cmdAddPlayer(GameObject plObject, NetworkIdentity owner)
     {
         GameObject pl = Instantiate(plObject);
         pl.transform.position = GetStartPosition().position;
         NetworkServer.Spawn(pl);
-        pl.GetComponent<NetworkIdentity>().AssignClientAuthority(NetworkServer.localConnection);
-        return pl;
+        pl.GetComponent<networkPlayable>().setNetworkPlayer(owner.GetComponent<networkPlayerObject>());
+        pl.GetComponent<NetworkIdentity>().AssignClientAuthority(owner.connectionToClient);
+        rpcAddPlayer(pl.GetComponent<NetworkIdentity>(), owner);
+
     }
+
+    [ClientRpc]
+    private void rpcAddPlayer(NetworkIdentity pl, NetworkIdentity owner)
+    {
+        pl.GetComponent<networkPlayable>().setNetworkPlayer(owner.GetComponent<networkPlayerObject>());
+        if(NetworkClient.localPlayer == owner)
+        {
+            Player playerOb = pl.GetComponent<Player>();
+            iPlayable playable 
+            playerOb.addPlayable(pl.GetComponent<>)
+        }
+    }
+
 }
+    

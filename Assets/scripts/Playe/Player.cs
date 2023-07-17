@@ -47,11 +47,16 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        ((myNetworkManager)myNetworkManager.singleton).addPlayer(PlayerManager.getInstance().getPlayable());
+        //Debug.Log("created player object");
+        /*
         iPlayable p = ((myNetworkManager)myNetworkManager.singleton).addPlayer(PlayerManager.getInstance().getPlayable()).GetComponent<iPlayable>();
         myplayables.Add(p);
         myplayables[0].addPlayer(this);
         myplayables[0].ActivatePlayer();
+        */
     }
+
 
     public void setViewmodelLayer(int l)
     {
