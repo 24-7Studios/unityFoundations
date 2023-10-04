@@ -46,35 +46,5 @@ public class myNetworkManager : NetworkManager
     }
 
 
-
-    public GameObject addPlayer(GameObject plObject)
-    {
-        cmdAddPlayer(plObject, NetworkClient.localPlayer);
-    }
-
-    [Command]
-    private void cmdAddPlayer(GameObject plObject, NetworkIdentity owner)
-    {
-        GameObject pl = Instantiate(plObject);
-        pl.transform.position = GetStartPosition().position;
-        NetworkServer.Spawn(pl);
-        pl.GetComponent<networkPlayable>().setNetworkPlayer(owner.GetComponent<networkPlayerObject>());
-        pl.GetComponent<NetworkIdentity>().AssignClientAuthority(owner.connectionToClient);
-        rpcAddPlayer(pl.GetComponent<NetworkIdentity>(), owner);
-
-    }
-
-    [ClientRpc]
-    private void rpcAddPlayer(NetworkIdentity pl, NetworkIdentity owner)
-    {
-        pl.GetComponent<networkPlayable>().setNetworkPlayer(owner.GetComponent<networkPlayerObject>());
-        if(NetworkClient.localPlayer == owner)
-        {
-            Player playerOb = pl.GetComponent<Player>();
-            iPlayable playable 
-            playerOb.addPlayable(pl.GetComponent<>)
-        }
-    }
-
 }
     

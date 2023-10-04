@@ -237,6 +237,8 @@ public class PlayerScript : NetworkBehaviour, IDamage, networkPlayable
     public void setNetworkPlayer(networkPlayerObject net)
     {
         myNetworkPlayer = net;
+        Debug.Log(net);
+        //net.addPlayer(this.netIdentity);
     }
 
     public void addPlayer(Player newPlayer)
@@ -395,11 +397,14 @@ public class PlayerScript : NetworkBehaviour, IDamage, networkPlayable
 
         if(IsLocalPlayer())
         {
-            handleMouseInput();
-            handleCameraTilt();
-            handleViewShift();
-            handleViewSway();
-            handleViewPush();
+            if (input != null)
+            {
+                handleMouseInput();
+                handleCameraTilt();
+                handleViewShift();
+                handleViewSway();
+                handleViewPush();
+            }
         }
 
 
