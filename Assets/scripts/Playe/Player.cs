@@ -47,15 +47,9 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        NetworkClient.localPlayer.GetComponent<networkPlayerObject>().addPlayer(PlayerManager.getInstance().getPlayable());
-        //((myNetworkManager)myNetworkManager.singleton).addPlayer(PlayerManager.getInstance().getPlayable());
-        //Debug.Log("created player object");
-        /*
-        iPlayable p = ((myNetworkManager)myNetworkManager.singleton).addPlayer(PlayerManager.getInstance().getPlayable()).GetComponent<iPlayable>();
-        myplayables.Add(p);
-        myplayables[0].addPlayer(this);
-        myplayables[0].ActivatePlayer();
-        */
+        addPlayable(Instantiate(blankPlayable).GetComponent<iPlayable>());
+        activate(0);
+        NetworkClient.localPlayer.GetComponent<networkPlayerObject>().requestPlayable(playerIndex);
     }
 
 
@@ -119,6 +113,7 @@ public class Player : MonoBehaviour
         if(myplayables.Contains(play))
         {
             activePlayableIndex = myplayables.IndexOf(play);
+            myplayables[activePlayableIndex].attatchPlayer();
             myplayables[activePlayableIndex].ActivatePlayer();
             return true;
         }
@@ -130,6 +125,7 @@ public class Player : MonoBehaviour
         if (index < myplayables.Count)
         {
             activePlayableIndex = index;
+            myplayables[activePlayableIndex].attatchPlayer();
             myplayables[activePlayableIndex].ActivatePlayer();
             return true;
         }
@@ -138,14 +134,20 @@ public class Player : MonoBehaviour
 
     public void addPlayable(iPlayable play)
     {
-        if(!myplayables.Contains(play))
+        if (!myplayables.Contains(play))
+        {
             myplayables.Add(play);
+            play.addPlayer(this);
+        }
     }
 
     public void removePlayable(iPlayable play)
     {
         if (myplayables.Contains(play))
+        {
             myplayables.Remove(play);
+            play.removePlayer();
+        }
     }
 
     public iPlayable getActive()

@@ -414,7 +414,7 @@ public class PlayerScript : NetworkBehaviour, IDamage, networkPlayable
         grounded = checkSlope();
 
 
-        if (IsLocalPlayer())
+        if (IsLocalPlayer() && input != null)
         {
             x = moving.ReadValue<Vector2>().x;
             z = moving.ReadValue<Vector2>().y;

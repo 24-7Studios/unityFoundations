@@ -7,36 +7,47 @@ using Mirror;
 public class networkPlayerObject :  NetworkBehaviour
 {
     static networkPlayerObject localPlayer;
-    private List<NetworkIdentity> childPlayers;
+    private List<NetworkIdentity> childPlayables;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        childPlayables = new List<NetworkIdentity>();
     }
 
 
-    public void addPlayer(NetworkIdentity netId)
+    public void requestPlayable(int PIndex)
     {
-        childPlayers.Add(netId);
+        cmdAddPlayable(PIndex);
     }
 
-    public GameObject requestPlayable()
+    [Command]
+    public void cmdAddPlayable(int PIndex)
     {
-        return null;
+        GameObject pl = Instantiate(PlayerManager.getInstance().getPlayable());
+        pl.transform.position = ((myNetworkManager)myNetworkManager.singleton).GetStartPosition().position;
+        NetworkServer.Spawn(pl);
+        pl.GetComponent<networkPlayable>().setNetworkPlayer(this);
+        NetworkIdentity ObId = pl.GetComponent<NetworkIdentity>();
+        ObId.AssignClientAuthority(connectionToClient);
+        rpcAddPlayble(PIndex, ObId);
 
-        if(!isServer)
-        {
-            cmdGetPlayable();
-        }
-        else
-        {
+    }
 
+    [ClientRpc]
+    public void rpcAddPlayble(int PIndex, NetworkIdentity ObId)
+    {
+        networkPlayable obPlay = ObId.gameObject.GetComponent<networkPlayable>();
+        obPlay.setNetworkPlayer(this);
+        childPlayables.Add(ObId);
+        if(isLocalPlayer)
+        {
+            PlayerManager.getInstance().getPlayer(PIndex).addPlayable(obPlay);
+            PlayerManager.getInstance().getPlayer(PIndex).activate(obPlay);
         }
     }
 
-
-
+    /*
     [Command]
     public void cmdGetPlayable()
     {
@@ -46,7 +57,7 @@ public class networkPlayerObject :  NetworkBehaviour
 
     public void removePlayer(NetworkIdentity netId)
     {
-        childPlayers.Remove(netId);
+        childPlayables.Remove(netId);
     }
 
     public void addPlayer(GameObject plObject)
@@ -77,5 +88,6 @@ public class networkPlayerObject :  NetworkBehaviour
             playerOb.addPlayable(pl.GetComponent<iPlayable>());
         }
     }
+    */
 
 }

@@ -29,6 +29,12 @@ public class PlayerManager : MonoBehaviour
         return defaultIPlayable;
     }
 
+    public Player getPlayer(int index)
+    {
+        return playerList[index];
+    }
+
+
     private void Awake()
     {
 
