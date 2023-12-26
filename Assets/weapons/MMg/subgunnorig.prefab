@@ -297,7 +297,7 @@ MonoBehaviour:
   rightHandAnims: {fileID: 0}
   leftHandAnims: {fileID: 0}
   aud: {fileID: 4485723609856028590}
-  debugMode: 1
+  debugMode: 0
   debugMarker: {fileID: 4837419253238934036, guid: d294ffef25fbe1a4ca7ed8440f33ecc3,
     type: 3}
   hitEffect: {fileID: 5718995469900101050, guid: 8e06fde96679c1248a8bca766fc413a1,
@@ -309,28 +309,28 @@ MonoBehaviour:
   WModelPosOffset: {x: 0, y: 0, z: 0}
   WModelRotOffset: {x: 0, y: 0, z: 0}
   WModelScaOffset: {x: 0, y: 0, z: 0}
-  viewpunch: 0
-  viewpunchAttack: 0.2
-  viewpunchRecovery: 1
-  recoilAmount: 10
+  viewpunch: 2
+  viewpunchAttack: 3
+  viewpunchRecovery: 5
+  recoilAmount: 5
   recoilAttack: 0.5
   recoilSmoothing: 10
-  viewPushAmount: 0.2
-  viewPushAttack: 0.5
-  viewPushRecovery: 10
+  viewPushAmount: 0.4
+  viewPushAttack: 5
+  viewPushRecovery: 25
   damage: 10
   fleshMultiplier: 1
   knockbackForce: 20
-  spread: 0
+  spread: 0.05
   fullAuto: 1
-  fireDelay: 0.075
+  fireDelay: 0.09
   ViewmodelFlash: {fileID: 4314926972769928921, guid: 4e5e209968c3140498b9c719202d5482,
     type: 3}
   ViewmodelflashPos: {fileID: 4485723610245200068}
   WorldmodelFlash: {fileID: 0}
   WorldmodelFlashPos: {fileID: 0}
   fireAnim: fire
-  fireSound: {fileID: 8300000, guid: 4827659843b720546bb98b7421c96cda, type: 3}
+  fireSound: {fileID: 8300000, guid: 61905623167712a4f8a587f3efd289f5, type: 3}
   reloadAnim: reload
   reloadSound: {fileID: 0}
   idleAnim: idle
@@ -882,7 +882,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &4485723609135497305
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -899,7 +899,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!4 &4164357023855362062 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b43392caac5209d4db3e499e8aa85966,
