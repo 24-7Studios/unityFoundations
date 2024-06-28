@@ -108,11 +108,21 @@ public class biped : PlayerModelClass
                 anim.SetLayerWeight(2, 0);
                 anim.SetLayerWeight(3, 0);
                 rightAimConstriant.weight = 1;
-                leftAimConstraint.weight = 0;
                 rightChainConstraint.weight = 0;
                 leftChainConstraint.weight = 0;
                 rightArmTarget.position = player.getEquipedSlot().getWeapon().rightHoldPos.position;
-                leftArmTarget.position = leftHand.position;
+                
+                if(player.getEquipedSlot().getOtherHand() != null && player.getEquipedSlot().getOtherHand().rightHoldPos != null)
+                {
+                    anim.SetLayerWeight(2, 1);
+                    leftAimConstraint.weight = 1;
+                    leftArmTarget.position = player.getEquipedSlot().getOtherHand().rightHoldPos.position;
+                }
+                else
+                {
+                    leftAimConstraint.weight = 0;
+                    leftArmTarget.position = leftHand.position;
+                }
             }
             else
             {
@@ -129,15 +139,16 @@ public class biped : PlayerModelClass
         }
 
     }
-
+ 
     public override void equipWeapon(WeaponClass w, bool hand)
     {
         base.equipWeapon(w, hand);
 
         if (w.rightHoldPos != null)
         {
-            w.getWorldModelOb().transform.position = RightHoldParent.position - (w.rightHoldPos.position - w.getWorldModelOb().transform.position);
-        }
+            //w.getWorldModelOb().transform.position = hand?(LeftHoldParent.position):RightHoldParent.position - (w.rightHoldPos.position - w.getWorldModelOb().transform.position);
+            w.getWorldModelOb().transform.localPosition = -new Vector3(w.rightHoldPos.localPosition.x * w.getWorldModelOb().transform.localScale.x, w.rightHoldPos.localPosition.y * w.getWorldModelOb().transform.localScale.y, w.rightHoldPos.localPosition.z * w.getWorldModelOb().transform.localScale.z);
+        }   
 
     }
 
