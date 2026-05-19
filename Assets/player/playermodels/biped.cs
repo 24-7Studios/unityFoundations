@@ -146,7 +146,6 @@ public class biped : PlayerModelClass
 
         if (w.rightHoldPos != null)
         {
-            //w.getWorldModelOb().transform.position = hand?(LeftHoldParent.position):RightHoldParent.position - (w.rightHoldPos.position - w.getWorldModelOb().transform.position);
             w.getWorldModelOb().transform.localPosition = -new Vector3(w.rightHoldPos.localPosition.x * w.getWorldModelOb().transform.localScale.x, w.rightHoldPos.localPosition.y * w.getWorldModelOb().transform.localScale.y, w.rightHoldPos.localPosition.z * w.getWorldModelOb().transform.localScale.z);
         }   
 

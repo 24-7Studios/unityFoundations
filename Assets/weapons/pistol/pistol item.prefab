@@ -93,6 +93,7 @@ Transform:
   m_Children:
   - {fileID: 8289172741311618332}
   - {fileID: 8570352544767722458}
+  - {fileID: 3307742771315753421}
   m_Father: {fileID: 6656811077674729456}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -297,9 +298,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1399968401232785994}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 0.6, y: 1.7365336, z: 1.4149781}
   m_Center: {x: 0, y: 0, z: -0.8746881}
 --- !u!65 &1399968401232785995
@@ -310,9 +319,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1399968401232785994}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 0.6, y: 1.1525311, z: 2.5}
   m_Center: {x: 0, y: 0.27626547, z: 1}
 --- !u!54 &1399968401232785991
@@ -322,10 +339,21 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1399968401232785994}
-  serializedVersion: 2
+  serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -346,19 +374,31 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   canDual: 1
+  isInDual: 0
   item: {fileID: 1399968401232785994}
   Shootable:
     serializedVersion: 2
     m_Bits: 1
   worldModel: {fileID: 1599612041099345149}
+  rightHoldPos: {fileID: 0}
+  leftHoldPos: {fileID: 0}
   viewmodel: {fileID: 7398695899567342423}
+  viewmodelMeshes:
+  - {fileID: 6801558868539408384}
+  - {fileID: 7637296049203225553}
+  armsMesh: {fileID: 2737048594119616014}
   ViewAnim: {fileID: 8932223051446666706}
+  drawAnim: 
+  defaultAnims: {fileID: 0}
+  rightHandAnims: {fileID: 0}
+  leftHandAnims: {fileID: 0}
   aud: {fileID: 7599429597232043718}
   debugMode: 0
   debugMarker: {fileID: 4837419253238934036, guid: d294ffef25fbe1a4ca7ed8440f33ecc3,
     type: 3}
   hitEffect: {fileID: 5718995469900101050, guid: 8e06fde96679c1248a8bca766fc413a1,
     type: 3}
+  pushBack: 0
   basePosOffset: {x: 0, y: 0, z: 0}
   baseRotOffset: {x: 0, y: 0, z: 0}
   baseScaOffset: {x: 0.5, y: 0.5, z: 0.5}
@@ -366,12 +406,25 @@ MonoBehaviour:
   WModelRotOffset: {x: 0, y: 0, z: 0}
   WModelScaOffset: {x: 0.5, y: 0.5, z: 0.5}
   viewpunch: 2
+  viewpunchAttack: 0.2
+  viewpunchRecovery: 1
+  recoilAmount: 10
+  recoilAttack: 0.5
+  recoilSmoothing: 10
+  viewPushAmount: 0.3
+  viewPushAttack: 10
+  viewPushRecovery: 20
   damage: 15
   fleshMultiplier: 1
   knockbackForce: 15
   spread: 0.02
   fullAuto: 0
   fireDelay: 0.08
+  ViewmodelFlash: {fileID: 3877509656523273383, guid: 93a5a28d615d2704c96333d72daaf75a,
+    type: 3}
+  ViewmodelflashPos: {fileID: 3307742771315753421}
+  WorldmodelFlash: {fileID: 0}
+  WorldmodelFlashPos: {fileID: 0}
   fireAnim: shoot
   fireSound: {fileID: 8300000, guid: 8e2a8f560d2f221458e28ea02079f64a, type: 3}
   reloadAnim: overheatPull
@@ -955,6 +1008,37 @@ Transform:
   - {fileID: 8540013702073531989}
   m_Father: {fileID: 2286412099945468663}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2847915040252431530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3307742771315753421}
+  m_Layer: 11
+  m_Name: flash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3307742771315753421
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2847915040252431530}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.598, y: 2.649, z: 0.003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8734314874854963182}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2924893959207409183
 GameObject:
@@ -1842,7 +1926,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8932223051446666706
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1859,7 +1943,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &7410180437247779570
 GameObject:
   m_ObjectHideFlags: 0
